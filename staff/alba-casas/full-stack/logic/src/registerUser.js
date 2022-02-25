@@ -3,7 +3,7 @@ const {
 } = require("data");
 
 function registerUser(name, email, password) {
-  return User.create({ name, email, password }).then((user) => {});
+  return User.create({ name, email, password })
 }
 
 module.exports = registerUser;
