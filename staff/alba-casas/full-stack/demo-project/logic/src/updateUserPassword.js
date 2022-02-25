@@ -1,8 +1,6 @@
-const {
-  models: { User },
-} = require("data");
+const { models: { User } } = require("data");
 
-async function updateUserPassword(id, { currPassword, newPassword }) {
+async function updateUserPassword( id, { currPassword, newPassword }) {
   await User.findById(id).then(async (user) => {
     if (user.password === currPassword) {
       await User.updateOne({ _id: id }, { password: newPassword });

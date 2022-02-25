@@ -1,7 +1,4 @@
-const {
-  mongoose: { connect, disconnect },
-  models: { User },
-} = require("data");
+const {mongoose: { connect, disconnect },models: { User }} = require("data");
 
 const {
   deleteUser,
@@ -15,7 +12,7 @@ connect("mongodb://localhost:27017/demo-db")
   /*  .then(() => registerUser("Pepito Grillo", "pepito@grillo.com", "123123123"))
   .then(() => console.log("user registered")) */
 
-  .then(() => authenticateUser("pepito@grillo.com", "123123123"))
+  .then(() => authenticateUser("pepita@grilla.com", "123123123"))
 
   /* .then((id) =>
     updateUserPassword(id, {
@@ -26,6 +23,7 @@ connect("mongodb://localhost:27017/demo-db")
   .then(() => console.log("Password updated"))
  */
   /* .then((userId) => deleteUser(userId)) */
+
   .then((userId) => {
     return updateUser(userId, {
       name: "Pepita Grilla",

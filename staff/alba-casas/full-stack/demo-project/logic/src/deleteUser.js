@@ -1,6 +1,4 @@
-const {
-  models: { User },
-} = require("data");
+const { models: { User }} = require("data");
 
 function deleteUser(id) {
   return User.deleteOne({ _id: id });
