@@ -3,8 +3,8 @@ import Register from "./component/Register/Register";
 
 function App() {
   return (
-    <div>
-      <h1>hello app</h1>
+    <div className="app">
+      <h1>Holiwis</h1>
       <Register />
     </div>
   );

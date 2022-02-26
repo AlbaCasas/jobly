@@ -1,4 +1,5 @@
 import registerUser from "../../logic/registerUser";
+import "./Register.css";
 
 function Register() {
   const register = (event) => {
@@ -22,7 +23,7 @@ function Register() {
   };
 
   return (
-    <form onSubmit={register}>
+    <form className="register__form" onSubmit={register}>
       <input type="text" name="name" placeholder="name" />
       <input type="email" name="email" placeholder="email" />
       <input type="password" name="password" placeholder="password" />
