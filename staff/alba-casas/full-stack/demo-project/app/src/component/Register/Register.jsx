@@ -1,7 +1,7 @@
 import registerUser from "../../logic/registerUser";
 import "./Register.css";
 
-function Register() {
+function Register({ onLogin }) {
   const register = (event) => {
     event.preventDefault();
 
@@ -15,11 +15,20 @@ function Register() {
 
     try {
       registerUser(name, email, password)
-        .then(() => alert("user registered"))
+        .then(() => {
+          alert("user registered");
+          onLogin();
+        })
         .catch((error) => alert(error.message));
     } catch (error) {
       alert(error.message);
     }
+  };
+
+  const goToLogin = (event) => {
+    event.preventDefault();
+
+    onLogin();
   };
 
   return (
@@ -28,6 +37,9 @@ function Register() {
       <input type="email" name="email" placeholder="email" />
       <input type="password" name="password" placeholder="password" />
       <button>Register</button>
+      <a onClick={goToLogin} href="javascript">
+        Login
+      </a>
     </form>
   );
 }
