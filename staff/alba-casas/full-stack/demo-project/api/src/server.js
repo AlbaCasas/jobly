@@ -2,8 +2,9 @@ const {
   mongoose: { connect, disconnect },
 } = require("data");
 const express = require("express");
-const { registerUser } = require("logic");
+const { registerUser, authenticateUser, retrieveUser } = require("logic");
 const cors = require("cors");
+const jwt = require("jsonwebtoken");
 
 connect("mongodb://localhost:27017/demo-db")
   .then(() => console.log("db connected"))
@@ -16,12 +17,6 @@ connect("mongodb://localhost:27017/demo-db")
 
     const api = express.Router();
 
-    api.get("/hello", (req, res) => {
-      const { name, surname } = req.query;
-
-      res.json([name, surname]);
-    });
-
     api.post("/users", jsonBodyParser, (req, res) => {
       try {
         const {
@@ -30,6 +25,44 @@ connect("mongodb://localhost:27017/demo-db")
 
         registerUser(name, email, password)
           .then(() => res.status(201).send())
+          .catch((error) => res.status(400).json({ error: error.message }));
+      } catch (error) {
+        res.status(400).json({ error: error.message });
+      }
+    });
+
+    api.post("/users/auth", jsonBodyParser, (req, res) => {
+      try {
+        const {
+          body: { email, password },
+        } = req;
+
+        authenticateUser(email, password).then((id) => {
+          const token = jwt.sign(
+            { sub: id, exp: Math.floor(Date.now() / 1000) + 60 * 60 },
+            "mi super secreto"
+          );
+          res.json({ token });
+        });
+      } catch (error) {
+        res.status(400).json({ error: error.message });
+      }
+    });
+
+    api.get("/users", (req, res) => {
+      try {
+        const {
+          headers: { authorization },
+        } = req;
+
+        const [, token] = authorization.split(" ");
+
+        const payload = jwt.verify(token, "mi super secreto");
+
+        const { sub: id } = payload;
+
+        retrieveUser(id)
+          .then((user) => res.json(user))
           .catch((error) => res.status(400).json({ error: error.message }));
       } catch (error) {
         res.status(400).json({ error: error.message });
