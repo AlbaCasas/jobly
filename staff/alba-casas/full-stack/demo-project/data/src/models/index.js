@@ -5,6 +5,7 @@ const Brand = require("./Brand");
 const Order = require("./Order");
 const Stock = require("./Stock");
 const Product = require("./Product");
+const Note = require("./Note");
 
 module.exports = {
   User,
@@ -14,4 +15,5 @@ module.exports = {
   Order,
   Stock,
   Product,
+  Note
 };
