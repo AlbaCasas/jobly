@@ -1,16 +1,19 @@
-const { models: { User } } = require("data");
-const { validators: { validateId, validatePassword }} = require("commons");
+const {
+  models: { User },
+} = require("data");
+const {
+  validators: { validateId, validatePassword },
+} = require("commons");
 
-
-async function updateUserPassword( id, { currPassword, newPassword }) {
-  validateId(id)
-  validatePassword(currPassword)
-  validatePassword(newPassword)
-
-  await User.findById(id)
-  .then(async (user) => {
+function updateUserPassword({id, currPassword, newPassword }) {
+  validateId(id);
+  validatePassword(currPassword);
+  validatePassword(newPassword);
+  
+  return User.findById(id).then((user) => {
     if (user.password === currPassword) {
-      await User.updateOne({ _id: id }, { password: newPassword });
+      return User.updateOne({ _id: id }, { password: newPassword })
+      .then(() => {});
     } else throw new Error("Wrong credentials");
   });
 }

@@ -1,9 +1,9 @@
 const { models: { Note }} = require("data");
 const {validators: { validateId }} = require("commons");
 
-function deleteNote(id) {
-  validateId(id)
-  return Note.deleteOne({ _id: id });
+function deleteNote(noteId) {
+  validateId(noteId)
+  return Note.deleteOne({ id: noteId });
 }
 
 module.exports = deleteNote;

@@ -9,7 +9,8 @@ const {
   createNote,
   listNotes,
   updateNote,
-  deleteNote
+  deleteNote,
+  updateUserPassword,
 } = require("logic");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
@@ -80,6 +81,27 @@ connect("mongodb://localhost:27017/demo-db")
       }
     });
 
+    api.patch("/users/change-password", jsonBodyParser, (req, res) => {
+      try {
+        const {
+          headers: { authorization },
+          body: { currPassword, newPassword },
+        } = req;
+
+        const [, token] = authorization.split(" ");
+
+        const payload = jwt.verify(token, "mi super secreto");
+
+        const { sub: id } = payload;
+
+        updateUserPassword({id, currPassword, newPassword })
+          .then(() => res.status(200).send())
+          .catch((error) => res.status(400).json({ error: error.message }));
+      } catch (error) {
+        res.status(400).json({ error: error.message });
+      }
+    });
+
     api.post("/notes", jsonBodyParser, (req, res) => {
       try {
         const {
@@ -125,15 +147,16 @@ connect("mongodb://localhost:27017/demo-db")
       try {
         const {
           headers: { authorization },
-          body: { id, text, color },
+          body: { id: noteId, text, color },
         } = req;
 
         const [, token] = authorization.split(" ");
 
-        jwt.verify(token, "mi super secreto");
+        const payload = jwt.verify(token, "mi super secreto");
 
+        const { sub: id } = payload;
 
-        updateNote(id, text, color)
+        updateNote(id, noteId, text, color)
           .then(() => res.status(201).send())
           .catch((error) => res.status(400).json({ error: error.message }));
       } catch (error) {
@@ -144,7 +167,7 @@ connect("mongodb://localhost:27017/demo-db")
     api.delete("/notes", jsonBodyParser, (req, res) => {
       try {
         const {
-          headers: {authorization},
+          headers: { authorization },
           body: { id },
         } = req;
 
@@ -154,7 +177,7 @@ connect("mongodb://localhost:27017/demo-db")
 
         deleteNote(id)
           .then(() => res.status(201).send())
-          .catch(error => res.status(400).json({ error: error.message }));
+          .catch((error) => res.status(400).json({ error: error.message }));
       } catch (error) {
         res.status(400).json({ error: error.message });
       }
