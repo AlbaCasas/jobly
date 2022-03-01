@@ -8,6 +8,8 @@ const {
   retrieveUser,
   createNote,
   listNotes,
+  updateNote,
+  deleteNote
 } = require("logic");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
@@ -46,7 +48,7 @@ connect("mongodb://localhost:27017/demo-db")
         authenticateUser(email, password)
           .then((id) => {
             const token = jwt.sign(
-              { sub: id, exp: Math.floor(Date.now() / 1000) + 2 * 60 },
+              { sub: id, exp: Math.floor(Date.now() / 1000) + 60 * 60 },
               "mi super secreto"
             );
 
@@ -114,6 +116,45 @@ connect("mongodb://localhost:27017/demo-db")
         listNotes(id)
           .then((notes) => res.json(notes))
           .catch((error) => res.status(400).json({ error: error.message }));
+      } catch (error) {
+        res.status(400).json({ error: error.message });
+      }
+    });
+
+    api.patch("/notes", jsonBodyParser, (req, res) => {
+      try {
+        const {
+          headers: { authorization },
+          body: { id, text, color },
+        } = req;
+
+        const [, token] = authorization.split(" ");
+
+        jwt.verify(token, "mi super secreto");
+
+
+        updateNote(id, text, color)
+          .then(() => res.status(201).send())
+          .catch((error) => res.status(400).json({ error: error.message }));
+      } catch (error) {
+        res.status(400).json({ error: error.message });
+      }
+    });
+
+    api.delete("/notes", jsonBodyParser, (req, res) => {
+      try {
+        const {
+          headers: {authorization},
+          body: { id },
+        } = req;
+
+        const [, token] = authorization.split(" ");
+
+        jwt.verify(token, "mi super secreto");
+
+        deleteNote(id)
+          .then(() => res.status(201).send())
+          .catch(error => res.status(400).json({ error: error.message }));
       } catch (error) {
         res.status(400).json({ error: error.message });
       }
