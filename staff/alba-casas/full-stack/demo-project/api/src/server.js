@@ -11,6 +11,8 @@ const {
   updateNote,
   deleteNote,
   updateUserPassword,
+  listPublicNotes,
+  listPublicNotesFromUser,
 } = require("logic");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
@@ -49,7 +51,7 @@ connect("mongodb://localhost:27017/demo-db")
         authenticateUser(email, password)
           .then((id) => {
             const token = jwt.sign(
-              { sub: id, exp: Math.floor(Date.now() / 1000) + 60 * 60 },
+              { sub: id, exp: Math.floor(Date.now() / 1000) + 10 * 60 },
               "mi super secreto"
             );
 
@@ -94,8 +96,8 @@ connect("mongodb://localhost:27017/demo-db")
 
         const { sub: id } = payload;
 
-        updateUserPassword({id, currPassword, newPassword })
-          .then(() => res.status(200).send())
+        updateUserPassword({ id, currPassword, newPassword })
+          .then(() => res.status(204).send())
           .catch((error) => res.status(400).json({ error: error.message }));
       } catch (error) {
         res.status(400).json({ error: error.message });
@@ -143,40 +145,67 @@ connect("mongodb://localhost:27017/demo-db")
       }
     });
 
-    api.patch("/notes", jsonBodyParser, (req, res) => {
+    api.patch("/notes/:noteId", jsonBodyParser, (req, res) => {
       try {
         const {
           headers: { authorization },
-          body: { id: noteId, text, color },
+          body: { text, color, public },
+          params: { noteId },
         } = req;
 
         const [, token] = authorization.split(" ");
 
         const payload = jwt.verify(token, "mi super secreto");
 
-        const { sub: id } = payload;
+        const { sub: userId } = payload;
 
-        updateNote(id, noteId, text, color)
-          .then(() => res.status(201).send())
+        updateNote(userId, noteId, text, color, public)
+          .then(() => res.status(204).send())
           .catch((error) => res.status(400).json({ error: error.message }));
       } catch (error) {
         res.status(400).json({ error: error.message });
       }
     });
 
-    api.delete("/notes", jsonBodyParser, (req, res) => {
+    api.get("/notes/public", (req, res) => {
+      try {
+        listPublicNotes()
+          .then((notes) => res.json(notes))
+          .catch((error) => res.status(400).json({ error: error.message }));
+      } catch (error) {
+        res.status(400).json({ error: error.message });
+      }
+    });
+
+    api.delete("/notes/:noteId", jsonBodyParser, (req, res) => {
       try {
         const {
           headers: { authorization },
-          body: { id },
+          params: { noteId },
         } = req;
 
         const [, token] = authorization.split(" ");
 
-        jwt.verify(token, "mi super secreto");
+        const payload = jwt.verify(token, "mi super secreto");
 
-        deleteNote(id)
-          .then(() => res.status(201).send())
+        const { sub: userId } = payload;
+
+        deleteNote(userId, noteId)
+          .then(() => res.status(204).send())
+          .catch((error) => res.status(400).json({ error: error.message }));
+      } catch (error) {
+        res.status(400).json({ error: error.message });
+      }
+    });
+
+    api.get("/users/:userId/notes/public", (req, res) => {
+      try {
+        const {
+          params: { userId },
+        } = req;
+
+        listPublicNotesFromUser(userId)
+          .then((notes) => res.json(notes))
           .catch((error) => res.status(400).json({ error: error.message }));
       } catch (error) {
         res.status(400).json({ error: error.message });

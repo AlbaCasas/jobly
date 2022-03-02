@@ -11,6 +11,7 @@ function listNotes(userId){
                 
                 doc.id = doc._id.toString()
                 delete doc._id
+                delete doc.user
                 delete doc.__v
 
                 return doc

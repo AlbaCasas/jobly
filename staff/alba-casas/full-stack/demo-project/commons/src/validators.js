@@ -58,7 +58,6 @@ function validateToken(token) {
 
   if (expired) throw new Error("token expired");
 }
-
 function validateString(string, explain = "string") {
   if (typeof string !== "string")
     throw new TypeError(`${explain} is not a string`);
@@ -68,16 +67,21 @@ function validateString(string, explain = "string") {
     throw new Error(`${explain} has spaces around`);
 }
 
-function validateId(id) {
-  validateString(id, "id");
+function validateId(id, explain = "string") {
+  validateString(id, explain);
 
-  if (id.length !== 24) throw new Error("wrong id length");
+  if (id.length !== 24) throw new Error(`wrong ${explain} length`);
 }
 
+function validateBoolean(boolean, explain = "boolean") {
+  if (typeof boolean !== "boolean")
+    throw new TypeError(`${explain} is not a boolean`);
+}
 module.exports = {
   validateEmail,
   validatePassword,
   validateToken,
   validateString,
   validateId,
+  validateBoolean,
 };

@@ -1,5 +1,7 @@
 const { Schema } = require("mongoose");
-const { Types: { ObjectId }} = Schema;
+const {
+  Types: { ObjectId },
+} = Schema;
 
 const note = new Schema({
   user: {
@@ -16,8 +18,24 @@ const note = new Schema({
   color: {
     type: String,
     required: true,
-    default: "yellow"
+    default: "yellow",
+  },
+
+  public: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+
+  createAt: {
+    type: Date,
+    required: true,
+    default: Date.now
+  },
+
+  updateAt: {
+    type: Date,
   },
 });
 
-module.exports = note
+module.exports = note;
