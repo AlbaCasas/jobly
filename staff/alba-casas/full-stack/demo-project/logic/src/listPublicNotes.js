@@ -9,14 +9,14 @@ function listPublicNotes() {
       const docs = notes.map((note) => {
         const doc = note._doc;
 
+        // sanitize
         doc.id = doc._id.toString();
+
         delete doc._id;
         delete doc.__v;
 
-        doc.userId = doc.user.id;
-        doc.userName = doc.user.userName;
-
         delete doc.user;
+
         return doc;
       });
 

@@ -8,7 +8,8 @@ const {
 function listPublicNotesFromUser(userId) {
   validateId(userId);
 
-  return Note.find({ user: userId, public: true }).then((notes) => {
+  return Note.find({ user: userId, public: true })
+  .then((notes) => {
     const docs = notes.map((note) => {
       const doc = note._doc;
 

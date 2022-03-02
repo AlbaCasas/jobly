@@ -15,6 +15,7 @@ const {
   listPublicNotesFromUser,
   deleteUser,
   updateUser,
+  retrieveNote,
 } = require("logic");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
@@ -189,6 +190,30 @@ connect("mongodb://localhost:27017/demo-db")
       }
     });
 
+    api.get("/notes/public", (req, res) => {
+      try {
+        listPublicNotes()
+          .then((notes) => res.json(notes))
+          .catch((error) => res.status(400).json({ error: error.message }));
+      } catch (error) {
+        res.status(400).json({ error: error.message });
+      }
+    });
+
+    api.get("/notes/:noteId", (req, res) => {
+      try {
+        const {
+          params: { noteId },
+        } = req;
+
+        retrieveNote(noteId)
+          .then((note) => res.json(note))
+          .catch((error) => res.status(400).json({ error: error.message }));
+      } catch (error) {
+        res.status(400).json({ error: error.message });
+      }
+    });
+
     api.patch("/notes/:noteId", jsonBodyParser, (req, res) => {
       try {
         const {
@@ -205,16 +230,6 @@ connect("mongodb://localhost:27017/demo-db")
 
         updateNote(userId, noteId, text, color, public)
           .then(() => res.status(204).send())
-          .catch((error) => res.status(400).json({ error: error.message }));
-      } catch (error) {
-        res.status(400).json({ error: error.message });
-      }
-    });
-
-    api.get("/notes/public", (req, res) => {
-      try {
-        listPublicNotes()
-          .then((notes) => res.json(notes))
           .catch((error) => res.status(400).json({ error: error.message }));
       } catch (error) {
         res.status(400).json({ error: error.message });

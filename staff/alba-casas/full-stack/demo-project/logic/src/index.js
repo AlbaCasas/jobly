@@ -10,6 +10,7 @@ const deleteNote = require("./deleteNote");
 const updateNote = require("./updateNote");
 const listPublicNotes = require("./listPublicNotes");
 const listPublicNotesFromUser = require("./listPublicNotesFromUser");
+const retrieveNote = require("./retrieveNote")
 
 module.exports = {
   registerUser,
@@ -24,4 +25,5 @@ module.exports = {
   updateNote,
   listPublicNotes,
   listPublicNotesFromUser,
+  retrieveNote
 };
