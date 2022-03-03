@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { retrieveUser } from "../../logic";
 
-const Home = () => {
+const Home = ({ onDeleteAccount }) => {
   const [name, setName] = useState();
 
   useEffect(() => {
@@ -17,6 +17,13 @@ const Home = () => {
   return (
     <div>
       <h1>Welcome home, {name}!</h1>
+      <button
+        onClick={() => {
+          onDeleteAccount();
+        }}
+      >
+        Delete Account
+      </button>
     </div>
   );
 };

@@ -54,7 +54,7 @@ connect("mongodb://localhost:27017/demo-db")
         authenticateUser(email, password)
           .then((id) => {
             const token = jwt.sign(
-              { sub: id, exp: Math.floor(Date.now() / 1000) + 10 * 60 },
+              { sub: id, exp: Math.floor(Date.now() / 1000) + 60 * 60 },
               "mi super secreto"
             );
 
@@ -141,7 +141,7 @@ connect("mongodb://localhost:27017/demo-db")
 
         const { sub: userId } = payload;
 
-        deleteUser(userId, password )
+        deleteUser(userId, password)
           .then(() => res.status(204).send())
           .catch((error) => res.status(400).json({ error: error.message }));
       } catch (error) {
