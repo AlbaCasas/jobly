@@ -3,14 +3,16 @@ const {
 } = require("data");
 const express = require("express");
 const {
-  registerUser,
-  authenticateUser,
-  retrieveUser,
+  handlerRegister,
+  handlerAuthenticateUser,
+  handlerRetrieveUser,
+  handlerUpdatePassword,
+} = require("./handlers");
+const {
   createNote,
   listNotes,
   updateNote,
   deleteNote,
-  updateUserPassword,
   listPublicNotes,
   listPublicNotesFromUser,
   deleteUser,
@@ -31,81 +33,13 @@ connect("mongodb://localhost:27017/demo-db")
 
     const api = express.Router();
 
-    api.post("/users", jsonBodyParser, (req, res) => {
-      try {
-        const {
-          body: { name, email, password },
-        } = req;
+    api.post("/users", jsonBodyParser, handlerRegister);
 
-        registerUser(name, email, password)
-          .then(() => res.status(201).send())
-          .catch((error) => res.status(400).json({ error: error.message }));
-      } catch (error) {
-        res.status(400).json({ error: error.message });
-      }
-    });
+    api.post("/users/auth", jsonBodyParser, handlerAuthenticateUser);
 
-    api.post("/users/auth", jsonBodyParser, (req, res) => {
-      try {
-        const {
-          body: { email, password },
-        } = req;
+    api.get("/users", handlerRetrieveUser);
 
-        authenticateUser(email, password)
-          .then((id) => {
-            const token = jwt.sign(
-              { sub: id, exp: Math.floor(Date.now() / 1000) + 60 * 60 },
-              "mi super secreto"
-            );
-
-            res.json({ token });
-          })
-          .catch((error) => res.status(400).json({ error: error.message }));
-      } catch (error) {
-        res.status(400).json({ error: error.message });
-      }
-    });
-
-    api.get("/users", (req, res) => {
-      try {
-        const {
-          headers: { authorization },
-        } = req;
-
-        const [, token] = authorization.split(" ");
-
-        const payload = jwt.verify(token, "mi super secreto");
-
-        const { sub: id } = payload;
-
-        retrieveUser(id)
-          .then((user) => res.json(user))
-          .catch((error) => res.status(400).json({ error: error.message }));
-      } catch (error) {
-        res.status(400).json({ error: error.message });
-      }
-    });
-
-    api.patch("/users/change-password", jsonBodyParser, (req, res) => {
-      try {
-        const {
-          headers: { authorization },
-          body: { currPassword, newPassword },
-        } = req;
-
-        const [, token] = authorization.split(" ");
-
-        const payload = jwt.verify(token, "mi super secreto");
-
-        const { sub: id } = payload;
-
-        updateUserPassword({ id, currPassword, newPassword })
-          .then(() => res.status(204).send())
-          .catch((error) => res.status(400).json({ error: error.message }));
-      } catch (error) {
-        res.status(400).json({ error: error.message });
-      }
-    });
+    api.patch("/users/change-password", jsonBodyParser, handlerUpdatePassword);
 
     api.patch("/users", jsonBodyParser, (req, res) => {
       try {
