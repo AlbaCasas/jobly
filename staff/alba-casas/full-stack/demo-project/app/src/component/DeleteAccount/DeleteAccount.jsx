@@ -24,12 +24,13 @@ const DeleteAccount = ({ showLogin, onBack }) => {
 
   return (
     <Container className="container__delete-account">
+      <h1>Delete account</h1>
       <form className="form__delete-account" onSubmit={unregister}>
         <label>Password</label>
         <input name="password" type="password" placeholder="Password"></input>
         <button>Delete Account</button>
       </form>
-      <a
+      {/*  <a
         href="javascript"
         onClick={(event) => {
           event.preventDefault();
@@ -37,7 +38,7 @@ const DeleteAccount = ({ showLogin, onBack }) => {
         }}
       >
         Back
-      </a>
+      </a> */}
     </Container>
   );
 };

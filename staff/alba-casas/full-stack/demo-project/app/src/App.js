@@ -26,7 +26,10 @@ function App() {
   return (
     <Container>
       <Routes>
-        <Route path="/*" element={<Home showProfile={showProfile} />} />
+        <Route
+          path="/*"
+          element={<Home showProfile={showProfile} showLogin={showLogin} />}
+        />
         <Route
           path="login"
           element={

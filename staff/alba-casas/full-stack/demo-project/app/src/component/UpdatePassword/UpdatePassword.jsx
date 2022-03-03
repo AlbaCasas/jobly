@@ -13,9 +13,15 @@ const UpdatePassword = ({ onBack }) => {
     } = event;
 
     try {
-      updateUserPassword(sessionStorage.token, currPassword, newPassword, retypePassword )
-      .then(() => {
-        alert('Password updated')})
+      updateUserPassword(
+        sessionStorage.token,
+        currPassword,
+        newPassword,
+        retypePassword
+      )
+        .then(() => {
+          alert("Password updated");
+        })
         .catch((error) => alert(error.message));
     } catch (error) {
       alert(error.message);
@@ -41,7 +47,7 @@ const UpdatePassword = ({ onBack }) => {
         />
         <button>Update password</button>
       </form>
-      <a
+      {/*  <a
         onClick={(event) => {
           event.preventDefault();
           onBack();
@@ -49,7 +55,7 @@ const UpdatePassword = ({ onBack }) => {
         href="javascript"
       >
         Back
-      </a>
+      </a> */}
     </Container>
   );
 };

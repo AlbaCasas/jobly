@@ -28,17 +28,17 @@ const Login = ({ onRegister, onLoggedIn }) => {
     }
   };
   return (
-    <Container>
+    <Container className="container__login">
       <form className="login__form" onSubmit={login}>
         <label>Email</label>
         <input type="email" name="email" placeholder="email" />
         <label>Password</label>
         <input type="password" name="password" placeholder="password" />
         <button>Login</button>
-        <a onClick={goToRegister} href="javascript">
-          Register
-        </a>
       </form>
+      <a onClick={goToRegister} href="javascript">
+        Register
+      </a>
     </Container>
   );
 };

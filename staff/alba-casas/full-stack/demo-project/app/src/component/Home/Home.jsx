@@ -3,7 +3,7 @@ import { retrieveUser } from "../../logic";
 import Container from "../Container/Container";
 import "./Home.css";
 
-const Home = ({ showProfile }) => {
+const Home = ({ showProfile, showLogin }) => {
   const [name, setName] = useState();
 
   useEffect(() => {
@@ -24,6 +24,16 @@ const Home = ({ showProfile }) => {
       >
         Profile
       </button>
+      <a
+        href="javascript"
+        onClick={(event) => {
+          event.preventDefault();
+          sessionStorage.token = "";
+          showLogin();
+        }}
+      >
+        Log out
+      </a>
     </Container>
   );
 };
