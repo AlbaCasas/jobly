@@ -1,0 +1,10 @@
+.profile__container {
+  gap: 10px;
+}
+
+.profile__form {
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}

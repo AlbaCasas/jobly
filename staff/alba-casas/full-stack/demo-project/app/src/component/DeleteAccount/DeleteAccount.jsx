@@ -1,6 +1,8 @@
 import { unregisterUser } from "../../logic";
+import Container from "../Container/Container";
+import "./DeleteAccount.css";
 
-const DeleteAccount = ({ showLogin }) => {
+const DeleteAccount = ({ showLogin, onBack }) => {
   const unregister = (event) => {
     event.preventDefault();
 
@@ -20,10 +22,22 @@ const DeleteAccount = ({ showLogin }) => {
   };
 
   return (
-    <form onSubmit={unregister}>
-      <input name="password" type="password" placeholder="Password"></input>
-      <button>Delete Account</button>
-    </form>
+    <Container className="container__delete-account">
+      <form className="form__delete-account" onSubmit={unregister}>
+        <label>Password</label>
+        <input name="password" type="password" placeholder="Password"></input>
+        <button>Delete Account</button>
+      </form>
+      <a
+        href="javascript"
+        onClick={(event) => {
+          event.preventDefault();
+          onBack();
+        }}
+      >
+        Back
+      </a>
+    </Container>
   );
 };
 

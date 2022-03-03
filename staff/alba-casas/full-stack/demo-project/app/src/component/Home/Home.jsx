@@ -1,30 +1,30 @@
 import { useEffect, useState } from "react";
 import { retrieveUser } from "../../logic";
+import Container from "../Container/Container";
+import "./Home.css";
 
-const Home = ({ onDeleteAccount }) => {
+const Home = ({ showProfile }) => {
   const [name, setName] = useState();
 
   useEffect(() => {
     try {
-      retrieveUser(sessionStorage.token)
-        .then((user) => setName(user.name))
-        .catch((error) => alert(error.message));
+      retrieveUser(sessionStorage.token).then((user) => setName(user.name));
     } catch (error) {
       alert(error.message);
     }
   });
 
   return (
-    <div>
+    <Container className="home__container">
       <h1>Welcome home, {name}!</h1>
       <button
         onClick={() => {
-          onDeleteAccount();
+          showProfile();
         }}
       >
-        Delete Account
+        Profile
       </button>
-    </div>
+    </Container>
   );
 };
 
