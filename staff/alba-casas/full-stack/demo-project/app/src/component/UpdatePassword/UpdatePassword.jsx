@@ -13,12 +13,10 @@ const UpdatePassword = ({ onBack }) => {
     } = event;
 
     try {
-      updateUserPassword(
-        sessionStorage.token,
-        currPassword,
-        newPassword,
-        retypePassword
-      ).then(alert("password updated"));
+      updateUserPassword(sessionStorage.token, currPassword, newPassword, retypePassword )
+      .then(() => {
+        alert('Password updated')})
+        .catch((error) => alert(error.message));
     } catch (error) {
       alert(error.message);
     }
