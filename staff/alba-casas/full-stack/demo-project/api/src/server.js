@@ -141,7 +141,7 @@ connect("mongodb://localhost:27017/demo-db")
 
         const { sub: userId } = payload;
 
-        deleteUser(userId, password)
+        deleteUser(userId, password )
           .then(() => res.status(204).send())
           .catch((error) => res.status(400).json({ error: error.message }));
       } catch (error) {
