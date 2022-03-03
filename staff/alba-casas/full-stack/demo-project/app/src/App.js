@@ -6,12 +6,14 @@ import Home from "./component/Home/Home";
 import DeleteAccount from "./component/DeleteAccount/DeleteAccount";
 import Container from "./component/Container/Container";
 import Profile from "./component/Profile/Profile";
+import UpdatePassword from "./component/UpdatePassword/UpdatePassword";
 
 function App() {
   const navigate = useNavigate();
   const showLogin = () => navigate("login");
   const showRegister = () => navigate("register");
   const showDeleteAccount = () => navigate("delete-account");
+  const showUpdatePassword = () => navigate("update-password");
   const showProfile = () => navigate("profile");
   const onBack = () => navigate("-1");
 
@@ -37,9 +39,17 @@ function App() {
           element={<DeleteAccount showLogin={showLogin} onBack={showProfile} />}
         />
         <Route
+          path="update-password"
+          element={<UpdatePassword onBack={showProfile} />}
+        />
+        <Route
           path="profile"
           element={
-            <Profile onBack={onBack} onDeleteAccount={showDeleteAccount} />
+            <Profile
+              onBack={onBack}
+              onDeleteAccount={showDeleteAccount}
+              onUpdatePassword={showUpdatePassword}
+            />
           }
         />
       </Routes>

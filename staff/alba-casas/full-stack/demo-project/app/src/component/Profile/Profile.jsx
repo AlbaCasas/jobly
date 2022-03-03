@@ -3,7 +3,7 @@ import Container from "../Container/Container";
 import { useEffect, useState } from "react";
 import "./Profile.css";
 
-const Profile = ({ onBack, onDeleteAccount }) => {
+const Profile = ({ onBack, onDeleteAccount, onUpdatePassword }) => {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   useEffect(() => {
@@ -48,6 +48,15 @@ const Profile = ({ onBack, onDeleteAccount }) => {
         />
         <button>Update user</button>
       </form>
+      <a
+        href="javascript"
+        onClick={(event) => {
+          event.preventDefault();
+          onUpdatePassword();
+        }}
+      >
+        Update password
+      </a>
       <a
         href="javascript"
         onClick={(event) => {

@@ -1,4 +1,5 @@
 import { authenticateUser } from "../../logic";
+import Container from "../Container/Container";
 import "./Login.css";
 
 const Login = ({ onRegister, onLoggedIn }) => {
@@ -27,14 +28,18 @@ const Login = ({ onRegister, onLoggedIn }) => {
     }
   };
   return (
-    <form className="login__form" onSubmit={login}>
-      <input type="email" name="email" placeholder="email" />
-      <input type="password" name="password" placeholder="password" />
-      <button>Login</button>
-      <a onClick={goToRegister} href="javascript">
-        Register
-      </a>
-    </form>
+    <Container>
+      <form className="login__form" onSubmit={login}>
+        <label>Email</label>
+        <input type="email" name="email" placeholder="email" />
+        <label>Password</label>
+        <input type="password" name="password" placeholder="password" />
+        <button>Login</button>
+        <a onClick={goToRegister} href="javascript">
+          Register
+        </a>
+      </form>
+    </Container>
   );
 };
 
