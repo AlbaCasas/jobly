@@ -194,7 +194,9 @@ connect("mongodb://localhost:27017/demo-db")
       try {
         listPublicNotes()
           .then((notes) => res.json(notes))
-          .catch((error) => res.status(400).json({ error: error.message }));
+          .catch((error) => {
+            res.status(400).json({ error: error.message });
+          });
       } catch (error) {
         res.status(400).json({ error: error.message });
       }
@@ -203,10 +205,17 @@ connect("mongodb://localhost:27017/demo-db")
     api.get("/notes/:noteId", (req, res) => {
       try {
         const {
+          headers: { authorization },
           params: { noteId },
         } = req;
 
-        retrieveNote(noteId)
+        const [, token] = authorization.split(" ");
+
+        const payload = jwt.verify(token, "mi super secreto");
+
+        const { sub: userId } = payload;
+
+        retrieveNote(userId, noteId)
           .then((note) => res.json(note))
           .catch((error) => res.status(400).json({ error: error.message }));
       } catch (error) {

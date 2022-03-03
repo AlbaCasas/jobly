@@ -1,23 +1,27 @@
-const {
-  models: { Note },
-} = require("data");
-const {
-  validators: { validateId },
-} = require("commons");
-function retrieveNote(noteId) {
+const {models: { Note }} = require("data");
+const { validators: { validateId }} = require("commons");
+function retrieveNote(userId, noteId) {
+  validateId(userId)
   validateId(noteId);
 
-  return Note.findOne({ _id: noteId, public: true });
-  /* .then((note) => {
-    const doc = note._doc;
+  return Note.findById(noteId).populate("user")
+    .then((note) => {
+      if (!note) throw new Error (`note with ${noteId} does not exist`)
 
-    //sanitize
-    delete doc._id;
-    delete doc.public;
-    delete doc.__v;
+      if (note.user.id === userId || note.public) {
+          const doc = note._doc;
 
-    return doc;
-  }); */
+          delete doc._id;
+          delete doc.__v;
+  
+          doc.userId = doc.user.id
+          doc.userName = doc.user.name
+  
+          delete doc.user;
+
+          return doc
+      } else throw new Error(`note with id ${noteId} is not public`)
+    })
 }
 
 module.exports = retrieveNote;
