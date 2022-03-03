@@ -1,7 +1,7 @@
 import "./App.css";
 import Login from "./component/Login/Login";
 import Register from "./component/Register/Register";
-import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Home from "./component/Home/Home";
 import DeleteAccount from "./component/DeleteAccount/DeleteAccount";
 import Container from "./component/Container/Container";

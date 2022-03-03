@@ -7,6 +7,8 @@ const {
   handlerAuthenticateUser,
   handlerRetrieveUser,
   handlerUpdatePassword,
+  handlerUpdateUser,
+  handlerDeleteAccount,
 } = require("./handlers");
 const {
   createNote,
@@ -15,8 +17,6 @@ const {
   deleteNote,
   listPublicNotes,
   listPublicNotesFromUser,
-  deleteUser,
-  updateUser,
   retrieveNote,
 } = require("logic");
 const cors = require("cors");
@@ -41,47 +41,9 @@ connect("mongodb://localhost:27017/demo-db")
 
     api.patch("/users/change-password", jsonBodyParser, handlerUpdatePassword);
 
-    api.patch("/users", jsonBodyParser, (req, res) => {
-      try {
-        const {
-          headers: { authorization },
-          body: { name, email },
-        } = req;
+    api.patch("/users", jsonBodyParser, handlerUpdateUser);
 
-        const [, token] = authorization.split(" ");
-
-        const payload = jwt.verify(token, "mi super secreto");
-
-        const { sub: id } = payload;
-
-        updateUser(id, { name, email })
-          .then(() => res.status(204).send())
-          .catch((error) => res.status(400).json({ error: error.message }));
-      } catch (error) {
-        res.status(400).json({ error: error.message });
-      }
-    });
-
-    api.delete("/users", jsonBodyParser, (req, res) => {
-      try {
-        const {
-          headers: { authorization },
-          body: { password },
-        } = req;
-
-        const [, token] = authorization.split(" ");
-
-        const payload = jwt.verify(token, "mi super secreto");
-
-        const { sub: userId } = payload;
-
-        deleteUser(userId, password)
-          .then(() => res.status(204).send())
-          .catch((error) => res.status(400).json({ error: error.message }));
-      } catch (error) {
-        res.status(400).json({ error: error.message });
-      }
-    });
+    api.delete("/users", jsonBodyParser, handlerDeleteAccount);
 
     api.post("/notes", jsonBodyParser, (req, res) => {
       try {
