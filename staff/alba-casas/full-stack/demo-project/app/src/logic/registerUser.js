@@ -1,4 +1,4 @@
-import { validators } from "commons";
+import { validators } from "commons/src/index";
 
 const { validateString, validateEmail, validatePassword } = validators;
 

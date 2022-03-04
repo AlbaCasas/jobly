@@ -1,6 +1,6 @@
 const { listPublicNotesFromUser } = require("logic");
 
-const handlerListPublicNotesFromUser = (req, res) => {
+module.exports = (req, res) => {
   try {
     const {
       params: { userId },
@@ -14,4 +14,3 @@ const handlerListPublicNotesFromUser = (req, res) => {
   }
 };
 
-module.exports = handlerListPublicNotesFromUser;

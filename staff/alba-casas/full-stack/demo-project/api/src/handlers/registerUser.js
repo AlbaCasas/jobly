@@ -1,6 +1,6 @@
 const { registerUser } = require("logic");
 
-const handlerRegister = (req, res) => {
+module.exports = (req, res) => {
   try {
     const {
       body: { name, email, password },
@@ -13,5 +13,3 @@ const handlerRegister = (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
-
-module.exports = handlerRegister;

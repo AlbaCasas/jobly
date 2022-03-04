@@ -1,18 +1,12 @@
-const jwt = require("jsonwebtoken");
+const { verifyTokenAndGetUserId } = require("../helpers");
 const { retrieveNote } = require("logic");
 
-const handlerRetrieveNote = (req, res) => {
+module.exports = (req, res) => {
   try {
+    const userId = verifyTokenAndGetUserId(req);
     const {
-      headers: { authorization },
       params: { noteId },
     } = req;
-
-    const [, token] = authorization.split(" ");
-
-    const payload = jwt.verify(token, "mi super secreto");
-
-    const { sub: userId } = payload;
 
     retrieveNote(userId, noteId)
       .then((note) => res.json(note))
@@ -21,5 +15,3 @@ const handlerRetrieveNote = (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
-
-module.exports = handlerRetrieveNote;
