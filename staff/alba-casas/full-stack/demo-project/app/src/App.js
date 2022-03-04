@@ -7,6 +7,7 @@ import DeleteAccount from "./component/DeleteAccount/DeleteAccount";
 import Container from "./component/Container/Container";
 import Profile from "./component/Profile/Profile";
 import UpdatePassword from "./component/UpdatePassword/UpdatePassword";
+import { useEffect } from "react";
 
 function App() {
   const navigate = useNavigate();
@@ -16,12 +17,14 @@ function App() {
   const showUpdatePassword = () => navigate("update-password");
   const showProfile = () => navigate("profile");
   const onBack = () => navigate("-1");
+  let tokenValid;
 
   const keepTokenNShowHome = (token) => {
     sessionStorage.token = token;
-
     navigate("/");
   };
+
+  useEffect(() => !tokenValid && navigate("login"), []);
 
   return (
     <Container>

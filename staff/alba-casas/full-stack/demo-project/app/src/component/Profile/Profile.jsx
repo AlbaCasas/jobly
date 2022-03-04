@@ -48,25 +48,27 @@ const Profile = ({ onBack, onDeleteAccount, onUpdatePassword }) => {
         />
         <button>Update user</button>
       </form>
-      <a
-        href="javascript"
-        onClick={(event) => {
-          event.preventDefault();
-          onUpdatePassword();
-        }}
-      >
-        Update password
-      </a>
-      <a
-        href="javascript"
-        onClick={(event) => {
-          event.preventDefault();
-          onDeleteAccount();
-        }}
-      >
-        Delete account
-      </a>
-      <a
+      <div className="profile__links">
+        <a
+          href="javascript"
+          onClick={(event) => {
+            event.preventDefault();
+            onUpdatePassword();
+          }}
+        >
+          Update password
+        </a>
+        <a
+          href="javascript"
+          onClick={(event) => {
+            event.preventDefault();
+            onDeleteAccount();
+          }}
+        >
+          Delete account
+        </a>
+      </div>
+      {/* <a
         onClick={(event) => {
           event.preventDefault();
           onBack();
@@ -74,7 +76,7 @@ const Profile = ({ onBack, onDeleteAccount, onUpdatePassword }) => {
         href="javascript"
       >
         Back
-      </a>
+      </a> */}
     </Container>
   );
 };
