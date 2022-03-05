@@ -8,5 +8,9 @@ const theme = {
     grayLight: "#DDD",
     primaryDark: "#1F4A98",
   },
+  breakpoints: {
+    tablet: "600px",
+    desktop: "992px",
+  },
 };
 export default theme;
