@@ -1,7 +1,12 @@
-import "./App.css";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import Login from "./pages/Login";
 
 function App() {
-  return <div>App</div>;
+  return (
+    <Routes>
+      <Route path="/login" element={<Login />} />;
+    </Routes>
+  );
 }
 
 export default App;
