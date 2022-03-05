@@ -15,6 +15,7 @@ const DeleteAccount = ({ showLogin, onBack }) => {
     try {
       unregisterUser(sessionStorage.token, password)
         .then(alert("deleted user"))
+        .then(delete sessionStorage.token)
         .then(showLogin)
         .catch((error) => alert(error.message));
     } catch (error) {

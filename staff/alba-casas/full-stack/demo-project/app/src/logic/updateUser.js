@@ -17,7 +17,7 @@ function updateUser(token, name, email) {
   }).then((res) => {
     const { status } = res;
 
-    if (status === 201) {
+    if (status >= 200 && status < 300) {
       return;
     } else if (status >= 400 && status < 500) {
       return res.json().then((payload) => {

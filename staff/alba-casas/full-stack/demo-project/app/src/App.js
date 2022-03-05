@@ -17,7 +17,7 @@ function App() {
   const showUpdatePassword = () => navigate("update-password");
   const showProfile = () => navigate("profile");
   const onBack = () => navigate("-1");
-  let tokenValid;
+  let tokenValid = !!sessionStorage.token;
 
   const keepTokenNShowHome = (token) => {
     sessionStorage.token = token;
