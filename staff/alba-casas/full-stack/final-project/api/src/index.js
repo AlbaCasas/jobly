@@ -23,7 +23,7 @@ connect(MONGODB_URL)
 
     const api = express.Router();
 
-    api.post("/users/candidate", jsonBodyParser, registerCandidate);
+    api.post("/candidate", jsonBodyParser, registerCandidate);
 
     server.use("/api", api);
 
