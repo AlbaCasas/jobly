@@ -69,30 +69,21 @@ User
 
 - email (string, required, unique)
 - password (string, required, min length 8)
-
-Candidate
-
-- user (ObjectId, ref: "user", required)
+- location (String, required)
+- phone (String, required)
+- avatar (String)
 - name (String, required)
-- location (String, required)
-- phone (Number, required)
-- avatar (String)
-
-Company
-
-- user (ObjectId, ref: "user", required)
-- fiscalName (String, required)
-- location (String, required)
-- phone (Number, required)
-- avatar (String)
+- role (String, enum: ["company", "candidate"], required)
 
 Jobs
 
-- company (ObjectId, ref: "company", required)
+- company (ObjectId, ref: "User", required)
 - title (String, required)
 - description (String, required)
 - role (String, required, enum["designer", "developer", "product"]
-- candidates (Array, ref: "company")
+- location (String, required)
+- candidates (Array, ref: "User")
+- createAt (Date, required, dafault(Date now))
 
 ## Tasks history
 
