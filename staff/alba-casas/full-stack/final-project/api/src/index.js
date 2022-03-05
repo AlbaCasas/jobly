@@ -4,7 +4,11 @@ const {
   mongoose: { connect, disconnect },
 } = require("data");
 const express = require("express");
-const { registerCandidate, authenticateUser } = require("./handlers");
+const {
+  registerCandidate,
+  authenticateUser,
+  registerCompany,
+} = require("./handlers");
 
 const cors = require("cors");
 
@@ -24,6 +28,7 @@ connect(MONGODB_URL)
     const api = express.Router();
 
     api.post("/candidate", jsonBodyParser, registerCandidate);
+    api.post("/company", jsonBodyParser, registerCompany);
     api.post("/auth", jsonBodyParser, authenticateUser);
 
     server.use("/api", api);
