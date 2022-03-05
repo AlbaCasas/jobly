@@ -108,8 +108,8 @@ Jobs
 
 ### Data
 
-- TODO create mongoose schemas and models (2h)
-- TODO create populate.js to test my models (1h)
+- ~~TODO create mongoose schemas and models (2h)~~
+- ~~TODO create populate.js to test my models (1h)~~
 
 ### App
 
