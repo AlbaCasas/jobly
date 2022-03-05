@@ -4,7 +4,7 @@ const {
   mongoose: { connect, disconnect },
 } = require("data");
 const express = require("express");
-const { registerCandidate } = require("./handlers");
+const { registerCandidate, authenticateUser } = require("./handlers");
 
 const cors = require("cors");
 
@@ -24,6 +24,7 @@ connect(MONGODB_URL)
     const api = express.Router();
 
     api.post("/candidate", jsonBodyParser, registerCandidate);
+    api.post("/auth", jsonBodyParser, authenticateUser);
 
     server.use("/api", api);
 
