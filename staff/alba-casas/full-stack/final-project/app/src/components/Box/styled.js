@@ -7,6 +7,8 @@ const Box = styled.div`
   justify-content: ${({ justifyContent }) => justifyContent};
   width: ${({ width }) => width || "100%"};
   gap: ${({ gap }) => gap};
+  margin-bottom: ${({ marginBottom }) => marginBottom};
+  margin: ${({ margin }) => margin};
 `;
 
 export default Box;
