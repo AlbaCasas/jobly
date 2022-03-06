@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Box from "../../components/Box";
 import Input from "../../components/Input";
 import Text from "../../components/Text";
@@ -13,8 +13,31 @@ import {
   Illustration,
   LoginForm,
 } from "./styled";
+import { authenticateUser } from "../../api";
 
 const Login = () => {
+  const navigate = useNavigate();
+
+  const login = (event) => {
+    event.preventDefault();
+
+    const {
+      target: {
+        email: { value: email },
+        password: { value: password },
+      },
+    } = event;
+
+    try {
+      authenticateUser(email, password)
+        .then(() => navigate("/"))
+        .catch((error) => {
+          alert(error.message);
+        });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
   return (
     <View>
       <LeftSection>
@@ -35,7 +58,7 @@ const Login = () => {
         </Box>
       </LeftSection>
       <RightSection>
-        <LoginForm>
+        <LoginForm onSubmit={login}>
           <Box flexDirection="column" alignItems="center" gap="32px">
             <img src={Logo} alt="Jobly" />
             <Box flexDirection="column" alignItems="center" gap="12px">
@@ -47,8 +70,8 @@ const Login = () => {
             </Box>
             <Box gap="48px" flexDirection="column">
               <Box gap="24px" flexDirection="column">
-                <Input type="email" placeholder="Email" />
-                <Input type="password" placeholder="Password" />
+                <Input name="email" type="email" placeholder="Email" />
+                <Input name="password" type="password" placeholder="Password" />
               </Box>
               <StyledButton>Login</StyledButton>
             </Box>

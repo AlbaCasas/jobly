@@ -69,3 +69,10 @@ export const InputForm = styled.form`
   width: 100%;
   gap: 24px;
 `;
+
+export const StyledTopWrapper = styled(Box)`
+  margin: 32px 0px 48px 0px;
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    margin: 0;
+  }
+`;

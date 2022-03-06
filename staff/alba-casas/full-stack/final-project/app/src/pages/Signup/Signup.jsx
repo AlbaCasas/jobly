@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdWorkOutline, MdPerson } from "react-icons/md";
 import Box from "../../components/Box";
 import Text from "../../components/Text";
@@ -9,18 +9,24 @@ import {
   InputForm,
   InputsGrid,
   ResponsiveText,
+  StyledTopWrapper,
   SwitchContainer,
   View,
 } from "./styled";
 import { StyledButton, RegisterForm } from "./styled";
 import { useState } from "react";
 import CardButton from "../../components/CardButton";
-import { registerCandidate, registerCompany } from "../../api";
+import {
+  authenticateUser,
+  registerCandidate,
+  registerCompany,
+} from "../../api";
 
 const Signup = () => {
   const [isActiveCandidate, setIsActiveCandidate] = useState(true);
   const isActiveCompany = !isActiveCandidate;
   const placeholder = isActiveCandidate ? "Full name" : "Fiscal name";
+  const navigate = useNavigate();
 
   const handleClickCandidate = () => {
     setIsActiveCandidate(true);
@@ -45,17 +51,33 @@ const Signup = () => {
 
     if (isActiveCandidate) {
       try {
-        registerCandidate(name, email, password, location, phone).then(() => {
-          alert("user registered");
-        });
+        registerCandidate(name, email, password, location, phone)
+          .then(() => {
+            try {
+              authenticateUser(email, password)
+                .then((token) => (sessionStorage.token = token))
+                .then(() => navigate("/"));
+            } catch (error) {
+              alert(error.message);
+            }
+            alert("user registered");
+          })
+          .catch((error) => alert(error.message));
       } catch (error) {
         alert(error.message);
       }
     } else {
       try {
-        registerCompany(name, email, password, location, phone).then(() => {
-          alert("user registered");
-        });
+        registerCompany(name, email, password, location, phone)
+          .then(() => {
+            try {
+              authenticateUser(email, password).then(() => navigate("/"));
+            } catch (error) {
+              alert(error.message);
+            }
+            alert("user registered");
+          })
+          .catch((error) => alert(error.message));
       } catch (error) {
         alert(error.message);
       }
@@ -69,12 +91,12 @@ const Signup = () => {
         flexDirection="column"
         alignItems="center"
       >
-        <Box flexDirection="column" margin="40px">
+        <StyledTopWrapper flexDirection="column">
           <GoBackText forwardedAs={Link} to="/login" variant="link">
             <ArrowBack />
             Go back to login
           </GoBackText>
-        </Box>
+        </StyledTopWrapper>
         <RegisterForm
           justifyContent="center"
           flexDirection="column"
@@ -121,7 +143,7 @@ const Signup = () => {
               <Input name="name" placeholder={placeholder} />
               <InputsGrid>
                 <Input name="location" placeholder="Location" />
-                <Input name="phone" type="number" placeholder="Phone" />
+                <Input name="phone" type="tel" placeholder="Phone" />
               </InputsGrid>
               <Input name="email" type="email" placeholder="Email" />
               <Input name="password" type="password" placeholder="Password" />

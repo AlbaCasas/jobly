@@ -42,12 +42,15 @@ export const RightSection = styled(Box)`
   }
 `;
 
-export const LoginForm = styled(Box)`
+export const LoginForm = styled.form`
+  display: flex;
   width: 100%;
   gap: 32px;
   flex-direction: column;
+  margin-bottom: 24px;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    display: flex;
     height: 100%;
     justify-content: space-between;
     width: 400px;
