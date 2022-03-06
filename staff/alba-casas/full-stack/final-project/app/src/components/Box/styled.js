@@ -5,7 +5,7 @@ const Box = styled.div`
   flex-direction: ${({ flexDirection }) => flexDirection};
   align-items: ${({ alignItems }) => alignItems};
   justify-content: ${({ justifyContent }) => justifyContent};
-  width: ${({ width }) => width};
+  width: ${({ width }) => width || "100%"};
   gap: ${({ gap }) => gap};
 `;
 

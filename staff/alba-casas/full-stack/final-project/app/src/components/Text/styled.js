@@ -14,10 +14,17 @@ const linkCss = css`
   color: ${({ theme }) => theme.colors.primary};
 `;
 
-const heading = css`
+const headingCss = css`
   font-size: 40px;
   line-height: 56px;
   font-weight: 400;
+  color: ${({ theme }) => theme.colors.text};
+`;
+
+const subheadingCss = css`
+  font-size: 28px;
+  line-height: 32px;
+  font-weight: 500;
   color: ${({ theme }) => theme.colors.text};
 `;
 
@@ -31,9 +38,12 @@ export const StyledText = styled.span`
       case "link":
         return linkCss;
       case "heading":
-        return heading;
+        return headingCss;
+      case "subheading":
+        return subheadingCss;
       default:
         return bodyCss;
     }
   }}
+  color: ${({ color }) => color};
 `;

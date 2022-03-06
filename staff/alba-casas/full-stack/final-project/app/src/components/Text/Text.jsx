@@ -1,8 +1,13 @@
 import { StyledText } from "./styled";
 
-const Text = ({ variant, children, textAlign, ...props }) => {
+const Text = ({ color, variant, children, textAlign, ...props }) => {
   return (
-    <StyledText textAlign={textAlign} variant={variant} {...props}>
+    <StyledText
+      color={color}
+      textAlign={textAlign}
+      variant={variant}
+      {...props}
+    >
       {children}
     </StyledText>
   );
