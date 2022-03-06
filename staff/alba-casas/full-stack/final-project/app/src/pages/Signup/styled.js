@@ -62,3 +62,10 @@ export const GoBackText = styled(Text)`
   align-items: center;
   gap: 8px;
 `;
+
+export const InputForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 24px;
+`;

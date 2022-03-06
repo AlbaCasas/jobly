@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
-import { MdWorkOutline, MdPerson, MdArrowBack } from "react-icons/md";
+import { MdWorkOutline, MdPerson } from "react-icons/md";
 import Box from "../../components/Box";
 import Text from "../../components/Text";
 import Input from "../../components/Input";
 import {
   ArrowBack,
   GoBackText,
+  InputForm,
   InputsGrid,
   ResponsiveText,
   SwitchContainer,
@@ -14,6 +15,7 @@ import {
 import { StyledButton, RegisterForm } from "./styled";
 import { useState } from "react";
 import CardButton from "../../components/CardButton";
+import { registerCandidate, registerCompany } from "../../api";
 
 const Signup = () => {
   const [isActiveCandidate, setIsActiveCandidate] = useState(true);
@@ -26,6 +28,38 @@ const Signup = () => {
 
   const handleClickCompany = () => {
     setIsActiveCandidate(false);
+  };
+
+  const signup = (event) => {
+    event.preventDefault();
+
+    const {
+      target: {
+        name: { value: name },
+        email: { value: email },
+        password: { value: password },
+        location: { value: location },
+        phone: { value: phone },
+      },
+    } = event;
+
+    if (isActiveCandidate) {
+      try {
+        registerCandidate(name, email, password, location, phone).then(() => {
+          alert("user registered");
+        });
+      } catch (error) {
+        alert(error.message);
+      }
+    } else {
+      try {
+        registerCompany(name, email, password, location, phone).then(() => {
+          alert("user registered");
+        });
+      } catch (error) {
+        alert(error.message);
+      }
+    }
   };
 
   return (
@@ -83,16 +117,18 @@ const Signup = () => {
             flexDirection="column"
             alignItems="center"
           >
-            <Input placeholder={placeholder} />
-            <InputsGrid>
-              <Input placeholder="Location" />
-              <Input type="number" placeholder="Phone" />
-            </InputsGrid>
-            <Input type="email" placeholder="Email" />
-            <Input type="password" placeholder="Password" />
-          </Box>
-          <Box>
-            <StyledButton>Sign Up</StyledButton>
+            <InputForm onSubmit={signup}>
+              <Input name="name" placeholder={placeholder} />
+              <InputsGrid>
+                <Input name="location" placeholder="Location" />
+                <Input name="phone" type="number" placeholder="Phone" />
+              </InputsGrid>
+              <Input name="email" type="email" placeholder="Email" />
+              <Input name="password" type="password" placeholder="Password" />
+              <Box>
+                <StyledButton>Sign Up</StyledButton>
+              </Box>
+            </InputForm>
           </Box>
         </RegisterForm>
       </Box>

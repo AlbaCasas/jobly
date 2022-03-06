@@ -2,13 +2,13 @@ import { validators } from "commons";
 
 const { validateString, validateEmail, validatePassword } = validators;
 
-export function registerCandidate(name, email, password, location, phone) {
+export function registerCompany(name, email, password, location, phone) {
   validateString(name);
   validateEmail(email);
   validatePassword(password);
   validateString(location);
 
-  return fetch("http://localhost:8080/api/candidate", {
+  return fetch("http://localhost:8080/api/company", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
