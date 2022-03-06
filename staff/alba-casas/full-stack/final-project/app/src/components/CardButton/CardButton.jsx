@@ -1,11 +1,11 @@
 import React from "react";
-import { StyledCardButton } from "./styled";
+import { StyledCardButton, StyledText } from "./styled";
 
 const CardButton = ({ children, icon, isActive, ...props }) => {
   return (
     <StyledCardButton {...props} isActive={isActive}>
       {icon}
-      {children}
+      <StyledText>{children}</StyledText>
     </StyledCardButton>
   );
 };

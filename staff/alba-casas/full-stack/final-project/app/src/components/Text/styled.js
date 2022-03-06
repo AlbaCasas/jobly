@@ -46,4 +46,5 @@ export const StyledText = styled.span`
     }
   }}
   color: ${({ color }) => color};
+  width: fit-content;
 `;

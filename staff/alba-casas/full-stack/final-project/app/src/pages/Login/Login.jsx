@@ -47,8 +47,8 @@ const Login = () => {
             </Box>
             <Box gap="48px" flexDirection="column">
               <Box gap="24px" flexDirection="column">
-                <Input placeholder="Email" />
-                <Input placeholder="Password" />
+                <Input type="email" placeholder="Email" />
+                <Input type="password" placeholder="Password" />
               </Box>
               <StyledButton>Login</StyledButton>
             </Box>

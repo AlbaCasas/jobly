@@ -25,4 +25,19 @@ export const StyledCardButton = styled.div`
     }
     return CardButtonInactive;
   }}
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    width: 100%;
+    gap: 16px;
+  }
+`;
+
+export const StyledText = styled.div`
+  display: none;
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    display: block;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;

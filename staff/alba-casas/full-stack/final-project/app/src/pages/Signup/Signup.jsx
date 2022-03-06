@@ -1,27 +1,31 @@
 import { Link } from "react-router-dom";
-import { MdWorkOutline, MdPerson } from "react-icons/md";
+import { MdWorkOutline, MdPerson, MdArrowBack } from "react-icons/md";
 import Box from "../../components/Box";
 import Text from "../../components/Text";
 import Input from "../../components/Input";
-import { View } from "./styled";
-import { StyledButton, StyledCardButton } from "./styled";
+import {
+  ArrowBack,
+  GoBackText,
+  InputsGrid,
+  ResponsiveText,
+  SwitchContainer,
+  View,
+} from "./styled";
+import { StyledButton, RegisterForm } from "./styled";
 import { useState } from "react";
+import CardButton from "../../components/CardButton";
 
 const Signup = () => {
   const [isActiveCandidate, setIsActiveCandidate] = useState(true);
-  const [isActiveCompany, setIsActiveCompany] = useState(false);
-  const [placeholder, setPlaceholder] = useState("Full name");
+  const isActiveCompany = !isActiveCandidate;
+  const placeholder = isActiveCandidate ? "Full name" : "Fiscal name";
 
   const handleClickCandidate = () => {
-    setIsActiveCandidate(!isActiveCandidate);
-    setIsActiveCompany(isActiveCandidate);
-    setPlaceholder("Full name");
+    setIsActiveCandidate(true);
   };
 
   const handleClickCompany = () => {
-    setIsActiveCompany(!isActiveCompany);
-    setIsActiveCandidate(isActiveCompany);
-    setPlaceholder("Fiscal Name");
+    setIsActiveCandidate(false);
   };
 
   return (
@@ -32,11 +36,12 @@ const Signup = () => {
         alignItems="center"
       >
         <Box flexDirection="column" margin="40px">
-          <Text as={Link} to="/login" variant="link">
+          <GoBackText forwardedAs={Link} to="/login" variant="link">
+            <ArrowBack />
             Go back to login
-          </Text>
+          </GoBackText>
         </Box>
-        <Box
+        <RegisterForm
           justifyContent="center"
           flexDirection="column"
           alignItems="center"
@@ -47,23 +52,31 @@ const Signup = () => {
             flexDirection="column"
             alignItems="center"
             marginBottom="8px"
+            gap="12px"
           >
             <Text variant="heading" textAlign="center">
               Welcome to Jobly
             </Text>
+            <ResponsiveText>
+              We are almost done! Please fill in some data
+            </ResponsiveText>
           </Box>
-          <Box justifyContent="center" alignItems="center" gap="72px">
-            <StyledCardButton
+          <SwitchContainer>
+            <CardButton
               onClick={handleClickCandidate}
               isActive={isActiveCandidate}
               icon={<MdPerson />}
-            ></StyledCardButton>
-            <StyledCardButton
+            >
+              I'm a Candidate
+            </CardButton>
+            <CardButton
               onClick={handleClickCompany}
               isActive={isActiveCompany}
               icon={<MdWorkOutline />}
-            ></StyledCardButton>
-          </Box>
+            >
+              I'm a Company
+            </CardButton>
+          </SwitchContainer>
           <Box
             justifyContent="center"
             gap="24px"
@@ -71,15 +84,17 @@ const Signup = () => {
             alignItems="center"
           >
             <Input placeholder={placeholder} />
-            <Input placeholder="Location" />
-            <Input placeholder="Phone" />
-            <Input placeholder="Email" />
-            <Input placeholder="Password" />
+            <InputsGrid>
+              <Input placeholder="Location" />
+              <Input type="number" placeholder="Phone" />
+            </InputsGrid>
+            <Input type="email" placeholder="Email" />
+            <Input type="password" placeholder="Password" />
           </Box>
           <Box>
             <StyledButton>Sign Up</StyledButton>
           </Box>
-        </Box>
+        </RegisterForm>
       </Box>
     </View>
   );
