@@ -45,26 +45,45 @@ Companies on the other hand can register and create job postings for candidates.
 
 ### Use Cases
 
-##### Candidate 
+##### Candidate
+
 ![alt Jobly Project](./use-case-candidate.png)
 
 ---
+
 #### Company
+
 ![alt Jobly Project](./uses-cases-company.png)
 
 #### User Interface (UI)
 
 ##### Main Views
 
+![alt Jobly Project](figma/mobile-login-signup.png)
+![alt Jobly Project](figma/login-signup.png)
+![alt Jobly Project](figma/board-candidate.png)
+![alt Jobly Project](figma/board-company.png)
+![alt Jobly Project](figma/board-mobile.png)
+![alt Jobly Project](figma/profile.png)
+![alt Jobly Project](figma/profile-mobile.png)
+![alt Jobly Project](figma/details-job.png)
+![alt Jobly Project](figma/list-candidates.png)
+![alt Jobly Project](figma/list-jobs-mobile-company.png)
+
 ## Technical Description
+
 ### Blocks
+
 ![alt Jobly Project](./blocks.jpg)
 
 ---
+
 ### Data Model
+
 ![alt Jobly Project](./data-model.png)
 
 ---
+
 User
 
 - email (string, required, unique)
@@ -95,8 +114,8 @@ Jobs
 
 - ~~TODO create use cases diagram (.25h)~~
 - ~~TODO create wireframes in paper (2h)~~
-- TODO create wireframes in figma (alt excalidraw) (3h)
-- TODO create wireframes in README (images) (1h)
+- ~~TODO create wireframes in figma (alt excalidraw) (3h)~~
+- ~~TODO create wireframes in README (images) (1h)~~
 
 #### Technical Description
 
@@ -113,5 +132,5 @@ Jobs
 
 ### App
 
-- TODO create main views (components) (1h)
-- TODO mechanize navigations (.5h)
+- ~~TODO create main views (components) (1h)~~
+- ~~TODO mechanize navigations (.5h)~~
