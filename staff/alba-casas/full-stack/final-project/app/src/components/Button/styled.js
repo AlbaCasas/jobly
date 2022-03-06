@@ -11,4 +11,10 @@ export const StyledButton = styled.button`
   border-radius: 10px;
   color: ${({ theme }) => theme.colors.white};
   font-weight: 500;
+  transition: all ease-in 0.1s;
+  cursor: pointer;
+  &:hover,
+  &:focus {
+    background-color: ${({ theme }) => theme.colors.primaryDark};
+  }
 `;

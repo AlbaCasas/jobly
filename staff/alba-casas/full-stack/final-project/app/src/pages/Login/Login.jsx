@@ -1,9 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Box from "../../components/Box";
 import Input from "../../components/Input";
 import Text from "../../components/Text";
 import Logo from "../../assets/logo.png";
-
 import { View, StyledButton, LeftSection, RightSection } from "./styled";
 
 const Login = () => {
@@ -28,7 +28,9 @@ const Login = () => {
         </Box>
         <Box justifyContent={"center"} gap="8px">
           <Text>Don’t have an account yet?</Text>
-          <Text variant="link">Sign Up</Text>
+          <Text as={Link} to="/signup" variant="link">
+            Sign Up
+          </Text>
         </Box>
       </RightSection>
     </View>

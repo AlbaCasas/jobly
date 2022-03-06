@@ -24,6 +24,8 @@ const heading = css`
 export const StyledText = styled.span`
   display: inline-block;
   text-align: ${({ textAlign }) => textAlign};
+  text-decoration: none;
+  margin: 0;
   ${({ variant }) => {
     switch (variant) {
       case "link":
