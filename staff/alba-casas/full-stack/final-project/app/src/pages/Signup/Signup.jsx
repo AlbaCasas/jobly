@@ -5,8 +5,25 @@ import Text from "../../components/Text";
 import Input from "../../components/Input";
 import { View } from "./styled";
 import { StyledButton, StyledCardButton } from "./styled";
+import { useState } from "react";
 
 const Signup = () => {
+  const [isActiveCandidate, setIsActiveCandidate] = useState(true);
+  const [isActiveCompany, setIsActiveCompany] = useState(false);
+  const [placeholder, setPlaceholder] = useState("Full name");
+
+  const handleClickCandidate = () => {
+    setIsActiveCandidate(!isActiveCandidate);
+    setIsActiveCompany(isActiveCandidate);
+    setPlaceholder("Full name");
+  };
+
+  const handleClickCompany = () => {
+    setIsActiveCompany(!isActiveCompany);
+    setIsActiveCandidate(isActiveCompany);
+    setPlaceholder("Fiscal Name");
+  };
+
   return (
     <View>
       <Box
@@ -36,8 +53,16 @@ const Signup = () => {
             </Text>
           </Box>
           <Box justifyContent="center" alignItems="center" gap="72px">
-            <StyledCardButton isActive icon={<MdPerson />}></StyledCardButton>
-            <StyledCardButton icon={<MdWorkOutline />}></StyledCardButton>
+            <StyledCardButton
+              onClick={handleClickCandidate}
+              isActive={isActiveCandidate}
+              icon={<MdPerson />}
+            ></StyledCardButton>
+            <StyledCardButton
+              onClick={handleClickCompany}
+              isActive={isActiveCompany}
+              icon={<MdWorkOutline />}
+            ></StyledCardButton>
           </Box>
           <Box
             justifyContent="center"
@@ -45,7 +70,7 @@ const Signup = () => {
             flexDirection="column"
             alignItems="center"
           >
-            <Input placeholder="Full name" />
+            <Input placeholder={placeholder} />
             <Input placeholder="Location" />
             <Input placeholder="Phone" />
             <Input placeholder="Email" />
