@@ -6,14 +6,14 @@ import Input from "../../components/Input";
 import {
   ArrowBack,
   GoBackText,
-  InputForm,
+  Form,
   InputsGrid,
   ResponsiveText,
-  StyledTopWrapper,
+  TopWrapper,
   SwitchContainer,
   View,
 } from "./styled";
-import { StyledButton, RegisterForm } from "./styled";
+import { StyledButton, RegisterWrapper } from "./styled";
 import { useState } from "react";
 import CardButton from "../../components/CardButton";
 import {
@@ -91,13 +91,13 @@ const Signup = () => {
         flexDirection="column"
         alignItems="center"
       >
-        <StyledTopWrapper flexDirection="column">
+        <TopWrapper flexDirection="column">
           <GoBackText forwardedAs={Link} to="/login" variant="link">
             <ArrowBack />
             Go back to login
           </GoBackText>
-        </StyledTopWrapper>
-        <RegisterForm
+        </TopWrapper>
+        <RegisterWrapper
           justifyContent="center"
           flexDirection="column"
           alignItems="center"
@@ -139,7 +139,7 @@ const Signup = () => {
             flexDirection="column"
             alignItems="center"
           >
-            <InputForm onSubmit={signup}>
+            <Form onSubmit={signup}>
               <Input name="name" placeholder={placeholder} />
               <InputsGrid>
                 <Input name="location" placeholder="Location" />
@@ -150,9 +150,9 @@ const Signup = () => {
               <Box>
                 <StyledButton>Sign Up</StyledButton>
               </Box>
-            </InputForm>
+            </Form>
           </Box>
-        </RegisterForm>
+        </RegisterWrapper>
       </Box>
     </View>
   );

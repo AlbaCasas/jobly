@@ -28,6 +28,20 @@ const subheadingCss = css`
   color: ${({ theme }) => theme.colors.text};
 `;
 
+const bodyBoldCss = css`
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 16px;
+  color: ${({ theme }) => theme.colors.text};
+`;
+
+const captionCss = css`
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  color: ${({ theme }) => theme.colors.gray};
+`;
+
 export const StyledText = styled.span`
   display: inline-block;
   text-align: ${({ textAlign }) => textAlign};
@@ -41,6 +55,10 @@ export const StyledText = styled.span`
         return headingCss;
       case "subheading":
         return subheadingCss;
+      case "body-bold":
+        return bodyBoldCss;
+      case "caption":
+        return captionCss;
       default:
         return bodyCss;
     }

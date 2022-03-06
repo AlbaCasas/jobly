@@ -18,6 +18,7 @@ export const StyledCardButton = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 10px;
+  cursor: pointer;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
   ${({ isActive }) => {
     if (isActive) {

@@ -30,7 +30,10 @@ const Login = () => {
 
     try {
       authenticateUser(email, password)
-        .then(() => navigate("/"))
+        .then((token) => {
+          sessionStorage.token = token;
+          navigate("/");
+        })
         .catch((error) => {
           alert(error.message);
         });

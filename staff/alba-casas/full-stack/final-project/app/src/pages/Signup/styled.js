@@ -17,7 +17,7 @@ export const StyledButton = styled(Button)`
   width: 100%;
 `;
 
-export const RegisterForm = styled(Box)`
+export const RegisterWrapper = styled(Box)`
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     height: 520;
     justify-content: space-between;
@@ -63,14 +63,14 @@ export const GoBackText = styled(Text)`
   gap: 8px;
 `;
 
-export const InputForm = styled.form`
+export const Form = styled.form`
   display: flex;
   flex-direction: column;
   width: 100%;
   gap: 24px;
 `;
 
-export const StyledTopWrapper = styled(Box)`
+export const TopWrapper = styled(Box)`
   margin: 32px 0px 48px 0px;
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     margin: 0;
