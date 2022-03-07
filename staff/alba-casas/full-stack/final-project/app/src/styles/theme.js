@@ -7,6 +7,7 @@ const theme = {
     text: "#333333",
     grayLight: "#DDD",
     primaryDark: "#1F4A98",
+    primaryLight: "#C3D5F4",
   },
   breakpoints: {
     tablet: "600px",

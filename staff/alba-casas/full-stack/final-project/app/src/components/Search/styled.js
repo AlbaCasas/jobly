@@ -4,7 +4,7 @@ import Button from "../Button";
 
 export const StyledSearch = styled.div`
   width: 100%;
-  height: 200px;
+  height: auto;
   display: flex;
   flex-direction: column;
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {

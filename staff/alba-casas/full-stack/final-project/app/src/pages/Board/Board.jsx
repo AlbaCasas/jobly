@@ -1,7 +1,9 @@
 import { Navigate } from "react-router-dom";
+import Box from "../../components/Box";
+import Card from "../../components/Card";
 import Nav from "../../components/Nav";
 import Search from "../../components/Search";
-import { Section, View } from "./styled";
+import { Section, StyledContainer, View } from "./styled";
 
 const Board = () => {
   let tokenValid = !!sessionStorage.token;
@@ -13,6 +15,13 @@ const Board = () => {
       <Nav>Jobly</Nav>
       <Section>
         <Search />
+        <StyledContainer>
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+        </StyledContainer>
       </Section>
     </View>
   );

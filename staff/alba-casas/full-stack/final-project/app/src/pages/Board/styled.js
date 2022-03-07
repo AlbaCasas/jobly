@@ -3,13 +3,31 @@ import Box from "../../components/Box";
 
 export const View = styled(Box)`
   height: auto;
+  display: flex;
+  justify-content: center;
 `;
 
 export const Section = styled(Box)`
   display: flex;
+  flex-direction: column;
   margin: 144px 24px;
-  width: 100%;
+  width: 920px;
   height: auto;
   justify-content: center;
   align-items: center;
+  gap: 24px;
+`;
+
+export const StyledContainer = styled(Box)`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  flex-direction: column;
+  margin-top: 40px;
+  flex-wrap: wrap;
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    flex-direction: row;
+  }
 `;

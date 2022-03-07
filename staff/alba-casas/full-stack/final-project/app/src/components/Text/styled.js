@@ -42,6 +42,13 @@ const captionCss = css`
   color: ${({ theme }) => theme.colors.gray};
 `;
 
+const sectionCss = css`
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 20px;
+  color: ${({ theme }) => theme.colors.text};
+`;
+
 export const StyledText = styled.span`
   display: inline-block;
   text-align: ${({ textAlign }) => textAlign};
@@ -59,6 +66,8 @@ export const StyledText = styled.span`
         return bodyBoldCss;
       case "caption":
         return captionCss;
+      case "section":
+        return sectionCss;
       default:
         return bodyCss;
     }
