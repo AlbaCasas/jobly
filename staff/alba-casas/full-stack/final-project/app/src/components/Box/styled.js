@@ -9,6 +9,7 @@ const Box = styled.div`
   gap: ${({ gap }) => gap};
   margin-bottom: ${({ marginBottom }) => marginBottom};
   margin: ${({ margin }) => margin};
+  border-radius: ${({ borderRadius }) => borderRadius};
 `;
 
 export default Box;
