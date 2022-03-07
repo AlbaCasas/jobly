@@ -1,6 +1,7 @@
 import { Navigate } from "react-router-dom";
 import Nav from "../../components/Nav";
-import { View } from "./styled";
+import Search from "../../components/Search";
+import { Section, View } from "./styled";
 
 const Board = () => {
   let tokenValid = !!sessionStorage.token;
@@ -10,6 +11,9 @@ const Board = () => {
   ) : (
     <View>
       <Nav>Jobly</Nav>
+      <Section>
+        <Search />
+      </Section>
     </View>
   );
 };

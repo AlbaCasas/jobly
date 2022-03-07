@@ -13,6 +13,8 @@ function registerCandidate(name, email, password, location, phone) {
   validateString(location);
 
   const role = "candidate";
+  const avatar =
+    "https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png";
   return User.create({
     name,
     email,
@@ -20,6 +22,7 @@ function registerCandidate(name, email, password, location, phone) {
     location,
     phone,
     role,
+    avatar,
   }).then((user) => {});
 }
 
