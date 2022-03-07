@@ -1,5 +1,3 @@
-import React from "react";
-
 import {
   Checkbox,
   SearchForm,
@@ -12,7 +10,7 @@ import {
 } from "./styled";
 import Text from "../Text";
 
-const Search = () => {
+const Search = ({ role }) => {
   return (
     <StyledSearch>
       <SearchForm>
@@ -21,18 +19,22 @@ const Search = () => {
         <StyledInputSearch placeholder="Role type" />
         <StyledButtonSearch>Find Job</StyledButtonSearch>
       </SearchForm>
-      <StyledJobSearch>
-        <Checkbox>
-          <Wrapper>
-            <input type="checkbox" />
-            <Text>Hide jobs with no candidates</Text>
-          </Wrapper>
-          <Wrapper>
-            <input type="checkbox" />
-            <Text>Show only my jobs</Text>
-          </Wrapper>
-        </Checkbox>
-      </StyledJobSearch>
+      {role === "company" ? (
+        <StyledJobSearch>
+          <Checkbox>
+            <Wrapper>
+              <input type="checkbox" />
+              <Text>Hide jobs with no candidates</Text>
+            </Wrapper>
+            <Wrapper>
+              <input type="checkbox" />
+              <Text>Show only my jobs</Text>
+            </Wrapper>
+          </Checkbox>
+        </StyledJobSearch>
+      ) : (
+        false
+      )}
     </StyledSearch>
   );
 };

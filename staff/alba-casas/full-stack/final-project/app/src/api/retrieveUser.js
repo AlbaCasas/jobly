@@ -2,7 +2,7 @@ import { validators } from "commons/src/index";
 
 const { validateToken } = validators;
 
-function retrieveUser(token) {
+export function retrieveUser(token) {
   validateToken(token);
 
   return fetch("http://localhost:8000/api/users", {
@@ -27,5 +27,3 @@ function retrieveUser(token) {
     }
   });
 }
-
-export default retrieveUser;

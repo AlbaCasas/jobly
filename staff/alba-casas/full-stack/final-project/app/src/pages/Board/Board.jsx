@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
+import { retrieveUser } from "../../api";
+
 import Card from "../../components/Card";
 import DropDown from "../../components/DropDown/DropDown";
 import Nav from "../../components/Nav";
@@ -8,6 +10,19 @@ import { Section, StyledContainer, View } from "./styled";
 
 const Board = () => {
   const [isShownDropDown, setIsShownDropDown] = useState(false);
+  const [name, setName] = useState();
+  const [role, setRole] = useState();
+
+  useEffect(() => {
+    try {
+      retrieveUser(sessionStorage.token).then((user) => {
+        setName(user.name);
+        setRole(user.role);
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  });
 
   const showDropDown = () => {
     setIsShownDropDown(!isShownDropDown);
@@ -19,10 +34,12 @@ const Board = () => {
     <Navigate to="/login" />
   ) : (
     <View>
-      <Nav showDropDown={showDropDown}>Jobly</Nav>
+      <Nav name={name} role={role} showDropDown={showDropDown}>
+        Jobly
+      </Nav>
       <DropDown isShownDropDown={isShownDropDown}>Profile</DropDown>
       <Section>
-        <Search />
+        <Search role={role} />
         <StyledContainer>
           <Card />
           <Card />

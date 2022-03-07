@@ -35,3 +35,18 @@ export const StyledTextNav = styled.div`
     gap: 4px;
   }
 `;
+
+export const StyledTextTitle = styled(Text)`
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: ${({ theme }) => theme.colors.text};
+`;
+
+export const StyleTextRole = styled(Text)`
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  color: ${({ theme }) => theme.colors.gray};
+  user-select: none;
+`;
