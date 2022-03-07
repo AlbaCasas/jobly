@@ -9,6 +9,7 @@ const {
   authenticateUser,
   registerCompany,
   retrieveUser,
+  createJob,
 } = require("./handlers");
 
 const cors = require("cors");
@@ -32,6 +33,7 @@ connect(MONGODB_URL)
     api.post("/company", jsonBodyParser, registerCompany);
     api.post("/auth", jsonBodyParser, authenticateUser);
     api.get("/users", jsonBodyParser, retrieveUser);
+    api.post("/job", jsonBodyParser, createJob);
 
     server.use("/api", api);
 
