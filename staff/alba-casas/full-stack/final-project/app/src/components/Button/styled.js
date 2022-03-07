@@ -13,8 +13,7 @@ export const StyledButton = styled.button`
   font-weight: 500;
   transition: all ease-in 0.1s;
   cursor: pointer;
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: ${({ theme }) => theme.colors.primaryDark};
   }
 `;

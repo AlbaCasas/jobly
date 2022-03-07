@@ -33,13 +33,22 @@ const bodyBoldCss = css`
   font-size: 16px;
   line-height: 16px;
   color: ${({ theme }) => theme.colors.text};
+  cursor: pointer;
 `;
 
 const captionCss = css`
   font-weight: 400;
   font-size: 14px;
+  cursor: pointer;
   line-height: 16px;
-  color: ${({ theme }) => theme.colors.gray};
+  color: ${({ theme }) => theme.colors.text};
+`;
+const captionBoldCss = css`
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 16px;
+  cursor: pointer;
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 const sectionCss = css`
@@ -68,6 +77,8 @@ export const StyledText = styled.span`
         return captionCss;
       case "section":
         return sectionCss;
+      case "captionBold":
+        return captionBoldCss;
       default:
         return bodyCss;
     }

@@ -1,18 +1,26 @@
+import { useState } from "react";
 import { Navigate } from "react-router-dom";
-import Box from "../../components/Box";
 import Card from "../../components/Card";
+import DropDown from "../../components/DropDown/DropDown";
 import Nav from "../../components/Nav";
 import Search from "../../components/Search";
 import { Section, StyledContainer, View } from "./styled";
 
 const Board = () => {
+  const [isShownDropDown, setIsShownDropDown] = useState(false);
+
+  const showDropDown = () => {
+    setIsShownDropDown(!isShownDropDown);
+  };
+
   let tokenValid = !!sessionStorage.token;
 
   return !tokenValid ? (
     <Navigate to="/login" />
   ) : (
     <View>
-      <Nav>Jobly</Nav>
+      <Nav showDropDown={showDropDown}>Jobly</Nav>
+      <DropDown isShownDropDown={isShownDropDown}>Profile</DropDown>
       <Section>
         <Search />
         <StyledContainer>

@@ -1,6 +1,13 @@
 import { StyledText } from "./styled";
 
-const Text = ({ color, variant, children, textAlign, ...props }) => {
+const Text = ({
+  color,
+  variant,
+  children,
+  cursorPointer,
+  textAlign,
+  ...props
+}) => {
   return (
     <StyledText
       color={color}

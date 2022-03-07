@@ -11,7 +11,6 @@ export const StyledCard = styled.div`
   gap: 8px;
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     max-width: 290px;
-    
     gap: 16px;
   }
 `;

@@ -3,7 +3,7 @@ import { StyledNav, StyledText, StyledTextNav } from "./styled";
 import Box from "../Box";
 import Text from "../Text";
 
-const Nav = ({ children }) => {
+const Nav = ({ children, showDropDown }) => {
   return (
     <StyledNav>
       <Box
@@ -13,7 +13,12 @@ const Nav = ({ children }) => {
       >
         <StyledText>{children}</StyledText>
       </Box>
-      <Box width="fit-content" justifyContent="center" alignItems="center">
+      <Box
+        onClick={showDropDown}
+        width="fit-content"
+        justifyContent="center"
+        alignItems="center"
+      >
         <MdAccountCircle />
         <StyledTextNav>
           <Text variant="body-bold">Alba Casas</Text>
