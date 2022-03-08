@@ -28,7 +28,14 @@ export const ContainerSelect = styled.div`
 `;
 
 export const ContainerSelectViewProfile = styled.div`
-  height: 40px;
+  height: 36px;
+  width: 100%;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.gray};
+  margin-bottom: 8px;
+`;
+
+export const ContainerMyJobs = styled.div`
+  height: 36px;
   width: 100%;
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray};
   margin-bottom: 8px;

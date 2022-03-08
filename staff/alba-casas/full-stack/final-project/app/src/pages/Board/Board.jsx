@@ -56,13 +56,16 @@ const Board = () => {
       <Nav name={name} avatar={avatar} role={role} showDropdown={showDropdown}>
         Jobly
       </Nav>
-      <Dropdown closeDropdown={closeDropdown} isShown={isDropdownShown}>
+      <Dropdown
+        role={role}
+        closeDropdown={closeDropdown}
+        isShown={isDropdownShown}
+      >
         Profile
       </Dropdown>
       <Section>
         <Search role={role} />
         <StyledContainer>
-          {/* Si pokemonList contiene map (en su prototipado), hace el map (Optional Chaining) */}
           {!!jobList.length ? (
             jobList.map((job) => {
               return (

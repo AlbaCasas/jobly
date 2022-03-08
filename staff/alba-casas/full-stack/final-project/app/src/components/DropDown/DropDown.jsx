@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  ContainerMyJobs,
   ContainerSelect,
   ContainerSelectViewProfile,
   StyledDropdown,
@@ -8,7 +9,7 @@ import Text from "../Text";
 import { useNavigate } from "react-router-dom";
 import OutsideClickHandler from "react-outside-click-handler";
 
-const Dropdown = ({ isShown, closeDropdown }) => {
+const Dropdown = ({ isShown, closeDropdown, role }) => {
   const navigate = useNavigate();
 
   return !!isShown ? (
@@ -20,6 +21,11 @@ const Dropdown = ({ isShown, closeDropdown }) => {
         <ContainerSelectViewProfile>
           <Text variant="caption">View Profile</Text>
         </ContainerSelectViewProfile>
+        {role === "company" ? (
+          <ContainerMyJobs>
+            <Text variant="caption">My jobs</Text>
+          </ContainerMyJobs>
+        ) : null}
         <ContainerSelect>
           <Text
             cursorPointer="cursor-pointer"
