@@ -2,37 +2,40 @@ import React from "react";
 import {
   ContainerSelect,
   ContainerSelectViewProfile,
-  StyledDropDown,
+  StyledDropdown,
 } from "./styled";
 import Text from "../Text";
 import { useNavigate } from "react-router-dom";
+import OutsideClickHandler from "react-outside-click-handler";
 
-const DropDown = ({ isShownDropDown }) => {
+const Dropdown = ({ isShown, closeDropdown }) => {
   const navigate = useNavigate();
 
-  return !!isShownDropDown ? (
-    <StyledDropDown>
-      <ContainerSelect>
-        <Text variant="captionBold">Profile</Text>
-      </ContainerSelect>
-      <ContainerSelectViewProfile>
-        <Text variant="caption">View Profile</Text>
-      </ContainerSelectViewProfile>
-      <ContainerSelect>
-        <Text
-          cursorPointer="cursor-pointer"
-          as="a"
-          onClick={() => {
-            delete sessionStorage.token;
-            navigate("/login");
-          }}
-          variant="caption"
-        >
-          Log Out
-        </Text>
-      </ContainerSelect>
-    </StyledDropDown>
+  return !!isShown ? (
+    <OutsideClickHandler onOutsideClick={closeDropdown}>
+      <StyledDropdown>
+        <ContainerSelect>
+          <Text variant="captionBold">Profile</Text>
+        </ContainerSelect>
+        <ContainerSelectViewProfile>
+          <Text variant="caption">View Profile</Text>
+        </ContainerSelectViewProfile>
+        <ContainerSelect>
+          <Text
+            cursorPointer="cursor-pointer"
+            as="a"
+            onClick={() => {
+              delete sessionStorage.token;
+              navigate("/login");
+            }}
+            variant="caption"
+          >
+            Log Out
+          </Text>
+        </ContainerSelect>
+      </StyledDropdown>
+    </OutsideClickHandler>
   ) : null;
 };
 
-export default DropDown;
+export default Dropdown;

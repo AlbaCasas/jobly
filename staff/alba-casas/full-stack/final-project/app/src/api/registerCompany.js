@@ -8,7 +8,7 @@ export function registerCompany(name, email, password, location, phone) {
   validatePassword(password);
   validateString(location);
 
-  return fetch("http://localhost:8080/api/company", {
+  return fetch("http://localhost:8000/api/company", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

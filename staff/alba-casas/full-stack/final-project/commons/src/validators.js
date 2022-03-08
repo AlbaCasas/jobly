@@ -56,7 +56,10 @@ function validateToken(token) {
 
   const expired = Date.now() > expStamp;
 
-  if (expired) throw new Error("token expired");
+  if (expired) {
+    delete sessionStorage.token;
+    throw new Error("token expired");
+  }
 }
 function validateString(string, explain = "string") {
   if (typeof string !== "string")

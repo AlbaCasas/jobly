@@ -36,7 +36,7 @@ const Signup = () => {
     setIsActiveCandidate(false);
   };
 
-  const signup = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
     const {
@@ -139,7 +139,7 @@ const Signup = () => {
             flexDirection="column"
             alignItems="center"
           >
-            <Form onSubmit={signup}>
+            <Form onSubmit={handleSubmit}>
               <Input name="name" placeholder={placeholder} />
               <InputsGrid>
                 <Input name="location" placeholder="Location" />

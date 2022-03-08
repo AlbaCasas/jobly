@@ -8,7 +8,7 @@ import {
 } from "./styled";
 import Box from "../Box";
 
-const Nav = ({ children, showDropDown, name, role }) => {
+const Nav = ({ children, showDropdown, name, role }) => {
   return (
     <StyledNav>
       <Box
@@ -19,7 +19,7 @@ const Nav = ({ children, showDropDown, name, role }) => {
         <StyledText>{children}</StyledText>
       </Box>
       <Box
-        onClick={showDropDown}
+        onClick={showDropdown}
         width="fit-content"
         justifyContent="center"
         alignItems="center"

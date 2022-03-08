@@ -18,7 +18,7 @@ import { authenticateUser } from "../../api";
 const Login = () => {
   const navigate = useNavigate();
 
-  const login = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
     const {
@@ -61,7 +61,7 @@ const Login = () => {
         </Box>
       </LeftSection>
       <RightSection>
-        <LoginForm onSubmit={login}>
+        <LoginForm onSubmit={handleSubmit}>
           <Box flexDirection="column" alignItems="center" gap="32px">
             <img src={Logo} alt="Jobly" />
             <Box flexDirection="column" alignItems="center" gap="12px">

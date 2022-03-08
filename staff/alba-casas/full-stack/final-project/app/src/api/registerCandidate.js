@@ -8,7 +8,7 @@ export function registerCandidate(name, email, password, location, phone) {
   validatePassword(password);
   validateString(location);
 
-  return fetch("http://localhost:8080/api/candidate", {
+  return fetch("http://localhost:8000/api/candidate", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -22,6 +22,7 @@ export function registerCandidate(name, email, password, location, phone) {
     } else if (status >= 400 && status < 500) {
       return res.json().then((payload) => {
         const { error } = payload;
+        console.log(error);
 
         throw new Error(error);
       });

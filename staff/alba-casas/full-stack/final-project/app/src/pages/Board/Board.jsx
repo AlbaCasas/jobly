@@ -1,17 +1,27 @@
 import { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { retrieveUser } from "../../api";
-
 import Card from "../../components/Card";
-import DropDown from "../../components/DropDown/DropDown";
+import Dropdown from "../../components/Dropdown/Dropdown";
 import Nav from "../../components/Nav";
 import Search from "../../components/Search";
 import { Section, StyledContainer, View } from "./styled";
 
 const Board = () => {
-  const [isShownDropDown, setIsShownDropDown] = useState(false);
-  const [name, setName] = useState();
+  let tokenValid = !!sessionStorage.token;
+  const [isDropdownShown, setIsDropdownShown] = useState(false);
+  const[name, setName] = useState();
   const [role, setRole] = useState();
+
+  const showDropdown = () => {
+    setIsDropdownShown(!isDropdownShown);
+  };
+
+  const closeDropdown = () => {
+    if (isDropdownShown) {
+      setIsDropdownShown(false);
+    }
+  };
 
   useEffect(() => {
     try {
@@ -22,22 +32,18 @@ const Board = () => {
     } catch (error) {
       alert(error.message);
     }
-  });
-
-  const showDropDown = () => {
-    setIsShownDropDown(!isShownDropDown);
-  };
-
-  let tokenValid = !!sessionStorage.token;
+  }, []);
 
   return !tokenValid ? (
     <Navigate to="/login" />
   ) : (
     <View>
-      <Nav name={name} role={role} showDropDown={showDropDown}>
+      <Nav name={name} role={role} showDropdown={showDropdown}>
         Jobly
       </Nav>
-      <DropDown isShownDropDown={isShownDropDown}>Profile</DropDown>
+      <Dropdown closeDropdown={closeDropdown} isShown={isDropdownShown}>
+        Profile
+      </Dropdown>
       <Section>
         <Search role={role} />
         <StyledContainer>
