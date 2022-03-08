@@ -4,6 +4,7 @@ import { authenticateUser } from "./authenticateUser";
 import { retrieveUser } from "./retrieveUser";
 import { listjobs } from "./listJobs";
 import { updateUser } from "./updateUser";
+import { updateUserPassword } from "./updateUserPassword";
 
 export {
   registerCandidate,
@@ -12,4 +13,5 @@ export {
   retrieveUser,
   listjobs,
   updateUser,
+  updateUserPassword,
 };

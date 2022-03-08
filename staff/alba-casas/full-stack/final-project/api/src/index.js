@@ -12,6 +12,7 @@ const {
   createJob,
   listJobs,
   updateUser,
+  updateUserPassword,
 } = require("./handlers");
 
 const cors = require("cors");
@@ -38,6 +39,7 @@ connect(MONGODB_URL)
     api.post("/job", jsonBodyParser, createJob);
     api.get("/job", listJobs);
     api.patch("/users", jsonBodyParser, updateUser);
+    api.patch("/users/change-password", jsonBodyParser, updateUserPassword);
 
     server.use("/api", api);
 

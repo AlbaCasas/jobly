@@ -1,16 +1,16 @@
 const { verifyTokenAndGetUserId } = require("../helpers");
-const { createJob } = require("logic");
+const { updateUserPassword } = require("logic");
 
 module.exports = (req, res) => {
   try {
-    const companyId = verifyTokenAndGetUserId(req);
+    const id = verifyTokenAndGetUserId(req);
 
     const {
-      body: { title, description, role, location },
+      body: { currPassword, newPassword },
     } = req;
 
-    createJob(companyId, { title, description, role, location })
-      .then(() => res.status(201).send())
+    updateUserPassword({ id, currPassword, newPassword })
+      .then(() => res.status(204).send())
       .catch((error) => res.status(400).json({ error: error.message }));
   } catch (error) {
     res.status(400).json({ error: error.message });

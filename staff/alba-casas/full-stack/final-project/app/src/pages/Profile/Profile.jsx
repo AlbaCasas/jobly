@@ -15,7 +15,7 @@ import {
   Wrapper,
 } from "./styled";
 import { useEffect, useState } from "react";
-import { retrieveUser, updateUser } from "../../api/";
+import { retrieveUser, updateUser, updateUserPassword } from "../../api/";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
@@ -63,6 +63,32 @@ const Profile = () => {
       alert(error.message);
     }
   };
+
+  const handleUpdatePassword = (event) => {
+    event.preventDefault();
+    const {
+      target: {
+        currPassword: { value: currPassword },
+        newPassword: { value: newPassword },
+        retypePassword: { value: retypePassword },
+      },
+    } = event;
+
+    try {
+      updateUserPassword(
+        sessionStorage.token,
+        currPassword,
+        newPassword,
+        retypePassword
+      )
+        .then(() => {
+          alert("Password updated");
+        })
+        .catch((error) => alert(error.message));
+    } catch (error) {
+      alert(error.message);
+    }
+  };
   return (
     <Layout>
       <Section>
@@ -106,12 +132,12 @@ const Profile = () => {
             </Wrapper>
             <Button>Update profile</Button>
           </StyledForm>
-          <StyledForm>
+          <StyledForm onSubmit={handleUpdatePassword}>
             <Wrapper>
               <StyledSubTitle>Modify your user settings</StyledSubTitle>
               <Input
                 type="password"
-                name="currentPassword"
+                name="currPassword"
                 placeholder="Current Password"
               />
               <Input
