@@ -13,6 +13,8 @@ function registerCompany(name, email, password, location, phone) {
   validateString(location);
 
   const role = "company";
+  const avatar =
+    "https://humanoz.com/wp-content/uploads/2019/10/deafult-profile-icon-png-image-free-download-searchpngcom-profile-icon-png-673_673.png";
   return User.create({
     name,
     email,
@@ -20,6 +22,7 @@ function registerCompany(name, email, password, location, phone) {
     location,
     phone,
     role,
+    avatar,
   }).then((user) => {});
 }
 

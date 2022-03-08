@@ -1,4 +1,3 @@
-import { MdAccountCircle } from "react-icons/md";
 import {
   StyledNav,
   StyledText,
@@ -8,7 +7,7 @@ import {
 } from "./styled";
 import Box from "../Box";
 
-const Nav = ({ children, showDropdown, name, role }) => {
+const Nav = ({ avatar, children, showDropdown, name, role }) => {
   return (
     <StyledNav>
       <Box
@@ -24,7 +23,7 @@ const Nav = ({ children, showDropdown, name, role }) => {
         justifyContent="center"
         alignItems="center"
       >
-        <MdAccountCircle />
+        <img width="48px" src={avatar} alt="profile" />
         <StyledTextNav>
           <StyledTextTitle>{name}</StyledTextTitle>
           <StyleTextRole variant="caption">{role}</StyleTextRole>

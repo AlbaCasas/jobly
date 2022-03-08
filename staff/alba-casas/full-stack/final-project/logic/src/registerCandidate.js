@@ -14,7 +14,7 @@ function registerCandidate(name, email, password, location, phone) {
 
   const role = "candidate";
   const avatar =
-    "https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png";
+    "https://humanoz.com/wp-content/uploads/2019/10/deafult-profile-icon-png-image-free-download-searchpngcom-profile-icon-png-673_673.png";
   return User.create({
     name,
     email,

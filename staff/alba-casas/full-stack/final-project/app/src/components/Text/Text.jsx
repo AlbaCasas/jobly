@@ -11,7 +11,7 @@ const Text = ({
   return (
     <StyledText
       color={color}
-      textAlign={textAlign}
+      $textAlign={textAlign}
       variant={variant}
       {...props}
     >

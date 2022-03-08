@@ -1,17 +1,21 @@
 import { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
-import { retrieveUser } from "../../api";
+import { retrieveUser, listjobs } from "../../api";
 import Card from "../../components/Card";
 import Dropdown from "../../components/Dropdown/Dropdown";
 import Nav from "../../components/Nav";
 import Search from "../../components/Search";
+import Text from "../../components/Text";
 import { Section, StyledContainer, View } from "./styled";
 
 const Board = () => {
   let tokenValid = !!sessionStorage.token;
   const [isDropdownShown, setIsDropdownShown] = useState(false);
-  const[name, setName] = useState();
+  const [jobList, setJobList] = useState([]);
+
+  const [name, setName] = useState();
   const [role, setRole] = useState();
+  const [avatar, setAvatar] = useState();
 
   const showDropdown = () => {
     setIsDropdownShown(!isDropdownShown);
@@ -28,9 +32,20 @@ const Board = () => {
       retrieveUser(sessionStorage.token).then((user) => {
         setName(user.name);
         setRole(user.role);
+        setAvatar(user.avatar);
       });
     } catch (error) {
       alert(error.message);
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      listjobs(sessionStorage.token).then((job) => {
+        setJobList(job);
+      });
+    } catch ({ message }) {
+      alert(message);
     }
   }, []);
 
@@ -38,7 +53,7 @@ const Board = () => {
     <Navigate to="/login" />
   ) : (
     <View>
-      <Nav name={name} role={role} showDropdown={showDropdown}>
+      <Nav name={name} avatar={avatar} role={role} showDropdown={showDropdown}>
         Jobly
       </Nav>
       <Dropdown closeDropdown={closeDropdown} isShown={isDropdownShown}>
@@ -47,11 +62,24 @@ const Board = () => {
       <Section>
         <Search role={role} />
         <StyledContainer>
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          {/* Si pokemonList contiene map (en su prototipado), hace el map (Optional Chaining) */}
+          {!!jobList.length ? (
+            jobList.map((job) => {
+              return (
+                <Card
+                  key={job._id}
+                  avatar={job.company.avatar}
+                  title={job.title}
+                  description={job.description}
+                  role={job.role}
+                  location={job.location}
+                  candidates={job.candidates}
+                />
+              );
+            })
+          ) : (
+            <Text variant="subheading">No results</Text>
+          )}
         </StyledContainer>
       </Section>
     </View>
