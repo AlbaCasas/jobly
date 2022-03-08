@@ -4,6 +4,7 @@ const registerCompany = require("./registerCompany");
 const retrieveUser = require("./retrieveUser");
 const createJob = require("./createJob");
 const listJobs = require("./listJobs");
+const updateUser = require("./updateUser");
 module.exports = {
   registerCandidate,
   authenticateUser,
@@ -11,4 +12,5 @@ module.exports = {
   retrieveUser,
   createJob,
   listJobs,
+  updateUser,
 };

@@ -8,15 +8,20 @@ const {
 function listJobs(userId) {
   validateId(userId);
 
-  return Job.find({ user: userId }).then((jobs) => {
-    const docs = jobs.map((job) => {
-      const doc = job._doc;
+  return Job.find({ user: userId })
+    .populate("company")
+    .then((jobs) => {
+      const docs = jobs.map((job) => {
+        const doc = job._doc;
+        
+        delete doc._id;
+        delete doc.__v;
 
-      return doc;
+        return doc;
+      });
+
+      return docs;
     });
-
-    return docs;
-  });
 }
 
 module.exports = listJobs;

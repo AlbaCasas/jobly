@@ -3,6 +3,7 @@ import { registerCompany } from "./registerCompany";
 import { authenticateUser } from "./authenticateUser";
 import { retrieveUser } from "./retrieveUser";
 import { listjobs } from "./listJobs";
+import { updateUser } from "./updateUser";
 
 export {
   registerCandidate,
@@ -10,4 +11,5 @@ export {
   authenticateUser,
   retrieveUser,
   listjobs,
+  updateUser,
 };

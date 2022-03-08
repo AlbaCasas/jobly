@@ -21,11 +21,11 @@ const Board = () => {
     setIsDropdownShown(!isDropdownShown);
   };
 
-  const closeDropdown = () => {
+  /*  const closeDropdown = () => {
     if (isDropdownShown) {
       setIsDropdownShown(false);
     }
-  };
+  }; */
 
   useEffect(() => {
     try {
@@ -58,7 +58,7 @@ const Board = () => {
       </Nav>
       <Dropdown
         role={role}
-        closeDropdown={closeDropdown}
+        /*  closeDropdown={closeDropdown} */
         isShown={isDropdownShown}
       >
         Profile
