@@ -9,8 +9,10 @@ function addJob(userId, jobId) {
   validateId(userId, "userId");
   validateId(jobId, "jobId");
 
-  return Job.findById(jobId).then((job) => {job.candidates.push(userId);
-    Job.save();
+  return Job.findById(jobId).then((job) => {
+    if (job.candidates.includes(userId)) throw new Error("Duplicate id");
+    job.candidates.push(userId);
+    job.save();
   });
 }
 
