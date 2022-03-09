@@ -28,11 +28,9 @@ const Dropdown = ({ isShown, closeDropdown, role }) => {
             View Profile
           </Text>
         </ContainerSelectViewProfile>
-        {role === "company" ? (
-          <ContainerMyJobs>
-            <Text variant="caption">My jobs</Text>
-          </ContainerMyJobs>
-        ) : null}
+        <ContainerMyJobs>
+          <Text variant="caption">My jobs</Text>
+        </ContainerMyJobs>
         <ContainerSelect>
           <Text
             cursorPointer="cursor-pointer"

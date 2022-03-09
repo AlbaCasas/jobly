@@ -80,7 +80,7 @@ Companies on the other hand can register and create job postings for candidates.
 
 ### Data Model
 
-![alt Jobly Project](./data-model.png)
+![alt Jobly Project](./er-diagram.png)
 
 ---
 

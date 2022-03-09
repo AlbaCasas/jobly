@@ -52,22 +52,6 @@ const Profile = () => {
         email: { value: email },
         location: { value: location },
         phone: { value: phone },
-      },
-    } = event;
-
-    try {
-      updateUser(sessionStorage.token, name, email, location, phone).then(
-        alert("user updated")
-      );
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-
-  const handleUpdatePassword = (event) => {
-    event.preventDefault();
-    const {
-      target: {
         currPassword: { value: currPassword },
         newPassword: { value: newPassword },
         retypePassword: { value: retypePassword },
@@ -75,20 +59,31 @@ const Profile = () => {
     } = event;
 
     try {
-      updateUserPassword(
-        sessionStorage.token,
-        currPassword,
-        newPassword,
-        retypePassword
-      )
-        .then(() => {
-          alert("Password updated");
-        })
-        .catch((error) => alert(error.message));
+      if (
+        currPassword.length === 0 &&
+        newPassword.length === 0 &&
+        retypePassword.length === 0
+      ) {
+        updateUser(sessionStorage.token, name, email, location, phone);
+        alert("user update");
+      } else {
+        updateUser(sessionStorage.token, name, email, location, phone)
+          .then(() => {
+            updateUserPassword(
+              sessionStorage.token,
+              currPassword,
+              newPassword,
+              retypePassword
+            );
+            alert("user update");
+          })
+          .catch((error) => alert(error.message));
+      }
     } catch (error) {
       alert(error.message);
     }
   };
+
   return (
     <Layout>
       <Section>
@@ -102,7 +97,6 @@ const Profile = () => {
               Introduce your contact details so companies can reach back to you
             </StyledSpan>
           </ContainerText>
-
           <StyledForm onSubmit={handleUpdateUser}>
             <Wrapper>
               <Input
@@ -130,9 +124,6 @@ const Profile = () => {
                 defaultValue={location}
               />
             </Wrapper>
-            <Button>Update profile</Button>
-          </StyledForm>
-          <StyledForm onSubmit={handleUpdatePassword}>
             <Wrapper>
               <StyledSubTitle>Modify your user settings</StyledSubTitle>
               <Input
@@ -152,7 +143,7 @@ const Profile = () => {
               />
             </Wrapper>
             <Footer>
-              <Button>Update password</Button>
+              <Button>Update profile</Button>
               <StyledButton
                 onClick={() => {
                   navigate("/board");
