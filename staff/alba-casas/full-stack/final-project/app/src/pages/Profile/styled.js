@@ -19,6 +19,10 @@ export const Section = styled(Box)`
   gap: 24px;
 `;
 
+export const WrapperHeader = styled.div`
+  width: 100%;
+`;
+
 export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;

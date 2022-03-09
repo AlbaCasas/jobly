@@ -9,6 +9,7 @@ export const StyledCard = styled.div`
   padding: 24px;
   flex-direction: column;
   gap: 8px;
+  cursor: pointer;
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     max-width: 290px;
     gap: 16px;

@@ -7,11 +7,11 @@ import {
 import Text from "../Text";
 import Tag from "../Tag";
 
-const Card = ({ avatar, title, description, location, role }) => {
+const Card = ({ avatar, title, description, location, role, ...props }) => {
   return (
-    <StyledCard>
+    <StyledCard {...props}>
       <ImageContainer>
-        <ImageStyled src={avatar} alt="glovo" />
+        <ImageStyled src={avatar} alt="company" />
       </ImageContainer>
       <Text variant="section">{title}</Text>
       <Text>{description}</Text>

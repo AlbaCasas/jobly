@@ -13,8 +13,7 @@ function listJobs(userId) {
     .then((jobs) => {
       const docs = jobs.map((job) => {
         const doc = job._doc;
-        
-        delete doc._id;
+
         delete doc.__v;
 
         return doc;

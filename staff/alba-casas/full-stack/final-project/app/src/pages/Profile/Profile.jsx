@@ -13,6 +13,7 @@ import {
   StyledSpan,
   StyledSubTitle,
   Wrapper,
+  WrapperHeader,
 } from "./styled";
 import { useEffect, useState } from "react";
 import { retrieveUser, updateUser, updateUserPassword } from "../../api/";
@@ -88,9 +89,11 @@ const Profile = () => {
     <Layout>
       <Section>
         <Box justifyContent="center" flexDirection="column" alignItems="center">
-          <ContainerPhoto>
-            <StyledImage src={avatar} alt="photo" />
-          </ContainerPhoto>
+          <WrapperHeader>
+            <ContainerPhoto>
+              <StyledImage src={avatar} alt="photo" />
+            </ContainerPhoto>
+          </WrapperHeader>
           <ContainerText>
             <StyledDetailsText>Contact Details</StyledDetailsText>
             <StyledSpan>

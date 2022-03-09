@@ -4,28 +4,20 @@ const {
 const {
   validators: { validateId },
 } = require("commons");
-function retrieveJob(userId, noteId) {
+function retrieveJob(userId, jobId) {
   validateId(userId);
-  validateId(noteId);
+  validateId(jobId);
 
-  return Note.findById(noteId)
-    .populate("user")
-    .then((note) => {
-      if (!note) throw new Error(`note with ${noteId} does not exist`);
+  return Job.findById(jobId)
+    .populate("company")
+    .then((job) => {
+      const doc = job._doc;
 
-      if (note.user.id === userId || note.public) {
-        const doc = note._doc;
+      delete doc._id;
+      delete doc.password;
+      delete doc.__v;
 
-        delete doc._id;
-        delete doc.__v;
-
-        doc.userId = doc.user.id;
-        doc.userName = doc.user.name;
-
-        delete doc.user;
-
-        return doc;
-      } else throw new Error(`note with id ${noteId} is not public`);
+      return doc;
     });
 }
 

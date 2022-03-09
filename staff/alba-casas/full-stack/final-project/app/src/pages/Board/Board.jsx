@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { retrieveUser, listjobs } from "../../api";
 import Card from "../../components/Card";
 import Dropdown from "../../components/Dropdown/Dropdown";
@@ -13,6 +13,8 @@ const Board = () => {
   const [isDropdownShown, setIsDropdownShown] = useState(false);
   const [jobList, setJobList] = useState([]);
 
+  const navigate = useNavigate();
+
   const [name, setName] = useState();
   const [role, setRole] = useState();
   const [avatar, setAvatar] = useState();
@@ -21,11 +23,11 @@ const Board = () => {
     setIsDropdownShown(!isDropdownShown);
   };
 
-  /*  const closeDropdown = () => {
+  const closeDropdown = () => {
     if (isDropdownShown) {
       setIsDropdownShown(false);
     }
-  }; */
+  };
 
   useEffect(() => {
     try {
@@ -58,7 +60,7 @@ const Board = () => {
       </Nav>
       <Dropdown
         role={role}
-        /*  closeDropdown={closeDropdown} */
+        closeDropdown={closeDropdown}
         isShown={isDropdownShown}
       >
         Profile
@@ -70,6 +72,9 @@ const Board = () => {
             jobList.map((job) => {
               return (
                 <Card
+                  onClick={() => {
+                    navigate(`/job/${job._id}`);
+                  }}
                   key={job._id}
                   avatar={job.company.avatar}
                   title={job.title}
