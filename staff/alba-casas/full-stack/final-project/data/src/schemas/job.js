@@ -36,7 +36,7 @@ const job = new Schema({
   createAt: {
     type: Date,
     required: true,
-    default: Date.getDate(),
+    default: Date.now(),
   },
 });
 
