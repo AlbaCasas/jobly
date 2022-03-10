@@ -16,6 +16,8 @@ const Card = ({
   role,
   candidates,
   isCompany,
+  shouldOnlyShowOwnJobs,
+
   ...props
 }) => {
   return (

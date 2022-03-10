@@ -10,7 +10,7 @@ export const StyledSearch = styled.div`
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
 `;
 
-export const SearchForm = styled.div`
+export const SearchForm = styled.form`
   width: 100%;
   height: auto;
   display: flex;
@@ -78,4 +78,17 @@ export const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 8px;
+`;
+
+export const Label = styled.label`
+  font-size: 16px;
+  line-height: 24px;
+  color: ${({ theme }) => theme.colors.gray};
+`;
+
+export const CheckboxStyled = styled.input`
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+  border: 1px solid ${({ theme }) => theme.colors.primary}; ;
 `;

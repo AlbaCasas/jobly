@@ -68,7 +68,7 @@ const Board = () => {
         Profile
       </Dropdown>
       <Section>
-        <Search role={user.role} />
+        <Search role={user.role} setJobList={setJobList} />
         <StyledContainer>
           {!!jobList.length ? (
             jobList.map((job) => {
