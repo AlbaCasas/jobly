@@ -16,19 +16,15 @@ const Search = ({ role, setJobList }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     listjobs(sessionStorage.token).then((jobs) => {
-      const queryCompany = event.target[0].value;
-      const queryLocation = event.target[1].value;
-      const queryRole = event.target[2].value;
+      const queryCompany = event.target[0].value || "";
+      const queryLocation = event.target[1].value || "";
+      const queryRole = event.target[2].value || "";
       const result = jobs.filter((job) => {
-        if (queryCompany.length > 0) {
-          return job.title.includes(queryCompany);
-        } else if (queryLocation.length > 0) {
-          return job.location.includes(queryLocation);
-        } else if (queryRole.length > 0) {
-          return job.role.includes(queryRole);
-        } else {
-          return setJobList;
-        }
+        return (
+          job.title.toLowerCase().includes(queryCompany.toLowerCase()) &&
+          job.location.toLowerCase().includes(queryLocation.toLowerCase()) &&
+          job.role.toLowerCase().includes(queryRole.toLowerCase())
+        );
       });
       setJobList(result);
     });

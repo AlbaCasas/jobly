@@ -6,3 +6,7 @@ export const View = styled(Box)`
   display: flex;
   justify-content: center;
 `;
+
+export const StyledLogo = styled.div`
+  cursor: pointer;
+`;

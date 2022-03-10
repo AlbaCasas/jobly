@@ -85,4 +85,7 @@ export const Footer = styled.div`
 export const StyledButton = styled(Button)`
   background-color: ${({ theme }) => theme.colors.white};
   color: ${({ theme }) => theme.colors.primary};
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.white};
+  }
 `;

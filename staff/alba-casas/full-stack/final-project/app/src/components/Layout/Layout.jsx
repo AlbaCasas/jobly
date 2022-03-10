@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import { retrieveUser } from "../../api";
 import Dropdown from "../Dropdown/Dropdown";
 import Nav from "../Nav";
 
-import { View } from "./styled";
+import { StyledLogo, View } from "./styled";
 
 const Layout = ({ children }) => {
   let tokenValid = !!sessionStorage.token;
@@ -13,6 +13,11 @@ const Layout = ({ children }) => {
   const [name, setName] = useState();
   const [role, setRole] = useState();
   const [avatar, setAvatar] = useState();
+
+  const navigate = useNavigate();
+  const goToBoard = () => {
+    navigate("board");
+  };
 
   const showDropdown = () => {
     setIsDropdownShown(!isDropdownShown);
@@ -41,7 +46,7 @@ const Layout = ({ children }) => {
   ) : (
     <View>
       <Nav name={name} avatar={avatar} role={role} showDropdown={showDropdown}>
-        Jobly
+        <StyledLogo onClick={goToBoard}>Jobly</StyledLogo>
       </Nav>
       <Dropdown
         role={role}
