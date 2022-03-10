@@ -6,6 +6,7 @@ import { listjobs } from "./listJobs";
 import { updateUser } from "./updateUser";
 import { updateUserPassword } from "./updateUserPassword";
 import { retrieveJob } from "./retrieveJob";
+import { applyJob } from "./applyJob";
 
 export {
   registerCandidate,
@@ -16,4 +17,5 @@ export {
   updateUser,
   updateUserPassword,
   retrieveJob,
+  applyJob,
 };

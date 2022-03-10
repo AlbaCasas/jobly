@@ -4,7 +4,7 @@ import Layout from "../../components/Layout/Layout";
 import Box from "../../components/Box";
 import Text from "../../components/Text";
 import { Link } from "react-router-dom";
-import { retrieveJob, retrieveUser } from "../../api";
+import { applyJob, retrieveJob, retrieveUser } from "../../api";
 import {
   ArrowBack,
   ContainerDescription,
@@ -48,6 +48,18 @@ const Details = () => {
       alert(error.message);
     }
   }, [jobId]);
+
+  const handleClick = () => {
+    try {
+      applyJob(sessionStorage.token, jobId)
+        .then(() => alert("applied job"))
+        .catch((error) => {
+          alert(error.message);
+        });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
   return (
     <Layout>
       <View>
@@ -90,7 +102,7 @@ const Details = () => {
                 </StyledTextBodyDescription>
               </ContainerDescription>
               {userRole === "candidate" ? (
-                <StyledButton>Apply now</StyledButton>
+                <StyledButton onClick={handleClick}>Apply now</StyledButton>
               ) : null}
             </Box>
           </Wrapper>
