@@ -11,7 +11,7 @@ function deleteJob(userId, jobId) {
   return Job.deleteOne({ _id: jobId, company: userId }).then((result) => {
     if (result.deletedCount === 0)
       throw new Error(
-        `note with id ${jobId} and user id ${userId} does not exist`
+        `Job with id ${jobId} and user id ${userId} does not exist`
       );
   });
 }

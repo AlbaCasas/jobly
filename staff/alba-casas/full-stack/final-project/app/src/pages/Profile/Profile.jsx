@@ -22,22 +22,14 @@ import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [location, setLocation] = useState();
-  const [phone, setPhone] = useState();
-  const [avatar, setAvatar] = useState();
+  const [user, setUser] = useState({});
 
   const navigate = useNavigate();
   useEffect(() => {
     try {
       retrieveUser(sessionStorage.token)
-        .then(({ avatar, name, email, location, phone }) => {
-          setName(name);
-          setEmail(email);
-          setLocation(location);
-          setPhone(phone);
-          setAvatar(avatar);
+        .then((user) => {
+          setUser(user);
         })
         .catch((error) => alert(error.message));
     } catch (error) {
@@ -91,7 +83,7 @@ const Profile = () => {
         <Box justifyContent="center" flexDirection="column" alignItems="center">
           <WrapperHeader>
             <ContainerPhoto>
-              <StyledImage src={avatar} alt="photo" />
+              <StyledImage src={user.avatar} alt="photo" />
             </ContainerPhoto>
           </WrapperHeader>
           <ContainerText>
@@ -106,25 +98,25 @@ const Profile = () => {
                 type="text"
                 name="name"
                 placeholder="Name"
-                defaultValue={name}
+                defaultValue={user.name}
               />
               <Input
                 type="email"
                 name="email"
                 placeholder="email"
-                defaultValue={email}
+                defaultValue={user.email}
               />
               <Input
                 type="tel"
                 name="phone"
                 placeholder="Phone"
-                defaultValue={phone}
+                defaultValue={user.phone}
               />
               <Input
                 type="text"
                 name="location"
                 placeholder="Location"
-                defaultValue={location}
+                defaultValue={user.location}
               />
             </Wrapper>
             <Wrapper>

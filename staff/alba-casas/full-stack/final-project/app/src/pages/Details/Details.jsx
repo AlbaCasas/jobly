@@ -23,19 +23,14 @@ import {
 } from "./styled";
 
 const Details = () => {
-  const [avatar, setAvatar] = useState();
-  const [nameCompany, setNameCompany] = useState();
-  const [title, setTitle] = useState();
-  const [date, setDate] = useState();
-  const [description, setDescription] = useState();
-  const [location, setLocation] = useState();
-  const [role, setRole] = useState();
+  const [job, setJob] = useState({});
+  const [userRole, setUserRole] = useState();
   const { jobId } = useParams();
 
   useEffect(() => {
     try {
       retrieveUser(sessionStorage.token).then((user) => {
-        setRole(user.role);
+        setUserRole(user.role);
       });
     } catch (error) {
       alert(error.message);
@@ -46,12 +41,7 @@ const Details = () => {
     try {
       retrieveJob(sessionStorage.token, jobId)
         .then((job) => {
-          setTitle(job.title);
-          setNameCompany(job.company.name);
-          setLocation(job.location);
-          setDescription(job.description);
-          setDate(job.createAt);
-          setAvatar(job.company.avatar);
+          setJob(job);
         })
         .catch((error) => alert(error.message));
     } catch (error) {
@@ -74,7 +64,7 @@ const Details = () => {
                 Go back to login
               </GoBackText>
               <StyledContainer>
-                <ImageStyled src={avatar} alt="logo" />
+                <ImageStyled src={job.company?.avatar} alt="logo" />
               </StyledContainer>
             </Header>
             <Box
@@ -83,23 +73,23 @@ const Details = () => {
               flexDirection="column"
               gap="16px"
             >
-              <Text variant="subheading">{title}</Text>
+              <Text variant="subheading">{job.title}</Text>
               <StyledTextContainer>
                 <StyledLocation variant="bodyBold">
-                  {nameCompany}
+                  {job.company?.name}
                 </StyledLocation>
-                <Text>{location}</Text>
+                <Text>{job.location}</Text>
               </StyledTextContainer>
-              <Text>{date}</Text>
+              <Text>{job.date}</Text>
               <ContainerDescription>
                 <StyledTextDescription variant="section">
                   Description
                 </StyledTextDescription>
                 <StyledTextBodyDescription>
-                  {description}
+                  {job.description}
                 </StyledTextBodyDescription>
               </ContainerDescription>
-              {role === "candidate" ? (
+              {userRole === "candidate" ? (
                 <StyledButton>Apply now</StyledButton>
               ) : null}
             </Box>

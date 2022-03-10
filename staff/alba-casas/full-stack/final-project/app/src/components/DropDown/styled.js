@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const StyledDropdown = styled.div`
+  z-index: 3;
   width: 100%;
   height: fit-content;
   background-color: ${({ theme }) => theme.colors.white};

@@ -1,11 +1,7 @@
-const {
-  models: { Job },
-} = require("data");
-const {
-  validators: { validateId },
-} = require("commons");
+const { models: { Job }} = require("data");
+const { validators: { validateId }} = require("commons");
 
-function addJob(userId, jobId) {
+function applyToJob(userId, jobId) {
   validateId(userId, "userId");
   validateId(jobId, "jobId");
 
@@ -16,4 +12,4 @@ function addJob(userId, jobId) {
   });
 }
 
-module.exports = addJob;
+module.exports = applyToJob;

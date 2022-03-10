@@ -12,15 +12,14 @@ const Board = () => {
   let tokenValid = !!sessionStorage.token;
   const [isDropdownShown, setIsDropdownShown] = useState(false);
   const [jobList, setJobList] = useState([]);
+  const [user, setUser] = useState({});
 
   const navigate = useNavigate();
 
-  const [name, setName] = useState();
-  const [role, setRole] = useState();
-  const [avatar, setAvatar] = useState();
-
   const showDropdown = () => {
-    setIsDropdownShown(!isDropdownShown);
+    if (!isDropdownShown) {
+      setIsDropdownShown(true);
+    }
   };
 
   const closeDropdown = () => {
@@ -32,9 +31,7 @@ const Board = () => {
   useEffect(() => {
     try {
       retrieveUser(sessionStorage.token).then((user) => {
-        setName(user.name);
-        setRole(user.role);
-        setAvatar(user.avatar);
+        setUser(user);
       });
     } catch (error) {
       alert(error.message);
@@ -55,18 +52,23 @@ const Board = () => {
     <Navigate to="/login" />
   ) : (
     <View>
-      <Nav name={name} avatar={avatar} role={role} showDropdown={showDropdown}>
+      <Nav
+        name={user.name}
+        avatar={user.avatar}
+        role={user.role}
+        showDropdown={showDropdown}
+      >
         Jobly
       </Nav>
       <Dropdown
-        role={role}
+        role={user.role}
         closeDropdown={closeDropdown}
         isShown={isDropdownShown}
       >
         Profile
       </Dropdown>
       <Section>
-        <Search role={role} />
+        <Search role={user.role} />
         <StyledContainer>
           {!!jobList.length ? (
             jobList.map((job) => {

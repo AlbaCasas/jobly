@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Text from "../Text";
 
 export const StyledCard = styled.div`
   display: flex;
@@ -13,6 +14,8 @@ export const StyledCard = styled.div`
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     max-width: 290px;
     gap: 16px;
+    overflow: hidden;
+    position: relative;
   }
 `;
 
@@ -32,4 +35,14 @@ export const ContainerTag = styled.div`
   display: flex;
   gap: 16px;
   margin-top: 8px;
+`;
+
+export const StyledDescription = styled(Text)`
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    text-overflow: ellipsis;
+    width: 100%;
+  }
 `;

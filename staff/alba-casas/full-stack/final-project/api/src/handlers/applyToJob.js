@@ -1,5 +1,5 @@
 const { verifyTokenAndGetUserId } = require("../helpers");
-const { addJob } = require("logic");
+const { applyToJob } = require("logic");
 
 module.exports = (req, res) => {
   try {
@@ -9,7 +9,7 @@ module.exports = (req, res) => {
       params: { jobId },
     } = req;
 
-    addJob(userId, jobId)
+    applyToJob(userId, jobId)
       .then(() => res.status(201).send())
       .catch((error) => res.status(400).json({ error: error.message }));
   } catch (error) {

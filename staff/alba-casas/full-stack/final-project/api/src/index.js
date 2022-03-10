@@ -15,7 +15,7 @@ const {
   updateUserPassword,
   retrieveJob,
   deleteJob,
-  addJob,
+  applyToJob,
 } = require("./handlers");
 
 const cors = require("cors");
@@ -40,7 +40,7 @@ connect(MONGODB_URL)
     api.post("/auth", jsonBodyParser, authenticateUser);
     api.get("/users", jsonBodyParser, retrieveUser);
     api.post("/job", jsonBodyParser, createJob);
-    api.patch("/job/:jobId", jsonBodyParser, addJob);
+    api.patch("/job/:jobId", jsonBodyParser, applyToJob);
     api.get("/job", listJobs);
     api.patch("/users", jsonBodyParser, updateUser);
     api.patch("/users/change-password", jsonBodyParser, updateUserPassword);
