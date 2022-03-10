@@ -72,6 +72,7 @@ const Board = () => {
         <StyledContainer>
           {!!jobList.length ? (
             jobList.map((job) => {
+              const isCompany = job.company._id === user.id ? true : null;
               return (
                 <Card
                   onClick={() => {
@@ -84,6 +85,7 @@ const Board = () => {
                   role={job.role}
                   location={job.location}
                   candidates={job.candidates}
+                  isCompany={isCompany}
                 />
               );
             })

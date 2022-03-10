@@ -58,6 +58,10 @@ const sectionCss = css`
   color: ${({ theme }) => theme.colors.text};
 `;
 
+const textCompany = css`
+  color: ${({ theme }) => theme.colors.white};
+`;
+
 export const StyledText = styled.span`
   display: inline-block;
   text-align: ${({ textAlign }) => textAlign};
@@ -81,6 +85,11 @@ export const StyledText = styled.span`
         return captionBoldCss;
       default:
         return bodyCss;
+    }
+  }}
+  ${({ isCompany }) => {
+    if (isCompany) {
+      return textCompany;
     }
   }}
   color: ${({ color }) => color};

@@ -1,5 +1,13 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Text from "../Text";
+
+const cardBlue = css`
+  background-color: ${({ theme }) => theme.colors.primary};
+`;
+
+const textDescription = css`
+  color: ${({ theme }) => theme.colors.white};
+`;
 
 export const StyledCard = styled.div`
   display: flex;
@@ -11,6 +19,11 @@ export const StyledCard = styled.div`
   flex-direction: column;
   gap: 8px;
   cursor: pointer;
+  ${({ isCompany }) => {
+    if (isCompany) {
+      return cardBlue;
+    }
+  }}
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     max-width: 290px;
     gap: 16px;
@@ -21,7 +34,9 @@ export const StyledCard = styled.div`
 
 export const ImageContainer = styled.div`
   gap: 16px;
-  width: fit-content;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const ImageStyled = styled.img`
@@ -35,6 +50,11 @@ export const ContainerTag = styled.div`
   display: flex;
   gap: 16px;
   margin-top: 8px;
+  ${({ isCompany }) => {
+    if (isCompany) {
+      return textDescription;
+    }
+  }}
 `;
 
 export const StyledDescription = styled(Text)`
@@ -44,5 +64,10 @@ export const StyledDescription = styled(Text)`
     display: inline-block;
     text-overflow: ellipsis;
     width: 100%;
+    ${({ isCompany }) => {
+      if (isCompany) {
+        return textDescription;
+      }
+    }}
   }
 `;

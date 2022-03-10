@@ -9,6 +9,7 @@ function retrieveUser(id) {
   return User.findById(id).then((user) => {
     const doc = user._doc;
 
+    doc.id = doc._id.toString();
     delete doc._id;
     delete doc.password;
     delete doc.__v;

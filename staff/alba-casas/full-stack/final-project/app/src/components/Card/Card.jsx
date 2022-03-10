@@ -8,17 +8,29 @@ import {
 import Text from "../Text";
 import Tag from "../Tag";
 
-const Card = ({ avatar, title, description, location, role, ...props }) => {
+const Card = ({
+  avatar,
+  title,
+  description,
+  location,
+  role,
+  candidates,
+  isCompany,
+  ...props
+}) => {
   return (
-    <StyledCard {...props}>
+    <StyledCard isCompany={isCompany} {...props}>
       <ImageContainer>
         <ImageStyled src={avatar} alt="company" />
+        {isCompany ? <Tag>{candidates.length}</Tag> : null}
       </ImageContainer>
-      <Text variant="section">{title}</Text>
-      <StyledDescription>{description}</StyledDescription>
+      <Text isCompany={isCompany} variant="section">
+        {title}
+      </Text>
+      <StyledDescription isCompany={isCompany}>{description}</StyledDescription>
       <ContainerTag>
-        <Tag>{location}</Tag>
-        <Tag>{role}</Tag>
+        <Tag isCompany={isCompany}>{location}</Tag>
+        <Tag isCompany={isCompany}>{role}</Tag>
       </ContainerTag>
     </StyledCard>
   );
