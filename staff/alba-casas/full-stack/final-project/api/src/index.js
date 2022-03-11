@@ -16,6 +16,8 @@ const {
   retrieveJob,
   deleteJob,
   applyToJob,
+  updateJob,
+  listJobsFromCompany,
 } = require("./handlers");
 
 const cors = require("cors");
@@ -46,6 +48,8 @@ connect(MONGODB_URL)
     api.patch("/users/change-password", jsonBodyParser, updateUserPassword);
     api.get("/job/:jobId", retrieveJob);
     api.delete("/job/:jobId", jsonBodyParser, deleteJob);
+    api.get("/company/job", listJobsFromCompany);
+    api.patch("/company/job/:jobId", jsonBodyParser, updateJob);
 
     server.use("/api", api);
 

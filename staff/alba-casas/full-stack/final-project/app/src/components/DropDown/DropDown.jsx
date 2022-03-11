@@ -29,7 +29,14 @@ const Dropdown = ({ isShown, closeDropdown, role }) => {
           </Text>
         </ContainerSelectViewProfile>
         <ContainerMyJobs>
-          <Text variant="caption">My jobs</Text>
+          <Text
+            onClick={() => {
+              navigate(`/job/${role}`);
+            }}
+            variant="caption"
+          >
+            My jobs
+          </Text>
         </ContainerMyJobs>
         <ContainerSelect>
           <Text

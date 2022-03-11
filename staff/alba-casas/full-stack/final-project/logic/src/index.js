@@ -9,6 +9,8 @@ const updateUserPassword = require("./updateUserPassword");
 const retrieveJob = require("./retrieveJob");
 const deleteJob = require("./deleteJob");
 const applyToJob = require("./applyToJob");
+const updateJob = require("./updateJob");
+const listJobsFromCompany = require("./listJobsFromCompany");
 
 module.exports = {
   registerCandidate,
@@ -22,4 +24,6 @@ module.exports = {
   retrieveJob,
   deleteJob,
   applyToJob,
+  updateJob,
+  listJobsFromCompany,
 };

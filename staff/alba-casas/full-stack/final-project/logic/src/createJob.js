@@ -6,10 +6,7 @@ const {
   validators: { validateString, validateId },
 } = require("commons");
 
-function createJob(
-  userId,
-  { title, description, role, location, candidates = [], createAt = Date() }
-) {
+function createJob(userId, { title, description, role, location }) {
   validateId(userId);
   validateString(title, "title");
   validateString(description, "description");
@@ -19,7 +16,7 @@ function createJob(
   return User.findById(userId).then((user) => {
     if (!user) throw new Error(`User with id ${userId} does not exist`);
 
-    if (user.role === "candidate")
+    if (user.role !== "company")
       throw new Error(`User with id ${userId} is not a company`);
 
     return Job.create({
@@ -28,8 +25,8 @@ function createJob(
       description,
       role,
       location,
-      candidates,
-      createAt,
+      candidates: [],
+      createAt: new Date(),
     }).then((job) => {});
   });
 }

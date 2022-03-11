@@ -22,7 +22,6 @@ export function registerCandidate(name, email, password, location, phone) {
     } else if (status >= 400 && status < 500) {
       return res.json().then((payload) => {
         const { error } = payload;
-        console.log(error);
 
         throw new Error(error);
       });

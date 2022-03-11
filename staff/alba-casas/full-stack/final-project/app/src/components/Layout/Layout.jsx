@@ -9,10 +9,7 @@ import { StyledLogo, View } from "./styled";
 const Layout = ({ children }) => {
   let tokenValid = !!sessionStorage.token;
   const [isDropdownShown, setIsDropdownShown] = useState(false);
-
-  const [name, setName] = useState();
-  const [role, setRole] = useState();
-  const [avatar, setAvatar] = useState();
+  const [user, setUser] = useState({});
 
   const navigate = useNavigate();
   const goToBoard = () => {
@@ -32,9 +29,7 @@ const Layout = ({ children }) => {
   useEffect(() => {
     try {
       retrieveUser(sessionStorage.token).then((user) => {
-        setName(user.name);
-        setRole(user.role);
-        setAvatar(user.avatar);
+        setUser(user);
       });
     } catch (error) {
       alert(error.message);
@@ -45,11 +40,16 @@ const Layout = ({ children }) => {
     <Navigate to="/login" />
   ) : (
     <View>
-      <Nav name={name} avatar={avatar} role={role} showDropdown={showDropdown}>
+      <Nav
+        name={user.name}
+        avatar={user.avatar}
+        role={user.role}
+        showDropdown={showDropdown}
+      >
         <StyledLogo onClick={goToBoard}>Jobly</StyledLogo>
       </Nav>
       <Dropdown
-        role={role}
+        role={user.role}
         closeDropdown={closeDropdown}
         isShown={isDropdownShown}
       >

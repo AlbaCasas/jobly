@@ -24,7 +24,6 @@ const user = new Schema({
 
   avatar: {
     type: String,
-    
   },
 
   resume: {

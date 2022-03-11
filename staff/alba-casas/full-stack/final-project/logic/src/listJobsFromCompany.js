@@ -5,10 +5,10 @@ const {
   models: { Job, User },
 } = require("data");
 
-function listJobs(userId) {
+function listJobsFromCompany(userId) {
   validateId(userId);
 
-  return Job.find({ user: userId })
+  return Job.find({ company: userId })
     .populate("company")
     .populate("candidates")
 
@@ -25,4 +25,4 @@ function listJobs(userId) {
     });
 }
 
-module.exports = listJobs;
+module.exports = listJobsFromCompany;
