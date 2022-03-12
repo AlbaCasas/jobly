@@ -14,7 +14,7 @@ const Card = ({
   description,
   location,
   role,
-  candidates,
+  candidatures,
   isCompany,
   shouldOnlyShowOwnJobs,
 
@@ -24,7 +24,7 @@ const Card = ({
     <StyledCard isCompany={isCompany} {...props}>
       <ImageContainer>
         <ImageStyled src={avatar} alt="company" />
-        {isCompany ? <Tag>{candidates.length}</Tag> : null}
+        {isCompany ? <Tag>{candidatures.length}</Tag> : null}
       </ImageContainer>
       <Text isCompany={isCompany} variant="section">
         {title}

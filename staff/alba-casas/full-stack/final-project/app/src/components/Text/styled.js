@@ -81,7 +81,7 @@ export const StyledText = styled.span`
         return captionCss;
       case "section":
         return sectionCss;
-      case "captionBold":
+      case "caption-bold":
         return captionBoldCss;
       default:
         return bodyCss;

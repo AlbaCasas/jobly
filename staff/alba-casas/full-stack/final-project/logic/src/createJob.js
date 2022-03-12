@@ -25,7 +25,7 @@ function createJob(userId, { title, description, role, location }) {
       description,
       role,
       location,
-      candidates: [],
+      candidatures: [],
       createAt: new Date(),
     }).then((job) => {});
   });

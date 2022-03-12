@@ -31,7 +31,13 @@ const job = new Schema({
     required: true,
   },
 
-  candidates: [{ type: ObjectId, ref: "User" }],
+  candidatures: [
+    {
+      candidate: { type: ObjectId, ref: "User" },
+      resume: { type: String },
+      createAt: { type: Date, default: Date.now() },
+    },
+  ],
 
   createAt: {
     type: Date,

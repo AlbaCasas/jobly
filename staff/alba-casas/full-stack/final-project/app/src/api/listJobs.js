@@ -2,10 +2,27 @@ import { validators } from "commons/src/index";
 
 const { validateToken } = validators;
 
-export function listjobs(token) {
+export function listJobs(token, { title, location, role, companyId }) {
   validateToken(token);
 
-  return fetch("http://localhost:8000/api/job", {
+  let query = "";
+  if (title && !location && !role) {
+    query = `?title=${title}`;
+  } else if (title && location && !role) {
+    query = `?title=${title}&location=${location}`;
+  } else if (title && location && role) {
+    query = `?title=${title}&location=${location}&role=${role}`;
+  } else if (title && !location && role) {
+    query = `?title=${title}&role=${role}`;
+  } else if (!title && location && role) {
+    query = `?location=${location}&role=${role}`;
+  } else if (!title && !location && role) {
+    query = `?role=${role}`;
+  } else if (!title && location && !role) {
+    query = `?location=${location}`;
+  }
+
+  return fetch(`http://localhost:8000/api/job${query}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

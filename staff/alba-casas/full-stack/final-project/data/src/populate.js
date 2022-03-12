@@ -41,7 +41,7 @@ connect("mongodb://localhost:27017/demo-db")
       role: "developer",
       location: "Barcelona",
       createAt: Date.now(),
-      candidates: [pepito.id, peter.id],
+      candidatures: [{ candidate: pepito.id }, { candidate: peter.id }],
     });
 
     return Promise.all([fullStack.save()]);

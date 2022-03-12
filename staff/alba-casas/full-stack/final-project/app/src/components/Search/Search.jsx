@@ -1,4 +1,4 @@
-import { listjobs } from "../../api";
+import { listJobs } from "../../api";
 import {
   Checkbox,
   CheckboxStyled,
@@ -15,18 +15,15 @@ import {
 const Search = ({ role, setJobList }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
-    listjobs(sessionStorage.token).then((jobs) => {
-      const queryCompany = event.target[0].value || "";
-      const queryLocation = event.target[1].value || "";
-      const queryRole = event.target[2].value || "";
-      const result = jobs.filter((job) => {
-        return (
-          job.title.toLowerCase().includes(queryCompany.toLowerCase()) &&
-          job.location.toLowerCase().includes(queryLocation.toLowerCase()) &&
-          job.role.toLowerCase().includes(queryRole.toLowerCase())
-        );
-      });
-      setJobList(result);
+    const queryTitle = event.target[0].value;
+    const queryLocation = event.target[1].value;
+    const queryRole = event.target[2].value;
+    listJobs(sessionStorage.token, {
+      title: queryTitle,
+      location: queryLocation,
+      role: queryRole,
+    }).then((jobs) => {
+      setJobList(jobs);
     });
   };
   return (
@@ -40,10 +37,6 @@ const Search = ({ role, setJobList }) => {
       {role === "company" ? (
         <StyledJobSearch>
           <Checkbox>
-            <Wrapper>
-              <CheckboxStyled id="noCandidates" type="checkbox" />
-              <Label htmlFor="noCandidates">Hide jobs with no candidates</Label>
-            </Wrapper>
             <Wrapper>
               <CheckboxStyled id="jobs" type="checkbox" />
               <Label htmlFor="jobs">Show only my jobs</Label>

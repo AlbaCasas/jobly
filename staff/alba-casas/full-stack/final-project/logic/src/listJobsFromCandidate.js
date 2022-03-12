@@ -8,9 +8,9 @@ const {
 function listJobsFromCandidate(userId) {
   validateId(userId);
 
-  return Job.find({ candidates: userId })
+  return Job.find({ "candidatures.candidate": userId })
     .populate("company")
-    .populate("candidates")
+    .populate("candidatures.candidate")
     .then((jobs) => {
       const docs = jobs.map((job) => {
         const doc = job._doc;

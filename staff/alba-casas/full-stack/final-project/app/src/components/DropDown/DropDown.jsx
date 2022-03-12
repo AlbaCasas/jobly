@@ -16,7 +16,7 @@ const Dropdown = ({ isShown, closeDropdown, role }) => {
     <OutsideClickHandler onOutsideClick={closeDropdown}>
       <StyledDropdown>
         <ContainerSelect>
-          <Text variant="captionBold">Profile</Text>
+          <Text variant="caption-bold">Profile</Text>
         </ContainerSelect>
         <ContainerSelectViewProfile>
           <Text

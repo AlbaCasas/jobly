@@ -10,7 +10,7 @@ function listJobsFromCompany(userId) {
 
   return Job.find({ company: userId })
     .populate("company")
-    .populate("candidates")
+    .populate("candidatures.candidate")
 
     .then((jobs) => {
       const docs = jobs.map((job) => {

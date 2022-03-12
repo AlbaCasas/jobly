@@ -101,7 +101,10 @@ Jobs
 - description (String, required)
 - role (String, required, enum["designer", "developer", "product"]
 - location (String, required)
-- candidates (Array, ref: "User")
+- candidatures (Array)
+  - candidate (ObjectId, ref: "User")
+  - resume: String
+  - createAt: (Date, required, dafault(Date now))
 - createAt (Date, required, dafault(Date now))
 
 ## Tasks history

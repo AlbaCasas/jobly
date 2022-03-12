@@ -17,20 +17,25 @@ import {
 import { MdWorkOutline, MdPerson } from "react-icons/md";
 import Box from "../../components/Box";
 import Text from "../../components/Text";
-import { listjobs } from "../../api";
+import { listJobs } from "../../api";
 
 const JobListCompany = () => {
-  const [jobList, setJobList] = useState({});
+  const [jobList, setJobList] = useState([]);
 
   useEffect(() => {
     try {
-      listjobs(sessionStorage.token).then((job) => {
+      listJobs(sessionStorage.token, {}).then((job) => {
         setJobList(job);
       });
     } catch (error) {
       alert(error.message);
     }
   }, []);
+
+  const totalCandidates =
+    jobList.length > 0
+      ? jobList.map((job) => job.candidatures.length).reduce((a, b) => a + b)
+      : 0;
 
   return (
     <Layout>
@@ -47,7 +52,7 @@ const JobListCompany = () => {
                 <ContainerIcon>
                   <MdPerson color="#2E66CC" />
                 </ContainerIcon>
-                <TextJob>{jobList.length}</TextJob>
+                <TextJob>{totalCandidates}</TextJob>
               </ContainerCandidates>
               <ContainerJobs>
                 <ContainerIcon>
@@ -60,8 +65,8 @@ const JobListCompany = () => {
           </Section>
           <Table>
             <Header>
-              <Text variant="captionBold">Title</Text>
-              <Text variant="captionBold">Candidates</Text>
+              <Text variant="caption-bold">Title</Text>
+              <Text variant="caption-bold">Candidates</Text>
             </Header>
             {!!jobList.length
               ? jobList.map((job) => {
@@ -69,14 +74,16 @@ const JobListCompany = () => {
                     <Row key={job._id}>
                       {job.title}
                       <RowCandidate>
-                        <Text>{job.candidates.length}</Text>
-                        {!!job.candidates.length
-                          ? job.candidates.map((candidate) => {
+                        <Text variant="caption-bold">
+                          {job.candidatures.length}
+                        </Text>
+                        {!!job.candidatures.length
+                          ? job.candidatures.map((candidature) => {
                               return (
                                 <>
                                   <ImageCandidates
-                                    key={candidate._id}
-                                    src={candidate.avatar}
+                                    key={candidature.candidate._id}
+                                    src={candidature.candidate.avatar}
                                   ></ImageCandidates>
                                 </>
                               );

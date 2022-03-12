@@ -73,7 +73,7 @@ const Details = () => {
                 variant="link"
               >
                 <ArrowBack />
-                Go back to login
+                Go back
               </GoBackText>
               <StyledContainer>
                 <ImageStyled src={job.company?.avatar} alt="logo" />

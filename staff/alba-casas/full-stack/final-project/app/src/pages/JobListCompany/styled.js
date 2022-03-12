@@ -110,4 +110,5 @@ export const RowCandidate = styled.div`
   overflow: hidden;
   display: flex;
   align-items: center;
+  gap: 4px;
 `;

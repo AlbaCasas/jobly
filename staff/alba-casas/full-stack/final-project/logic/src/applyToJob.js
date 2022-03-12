@@ -13,9 +13,13 @@ function applyToJob(userId, jobId) {
   return User.findById(userId).then((user) => {
     if (user.role !== "candidate") throw new Error("Companies can not apply");
     return Job.findById(jobId).then((job) => {
-      if (job.candidates.includes(userId))
+      if (
+        job.candidatures.some((candidature) => {
+          return candidature.candidate.equals(userId);
+        })
+      )
         throw new Error("You have applied to this offer");
-      job.candidates.push(userId);
+      job.candidatures.push({ candidate: userId });
       job.save();
     });
   });

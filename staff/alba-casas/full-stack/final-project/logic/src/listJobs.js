@@ -1,11 +1,17 @@
-const { validateId, validateString } = require("commons/src/validators");
+const {
+  validateId,
+  validateString,
+  validateBoolean,
+} = require("commons/src/validators");
 const { Job } = require("data/src/models");
+const ObjectId = require("mongoose").Types.ObjectId;
 
-function listJobs(userId, { title, location, role }) {
+function listJobs(userId, { title, location, role, company }) {
   validateId(userId);
   if (title) validateString(title);
   if (location) validateString(location);
   if (role) validateString(role);
+  if (company) validateId(company);
 
   const TITLE_REGEX = new RegExp(title, "i");
   const LOCATION_REGEX = new RegExp(location, "i");
@@ -18,9 +24,10 @@ function listJobs(userId, { title, location, role }) {
     ...(title && { title: TITLE_REGEX }),
     ...(location && { location: LOCATION_REGEX }),
     ...(role && { role: ROLE_REGEX }),
+    ...(company && { company: new ObjectId(company) }),
   })
     .populate("company")
-    .populate("candidates")
+    .populate("candidatures.candidate")
     .then((results) => {
       const docs = results.map((job) => {
         const doc = job._doc;
@@ -38,4 +45,3 @@ function listJobs(userId, { title, location, role }) {
 }
 
 module.exports = listJobs;
-
