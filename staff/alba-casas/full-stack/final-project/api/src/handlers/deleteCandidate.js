@@ -1,16 +1,15 @@
 const { verifyTokenAndGetUserId } = require("../helpers");
-const { updateJob } = require("logic");
+const { deleteCandidate } = require("logic");
 
 module.exports = (req, res) => {
   try {
-    const userId = verifyTokenAndGetUserId(req);
-
     const {
-      body: { title, description, role, location },
-      params: { jobId },
+      body: { password },
     } = req;
 
-    updateJob(userId, { jobId, title, description, role, location })
+    const userId = verifyTokenAndGetUserId(req);
+
+    deleteCandidate(userId, password)
       .then(() => res.status(204).send())
       .catch((error) => res.status(400).json({ error: error.message }));
   } catch (error) {

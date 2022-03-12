@@ -11,6 +11,8 @@ const deleteJob = require("./deleteJob");
 const applyToJob = require("./applyToJob");
 const updateJob = require("./updateJob");
 const listJobsFromCompany = require("./listJobsFromCompany");
+const listJobsFromCandidate = require("./listJobsFromCandidate");
+const deleteCandidate = require("./deleteCandidate");
 
 module.exports = {
   registerCandidate,
@@ -26,4 +28,6 @@ module.exports = {
   applyToJob,
   updateJob,
   listJobsFromCompany,
+  listJobsFromCandidate,
+  deleteCandidate,
 };

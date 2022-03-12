@@ -1,6 +1,30 @@
-function listJobsFromCandidate(userId) {
-    // TODO validate candidate id
+const {
+  models: { Job, User },
+} = require("data");
+const {
+  validators: { validateId },
+} = require("commons");
 
-    // TODO find jobs where candidate is joined
-    // HINT Job.find(... userId $in candidates...)
+function listJobsFromCandidate(userId) {
+  validateId(userId);
+
+  return Job.find({ candidates: userId })
+    .populate("company")
+    .populate("candidates")
+    .then((jobs) => {
+      const docs = jobs.map((job) => {
+        const doc = job._doc;
+
+        doc.id = doc._id.toString();
+        delete doc._id;
+        delete doc.__v;
+
+        delete doc.candidate;
+
+        return doc;
+      });
+      return docs;
+    });
 }
+
+module.exports = listJobsFromCandidate;

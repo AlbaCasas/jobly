@@ -18,6 +18,8 @@ const {
   applyToJob,
   updateJob,
   listJobsFromCompany,
+  listJobsFromCandidate,
+  deleteCandidate,
 } = require("./handlers");
 
 const cors = require("cors");
@@ -37,20 +39,21 @@ connect(MONGODB_URL)
 
     const api = express.Router();
 
-    api.post("/candidate", jsonBodyParser, registerCandidate);
-    api.post("/company", jsonBodyParser, registerCompany);
     api.post("/auth", jsonBodyParser, authenticateUser);
-    api.get("/users", jsonBodyParser, retrieveUser);
+    api.post("/candidate", jsonBodyParser, registerCandidate);
+    api.delete("/candidate", jsonBodyParser, deleteCandidate);
+    api.get("/candidate/job", jsonBodyParser, listJobsFromCandidate);
+    api.post("/company", jsonBodyParser, registerCompany);
+    api.get("/company/job", listJobsFromCompany);
     api.post("/job", jsonBodyParser, createJob);
-    api.patch("/job/:jobId", jsonBodyParser, applyToJob);
+    api.patch("/job/apply/:jobId", jsonBodyParser, applyToJob);
+    api.patch("/job/:jobId", jsonBodyParser, updateJob);
     api.get("/job", listJobs);
-    api.patch("/users", jsonBodyParser, updateUser);
-    api.patch("/users/change-password", jsonBodyParser, updateUserPassword);
     api.get("/job/:jobId", retrieveJob);
     api.delete("/job/:jobId", jsonBodyParser, deleteJob);
-    api.get("/company/job", listJobsFromCompany);
-    api.patch("/company/job/:jobId", jsonBodyParser, updateJob);
-
+    api.get("/users", jsonBodyParser, retrieveUser);
+    api.patch("/users", jsonBodyParser, updateUser);
+    api.patch("/users/change-password", jsonBodyParser, updateUserPassword);
     server.use("/api", api);
 
     server.listen(PORT, () => console.log("server started"));
