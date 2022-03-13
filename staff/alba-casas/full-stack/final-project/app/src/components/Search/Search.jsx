@@ -3,7 +3,7 @@ import {
   Checkbox,
   CheckboxStyled,
   Label,
-  SearchForm,
+  FirstRow,
   StyledButtonSearch,
   StyledInputSearch,
   StyledInputSearchBorder,
@@ -12,39 +12,39 @@ import {
   Wrapper,
 } from "./styled";
 
-const Search = ({ role, setJobList }) => {
+const Search = ({ role, setJobList, userId }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
-    const queryTitle = event.target[0].value;
-    const queryLocation = event.target[1].value;
-    const queryRole = event.target[2].value;
+    const queryTitle = event.target.title.value;
+    const queryLocation = event.target.location.value;
+    const queryRole = event.target.role.value;
+    const isShowMyJobsChecked = event.target.company.checked;
     listJobs(sessionStorage.token, {
       title: queryTitle,
       location: queryLocation,
       role: queryRole,
+      company: isShowMyJobsChecked && userId,
     }).then((jobs) => {
       setJobList(jobs);
     });
   };
   return (
-    <StyledSearch>
-      <SearchForm onSubmit={handleSubmit}>
-        <StyledInputSearchBorder name="company" placeholder="Search by title" />
-        <StyledInputSearch name="locacion" placeholder="Location" />
+    <StyledSearch onSubmit={handleSubmit}>
+      <FirstRow>
+        <StyledInputSearchBorder name="title" placeholder="Search by title" />
+        <StyledInputSearch name="location" placeholder="Location" />
         <StyledInputSearch name="role" placeholder="Role type" />
         <StyledButtonSearch>Find Job</StyledButtonSearch>
-      </SearchForm>
-      {role === "company" ? (
+      </FirstRow>
+      {role === "company" && (
         <StyledJobSearch>
           <Checkbox>
             <Wrapper>
-              <CheckboxStyled id="jobs" type="checkbox" />
+              <CheckboxStyled name="company" id="jobs" type="checkbox" />
               <Label htmlFor="jobs">Show only my jobs</Label>
             </Wrapper>
           </Checkbox>
         </StyledJobSearch>
-      ) : (
-        false
       )}
     </StyledSearch>
   );

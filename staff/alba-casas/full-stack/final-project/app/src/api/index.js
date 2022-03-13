@@ -7,15 +7,17 @@ import { updateUser } from "./updateUser";
 import { updateUserPassword } from "./updateUserPassword";
 import { retrieveJob } from "./retrieveJob";
 import { applyJob } from "./applyJob";
+import { listJobsFromCompany } from "./listJobsFromCompany";
 
 export {
   registerCandidate,
   registerCompany,
   authenticateUser,
   retrieveUser,
-  listJobs as listJobs,
+  listJobs,
   updateUser,
   updateUserPassword,
   retrieveJob,
   applyJob,
+  listJobsFromCompany,
 };

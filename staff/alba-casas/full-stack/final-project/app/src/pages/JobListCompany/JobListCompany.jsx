@@ -17,14 +17,14 @@ import {
 import { MdWorkOutline, MdPerson } from "react-icons/md";
 import Box from "../../components/Box";
 import Text from "../../components/Text";
-import { listJobs } from "../../api";
+import { listJobsFromCompany } from "../../api";
 
 const JobListCompany = () => {
   const [jobList, setJobList] = useState([]);
 
   useEffect(() => {
     try {
-      listJobs(sessionStorage.token, {}).then((job) => {
+      listJobsFromCompany(sessionStorage.token).then((job) => {
         setJobList(job);
       });
     } catch (error) {
@@ -68,32 +68,30 @@ const JobListCompany = () => {
               <Text variant="caption-bold">Title</Text>
               <Text variant="caption-bold">Candidates</Text>
             </Header>
-            {!!jobList.length
-              ? jobList.map((job) => {
-                  return (
-                    <Row key={job._id}>
-                      {job.title}
-                      <RowCandidate>
-                        <Text variant="caption-bold">
-                          {job.candidatures.length}
-                        </Text>
-                        {!!job.candidatures.length
-                          ? job.candidatures.map((candidature) => {
-                              return (
-                                <>
-                                  <ImageCandidates
-                                    key={candidature.candidate._id}
-                                    src={candidature.candidate.avatar}
-                                  ></ImageCandidates>
-                                </>
-                              );
-                            })
-                          : null}
-                      </RowCandidate>
-                    </Row>
-                  );
-                })
-              : null}
+            {!!jobList.length &&
+              jobList.map((job) => {
+                return (
+                  <Row key={job._id}>
+                    {job.title}
+                    <RowCandidate>
+                      <Text variant="caption-bold">
+                        {job.candidatures.length}
+                      </Text>
+                      {!!job.candidatures.length &&
+                        job.candidatures.map((candidature) => {
+                          return (
+                            <>
+                              <ImageCandidates
+                                key={candidature.candidate._id}
+                                src={candidature.candidate.avatar}
+                              />
+                            </>
+                          );
+                        })}
+                    </RowCandidate>
+                  </Row>
+                );
+              })}
           </Table>
         </Box>
       </View>

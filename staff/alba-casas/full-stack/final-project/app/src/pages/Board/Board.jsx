@@ -40,11 +40,11 @@ const Board = () => {
     <View>
       <Layout>
         <Section>
-          <Search role={user.role} setJobList={setJobList} />
+          <Search role={user.role} userId={user.id} setJobList={setJobList} />
           <StyledContainer>
             {!!jobList.length ? (
               jobList.map((job) => {
-                const isCompany = job.company._id === user._id ? true : null;
+                const isCompany = job.company._id === user.id ? true : null;
                 return (
                   <Card
                     onClick={() => {

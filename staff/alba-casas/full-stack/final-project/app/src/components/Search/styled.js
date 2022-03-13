@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Input from "../Input";
 import Button from "../Button";
 
-export const StyledSearch = styled.div`
+export const StyledSearch = styled.form`
   overflow: hidden;
   width: 100%;
   height: auto;
@@ -10,7 +10,7 @@ export const StyledSearch = styled.div`
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
 `;
 
-export const SearchForm = styled.form`
+export const FirstRow = styled.div`
   width: 100%;
   height: auto;
   display: flex;
@@ -84,11 +84,13 @@ export const Label = styled.label`
   font-size: 16px;
   line-height: 24px;
   color: ${({ theme }) => theme.colors.gray};
+  cursor: pointer;
 `;
 
 export const CheckboxStyled = styled.input`
   width: 18px;
   height: 18px;
   border-radius: 3px;
-  border: 1px solid ${({ theme }) => theme.colors.primary}; ;
+  border: 1px solid ${({ theme }) => theme.colors.primary};
+  cursor: pointer;
 `;

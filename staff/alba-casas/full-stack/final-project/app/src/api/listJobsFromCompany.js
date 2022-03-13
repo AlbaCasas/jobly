@@ -2,16 +2,10 @@ import { validators } from "commons/src/index";
 
 const { validateToken } = validators;
 
-export function listJobs(token, { title, location, role, company }) {
+export function listJobsFromCompany(token) {
   validateToken(token);
-  const query = new URLSearchParams({
-    ...(title && { title }),
-    ...(location && { location }),
-    ...(role && { role }),
-    ...(company && { company }),
-  });
 
-  return fetch(`http://localhost:8000/api/job?${query}`, {
+  return fetch(`http://localhost:8000/api/company/job`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
