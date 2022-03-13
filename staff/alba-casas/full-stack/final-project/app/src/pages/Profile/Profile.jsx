@@ -2,14 +2,17 @@ import React from "react";
 import Box from "../../components/Box";
 import Layout from "../../components/Layout/Layout";
 import {
+  ContainerInput,
   ContainerPhoto,
   ContainerText,
   Footer,
   Section,
+  StyledBlueButton,
   StyledButton,
   StyledDetailsText,
   StyledForm,
   StyledImage,
+  StyledInput,
   StyledSpan,
   StyledSubTitle,
   Wrapper,
@@ -18,7 +21,6 @@ import {
 import { useEffect, useState } from "react";
 import { retrieveUser, updateUser, updateUserPassword } from "../../api/";
 import Input from "../../components/Input";
-import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
@@ -86,59 +88,69 @@ const Profile = () => {
               <StyledImage src={user.avatar} alt="photo" />
             </ContainerPhoto>
           </WrapperHeader>
-          <ContainerText>
-            <StyledDetailsText>Contact Details</StyledDetailsText>
-            <StyledSpan>
-              Introduce your contact details so companies can reach back to you
-            </StyledSpan>
-          </ContainerText>
           <StyledForm onSubmit={handleUpdateUser}>
             <Wrapper>
-              <Input
-                type="text"
-                name="name"
-                placeholder="Name"
-                defaultValue={user.name}
-              />
-              <Input
-                type="email"
-                name="email"
-                placeholder="email"
-                defaultValue={user.email}
-              />
-              <Input
-                type="tel"
-                name="phone"
-                placeholder="Phone"
-                defaultValue={user.phone}
-              />
-              <Input
-                type="text"
-                name="location"
-                placeholder="Location"
-                defaultValue={user.location}
-              />
+              <ContainerText>
+                <StyledDetailsText>Contact Details</StyledDetailsText>
+                <StyledSpan>
+                  Introduce your contact details so companies can reach back to
+                  you
+                </StyledSpan>
+              </ContainerText>
+              <ContainerInput>
+                <Input
+                  type="text"
+                  name="name"
+                  placeholder="Name"
+                  defaultValue={user.name}
+                />
+                <Input
+                  type="email"
+                  name="email"
+                  placeholder="email"
+                  defaultValue={user.email}
+                />
+              </ContainerInput>
+              <ContainerInput>
+                <Input
+                  type="tel"
+                  name="phone"
+                  placeholder="Phone"
+                  defaultValue={user.phone}
+                />
+                <Input
+                  type="text"
+                  name="location"
+                  placeholder="Location"
+                  defaultValue={user.location}
+                />
+              </ContainerInput>
             </Wrapper>
             <Wrapper>
               <StyledSubTitle>Modify your user settings</StyledSubTitle>
-              <Input
-                type="password"
-                name="currPassword"
-                placeholder="Current Password"
-              />
-              <Input
-                type="password"
-                name="newPassword"
-                placeholder="New Password"
-              />
-              <Input
-                type="password"
-                name="retypePassword"
-                placeholder="Retype Password"
-              />
+              <ContainerInput>
+                <Input
+                  type="password"
+                  name="currPassword"
+                  placeholder="Current Password"
+                />
+                <Input
+                  type="password"
+                  name="newPassword"
+                  placeholder="New Password"
+                />
+              </ContainerInput>
+              <ContainerInput>
+                <StyledInput
+                  type="password"
+                  name="retypePassword"
+                  placeholder="Retype
+                Password"
+                />
+              </ContainerInput>
             </Wrapper>
             <Footer>
-              <Button>Update profile</Button>
+              <StyledBlueButton>Update profile</StyledBlueButton>
               <StyledButton
                 onClick={() => {
                   navigate("/board");

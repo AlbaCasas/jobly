@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Box from "../../components/Box";
 import Button from "../../components/Button";
+import Input from "../../components/Input";
 
 export const View = styled(Box)`
   height: auto;
@@ -34,7 +35,7 @@ export const StyledForm = styled.form`
 export const ContainerPhoto = styled.div`
   width: 100%;
   height: auto;
-  margin-bottom: 32px;
+
   border-radius: 10px;
 `;
 
@@ -80,6 +81,10 @@ export const Footer = styled.div`
   flex-direction: column;
   width: 100%;
   gap: 24px;
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    flex-direction: row;
+    justify-content: flex-end;
+  }
 `;
 
 export const StyledButton = styled(Button)`
@@ -87,5 +92,29 @@ export const StyledButton = styled(Button)`
   color: ${({ theme }) => theme.colors.primary};
   &:hover {
     background-color: ${({ theme }) => theme.colors.white};
+  }
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    width: 160px;
+  }
+`;
+
+export const StyledBlueButton = styled(Button)`
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    width: 160px;
+  }
+`;
+
+export const ContainerInput = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    flex-direction: row;
+  }
+`;
+
+export const StyledInput = styled(Input)`
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    width: 448px;
   }
 `;
