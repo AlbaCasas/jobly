@@ -4,7 +4,7 @@ import { retrieveUser } from "../../api";
 import Dropdown from "../Dropdown/Dropdown";
 import Nav from "../Nav";
 
-import { StyledLogo, View } from "./styled";
+import { StyledLogo, View, Container } from "./styled";
 
 const Layout = ({ children }) => {
   let tokenValid = !!sessionStorage.token;
@@ -55,7 +55,7 @@ const Layout = ({ children }) => {
       >
         Profile
       </Dropdown>
-      {children}
+      <Container>{children}</Container>
     </View>
   );
 };

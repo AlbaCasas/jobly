@@ -2,88 +2,29 @@ import styled from "styled-components";
 import Box from "../../components/Box";
 import Button from "../../components/Button";
 import Text from "../../components/Text";
-export const View = styled(Box)`
-  height: auto;
-  display: flex;
-  justify-content: center;
-  padding: 24px;
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    width: 920px;
-  }
-`;
+import HeadingCard from "./HeadingCard/HeadingCard";
 
-export const Section = styled(Box)`
+export const Heading = styled(Box)`
   display: flex;
-  margin-top: 144px;
   height: 88px;
   overflow: hidden;
   border-radius: 10px;
   padding: 16px;
   background-color: ${({ theme }) => theme.colors.white};
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
-`;
-
-export const ContainerCandidates = styled.div`
-  display: flex;
-  height: 56px;
-  width: 104px;
-  gap: 16px;
-  align-items: center;
-  border-radius: 5px;
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    width: 160px;
-  }
-`;
-export const ContainerIcon = styled.div`
-  display: flex;
+  width: 100%;
   justify-content: center;
-  font-size: 32px;
-  line-height: 0px;
-  width: 40px;
-  height: 40px;
-  background-color: ${({ theme }) => theme.colors.primaryLight};
   align-items: center;
-  border-radius: 5px;
+`;
+
+export const StyledJobHeadingCard = styled(HeadingCard)`
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    width: 48px;
-    height: 48px;
+    width: 100%;
+    margin-left: 40px;
   }
 `;
 
-export const ContainerText = styled.div`
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    display: flex;
-    flex-direction: column;
-  }
-`;
-
-export const TextCandidates = styled(Text)`
-  display: none;
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    display: block;
-  }
-`;
-
-export const ContainerJobs = styled.div`
-  display: flex;
-  height: 56px;
-  width: 104px;
-  gap: 16px;
-  align-items: center;
-  border-radius: 5px;
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    flex-grow: 1;
-    margin-left: 32px;
-  }
-`;
-
-export const TextJob = styled(Text)`
-  font-size: 28px;
-  line-height: 28px;
-  color: ${({ theme }) => theme.colors.text};
-`;
-
-export const JobButton = styled(Button)`
+export const CreateJobButton = styled(Button)`
   height: 48px;
   width: 56px;
   min-width: 0px;
@@ -91,13 +32,15 @@ export const JobButton = styled(Button)`
   justify-self: center;
   font-size: 24px;
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    width: 136px;
+    min-width: 136px;
   }
 `;
 
-export const Table = styled(Box)`
+export const Table = styled.table`
+  display: flex;
   height: auto;
   margin-top: 32px;
+  width: 100%;
   justify-content: center;
   align-items: center;
   border: 1px solid #dddddd;
@@ -108,7 +51,7 @@ export const Table = styled(Box)`
   flex-direction: column;
 `;
 
-export const Header = styled.div`
+export const RowHeader = styled.tr`
   width: 100%;
   height: 32px;
   background-color: ${({ theme }) => theme.colors.background};
@@ -119,7 +62,7 @@ export const Header = styled.div`
   justify-content: space-between;
 `;
 
-export const Row = styled.div`
+export const Row = styled.tr`
   height: 48px;
   padding: 16px;
   width: 100%;
@@ -130,19 +73,14 @@ export const Row = styled.div`
   line-height: 16px;
   display: flex;
   cursor: pointer;
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.background};
+  }
 `;
 
 export const ImageCandidates = styled.img`
   width: 32px;
   height: 32px;
-`;
-export const RowCandidate = styled.div`
-  width: 95px;
-  height: 32px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  gap: 4px;
 `;
 
 export const TextDesktop = styled(Text)`
@@ -154,8 +92,47 @@ export const TextDesktop = styled(Text)`
 `;
 
 export const TextMobile = styled(Text)`
+  display: block;
   font-size: 20px;
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     display: none;
   }
+`;
+
+export const TitleColumn = styled.td`
+  width: 100%;
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    width: 200px;
+  }
+`;
+
+export const LocationColumn = styled.td`
+  display: none;
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    display: block;
+    width: 160px;
+  }
+`;
+
+export const RoleColumn = styled.td`
+  display: none;
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    display: block;
+    width: 160px;
+  }
+`;
+
+export const CandidateColumn = styled.td`
+  width: 95px;
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    width: 320px;
+  }
+`;
+
+export const CandidatesWrapper = styled.td`
+  height: 32px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 `;

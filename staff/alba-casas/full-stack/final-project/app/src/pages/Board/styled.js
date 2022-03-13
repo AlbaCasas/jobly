@@ -1,17 +1,9 @@
 import styled from "styled-components";
 import Box from "../../components/Box";
 
-export const View = styled(Box)`
-  height: auto;
-  display: flex;
-  justify-content: center;
-`;
-
-export const Section = styled(Box)`
+export const Wrapper = styled(Box)`
   display: flex;
   flex-direction: column;
-  margin: 144px 24px;
-  width: 920px;
   height: auto;
   justify-content: center;
   align-items: center;

@@ -1,27 +1,15 @@
 import styled from "styled-components";
-import Box from "../../components/Box";
 import Text from "../../components/Text";
 import Button from "../../components/Button";
 import { MdArrowBack } from "react-icons/md";
 
-export const View = styled(Box)`
-  height: auto;
+export const Wrapper = styled.div`
   display: flex;
-  justify-content: center;
-  padding: 24px;
-`;
-
-export const Section = styled(Box)`
-  display: flex;
+  width: 100%;
   flex-direction: column;
-  margin-top: 144px;
-  width: 920px;
-  height: auto;
-  justify-content: center;
-  align-items: center;
-  gap: 24px;
+  border-radius: 10px;
   overflow: hidden;
-  border-radius: 10px 10px 0px 0px;
+  background-color: ${({ theme }) => theme.colors.white};
 `;
 
 export const Header = styled.div`
@@ -32,6 +20,7 @@ export const Header = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
 `;
 
 export const ArrowBack = styled(MdArrowBack)`
@@ -44,21 +33,14 @@ export const GoBackText = styled(Text)`
   gap: 8px;
 `;
 
-export const Wrapper = styled.div`
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  background-color: ${({ theme }) => theme.colors.white};
-`;
-
 export const ImageStyled = styled.img`
   width: 64px;
   height: 64px;
 `;
-export const StyledContainer = styled.div`
+export const ImageContainer = styled.div`
   width: fit-content;
   background-color: ${({ theme }) => theme.colors.white};
-  top: 300px;
+  top: 128px;
   position: absolute;
   border-radius: 5px;
   z-index: 2;

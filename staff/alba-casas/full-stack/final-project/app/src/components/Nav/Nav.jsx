@@ -22,6 +22,7 @@ const Nav = ({ avatar, children, showDropdown, name, role }) => {
         width="fit-content"
         justifyContent="center"
         alignItems="center"
+        cursor="pointer"
       >
         <img width="48px" src={avatar} alt="profile" />
         <StyledTextNav>

@@ -1,27 +1,26 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import {
-  ContainerCandidates,
-  ContainerIcon,
-  ContainerJobs,
-  ContainerText,
-  Header,
+  RowHeader,
   ImageCandidates,
-  JobButton,
+  CreateJobButton,
   Row,
-  RowCandidate,
-  Section,
+  CandidatesWrapper,
+  Heading,
   Table,
-  TextCandidates,
   TextDesktop,
-  TextJob,
   TextMobile,
-  View,
+  StyledJobHeadingCard,
+  TitleColumn,
+  LocationColumn,
+  RoleColumn,
+  CandidateColumn,
 } from "./styled";
 import { MdWorkOutline, MdPerson } from "react-icons/md";
 import Box from "../../components/Box";
 import Text from "../../components/Text";
 import { listJobsFromCompany } from "../../api";
+import HeadingCard from "./HeadingCard/HeadingCard";
 
 const JobListCompany = () => {
   const [jobList, setJobList] = useState([]);
@@ -43,75 +42,74 @@ const JobListCompany = () => {
 
   return (
     <Layout>
-      <View>
-        <Box
-          width="100%"
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center"
-        >
-          <Section width="100%" justifyContent="center" alignItems="center">
-            <Box padding="24px" gap="16px" justifyContent="space-between">
-              <ContainerCandidates>
-                <ContainerIcon>
-                  <MdPerson color="#2E66CC" />
-                </ContainerIcon>
-                <ContainerText>
-                  <TextJob>{totalCandidates}</TextJob>
-                  <TextCandidates>Candidates</TextCandidates>
-                </ContainerText>
-              </ContainerCandidates>
-              <ContainerJobs>
-                <ContainerIcon>
-                  <MdWorkOutline color="#2E66CC" />
-                </ContainerIcon>
-                <ContainerText>
-                  <TextJob>{jobList.length}</TextJob>
-                  <TextCandidates>Postings</TextCandidates>
-                </ContainerText>
-              </ContainerJobs>
-              <JobButton>
-                <TextMobile color="white">+</TextMobile>
-                <TextDesktop color="white">Create Job</TextDesktop>
-              </JobButton>
-            </Box>
-          </Section>
-          <Table>
-            <Header>
-              <Text variant="caption-bold">Title</Text>
-              <TextDesktop variant="caption-bold">Location</TextDesktop>
-              <TextDesktop variant="caption-bold">Role</TextDesktop>
-              <Text variant="caption-bold">Candidates</Text>
-            </Header>
-            {!!jobList.length &&
-              jobList.map((job) => {
-                return (
-                  <Row key={job._id}>
-                    <Text variant="caption">{job.title}</Text>
-                    <TextDesktop variant="caption">{job.location}</TextDesktop>
-                    <TextDesktop variant="caption">{job.role}</TextDesktop>
-                    <RowCandidate>
-                      <Text variant="caption-bold">
-                        {job.candidatures.length}
-                      </Text>
-                      {!!job.candidatures.length &&
-                        job.candidatures.map((candidature) => {
-                          return (
-                            <>
-                              <ImageCandidates
-                                key={candidature.candidate._id}
-                                src={candidature.candidate.avatar}
-                              />
-                            </>
-                          );
-                        })}
-                    </RowCandidate>
-                  </Row>
-                );
-              })}
-          </Table>
+      <Heading>
+        <Box padding="24px" gap="16px" justifyContent="space-between">
+          <HeadingCard
+            title={totalCandidates}
+            subtitle="Candidates"
+            Icon={MdPerson}
+          />
+          <StyledJobHeadingCard
+            title={jobList.length}
+            subtitle="Postings"
+            Icon={MdWorkOutline}
+          />
+          <CreateJobButton>
+            <TextMobile color="white">+</TextMobile>
+            <TextDesktop color="white">Create Job</TextDesktop>
+          </CreateJobButton>
         </Box>
-      </View>
+      </Heading>
+      <Table>
+        <RowHeader>
+          <TitleColumn>
+            <Text variant="caption-bold">Title</Text>
+          </TitleColumn>
+          <LocationColumn>
+            <Text variant="caption-bold">Location</Text>
+          </LocationColumn>
+          <RoleColumn>
+            <Text variant="caption-bold">Role</Text>
+          </RoleColumn>
+          <CandidateColumn>
+            <Text variant="caption-bold">Candidates</Text>
+          </CandidateColumn>
+        </RowHeader>
+        {!!jobList.length &&
+          jobList.map((job) => {
+            return (
+              <Row key={job._id}>
+                <TitleColumn>
+                  <Text variant="caption">{job.title}</Text>
+                </TitleColumn>
+                <LocationColumn>
+                  <Text variant="caption">{job.location}</Text>
+                </LocationColumn>
+                <RoleColumn>
+                  <Text variant="caption">{job.role}</Text>
+                </RoleColumn>
+                <CandidateColumn>
+                  <CandidatesWrapper>
+                    <Text variant="caption-bold">
+                      {job.candidatures.length}
+                    </Text>
+                    {!!job.candidatures.length &&
+                      job.candidatures.map((candidature) => {
+                        return (
+                          <>
+                            <ImageCandidates
+                              key={candidature.candidate._id}
+                              src={candidature.candidate.avatar}
+                            />
+                          </>
+                        );
+                      })}
+                  </CandidatesWrapper>
+                </CandidateColumn>
+              </Row>
+            );
+          })}
+      </Table>
     </Layout>
   );
 };

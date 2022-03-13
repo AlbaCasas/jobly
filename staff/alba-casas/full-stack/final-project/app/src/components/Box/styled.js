@@ -12,6 +12,7 @@ const Box = styled.div`
   margin-top: ${({ marginTop }) => marginTop};
   border-radius: ${({ borderRadius }) => borderRadius};
   padding: ${({ padding }) => padding};
+  cursor: ${({ cursor }) => cursor};
 `;
 
 export default Box;

@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  ContainerMyJobs,
-  ContainerSelect,
-  ContainerSelectViewProfile,
-  StyledDropdown,
-} from "./styled";
+import { DropdownItem, StyledDropdown } from "./styled";
 import Text from "../Text";
 import { useNavigate } from "react-router-dom";
 import OutsideClickHandler from "react-outside-click-handler";
@@ -15,10 +10,10 @@ const Dropdown = ({ isShown, closeDropdown, role }) => {
   return !!isShown ? (
     <OutsideClickHandler onOutsideClick={closeDropdown}>
       <StyledDropdown>
-        <ContainerSelect>
-          <Text variant="caption-bold">Profile</Text>
-        </ContainerSelect>
-        <ContainerSelectViewProfile>
+        <Text variant="caption-bold" color="gray">
+          Profile
+        </Text>
+        <DropdownItem>
           <Text
             onClick={() => {
               navigate("/profile");
@@ -27,8 +22,8 @@ const Dropdown = ({ isShown, closeDropdown, role }) => {
           >
             View Profile
           </Text>
-        </ContainerSelectViewProfile>
-        <ContainerMyJobs>
+        </DropdownItem>
+        <DropdownItem>
           <Text
             onClick={() => {
               navigate(`/job/${role}`);
@@ -37,8 +32,8 @@ const Dropdown = ({ isShown, closeDropdown, role }) => {
           >
             My jobs
           </Text>
-        </ContainerMyJobs>
-        <ContainerSelect>
+        </DropdownItem>
+        <DropdownItem>
           <Text
             cursorPointer="cursor-pointer"
             as="a"
@@ -50,7 +45,7 @@ const Dropdown = ({ isShown, closeDropdown, role }) => {
           >
             Log Out
           </Text>
-        </ContainerSelect>
+        </DropdownItem>
       </StyledDropdown>
     </OutsideClickHandler>
   ) : null;

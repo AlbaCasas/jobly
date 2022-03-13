@@ -11,14 +11,12 @@ import {
   GoBackText,
   Header,
   ImageStyled,
-  Section,
   StyledButton,
-  StyledContainer,
+  ImageContainer,
   StyledLocation,
   StyledTextBodyDescription,
   StyledTextContainer,
   StyledTextDescription,
-  View,
   Wrapper,
 } from "./styled";
 
@@ -62,52 +60,43 @@ const Details = () => {
   };
   return (
     <Layout>
-      <View>
-        <Section>
-          <Wrapper>
-            <Header>
-              <GoBackText
-                forwardedAs={Link}
-                to="/board"
-                color="white"
-                variant="link"
-              >
-                <ArrowBack />
-                Go back
-              </GoBackText>
-              <StyledContainer>
-                <ImageStyled src={job.company?.avatar} alt="logo" />
-              </StyledContainer>
-            </Header>
-            <Box
-              marginTop="32px"
-              padding="24px"
-              flexDirection="column"
-              gap="16px"
-            >
-              <Text variant="subheading">{job.title}</Text>
-              <StyledTextContainer>
-                <StyledLocation variant="bodyBold">
-                  {job.company?.name}
-                </StyledLocation>
-                <Text>{job.location}</Text>
-              </StyledTextContainer>
-              <Text>{job.date}</Text>
-              <ContainerDescription>
-                <StyledTextDescription variant="section">
-                  Description
-                </StyledTextDescription>
-                <StyledTextBodyDescription>
-                  {job.description}
-                </StyledTextBodyDescription>
-              </ContainerDescription>
-              {userRole === "candidate" ? (
-                <StyledButton onClick={handleClick}>Apply now</StyledButton>
-              ) : null}
-            </Box>
-          </Wrapper>
-        </Section>
-      </View>
+      <Wrapper>
+        <Header>
+          <GoBackText
+            forwardedAs={Link}
+            to="/board"
+            color="white"
+            variant="link"
+          >
+            <ArrowBack />
+            Go back
+          </GoBackText>
+          <ImageContainer>
+            <ImageStyled src={job.company?.avatar} alt="logo" />
+          </ImageContainer>
+        </Header>
+        <Box marginTop="32px" padding="24px" flexDirection="column" gap="16px">
+          <Text variant="subheading">{job.title}</Text>
+          <StyledTextContainer>
+            <StyledLocation variant="bodyBold">
+              {job.company?.name}
+            </StyledLocation>
+            <Text>{job.location}</Text>
+          </StyledTextContainer>
+          <Text>{job.date}</Text>
+          <ContainerDescription>
+            <StyledTextDescription variant="section">
+              Description
+            </StyledTextDescription>
+            <StyledTextBodyDescription>
+              {job.description}
+            </StyledTextBodyDescription>
+          </ContainerDescription>
+          {userRole === "candidate" ? (
+            <StyledButton onClick={handleClick}>Apply now</StyledButton>
+          ) : null}
+        </Box>
+      </Wrapper>
     </Layout>
   );
 };

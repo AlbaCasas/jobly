@@ -1,35 +1,33 @@
 import styled from "styled-components";
-import Box from "../../components/Box";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
-
-export const View = styled(Box)`
-  height: auto;
-  display: flex;
-  justify-content: center;
-`;
-
-export const Section = styled(Box)`
-  display: flex;
-  flex-direction: column;
-  margin: 144px 24px;
-  width: 920px;
-  height: auto;
-  justify-content: center;
-  align-items: center;
-  gap: 24px;
-`;
-
-export const WrapperHeader = styled.div`
-  width: 100%;
-`;
 
 export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   width: 100%;
+  gap: 48px;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    flex-direction: row;
+  }
+`;
+
+export const AvatarSection = styled.div`
+  width: 100%;
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    width: fit-content;
+    display: flex;
+    align-items: flex-start;
+    height: 100%;
+  }
+`;
+
+export const FormSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   gap: 32px;
-  margin-top: 32px;
 `;
 
 export const ContainerPhoto = styled.div`
@@ -113,8 +111,8 @@ export const ContainerInput = styled.div`
   }
 `;
 
-export const StyledInput = styled(Input)`
+export const HalfWidthInput = styled(Input)`
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    width: 448px;
+    width: calc(50% - 12px);
   }
 `;
