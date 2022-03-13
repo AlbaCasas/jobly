@@ -7,6 +7,9 @@ export const View = styled(Box)`
   display: flex;
   justify-content: center;
   padding: 24px;
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    width: 920px;
+  }
 `;
 
 export const Section = styled(Box)`
@@ -27,6 +30,9 @@ export const ContainerCandidates = styled.div`
   gap: 16px;
   align-items: center;
   border-radius: 5px;
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    width: 160px;
+  }
 `;
 export const ContainerIcon = styled.div`
   display: flex;
@@ -38,6 +44,24 @@ export const ContainerIcon = styled.div`
   background-color: ${({ theme }) => theme.colors.primaryLight};
   align-items: center;
   border-radius: 5px;
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    width: 48px;
+    height: 48px;
+  }
+`;
+
+export const ContainerText = styled.div`
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    display: flex;
+    flex-direction: column;
+  }
+`;
+
+export const TextCandidates = styled(Text)`
+  display: none;
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    display: block;
+  }
 `;
 
 export const ContainerJobs = styled.div`
@@ -47,6 +71,10 @@ export const ContainerJobs = styled.div`
   gap: 16px;
   align-items: center;
   border-radius: 5px;
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    flex-grow: 1;
+    margin-left: 32px;
+  }
 `;
 
 export const TextJob = styled(Text)`
@@ -62,6 +90,9 @@ export const JobButton = styled(Button)`
   align-self: center;
   justify-self: center;
   font-size: 24px;
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    width: 136px;
+  }
 `;
 
 export const Table = styled(Box)`
@@ -98,6 +129,7 @@ export const Row = styled.div`
   font-size: 14px;
   line-height: 16px;
   display: flex;
+  cursor: pointer;
 `;
 
 export const ImageCandidates = styled.img`
@@ -111,4 +143,19 @@ export const RowCandidate = styled.div`
   display: flex;
   align-items: center;
   gap: 4px;
+`;
+
+export const TextDesktop = styled(Text)`
+  display: none;
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    display: block;
+    text-transform: capitalize;
+  }
+`;
+
+export const TextMobile = styled(Text)`
+  font-size: 20px;
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    display: none;
+  }
 `;

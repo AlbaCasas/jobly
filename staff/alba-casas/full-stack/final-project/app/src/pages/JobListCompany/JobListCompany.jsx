@@ -4,6 +4,7 @@ import {
   ContainerCandidates,
   ContainerIcon,
   ContainerJobs,
+  ContainerText,
   Header,
   ImageCandidates,
   JobButton,
@@ -11,7 +12,10 @@ import {
   RowCandidate,
   Section,
   Table,
+  TextCandidates,
+  TextDesktop,
   TextJob,
+  TextMobile,
   View,
 } from "./styled";
 import { MdWorkOutline, MdPerson } from "react-icons/md";
@@ -47,32 +51,45 @@ const JobListCompany = () => {
           alignItems="center"
         >
           <Section width="100%" justifyContent="center" alignItems="center">
-            <Box gap="16px" justifyContent="space-between">
+            <Box padding="24px" gap="16px" justifyContent="space-between">
               <ContainerCandidates>
                 <ContainerIcon>
                   <MdPerson color="#2E66CC" />
                 </ContainerIcon>
-                <TextJob>{totalCandidates}</TextJob>
+                <ContainerText>
+                  <TextJob>{totalCandidates}</TextJob>
+                  <TextCandidates>Candidates</TextCandidates>
+                </ContainerText>
               </ContainerCandidates>
               <ContainerJobs>
                 <ContainerIcon>
                   <MdWorkOutline color="#2E66CC" />
                 </ContainerIcon>
-                <TextJob>{jobList.length}</TextJob>
+                <ContainerText>
+                  <TextJob>{jobList.length}</TextJob>
+                  <TextCandidates>Postings</TextCandidates>
+                </ContainerText>
               </ContainerJobs>
-              <JobButton>+</JobButton>
+              <JobButton>
+                <TextMobile color="white">+</TextMobile>
+                <TextDesktop color="white">Create Job</TextDesktop>
+              </JobButton>
             </Box>
           </Section>
           <Table>
             <Header>
               <Text variant="caption-bold">Title</Text>
+              <TextDesktop variant="caption-bold">Location</TextDesktop>
+              <TextDesktop variant="caption-bold">Role</TextDesktop>
               <Text variant="caption-bold">Candidates</Text>
             </Header>
             {!!jobList.length &&
               jobList.map((job) => {
                 return (
                   <Row key={job._id}>
-                    {job.title}
+                    <Text variant="caption">{job.title}</Text>
+                    <TextDesktop variant="caption">{job.location}</TextDesktop>
+                    <TextDesktop variant="caption">{job.role}</TextDesktop>
                     <RowCandidate>
                       <Text variant="caption-bold">
                         {job.candidatures.length}

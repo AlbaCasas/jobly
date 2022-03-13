@@ -24,7 +24,7 @@ const Card = ({
     <StyledCard isCompany={isCompany} {...props}>
       <ImageContainer>
         <ImageStyled src={avatar} alt="company" />
-        {isCompany ? <Tag>{candidatures.length}</Tag> : null}
+        {isCompany && <Tag>{candidatures.length}</Tag>}
       </ImageContainer>
       <Text isCompany={isCompany} variant="section">
         {title}
