@@ -4,7 +4,7 @@ import Layout from "../../components/Layout/Layout";
 import Box from "../../components/Box";
 import Text from "../../components/Text";
 import { useNavigate } from "react-router-dom";
-import { applyJob, retrieveJob, retrieveUser } from "../../api";
+import { applyJob, deleteJob, retrieveJob, retrieveUser } from "../../api";
 import {
   ArrowBack,
   ContainerDescription,
@@ -18,6 +18,7 @@ import {
   StyledTextContainer,
   StyledTextDescription,
   Wrapper,
+  ContainerLeft,
 } from "./styled";
 
 const Details = () => {
@@ -61,6 +62,20 @@ const Details = () => {
       alert(error.message);
     }
   };
+  const handleClickDeleteJob = () => {
+    try {
+      deleteJob(sessionStorage.token, jobId)
+        .then(() => {
+          alert("deleted job");
+          back();
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   return (
     <Layout>
@@ -83,10 +98,13 @@ const Details = () => {
         <Box marginTop="32px" padding="24px" flexDirection="column" gap="16px">
           <Text variant="subheading">{job.title}</Text>
           <StyledTextContainer>
-            <StyledLocation variant="bodyBold">
-              {job.company?.name}
-            </StyledLocation>
-            <Text>{job.location}</Text>
+            <ContainerLeft>
+              <StyledLocation variant="bodyBold">
+                {job.company?.name}
+              </StyledLocation>
+              <Text>{job.location}</Text>
+            </ContainerLeft>
+            <Text>{job.createAt}</Text>
           </StyledTextContainer>
           <Text>{job.date}</Text>
           <ContainerDescription>
@@ -100,7 +118,9 @@ const Details = () => {
           {userRole === "candidate" ? (
             <StyledButton onClick={handleClickApplyJob}>Apply now</StyledButton>
           ) : (
-            <StyledButton>Delete Job</StyledButton>
+            <StyledButton onClick={handleClickDeleteJob}>
+              Delete Job
+            </StyledButton>
           )}
         </Box>
       </Wrapper>

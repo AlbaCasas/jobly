@@ -41,7 +41,19 @@ export const StyledButtonSearch = styled(Button)`
     height: 64px;
   }
 `;
-
+export const StyledSelectSearch = styled.select`
+  height: 64px;
+  border-radius: 0px;
+  border-top: 1px solid ${({ theme }) => theme.colors.white};
+  border-right: 1px solid ${({ theme }) => theme.colors.white};
+  border-left: 1px solid ${({ theme }) => theme.colors.white};
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    width: 1000px;
+    height: 64px;
+    border-right: 1px solid ${({ theme }) => theme.colors.grayLight};
+    border-bottom: none;
+  }
+`;
 export const StyledInputSearchBorder = styled(Input)`
   border-radius: 0px;
   border-top: 1px solid ${({ theme }) => theme.colors.white};

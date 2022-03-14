@@ -10,6 +10,7 @@ import {
   StyledJobSearch,
   StyledSearch,
   Wrapper,
+  StyledSelectSearch,
 } from "./styled";
 
 const Search = ({ role, setJobList, userId }) => {
@@ -33,7 +34,14 @@ const Search = ({ role, setJobList, userId }) => {
       <FirstRow>
         <StyledInputSearchBorder name="title" placeholder="Search by title" />
         <StyledInputSearch name="location" placeholder="Location" />
-        <StyledInputSearch name="role" placeholder="Role type" />
+        <StyledSelectSearch name="role" placeholder="Role type">
+          <option value="" selected="selected">
+            Select role
+          </option>
+          <option value="developer">Developer</option>
+          <option value="designer">Designer</option>
+          <option value="product">Product</option>
+        </StyledSelectSearch>
         <StyledButtonSearch>Find Job</StyledButtonSearch>
       </FirstRow>
       {role === "company" && (

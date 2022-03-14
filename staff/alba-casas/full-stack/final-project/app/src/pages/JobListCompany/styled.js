@@ -116,6 +116,7 @@ export const LocationColumn = styled.td`
 
 export const RoleColumn = styled.td`
   display: none;
+  text-transform: capitalize;
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     display: block;
     width: 160px;

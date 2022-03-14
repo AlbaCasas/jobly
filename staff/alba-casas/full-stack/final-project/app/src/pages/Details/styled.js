@@ -55,8 +55,7 @@ export const StyledLocation = styled.div`
 
 export const StyledTextContainer = styled.div`
   display: flex;
-  align-items: center;
-  gap: 12px;
+  justify-content: space-between;
 `;
 
 export const ContainerDescription = styled.div`
@@ -82,4 +81,10 @@ export const StyledButton = styled(Button)`
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     width: 300px;
   }
+`;
+
+export const ContainerLeft = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
 `;

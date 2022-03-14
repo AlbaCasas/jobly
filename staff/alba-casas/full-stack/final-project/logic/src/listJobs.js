@@ -33,10 +33,11 @@ function listJobs(userId, { title, location, role, company }) {
         const doc = job._doc;
 
         doc.id = doc._id.toString();
-        doc.createAt = doc.createAt.toDateString();
+        doc.date = doc.createAt.toDateString();
         delete doc.user;
         delete doc._id;
         delete doc.__v;
+        delete doc.createAt;
 
         return doc;
       });
