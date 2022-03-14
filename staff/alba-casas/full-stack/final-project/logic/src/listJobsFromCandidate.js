@@ -16,6 +16,7 @@ function listJobsFromCandidate(userId) {
         const doc = job._doc;
 
         doc.id = doc._id.toString();
+        doc.createAt = doc.createAt.toDateString();
         delete doc._id;
         delete doc.__v;
 

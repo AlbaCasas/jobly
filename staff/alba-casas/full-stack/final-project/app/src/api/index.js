@@ -8,6 +8,7 @@ import { updateUserPassword } from "./updateUserPassword";
 import { retrieveJob } from "./retrieveJob";
 import { applyJob } from "./applyJob";
 import { listJobsFromCompany } from "./listJobsFromCompany";
+import { listJobsFromCandidate } from "./listJobsfromCandidate";
 
 export {
   registerCandidate,
@@ -20,4 +21,5 @@ export {
   retrieveJob,
   applyJob,
   listJobsFromCompany,
+  listJobsFromCandidate,
 };
