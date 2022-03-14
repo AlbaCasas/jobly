@@ -19,7 +19,7 @@ const Search = ({ role, setJobList, userId }) => {
     const queryTitle = event.target.title.value;
     const queryLocation = event.target.location.value;
     const queryRole = event.target.role.value;
-    const isShowMyJobsChecked = event.target.company.checked;
+    const isShowMyJobsChecked = event.target.company?.checked;
     listJobs(sessionStorage.token, {
       title: queryTitle,
       location: queryLocation,

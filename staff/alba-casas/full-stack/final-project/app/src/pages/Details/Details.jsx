@@ -23,7 +23,8 @@ import {
 
 const Details = () => {
   const [job, setJob] = useState({});
-  const [userRole, setUserRole] = useState();
+  const [user, setUser] = useState({});
+
   const { jobId } = useParams();
   const navigate = useNavigate();
 
@@ -32,7 +33,7 @@ const Details = () => {
   useEffect(() => {
     try {
       retrieveUser(sessionStorage.token).then((user) => {
-        setUserRole(user.role);
+        setUser(user);
       });
     } catch (error) {
       alert(error.message);
@@ -115,7 +116,7 @@ const Details = () => {
               {job.description}
             </StyledTextBodyDescription>
           </ContainerDescription>
-          {userRole === "candidate" ? (
+          {user.role === "candidate" ? (
             <StyledButton onClick={handleClickApplyJob}>Apply now</StyledButton>
           ) : (
             <StyledButton onClick={handleClickDeleteJob}>
