@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Box from "../../components/Box";
 import Layout from "../../components/Layout/Layout";
 import Text from "../../components/Text";
+import { useNavigate } from "react-router-dom";
 import {
   CandidateColumn,
   CandidatesWrapper,
@@ -24,6 +25,8 @@ import { listJobsFromCandidate } from "../../api";
 
 const JobListCandidate = () => {
   const [jobList, setJobList] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     try {
@@ -68,7 +71,12 @@ const JobListCandidate = () => {
         {!!jobList.length &&
           jobList.map((job) => {
             return (
-              <Row key={job._id}>
+              <Row
+                onClick={() => {
+                  navigate(`/job/${job.id}`);
+                }}
+                key={job._id}
+              >
                 <TitleColumn>
                   <ImageCompany src={job.company.avatar} />
                   <Text variant="caption">{job.title}</Text>

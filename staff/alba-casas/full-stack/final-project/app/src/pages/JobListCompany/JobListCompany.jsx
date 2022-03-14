@@ -21,9 +21,11 @@ import Box from "../../components/Box";
 import Text from "../../components/Text";
 import { listJobsFromCompany } from "../../api";
 import HeadingCard from "./HeadingCard/HeadingCard";
+import { useNavigate } from "react-router-dom";
 
 const JobListCompany = () => {
   const [jobList, setJobList] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     try {
@@ -78,7 +80,12 @@ const JobListCompany = () => {
         {!!jobList.length &&
           jobList.map((job) => {
             return (
-              <Row key={job._id}>
+              <Row
+                onClick={() => {
+                  navigate(`/job/${job._id}`);
+                }}
+                key={job._id}
+              >
                 <TitleColumn>
                   <Text variant="caption">{job.title}</Text>
                 </TitleColumn>

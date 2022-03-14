@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import Layout from "../../components/Layout/Layout";
 import Box from "../../components/Box";
 import Text from "../../components/Text";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { applyJob, retrieveJob, retrieveUser } from "../../api";
 import {
   ArrowBack,
@@ -24,6 +24,9 @@ const Details = () => {
   const [job, setJob] = useState({});
   const [userRole, setUserRole] = useState();
   const { jobId } = useParams();
+  const navigate = useNavigate();
+
+  const back = () => navigate(-1);
 
   useEffect(() => {
     try {
@@ -47,7 +50,7 @@ const Details = () => {
     }
   }, [jobId]);
 
-  const handleClick = () => {
+  const handleClickApplyJob = () => {
     try {
       applyJob(sessionStorage.token, jobId)
         .then(() => alert("applied job"))
@@ -58,13 +61,15 @@ const Details = () => {
       alert(error.message);
     }
   };
+
   return (
     <Layout>
       <Wrapper>
         <Header>
           <GoBackText
-            forwardedAs={Link}
-            to="/board"
+            onClick={() => {
+              back();
+            }}
             color="white"
             variant="link"
           >
@@ -93,8 +98,10 @@ const Details = () => {
             </StyledTextBodyDescription>
           </ContainerDescription>
           {userRole === "candidate" ? (
-            <StyledButton onClick={handleClick}>Apply now</StyledButton>
-          ) : null}
+            <StyledButton onClick={handleClickApplyJob}>Apply now</StyledButton>
+          ) : (
+            <StyledButton>Delete Job</StyledButton>
+          )}
         </Box>
       </Wrapper>
     </Layout>
