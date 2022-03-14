@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import Box from "../Box";
 
-export const StyledModal = styled(Box)`
+export const StyledModal = styled.form`
   width: 800px;
   height: fit-content;
   background-color: ${({ theme }) => theme.colors.white};

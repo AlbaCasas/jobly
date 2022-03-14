@@ -10,6 +10,7 @@ import { applyJob } from "./applyJob";
 import { listJobsFromCompany } from "./listJobsFromCompany";
 import { listJobsFromCandidate } from "./listJobsfromCandidate";
 import { deleteJob } from "./deleteJob";
+import { createJob } from "./createJob";
 
 export {
   registerCandidate,
@@ -24,4 +25,5 @@ export {
   listJobsFromCompany,
   listJobsFromCandidate,
   deleteJob,
+  createJob,
 };

@@ -4,6 +4,8 @@ import Button from "../../components/Button";
 import Text from "../../components/Text";
 import HeadingCard from "./HeadingCard/HeadingCard";
 
+import { MdClose } from "react-icons/md";
+
 export const Heading = styled(Box)`
   display: flex;
   height: 88px;
@@ -184,4 +186,19 @@ export const StyledSelectSearch = styled.select`
     width: 100%;
     height: 48px;
   }
+`;
+
+export const HeaderModal = styled.header`
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+`;
+
+export const Icon = styled(MdClose)`
+  position: absolute;
+  right: -20px;
+  top: -24px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
 `;

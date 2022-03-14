@@ -1,7 +1,7 @@
 import React from "react";
 import { StyledModal, View } from "./styled";
 
-const Modal = ({ placeholder, children, ...props }) => {
+const Modal = ({ children, ...props }) => {
   return (
     <View>
       <StyledModal {...props}>{children}</StyledModal>

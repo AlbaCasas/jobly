@@ -20,12 +20,14 @@ import {
   InputDescription,
   ModalButton,
   StyledSelectSearch,
+  HeaderModal,
+  Icon,
 } from "./styled";
 import { MdWorkOutline, MdPerson } from "react-icons/md";
 import Box from "../../components/Box";
 import Text from "../../components/Text";
 import Input from "../../components/Input";
-import { listJobsFromCompany } from "../../api";
+import { createJob, listJobsFromCompany } from "../../api";
 import HeadingCard from "./HeadingCard/HeadingCard";
 import { useNavigate } from "react-router-dom";
 import Modal from "../../components/Modal";
@@ -53,14 +55,43 @@ const JobListCompany = () => {
   const shouldShowModal = () => {
     setShowModal(!showModal);
   };
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
+  const createAJob = (event) => {
+    event.preventDefault();
+
+    const {
+      target: {
+        title: { value: title },
+        role: { value: role },
+        location: { value: location },
+        description: { value: description },
+      },
+    } = event;
+
+    try {
+      createJob(sessionStorage.token, { title, role, location, description })
+        .then(alert("job created"))
+        .catch((error) => {
+          alert(error.message);
+        });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   return (
     <>
       {!!showModal && (
-        <Modal>
-          <Text variant="subheading">Create a new job posting</Text>
+        <Modal onSubmit={createAJob}>
+          <HeaderModal>
+            <Text variant="subheading">Create a new job posting</Text>
+            <Icon onClick={closeModal} />
+          </HeaderModal>
           <ContainerInput>
-            <Input placeholder="Job title" />
+            <Input name="title" placeholder="Job title" />
             <Wrapper>
               <StyledSelectSearch name="role" placeholder="Role type">
                 <option value="" selected="selected">
@@ -70,9 +101,9 @@ const JobListCompany = () => {
                 <option value="designer">Designer</option>
                 <option value="product">Product</option>/
               </StyledSelectSearch>
-              <Input placeholder="Location" />
+              <Input name="location" placeholder="Location" />
             </Wrapper>
-            <InputDescription placeholder="Description" />
+            <InputDescription name="description" placeholder="Description" />
           </ContainerInput>
           <ModalButton>Create job posting</ModalButton>
         </Modal>
