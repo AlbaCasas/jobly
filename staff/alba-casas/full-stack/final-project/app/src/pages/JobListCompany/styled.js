@@ -181,7 +181,7 @@ export const StyledSelectSearch = styled.select`
   border-radius: 5px;
   padding: 8px 12px;
   height: 48px;
-  color: #757575;
+
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     width: 100%;
     height: 48px;

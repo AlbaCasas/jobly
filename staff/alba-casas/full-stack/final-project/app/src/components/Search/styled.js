@@ -44,7 +44,7 @@ export const StyledButtonSearch = styled(Button)`
 export const StyledSelectSearch = styled.select`
   height: 64px;
   border-radius: 0px;
-  color: #757575;
+
   border-top: 1px solid ${({ theme }) => theme.colors.white};
   border-right: 1px solid ${({ theme }) => theme.colors.white};
   border-left: 1px solid ${({ theme }) => theme.colors.white};

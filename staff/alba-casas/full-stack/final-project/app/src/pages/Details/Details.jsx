@@ -20,6 +20,7 @@ import {
   Wrapper,
   ContainerLeft,
 } from "./styled";
+import moment from "moment";
 
 const Details = () => {
   const [job, setJob] = useState({});
@@ -105,7 +106,7 @@ const Details = () => {
               </StyledLocation>
               <Text>{job.location}</Text>
             </ContainerLeft>
-            <Text>{job.createAt}</Text>
+            <Text>{moment(job.createAt).format("DD-MM-YYYY")}</Text>
           </StyledTextContainer>
           <Text>{job.date}</Text>
           <ContainerDescription>

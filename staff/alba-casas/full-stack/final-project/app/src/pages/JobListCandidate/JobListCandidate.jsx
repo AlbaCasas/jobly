@@ -22,6 +22,7 @@ import {
 } from "./styled";
 import { MdWorkOutline } from "react-icons/md";
 import { listJobsFromCandidate } from "../../api";
+import moment from "moment";
 
 const JobListCandidate = () => {
   const [jobList, setJobList] = useState([]);
@@ -91,7 +92,11 @@ const JobListCandidate = () => {
                   <CandidatesWrapper>
                     {!!job.candidatures.length &&
                       job.candidatures.map((candidature) => {
-                        return <Text>{candidature.createAt}</Text>;
+                        return (
+                          <Text>
+                            {moment(candidature.createAt).format("DD-MM-YYYY")}
+                          </Text>
+                        );
                       })}
                   </CandidatesWrapper>
                 </CandidateColumn>
