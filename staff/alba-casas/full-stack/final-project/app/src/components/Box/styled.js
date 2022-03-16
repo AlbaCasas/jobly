@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Box = styled.div`
+export default styled.div`
   display: flex;
   flex-direction: ${({ flexDirection }) => flexDirection};
   align-items: ${({ alignItems }) => alignItems};
@@ -14,5 +14,3 @@ const Box = styled.div`
   padding: ${({ padding }) => padding};
   cursor: ${({ cursor }) => cursor};
 `;
-
-export default Box;

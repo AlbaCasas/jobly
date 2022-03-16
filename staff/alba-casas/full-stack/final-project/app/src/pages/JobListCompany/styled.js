@@ -5,6 +5,7 @@ import Text from "../../components/Text";
 import HeadingCard from "./HeadingCard/HeadingCard";
 
 import { MdClose } from "react-icons/md";
+import Modal from "../../components/Modal";
 
 export const Heading = styled(Box)`
   display: flex;
@@ -85,11 +86,15 @@ export const ImageCandidates = styled.img`
   height: 32px;
 `;
 
+export const ImageCandidatesModal = styled.img`
+  width: 48px;
+  height: 48px;
+`;
+
 export const TextDesktop = styled(Text)`
   display: none;
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     display: block;
-    text-transform: capitalize;
   }
 `;
 
@@ -106,6 +111,10 @@ export const TitleColumn = styled.td`
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     width: 200px;
   }
+`;
+
+export const CandidateColumnRow = styled.div`
+  width: fit-content;
 `;
 
 export const LocationColumn = styled.td`
@@ -195,10 +204,46 @@ export const HeaderModal = styled.header`
 `;
 
 export const Icon = styled(MdClose)`
-  position: absolute;
-  right: -20px;
-  top: -24px;
-  width: 24px;
-  height: 24px;
-  cursor: pointer;
+  display: none;
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    display: block;
+    position: absolute;
+    right: -20px;
+    top: -24px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+  }
+`;
+
+export const ModalCancelButton = styled(Button)`
+  width: 100%;
+  background-color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.primary};
+  display: block;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.white};
+  }
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    display: none;
+  }
+`;
+
+export const ModalCandidates = styled(Modal)`
+  display: flex;
+  justify-content: flex-start;
+  padding-top: 100px;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    margin-top: 40px;
+    padding-top: 40px;
+  }
+`;
+
+export const WrapperBox = styled(Box)`
+  margin-top: 40px;
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    margin-top: 0px;
+  }
 `;

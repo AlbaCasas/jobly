@@ -9,15 +9,16 @@ function retrieveJob(userId, jobId) {
   validateId(jobId);
 
   return Job.findById(jobId)
+    .lean()
     .populate("company")
+    .populate("candidatures.candidate")
     .then((job) => {
-      const doc = job._doc;
+      job.id = job._id.toString();
 
-      delete doc._id;
-      delete doc.password;
-      delete doc.__v;
+      delete job._id;
+      delete job.__v;
 
-      return doc;
+      return job;
     });
 }
 

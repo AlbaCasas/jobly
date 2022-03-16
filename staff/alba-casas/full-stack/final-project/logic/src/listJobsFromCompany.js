@@ -9,19 +9,20 @@ function listJobsFromCompany(userId) {
   validateId(userId);
 
   return Job.find({ company: userId })
+    .lean()
     .populate("company")
     .populate("candidatures.candidate")
 
     .then((jobs) => {
-      const docs = jobs.map((job) => {
-        const doc = job._doc;
+      jobs.forEach((job) => {
+        job.id = job._id.toString();
 
-        delete doc.__v;
+        delete job._id;
 
-        return doc;
+        delete job.__v;
       });
 
-      return docs;
+      return jobs;
     });
 }
 
