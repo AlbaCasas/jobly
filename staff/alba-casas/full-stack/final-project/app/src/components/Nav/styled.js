@@ -51,3 +51,7 @@ export const StyleTextRole = styled(Text)`
   color: ${({ theme }) => theme.colors.gray};
   user-select: none;
 `;
+
+export const StyledAvatar = styled.img`
+  border-radius: 100%;
+`;

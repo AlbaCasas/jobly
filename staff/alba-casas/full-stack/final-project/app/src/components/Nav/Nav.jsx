@@ -1,4 +1,5 @@
 import {
+  StyledAvatar,
   StyledNav,
   StyledText,
   StyledTextNav,
@@ -24,7 +25,7 @@ const Nav = ({ avatar, children, showDropdown, name, role }) => {
         alignItems="center"
         cursor="pointer"
       >
-        <img width="48px" src={avatar} alt="profile" />
+        <StyledAvatar width="48px" src={avatar} alt="profile" />
         <StyledTextNav>
           <StyledTextTitle>{name}</StyledTextTitle>
           <StyleTextRole variant="caption">{role}</StyleTextRole>

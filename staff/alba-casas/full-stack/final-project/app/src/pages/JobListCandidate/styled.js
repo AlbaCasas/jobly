@@ -26,6 +26,7 @@ export const StyledJobHeadingCard = styled.div`
 export const ImageCompany = styled.img`
   width: 32px;
   height: 32px;
+  border-radius: 100%;
 `;
 
 export const CreateJobButton = styled(Button)`

@@ -84,11 +84,13 @@ export const Row = styled.tr`
 export const ImageCandidates = styled.img`
   width: 32px;
   height: 32px;
+  border-radius: 100%;
 `;
 
 export const ImageCandidatesModal = styled.img`
   width: 48px;
   height: 48px;
+  border-radius: 100%;
 `;
 
 export const TextDesktop = styled(Text)`
