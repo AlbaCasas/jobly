@@ -2,7 +2,7 @@ import { validators } from "commons/src/index";
 
 const { validateToken, validateString, validateEmail } = validators;
 
-export function updateUser(token, name, email, phone, location) {
+export function updateUser(token, name, email, phone, location, avatar) {
   validateToken(token);
   validateString(name);
   validateEmail(email);
@@ -14,7 +14,7 @@ export function updateUser(token, name, email, phone, location) {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ name, email, phone, location }),
+    body: JSON.stringify({ name, email, phone, location, avatar }),
   }).then((res) => {
     const { status } = res;
 

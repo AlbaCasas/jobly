@@ -31,8 +31,8 @@ const JobListCandidate = () => {
 
   useEffect(() => {
     try {
-      listJobsFromCandidate(sessionStorage.token).then((job) => {
-        setJobList(job);
+      listJobsFromCandidate(sessionStorage.token).then((jobs) => {
+        setJobList(jobs);
       });
     } catch (error) {
       alert(error.message);

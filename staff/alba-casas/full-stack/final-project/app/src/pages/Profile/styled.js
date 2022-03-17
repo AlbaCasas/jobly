@@ -33,8 +33,14 @@ export const FormSection = styled.div`
 export const ContainerPhoto = styled.div`
   width: 100%;
   height: auto;
-
   border-radius: 10px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  cursor: pointer;
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    flex-direction: column;
+  }
 `;
 
 export const StyledImage = styled.img`

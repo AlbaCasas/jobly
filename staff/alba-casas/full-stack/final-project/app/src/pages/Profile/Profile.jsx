@@ -21,9 +21,16 @@ import { useEffect, useState } from "react";
 import { retrieveUser, updateUser, updateUserPassword } from "../../api/";
 import Input from "../../components/Input";
 import { useNavigate } from "react-router-dom";
+import { useDropzone } from "react-dropzone";
+import { convertToBase64 } from "./utils";
 
 const Profile = () => {
   const [user, setUser] = useState({});
+  const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
+    accept: "image/*",
+  });
+  const avatar = acceptedFiles[0];
+  const avatarSrc = avatar && URL.createObjectURL(avatar);
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -53,26 +60,30 @@ const Profile = () => {
     } = event;
 
     try {
-      if (
-        currPassword.length === 0 &&
-        newPassword.length === 0 &&
-        retypePassword.length === 0
-      ) {
-        updateUser(sessionStorage.token, name, email, location, phone);
-        alert("user update");
-      } else {
-        updateUser(sessionStorage.token, name, email, location, phone)
-          .then(() => {
-            updateUserPassword(
-              sessionStorage.token,
-              currPassword,
-              newPassword,
-              retypePassword
-            );
-            alert("user update");
+      convertToBase64(avatar).then((avatar) => {
+        if (
+          currPassword.length === 0 &&
+          newPassword.length === 0 &&
+          retypePassword.length === 0
+          ) {
+          updateUser(sessionStorage.token, name, email, location, phone, avatar).then(() => {
+            alert("user update")
+            .catch((error) => alert(error.message));
           })
-          .catch((error) => alert(error.message));
-      }
+        } else {
+          updateUser(sessionStorage.token, name, email, location, phone, avatar)
+            .then(() => {
+              updateUserPassword(
+                sessionStorage.token,
+                currPassword,
+                newPassword,
+                retypePassword
+              );
+              alert("user update");
+            })
+            .catch((error) => alert(error.message));
+        }
+      })
     } catch (error) {
       alert(error.message);
     }
@@ -82,8 +93,12 @@ const Profile = () => {
     <Layout>
       <StyledForm onSubmit={handleUpdateUser}>
         <AvatarSection>
-          <ContainerPhoto>
-            <StyledImage src={user.avatar} alt="photo" />
+          <ContainerPhoto {...getRootProps()}>
+            <input {...getInputProps()} />
+            <StyledImage
+              src={avatarSrc ? avatarSrc : user.avatar}
+              alt="photo"
+            />
           </ContainerPhoto>
         </AvatarSection>
         <FormSection>
