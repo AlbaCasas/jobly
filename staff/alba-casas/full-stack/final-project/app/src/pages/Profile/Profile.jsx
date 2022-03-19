@@ -82,7 +82,6 @@ const Profile = () => {
           email,
           location,
           phone,
-          avatar,
         });
       }
     } catch (error) {
