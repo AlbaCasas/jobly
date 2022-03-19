@@ -8,7 +8,7 @@ import Text from "../../components/Text";
 import { Wrapper, StyledContainer } from "./styled";
 
 const Board = () => {
-  let tokenValid = !!sessionStorage.token;
+  let isTokenValid = !!sessionStorage.token;
   const [jobList, setJobList] = useState([]);
   const [user, setUser] = useState({});
 
@@ -34,7 +34,7 @@ const Board = () => {
     }
   }, []);
 
-  return !tokenValid ? (
+  return !isTokenValid ? (
     <Navigate to="/login" />
   ) : (
     <Layout>

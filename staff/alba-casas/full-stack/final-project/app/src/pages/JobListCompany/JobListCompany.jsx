@@ -37,24 +37,24 @@ const JobListCompany = () => {
       ? jobList.map((job) => job.candidatures.length).reduce((a, b) => a + b)
       : 0;
 
-  const shouldShowModalCandidates = () => {
+  const toggleCandidatesModal = () => {
     setShowModalCandidates(!showModalCandidates);
   };
 
   const closeModalCandidates = () => {
     setShowModalCandidates(false);
   };
-  const shouldShowModalJob = () => {
+  const toggleCreateJobModal = () => {
     setShowModalJob(!showModalJob);
   };
 
-  const closeModal = () => {
+  const closeCreateJobModal = () => {
     setShowModalJob(false);
   };
 
   const onSelectJob = (jobId) => {
     setSelectedJob(jobId);
-    shouldShowModalCandidates();
+    toggleCandidatesModal();
     try {
       retrieveJob(sessionStorage.token, jobId)
         .then((job) => {
@@ -70,7 +70,7 @@ const JobListCompany = () => {
 
   return (
     <>
-      {!!showModalJob && <ModalJob onClose={closeModal} />}
+      {!!showModalJob && <ModalJob onClose={closeCreateJobModal} />}
       {!!showModalCandidates && (
         <ModalCandidates
           onClose={closeModalCandidates}
@@ -90,7 +90,7 @@ const JobListCompany = () => {
               subtitle="Postings"
               Icon={MdWorkOutline}
             />
-            <CreateJobButton onClick={shouldShowModalJob}>
+            <CreateJobButton onClick={toggleCreateJobModal}>
               <TextMobile color="white">+</TextMobile>
               <TextDesktop color="white">Create Job</TextDesktop>
             </CreateJobButton>
