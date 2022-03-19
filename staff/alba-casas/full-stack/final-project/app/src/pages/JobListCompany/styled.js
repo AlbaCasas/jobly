@@ -36,55 +36,6 @@ export const CreateJobButton = styled(Button)`
   }
 `;
 
-export const Table = styled.table`
-  display: flex;
-  height: auto;
-  margin-top: 32px;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #dddddd;
-  box-sizing: border-box;
-  border-radius: 10px;
-  background-color: ${({ theme }) => theme.colors.white};
-  overflow: hidden;
-  flex-direction: column;
-`;
-
-export const RowHeader = styled.tr`
-  width: 100%;
-  height: 32px;
-  background-color: ${({ theme }) => theme.colors.background};
-  margin-bottom: auto;
-  display: flex;
-  align-items: center;
-  padding: 8px 16px;
-  justify-content: space-between;
-`;
-
-export const Row = styled.tr`
-  height: 48px;
-  padding: 16px;
-  width: 100%;
-  border-top: 1px solid #dddddd;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 14px;
-  line-height: 16px;
-  display: flex;
-  cursor: pointer;
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.background};
-  }
-`;
-
-export const Avatar = styled.img`
-  width: 32px;
-  height: 32px;
-  object-fit: cover;
-  border-radius: 100%;
-`;
-
 export const TextDesktop = styled(Text)`
   display: none;
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
@@ -98,43 +49,4 @@ export const TextMobile = styled(Text)`
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     display: none;
   }
-`;
-
-export const TitleColumn = styled.td`
-  width: 100%;
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    width: 200px;
-  }
-`;
-
-export const LocationColumn = styled.td`
-  display: none;
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    display: block;
-    width: 160px;
-  }
-`;
-
-export const RoleColumn = styled.td`
-  display: none;
-  text-transform: capitalize;
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    display: block;
-    width: 160px;
-  }
-`;
-
-export const CandidateColumn = styled.td`
-  width: 95px;
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    width: 320px;
-  }
-`;
-
-export const CandidatesWrapper = styled.td`
-  height: 32px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  gap: 4px;
 `;

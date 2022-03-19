@@ -12,16 +12,14 @@ import {
   ImageCompany,
   LocationColumn,
   RoleColumn,
-  Row,
-  RowHeader,
   Subtitle,
-  Table,
   Title,
   TitleColumn,
 } from "./styled";
 import { MdWorkOutline } from "react-icons/md";
 import { listJobsFromCandidate, retrieveUser } from "../../api";
 import moment from "moment";
+import Table from "../../components/Table";
 
 const JobListCandidate = () => {
   const [jobList, setJobList] = useState([]);
@@ -64,54 +62,58 @@ const JobListCandidate = () => {
           </ContainerJobs>
         </Box>
       </Heading>
-      <Table>
-        <RowHeader>
-          <TitleColumn>
-            <Text variant="caption-bold">Job Title</Text>
-          </TitleColumn>
-          <LocationColumn>
-            <Text variant="caption-bold">Location</Text>
-          </LocationColumn>
-          <RoleColumn>
-            <Text variant="caption-bold">Role</Text>
-          </RoleColumn>
-          <DateColumn>
-            <Text variant="caption-bold">Date</Text>
-          </DateColumn>
-        </RowHeader>
-        {!!jobList.length &&
-          user &&
-          jobList.map((job) => {
-            const userCandidature = job.candidatures.find((candidature) => {
-              return candidature.candidate?._id === user.id;
-            });
+      <Table.Table>
+        <Table.Header>
+          <Table.HeaderRow>
+            <TitleColumn>
+              <Text variant="caption-bold">Job Title</Text>
+            </TitleColumn>
+            <LocationColumn>
+              <Text variant="caption-bold">Location</Text>
+            </LocationColumn>
+            <RoleColumn>
+              <Text variant="caption-bold">Role</Text>
+            </RoleColumn>
+            <DateColumn>
+              <Text variant="caption-bold">Date</Text>
+            </DateColumn>
+          </Table.HeaderRow>
+        </Table.Header>
+        <Table.Body>
+          {!!jobList.length &&
+            user &&
+            jobList.map((job) => {
+              const userCandidature = job.candidatures.find((candidature) => {
+                return candidature.candidate?._id === user.id;
+              });
 
-            return (
-              <Row
-                onClick={() => {
-                  navigate(`/job/${job.id}`);
-                }}
-                key={job._id}
-              >
-                <TitleColumn>
-                  <ImageCompany src={job.company.avatar} />
-                  <Text variant="caption">{job.title}</Text>
-                </TitleColumn>
-                <LocationColumn>
-                  <Text variant="caption">{job.location}</Text>
-                </LocationColumn>
-                <RoleColumn>
-                  <Text variant="caption">{job.role}</Text>
-                </RoleColumn>
-                <DateColumn>
-                  <Text variant="caption">
-                    {moment(userCandidature.createAt).format("MMMM DD, YYYY")}
-                  </Text>
-                </DateColumn>
-              </Row>
-            );
-          })}
-      </Table>
+              return (
+                <Table.Row
+                  onClick={() => {
+                    navigate(`/job/${job.id}`);
+                  }}
+                  key={job._id}
+                >
+                  <TitleColumn>
+                    <ImageCompany src={job.company.avatar} />
+                    <Text variant="caption">{job.title}</Text>
+                  </TitleColumn>
+                  <LocationColumn>
+                    <Text variant="caption">{job.location}</Text>
+                  </LocationColumn>
+                  <RoleColumn>
+                    <Text variant="caption">{job.role}</Text>
+                  </RoleColumn>
+                  <DateColumn>
+                    <Text variant="caption">
+                      {moment(userCandidature.createAt).format("MMMM DD, YYYY")}
+                    </Text>
+                  </DateColumn>
+                </Table.Row>
+              );
+            })}
+        </Table.Body>
+      </Table.Table>
     </Layout>
   );
 };

@@ -1,33 +1,23 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import {
-  RowHeader,
-  Avatar,
   CreateJobButton,
-  Row,
-  CandidatesWrapper,
   Heading,
-  Table,
   TextDesktop,
   TextMobile,
   StyledJobHeadingCard,
-  TitleColumn,
-  LocationColumn,
-  RoleColumn,
-  CandidateColumn,
 } from "./styled";
 import { MdWorkOutline, MdPerson } from "react-icons/md";
 import Box from "../../components/Box";
-import Text from "../../components/Text";
+
 import { listJobsFromCompany, retrieveJob } from "../../api";
 import HeadingCard from "./HeadingCard/HeadingCard";
-import { useNavigate } from "react-router-dom";
 import ModalJob from "./ModalJob";
 import ModalCandidates from "./ModalCandidates";
+import JobsTable from "./JobsTable";
 
 const JobListCompany = () => {
   const [jobList, setJobList] = useState([]);
-  const navigate = useNavigate();
   const [showModalJob, setShowModalJob] = useState();
   const [showModalCandidates, setShowModalCandidates] = useState();
   const [selectedJob, setSelectedJob] = useState({});
@@ -106,69 +96,7 @@ const JobListCompany = () => {
             </CreateJobButton>
           </Box>
         </Heading>
-        <Table>
-          <RowHeader>
-            <TitleColumn>
-              <Text variant="caption-bold">Title</Text>
-            </TitleColumn>
-            <LocationColumn>
-              <Text variant="caption-bold">Location</Text>
-            </LocationColumn>
-            <RoleColumn>
-              <Text variant="caption-bold">Role</Text>
-            </RoleColumn>
-            <CandidateColumn>
-              <Text variant="caption-bold">Candidates</Text>
-            </CandidateColumn>
-          </RowHeader>
-          {!!jobList.length &&
-            jobList.map((job) => {
-              return (
-                <Row key={job.id}>
-                  <TitleColumn
-                    onClick={() => {
-                      navigate(`/job/${job.id}`);
-                    }}
-                  >
-                    <Text variant="caption">{job.title}</Text>
-                  </TitleColumn>
-                  <LocationColumn
-                    onClick={() => {
-                      navigate(`/job/${job.id}`);
-                    }}
-                  >
-                    <Text variant="caption">{job.location}</Text>
-                  </LocationColumn>
-                  <RoleColumn
-                    onClick={() => {
-                      navigate(`/job/${job.id}`);
-                    }}
-                  >
-                    <Text variant="caption">{job.role}</Text>
-                  </RoleColumn>
-                  <CandidateColumn>
-                    <CandidatesWrapper>
-                      <Text variant="caption-bold">
-                        {job.candidatures.length}
-                      </Text>
-                      {!!job.candidatures.length &&
-                        job.candidatures.map((candidature) => {
-                          return (
-                            <>
-                              <Avatar
-                                onClick={() => onSelectJob(job.id)}
-                                key={candidature.candidate._id}
-                                src={candidature.candidate.avatar}
-                              />
-                            </>
-                          );
-                        })}
-                    </CandidatesWrapper>
-                  </CandidateColumn>
-                </Row>
-              );
-            })}
-        </Table>
+        <JobsTable onSelectJob={onSelectJob} jobList={jobList} />
       </Layout>
     </>
   );
