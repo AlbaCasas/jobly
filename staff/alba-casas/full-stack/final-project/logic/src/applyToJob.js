@@ -6,7 +6,7 @@ const {
 } = require("commons");
 const { User } = require("data/src/models");
 
-function applyToJob(userId, jobId) {
+function applyToJob(userId, jobId, resume) {
   validateId(userId, "userId");
   validateId(jobId, "jobId");
 
@@ -19,7 +19,7 @@ function applyToJob(userId, jobId) {
         })
       )
         throw new Error("You have applied to this offer");
-      job.candidatures.push({ candidate: userId });
+      job.candidatures.push({ candidate: userId, resume: resume });
       job.save();
     });
   });

@@ -3,7 +3,7 @@ import { validateId } from "commons/src/validators";
 
 const { validateToken } = validators;
 
-export function applyJob(token, jobId) {
+export function applyJob(token, jobId, resume) {
   validateToken(token);
   validateId(jobId);
 
@@ -13,6 +13,7 @@ export function applyJob(token, jobId) {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
+    body: JSON.stringify({ resume }),
   }).then((res) => {
     const { status } = res;
     if (status === 201) {

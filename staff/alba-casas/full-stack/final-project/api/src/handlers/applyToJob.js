@@ -7,9 +7,10 @@ module.exports = (req, res) => {
 
     const {
       params: { jobId },
+      body: { resume },
     } = req;
 
-    applyToJob(userId, jobId)
+    applyToJob(userId, jobId, resume)
       .then(() => res.status(201).send())
       .catch((error) => res.status(400).json({ error: error.message }));
   } catch (error) {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import {
   RowHeader,
-  ImageCandidates,
+  Avatar,
   CreateJobButton,
   Row,
   CandidatesWrapper,
@@ -15,35 +15,22 @@ import {
   LocationColumn,
   RoleColumn,
   CandidateColumn,
-  ContainerInput,
-  Wrapper,
-  InputDescription,
-  ModalButton,
-  StyledSelectSearch,
-  HeaderModal,
-  Icon,
-  ModalCancelButton,
-  ImageCandidatesModal,
-  ModalCandidates,
-  WrapperBox,
-  CandidateColumnRow,
 } from "./styled";
 import { MdWorkOutline, MdPerson } from "react-icons/md";
 import Box from "../../components/Box";
 import Text from "../../components/Text";
-import Input from "../../components/Input";
-import { createJob, listJobsFromCompany, retrieveJob } from "../../api";
+import { listJobsFromCompany, retrieveJob } from "../../api";
 import HeadingCard from "./HeadingCard/HeadingCard";
 import { useNavigate } from "react-router-dom";
-import Modal from "../../components/Modal";
-import CandidateRow from "./CandidateRow";
+import ModalJob from "./ModalJob";
+import ModalCandidates from "./ModalCandidates";
 
 const JobListCompany = () => {
   const [jobList, setJobList] = useState([]);
   const navigate = useNavigate();
   const [showModalJob, setShowModalJob] = useState();
   const [showModalCandidates, setShowModalCandidates] = useState();
-  const [selectJob, setSelectJob] = useState({});
+  const [selectedJob, setSelectedJob] = useState({});
 
   useEffect(() => {
     try {
@@ -75,36 +62,13 @@ const JobListCompany = () => {
     setShowModalJob(false);
   };
 
-  const createAJob = (event) => {
-    event.preventDefault();
-
-    const {
-      target: {
-        title: { value: title },
-        role: { value: role },
-        location: { value: location },
-        description: { value: description },
-      },
-    } = event;
-
-    try {
-      createJob(sessionStorage.token, { title, role, location, description })
-        .then(alert("job created"))
-        .catch((error) => {
-          alert(error.message);
-        });
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-
   const onSelectJob = (jobId) => {
-    setSelectJob(jobId);
+    setSelectedJob(jobId);
     shouldShowModalCandidates();
     try {
       retrieveJob(sessionStorage.token, jobId)
         .then((job) => {
-          setSelectJob(job);
+          setSelectedJob(job);
         })
         .catch((error) => {
           alert(error.message);
@@ -116,99 +80,12 @@ const JobListCompany = () => {
 
   return (
     <>
-      {!!showModalJob ? (
-        <Modal onSubmit={createAJob}>
-          <HeaderModal>
-            <Text variant="subheading">Create a new job posting</Text>
-            <Icon onClick={closeModal} />
-          </HeaderModal>
-          <ContainerInput>
-            <Input name="title" placeholder="Job title" />
-            <Wrapper>
-              <StyledSelectSearch name="role" placeholder="Role type">
-                <option value="" selected="selected">
-                  I'm looking for a
-                </option>
-                <option value="developer">Developer</option>
-                <option value="designer">Designer</option>
-                <option value="product">Product</option>/
-              </StyledSelectSearch>
-              <Input name="location" placeholder="Location" />
-            </Wrapper>
-            <InputDescription name="description" placeholder="Description" />
-          </ContainerInput>
-          <ModalButton>Create job posting</ModalButton>
-          <ModalCancelButton onClick={closeModal}>Cancel</ModalCancelButton>
-        </Modal>
-      ) : (
-        !!showModalCandidates && (
-          <ModalCandidates>
-            <HeaderModal>
-              <Box alignItems="center" flexDirection="column" gap="24px">
-                <Box gap="12px" alignItems="center">
-                  <Text variant="subheading">{selectJob.title} </Text>
-                  <Text variant="subheading">-</Text>
-                  <Text variant="subheading"> {selectJob.company?.name} </Text>
-                </Box>
-                <Box>
-                  <Text variant="section">List of candidates</Text>
-                </Box>
-                <WrapperBox
-                  gap="280px"
-                  flexDirection="column"
-                  justifyContent="space-between"
-                >
-                  <Box flexDirection="column" gap="24px">
-                    {!!selectJob.candidatures?.length &&
-                      selectJob.candidatures?.map((candidature) => {
-                        return (
-                          <CandidateRow>
-                            <Box alignItems="center">
-                              <Box alignItems="center" gap="24px">
-                                <ImageCandidatesModal
-                                  key={candidature.candidate._id}
-                                  src={candidature.candidate.avatar}
-                                />
-                                <CandidateColumnRow>
-                                  <Text variant="caption-bold">
-                                    {candidature.candidate?.name}
-                                  </Text>
-                                </CandidateColumnRow>
-                                <CandidateColumnRow>
-                                  <TextDesktop variant="caption-bold">
-                                    {candidature.candidate?.email}
-                                  </TextDesktop>
-                                </CandidateColumnRow>
-                              </Box>
-                              <Box
-                                alignItems="center"
-                                justifyContent="flex-end"
-                                width="100px"
-                                gap="48px"
-                              >
-                                <CandidateColumnRow>
-                                  <TextDesktop variant="caption-bold">
-                                    {candidature.candidate?.phone}
-                                  </TextDesktop>
-                                </CandidateColumnRow>
-                                <CandidateColumnRow>
-                                  <Text variant="link">resume</Text>
-                                </CandidateColumnRow>
-                              </Box>
-                            </Box>
-                          </CandidateRow>
-                        );
-                      })}
-                  </Box>
-                  <ModalCancelButton onClick={closeModalCandidates}>
-                    Cancel
-                  </ModalCancelButton>
-                </WrapperBox>
-              </Box>
-              <Icon onClick={closeModalCandidates} />
-            </HeaderModal>
-          </ModalCandidates>
-        )
+      {!!showModalJob && <ModalJob onClose={closeModal} />}
+      {!!showModalCandidates && (
+        <ModalCandidates
+          onClose={closeModalCandidates}
+          selectedJob={selectedJob}
+        />
       )}
       <Layout>
         <Heading>
@@ -278,7 +155,7 @@ const JobListCompany = () => {
                         job.candidatures.map((candidature) => {
                           return (
                             <>
-                              <ImageCandidates
+                              <Avatar
                                 onClick={() => onSelectJob(job.id)}
                                 key={candidature.candidate._id}
                                 src={candidature.candidate.avatar}

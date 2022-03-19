@@ -13,8 +13,9 @@ export const StyledNav = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   position: fixed;
   font-size: 48px;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.grayLight};
+
   color: ${({ theme }) => theme.colors.gray};
-  box-shadow: 0px 4px 20px #e5e5e5;
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     padding: 32px 128px;
   }

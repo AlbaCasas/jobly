@@ -11,7 +11,7 @@ export const StyledDropdown = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: auto;
-  box-shadow: 0px 4px 20px #e5e5e5;
+  border: 1px solid ${({ theme }) => theme.colors.grayLight};
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     width: 220px;
     right: 80px;

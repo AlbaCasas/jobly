@@ -7,7 +7,7 @@ export const StyledSearch = styled.form`
   width: 100%;
   height: auto;
   border-radius: 10px;
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+  border: 1px solid ${({ theme }) => theme.colors.grayLight};
 `;
 
 export const FirstRow = styled.div`
