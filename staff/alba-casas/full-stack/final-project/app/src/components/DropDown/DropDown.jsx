@@ -13,36 +13,27 @@ const Dropdown = ({ isShown, closeDropdown, role }) => {
         <Text variant="caption-bold" color="gray">
           Profile
         </Text>
-        <DropdownItem>
-          <Text
-            onClick={() => {
-              navigate("/profile");
-            }}
-            variant="caption"
-          >
-            View Profile
-          </Text>
+        <DropdownItem
+          onClick={() => {
+            navigate("/profile");
+          }}
+        >
+          <Text variant="caption">View Profile</Text>
         </DropdownItem>
-        <DropdownItem>
-          <Text
-            onClick={() => {
-              navigate(`/job/${role}`);
-            }}
-            variant="caption"
-          >
-            My jobs
-          </Text>
+        <DropdownItem
+          onClick={() => {
+            navigate(`/job/${role}`);
+          }}
+        >
+          <Text variant="caption">My jobs</Text>
         </DropdownItem>
-        <DropdownItem>
-          <Text
-            cursorPointer="cursor-pointer"
-            as="a"
-            onClick={() => {
-              delete sessionStorage.token;
-              navigate("/login");
-            }}
-            variant="caption"
-          >
+        <DropdownItem
+          onClick={() => {
+            delete sessionStorage.token;
+            navigate("/login");
+          }}
+        >
+          <Text cursorPointer="cursor-pointer" as="a" variant="caption">
             Log Out
           </Text>
         </DropdownItem>

@@ -4,11 +4,10 @@ import Layout from "../../components/Layout/Layout";
 import Text from "../../components/Text";
 import { useNavigate } from "react-router-dom";
 import {
-  CandidateColumn,
-  CandidatesWrapper,
   ContainerIcon,
   ContainerJobs,
   ContainerText,
+  DateColumn,
   Heading,
   ImageCompany,
   LocationColumn,
@@ -21,11 +20,12 @@ import {
   TitleColumn,
 } from "./styled";
 import { MdWorkOutline } from "react-icons/md";
-import { listJobsFromCandidate } from "../../api";
+import { listJobsFromCandidate, retrieveUser } from "../../api";
 import moment from "moment";
 
 const JobListCandidate = () => {
   const [jobList, setJobList] = useState([]);
+  const [user, setUser] = useState(null);
 
   const navigate = useNavigate();
 
@@ -33,6 +33,16 @@ const JobListCandidate = () => {
     try {
       listJobsFromCandidate(sessionStorage.token).then((jobs) => {
         setJobList(jobs);
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      retrieveUser(sessionStorage.token).then((user) => {
+        setUser(user);
       });
     } catch (error) {
       alert(error.message);
@@ -65,12 +75,17 @@ const JobListCandidate = () => {
           <RoleColumn>
             <Text variant="caption-bold">Role</Text>
           </RoleColumn>
-          <CandidateColumn>
+          <DateColumn>
             <Text variant="caption-bold">Date</Text>
-          </CandidateColumn>
+          </DateColumn>
         </RowHeader>
         {!!jobList.length &&
+          user &&
           jobList.map((job) => {
+            const userCandidature = job.candidatures.find((candidature) => {
+              return candidature.candidate?._id === user.id;
+            });
+
             return (
               <Row
                 onClick={() => {
@@ -88,18 +103,11 @@ const JobListCandidate = () => {
                 <RoleColumn>
                   <Text variant="caption">{job.role}</Text>
                 </RoleColumn>
-                <CandidateColumn>
-                  <CandidatesWrapper>
-                    {!!job.candidatures.length &&
-                      job.candidatures.map((candidature) => {
-                        return (
-                          <Text>
-                            {moment(candidature.createAt).format("DD-MM-YYYY")}
-                          </Text>
-                        );
-                      })}
-                  </CandidatesWrapper>
-                </CandidateColumn>
+                <DateColumn>
+                  <Text variant="caption">
+                    {moment(userCandidature.createAt).format("MMMM DD, YYYY")}
+                  </Text>
+                </DateColumn>
               </Row>
             );
           })}

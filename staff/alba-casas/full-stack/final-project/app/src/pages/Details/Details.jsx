@@ -98,7 +98,10 @@ const Details = () => {
                 </StyledLocation>
                 <Text>{job.location}</Text>
               </ContainerLeft>
-              <Text>Posted {moment(job.createAt).format("DD-MM-YYYY")}</Text>
+              <Text>
+                Posted {moment(Date.now()).diff(moment(job.createAt), "days")}{" "}
+                days ago
+              </Text>
             </StyledTextContainer>
             <Text>{job.date}</Text>
             <ContainerDescription>

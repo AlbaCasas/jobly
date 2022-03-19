@@ -131,19 +131,11 @@ export const RoleColumn = styled.td`
   }
 `;
 
-export const CandidateColumn = styled.td`
-  width: 95px;
+export const DateColumn = styled.td`
+  width: 100px;
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    width: 320px;
+    width: 200px;
   }
-`;
-
-export const CandidatesWrapper = styled.td`
-  height: 32px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  gap: 4px;
 `;
 
 export const ContainerJobs = styled.div`
