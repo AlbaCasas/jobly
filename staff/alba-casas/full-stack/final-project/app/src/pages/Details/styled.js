@@ -2,7 +2,6 @@ import styled from "styled-components";
 import Text from "../../components/Text";
 import Button from "../../components/Button";
 import { MdArrowBack } from "react-icons/md";
-import Box from "../../components/Box";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -37,14 +36,9 @@ export const GoBackText = styled(Text)`
 export const ImageStyled = styled.img`
   width: 64px;
   height: 64px;
-`;
-
-export const ImageContainer = styled.div`
-  width: fit-content;
-  background-color: ${({ theme }) => theme.colors.white};
+  border-radius: 5px;
   top: 128px;
   position: absolute;
-  border-radius: 5px;
   z-index: 2;
 `;
 
@@ -94,43 +88,4 @@ export const ContainerLeft = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
-`;
-
-export const ContainerModal = styled(Box)`
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    justify-content: center;
-    margin-top: 0px;
-    height: fit-content;
-  }
-`;
-
-export const ContainerText = styled.div`
-  flex-direction: column;
-  display: flex;
-  gap: 24px;
-  align-items: center;
-  margin-bottom: 24px;
-`;
-
-export const ButtonFile = styled(Button)`
-  background-color: ${({ theme }) => theme.colors.white};
-  border: 2px solid ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.primary};
-  box-sizing: border-box;
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.white};
-  }
-`;
-
-export const ButtonSend = styled(Button)`
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    width: 200px;
-  }
 `;

@@ -45,6 +45,8 @@ export const ContainerPhoto = styled.div`
 
 export const StyledImage = styled.img`
   width: 140px;
+  object-fit: cover;
+
   height: 140px;
 `;
 

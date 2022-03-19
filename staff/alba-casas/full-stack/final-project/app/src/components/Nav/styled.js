@@ -55,4 +55,7 @@ export const StyleTextRole = styled(Text)`
 
 export const StyledAvatar = styled.img`
   border-radius: 100%;
+  object-fit: cover;
+  height: 48px;
+  width: 48px;
 `;

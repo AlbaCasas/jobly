@@ -25,7 +25,7 @@ const Nav = ({ avatar, children, showDropdown, name, role }) => {
         alignItems="center"
         cursor="pointer"
       >
-        <StyledAvatar width="48px" src={avatar} alt="profile" />
+        <StyledAvatar src={avatar} alt="profile" />
         <StyledTextNav>
           <StyledTextTitle>{name}</StyledTextTitle>
           <StyleTextRole variant="caption">{role}</StyleTextRole>
