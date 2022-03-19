@@ -1,4 +1,12 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+const disabledCss = css`
+  background-color: ${({ theme }) => theme.colors.gray};
+  cursor: initial;
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.gray};
+  }
+`;
 
 export const StyledButton = styled.button`
   display: flex;
@@ -16,4 +24,7 @@ export const StyledButton = styled.button`
   &:hover {
     background-color: ${({ theme }) => theme.colors.primaryDark};
   }
+  ${({ disabled }) => {
+    if (disabled) return disabledCss;
+  }}
 `;

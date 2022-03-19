@@ -1,7 +1,11 @@
 import { StyledButton } from "./styled";
 
-const Button = ({ children, ...props }) => {
-  return <StyledButton {...props}>{children}</StyledButton>;
+const Button = ({ disabled, children, ...props }) => {
+  return (
+    <StyledButton disabled={disabled} {...props}>
+      {children}
+    </StyledButton>
+  );
 };
 
 export default Button;

@@ -23,7 +23,7 @@ import moment from "moment";
 import ModalApply from "./ModalApply";
 
 const Details = () => {
-  const [job, setJob] = useState({});
+  const [job, setJob] = useState(null);
   const [user, setUser] = useState({});
   const [isModalShow, setIsModalShow] = useState();
   const { jobId } = useParams();
@@ -72,56 +72,72 @@ const Details = () => {
     }
   };
 
+  const hasUserApplied = job?.candidatures.some((candidature) => {
+    return candidature.candidate?._id === user.id;
+  });
+
   return (
     <>
       {!!isModalShow && <ModalApply onClose={toggleApplyModal} jobId={jobId} />}
-      <Layout>
-        <Wrapper>
-          <Header>
-            <GoBackText forwardedAs={Link} to={-1} color="white" variant="link">
-              <ArrowBack />
-              Go back
-            </GoBackText>
-            <ImageStyled src={job.company?.avatar} alt="logo" />
-          </Header>
-          <Box
-            marginTop="32px"
-            padding="24px"
-            flexDirection="column"
-            gap="16px"
-          >
-            <Text variant="subheading">{job.title}</Text>
-            <StyledTextContainer>
-              <ContainerLeft>
-                <StyledLocation variant="bodyBold">
-                  {job.company?.name}
-                </StyledLocation>
-                <Text>{job.location}</Text>
-              </ContainerLeft>
-              <Text>
-                Posted {moment(Date.now()).diff(moment(job.createAt), "days")}{" "}
-                days ago
-              </Text>
-            </StyledTextContainer>
-            <Text>{job.date}</Text>
-            <ContainerDescription>
-              <StyledTextDescription variant="section">
-                Description
-              </StyledTextDescription>
-              <StyledTextBodyDescription>
-                {job.description}
-              </StyledTextBodyDescription>
-            </ContainerDescription>
-            {user.role === "candidate" ? (
-              <StyledButton onClick={toggleApplyModal}>Apply now</StyledButton>
-            ) : (
-              <StyledButton onClick={handleClickDeleteJob}>
-                Delete Job
-              </StyledButton>
-            )}
-          </Box>
-        </Wrapper>
-      </Layout>
+      {job && (
+        <Layout>
+          <Wrapper>
+            <Header>
+              <GoBackText
+                forwardedAs={Link}
+                to={-1}
+                color="white"
+                variant="link"
+              >
+                <ArrowBack />
+                Go back
+              </GoBackText>
+              <ImageStyled src={job.company.avatar} alt="logo" />
+            </Header>
+            <Box
+              marginTop="32px"
+              padding="24px"
+              flexDirection="column"
+              gap="16px"
+            >
+              <Text variant="subheading">{job.title}</Text>
+              <StyledTextContainer>
+                <ContainerLeft>
+                  <StyledLocation variant="bodyBold">
+                    {job.company.name}
+                  </StyledLocation>
+                  <Text>{job.location}</Text>
+                </ContainerLeft>
+                <Text>
+                  Posted {moment(Date.now()).diff(moment(job.createAt), "days")}{" "}
+                  days ago
+                </Text>
+              </StyledTextContainer>
+              <Text>{job.date}</Text>
+              <ContainerDescription>
+                <StyledTextDescription variant="section">
+                  Description
+                </StyledTextDescription>
+                <StyledTextBodyDescription>
+                  {job.description}
+                </StyledTextBodyDescription>
+              </ContainerDescription>
+              {user.role === "candidate" ? (
+                <StyledButton
+                  disabled={hasUserApplied}
+                  onClick={toggleApplyModal}
+                >
+                  Apply now
+                </StyledButton>
+              ) : (
+                <StyledButton onClick={handleClickDeleteJob}>
+                  Delete Job
+                </StyledButton>
+              )}
+            </Box>
+          </Wrapper>
+        </Layout>
+      )}
     </>
   );
 };
