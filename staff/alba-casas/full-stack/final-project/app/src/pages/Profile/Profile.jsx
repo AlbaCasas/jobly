@@ -18,7 +18,7 @@ import {
   AvatarSection,
 } from "./styled";
 import { useEffect, useState } from "react";
-import { retrieveUser, updateUser, updateUserPassword } from "../../api/";
+import { retrieveUser, updateUserAndPassword } from "../../api/";
 import Input from "../../components/Input";
 import { useNavigate } from "react-router-dom";
 import { useDropzone } from "react-dropzone";
@@ -62,32 +62,28 @@ const Profile = () => {
     try {
       if (avatar) {
         convertToBase64(avatar).then((avatar) => {
-          if (currPassword.length === 0 && newPassword.length === 0 && retypePassword.length === 0
-          ) {
-            updateUser( sessionStorage.token, name, email, location, phone, avatar);
-            alert("user update").catch((error) => alert(error.message));
-          } else {
-            updateUser( sessionStorage.token, name, email, location, phone, avatar)
-              .then(() => {
-                updateUserPassword( sessionStorage.token, currPassword, newPassword, retypePassword
-                );
-                alert("user update");
-              })
-              .catch((error) => alert(error.message));
-          }
+          updateUserAndPassword({
+            currPassword,
+            newPassword,
+            retypePassword,
+            name,
+            email,
+            location,
+            phone,
+            avatar,
+          });
         });
       } else {
-        if (currPassword.length === 0 && newPassword.length === 0 && retypePassword.length === 0) {
-          updateUser(sessionStorage.token, name, email, location, phone, avatar);
-          alert("user update").catch((error) => alert(error.message));
-        } else {
-          updateUser(sessionStorage.token, name, email, location, phone, avatar)
-            .then(() => {
-              updateUserPassword(sessionStorage.token, currPassword, newPassword, retypePassword);
-              alert("user update");
-            })
-            .catch((error) => alert(error.message));
-        }
+        updateUserAndPassword({
+          currPassword,
+          newPassword,
+          retypePassword,
+          name,
+          email,
+          location,
+          phone,
+          avatar,
+        });
       }
     } catch (error) {
       alert(error.message);

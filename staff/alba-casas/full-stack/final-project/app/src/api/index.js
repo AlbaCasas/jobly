@@ -11,6 +11,7 @@ import { listJobsFromCompany } from "./listJobsFromCompany";
 import { listJobsFromCandidate } from "./listJobsfromCandidate";
 import { deleteJob } from "./deleteJob";
 import { createJob } from "./createJob";
+import { updateUserAndPassword } from "./updateUserAndPassword";
 
 export {
   registerCandidate,
@@ -26,4 +27,5 @@ export {
   listJobsFromCandidate,
   deleteJob,
   createJob,
+  updateUserAndPassword,
 };
