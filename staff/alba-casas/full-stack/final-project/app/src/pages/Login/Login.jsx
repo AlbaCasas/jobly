@@ -14,19 +14,18 @@ import {
   LoginForm,
 } from "./styled";
 import { authenticateUser } from "../../api";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
   const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const {
-      target: {
-        email: { value: email },
-        password: { value: password },
-      },
-    } = event;
+  const submit = (values) => {
+    const { email, password } = values;
 
     try {
       authenticateUser(email, password)
@@ -61,7 +60,7 @@ const Login = () => {
         </Box>
       </LeftSection>
       <RightSection>
-        <LoginForm onSubmit={handleSubmit}>
+        <LoginForm onSubmit={handleSubmit(submit)}>
           <Box flexDirection="column" alignItems="center" gap="32px">
             <img src={Logo} alt="Jobly" />
             <Box flexDirection="column" alignItems="center" gap="12px">
@@ -73,8 +72,26 @@ const Login = () => {
             </Box>
             <Box gap="48px" flexDirection="column">
               <Box gap="24px" flexDirection="column">
-                <Input name="email" type="email" placeholder="Email" />
-                <Input name="password" type="password" placeholder="Password" />
+                <Input
+                  {...register("email", {
+                    required: "This field is required",
+                    pattern: {
+                      value: /^\S+@\S+\.\S+$/,
+                      message: "Enter a valid email",
+                    },
+                  })}
+                  type="email"
+                  placeholder="Email"
+                  error={errors.email?.message}
+                />
+                <Input
+                  {...register("password", {
+                    required: "This field is required",
+                  })}
+                  type="password"
+                  placeholder="Password"
+                  error={errors.password?.message}
+                />
               </Box>
               <StyledButton>Login</StyledButton>
             </Box>
