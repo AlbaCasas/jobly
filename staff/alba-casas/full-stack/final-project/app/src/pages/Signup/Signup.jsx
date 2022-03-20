@@ -21,12 +21,18 @@ import {
   registerCandidate,
   registerCompany,
 } from "../../api";
+import { useForm } from "react-hook-form";
 
 const Signup = () => {
   const [isActiveCandidate, setIsActiveCandidate] = useState(true);
   const isActiveCompany = !isActiveCandidate;
   const placeholder = isActiveCandidate ? "Full name" : "Fiscal name";
   const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const handleClickCandidate = () => {
     setIsActiveCandidate(true);
@@ -36,18 +42,8 @@ const Signup = () => {
     setIsActiveCandidate(false);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const {
-      target: {
-        name: { value: name },
-        email: { value: email },
-        password: { value: password },
-        location: { value: location },
-        phone: { value: phone },
-      },
-    } = event;
+  const submit = (values) => {
+    const { name, email, password, location, phone } = values;
 
     if (isActiveCandidate) {
       try {
@@ -139,14 +135,57 @@ const Signup = () => {
             flexDirection="column"
             alignItems="center"
           >
-            <Form onSubmit={handleSubmit}>
-              <Input name="name" placeholder={placeholder} />
+            <Form onSubmit={handleSubmit(submit)}>
+              <Input
+                {...register("name", { required: "This field is required" })}
+                placeholder={placeholder}
+                error={errors.name?.message}
+              />
               <InputsGrid>
-                <Input name="location" placeholder="Location" />
-                <Input name="phone" type="tel" placeholder="Phone" />
+                <Input
+                  {...register("location", {
+                    required: "This field is required",
+                  })}
+                  placeholder="Location"
+                  error={errors.location?.message}
+                />
+                <Input
+                  {...register("phone", {
+                    required: "This field is required",
+                    pattern: {
+                      value: /^[0-9\s]*$/,
+                      message: "Enter a valid phone",
+                    },
+                  })}
+                  type="tel"
+                  placeholder="Phone"
+                  error={errors.phone?.message}
+                />
               </InputsGrid>
-              <Input name="email" type="email" placeholder="Email" />
-              <Input name="password" type="password" placeholder="Password" />
+              <Input
+                {...register("email", {
+                  required: "This field is required",
+                  pattern: {
+                    value: /^\S+@\S+\.\S+$/,
+                    message: "Enter a valid email",
+                  },
+                })}
+                type="email"
+                placeholder="Email"
+                error={errors.email?.message}
+              />
+              <Input
+                {...register("password", {
+                  required: "This field is required",
+                  minLength: {
+                    value: 8,
+                    message: "Password must be at least 8 characters long",
+                  },
+                })}
+                type="password"
+                placeholder="Password"
+                error={errors.password?.message}
+              />
               <Box>
                 <StyledButton>Sign Up</StyledButton>
               </Box>

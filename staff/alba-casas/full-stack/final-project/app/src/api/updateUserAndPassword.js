@@ -16,13 +16,13 @@ export const updateUserAndPassword = ({
     newPassword.length === 0 &&
     retypePassword.length === 0
   ) {
-    updateUser(sessionStorage.token, name, email, location, phone, avatar)
+    updateUser(sessionStorage.token, name, email, phone, location, avatar)
       .then(() => {
         alert("user update");
       })
       .catch((error) => alert(error.message));
   } else {
-    updateUser(sessionStorage.token, name, email, location, phone, avatar)
+    updateUser(sessionStorage.token, name, email, phone, location, avatar)
       .then(() => {
         updateUserPassword(
           sessionStorage.token,

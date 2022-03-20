@@ -1,12 +1,14 @@
 import { validators } from "commons";
 
-const { validateString, validateEmail, validatePassword } = validators;
+const { validateString, validateEmail, validatePhone, validatePassword } =
+  validators;
 
 export function registerCompany(name, email, password, location, phone) {
   validateString(name);
   validateEmail(email);
   validatePassword(password);
   validateString(location);
+  validatePhone(phone);
 
   return fetch("http://localhost:8000/api/company", {
     method: "POST",

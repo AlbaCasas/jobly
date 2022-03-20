@@ -1,12 +1,14 @@
 import { validators } from "commons/src/index";
 
-const { validateToken, validateString, validateEmail } = validators;
+const { validateToken, validateString, validateEmail, validatePhone } =
+  validators;
 
 export function updateUser(token, name, email, phone, location, avatar) {
   validateToken(token);
   validateString(name);
   validateEmail(email);
   validateString(location);
+  validatePhone(phone);
 
   return fetch("http://localhost:8000/api/users", {
     method: "PATCH",

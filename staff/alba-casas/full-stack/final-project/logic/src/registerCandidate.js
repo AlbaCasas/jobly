@@ -2,7 +2,12 @@ const {
   models: { User },
 } = require("data");
 const {
-  validators: { validateString, validateEmail, validatePassword },
+  validators: {
+    validateString,
+    validatePhone,
+    validateEmail,
+    validatePassword,
+  },
 } = require("commons");
 
 function registerCandidate(name, email, password, location, phone) {
@@ -11,6 +16,7 @@ function registerCandidate(name, email, password, location, phone) {
   validateEmail(email);
   validatePassword(password);
   validateString(location);
+  validatePhone(phone);
 
   const role = "candidate";
   const avatar =
