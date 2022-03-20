@@ -23,6 +23,7 @@ import Input from "../../components/Input";
 import { useNavigate } from "react-router-dom";
 import { useDropzone } from "react-dropzone";
 import { convertToBase64 } from "./utils";
+import { useForm } from "react-hook-form";
 
 const Profile = () => {
   const [user, setUser] = useState({});
@@ -31,6 +32,13 @@ const Profile = () => {
   });
   const avatar = acceptedFiles[0];
   const avatarSrc = avatar && URL.createObjectURL(avatar);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    getValues,
+    formState: { errors },
+  } = useForm({ reValidateMode: "onBlur" });
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -38,26 +46,30 @@ const Profile = () => {
       retrieveUser(sessionStorage.token)
         .then((user) => {
           setUser(user);
+          reset({
+            name: user.name,
+            email: user.email,
+            phone: user.phone,
+            location: user.location,
+          });
         })
         .catch((error) => alert(error.message));
     } catch (error) {
       alert(error.message);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleUpdateUser = (event) => {
-    event.preventDefault();
+  const submit = (values) => {
     const {
-      target: {
-        name: { value: name },
-        email: { value: email },
-        location: { value: location },
-        phone: { value: phone },
-        currPassword: { value: currPassword },
-        newPassword: { value: newPassword },
-        retypePassword: { value: retypePassword },
-      },
-    } = event;
+      name,
+      email,
+      location,
+      phone,
+      currPassword,
+      newPassword,
+      retypePassword,
+    } = values;
 
     try {
       if (avatar) {
@@ -91,7 +103,7 @@ const Profile = () => {
 
   return (
     <Layout>
-      <StyledForm onSubmit={handleUpdateUser}>
+      <StyledForm onSubmit={handleSubmit(submit)}>
         <AvatarSection>
           <ContainerPhoto {...getRootProps()}>
             <input {...getInputProps()} />
@@ -113,29 +125,43 @@ const Profile = () => {
             <ContainerInput>
               <Input
                 type="text"
-                name="name"
+                {...register("name", { required: "This field is required" })}
                 placeholder="Name"
-                defaultValue={user.name}
+                error={errors.name?.message}
               />
               <Input
                 type="email"
-                name="email"
+                {...register("email", {
+                  required: "This field is required",
+                  pattern: {
+                    value: /^\S+@\S+\.\S+$/,
+                    message: "Enter a valid email",
+                  },
+                })}
                 placeholder="email"
-                defaultValue={user.email}
+                error={errors.email?.message}
               />
             </ContainerInput>
             <ContainerInput>
               <Input
                 type="tel"
-                name="phone"
+                {...register("phone", {
+                  required: "This field is required",
+                  pattern: {
+                    value: /^[0-9\s]*$/,
+                    message: "Enter a valid phone",
+                  },
+                })}
                 placeholder="Phone"
-                defaultValue={user.phone}
+                error={errors.phone?.message}
               />
               <Input
                 type="text"
-                name="location"
+                {...register("location", {
+                  required: "This field is required",
+                })}
                 placeholder="Location"
-                defaultValue={user.location}
+                error={errors.location?.message}
               />
             </ContainerInput>
           </Wrapper>
@@ -144,21 +170,77 @@ const Profile = () => {
             <ContainerInput>
               <HalfWidthInput
                 type="password"
-                name="currPassword"
+                {...register("currPassword", {
+                  validate: {
+                    requiredPassword: (value) => {
+                      if (
+                        !value &&
+                        (!!getValues("newPassword") ||
+                          !!getValues("retypePassword"))
+                      )
+                        return "This field is required";
+                      return true;
+                    },
+                  },
+                })}
                 placeholder="Current Password"
+                error={errors.currPassword?.message}
               />
             </ContainerInput>
             <ContainerInput>
               <Input
                 type="password"
-                name="newPassword"
+                {...register("newPassword", {
+                  validate: {
+                    requiredNewPassword: (value) => {
+                      if (
+                        !value &&
+                        (!!getValues("currPassword") ||
+                          !!getValues("retypePassword"))
+                      )
+                        return "This field is required";
+                      return true;
+                    },
+                    matchRetypePassword: (value) => {
+                      if (
+                        !!value &&
+                        !!getValues("retypePassword") &&
+                        value !== getValues("retypePassword")
+                      )
+                        return "New password and retype password must match";
+                      return true;
+                    },
+                  },
+                })}
                 placeholder="New Password"
+                error={errors.newPassword?.message}
               />
               <Input
                 type="password"
-                name="retypePassword"
-                placeholder="Retype
-                Password"
+                {...register("retypePassword", {
+                  validate: {
+                    requiredRetypePassword: (value) => {
+                      if (
+                        !value &&
+                        (!!getValues("currPassword") ||
+                          !!getValues("newPassword"))
+                      )
+                        return "This field is required";
+                      return true;
+                    },
+                    matchNewPassword: (value) => {
+                      if (
+                        !!value &&
+                        !!getValues("newPassword") &&
+                        value !== getValues("newPassword")
+                      )
+                        return "New password and retype password must match";
+                      return true;
+                    },
+                  },
+                })}
+                placeholder="Retype Password"
+                error={errors.retypePassword?.message}
               />
             </ContainerInput>
           </Wrapper>

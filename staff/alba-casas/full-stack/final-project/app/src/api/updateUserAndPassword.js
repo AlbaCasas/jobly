@@ -11,11 +11,7 @@ export const updateUserAndPassword = ({
   phone,
   avatar,
 }) => {
-  if (
-    currPassword.length === 0 &&
-    newPassword.length === 0 &&
-    retypePassword.length === 0
-  ) {
+  if (!currPassword && !newPassword && !retypePassword) {
     updateUser(sessionStorage.token, name, email, phone, location, avatar)
       .then(() => {
         alert("user update");
