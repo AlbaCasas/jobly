@@ -37,8 +37,8 @@ export const RightSection = styled(Box)`
 
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     width: 50%;
-    padding: 180px 72px 32px 72px;
     align-items: center;
+    justify-content: center;
   }
 `;
 

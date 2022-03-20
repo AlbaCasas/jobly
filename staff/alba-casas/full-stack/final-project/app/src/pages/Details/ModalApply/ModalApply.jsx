@@ -13,7 +13,6 @@ import { applyJob } from "../../../api";
 
 const ModalApply = ({ onClose, jobId }) => {
   const { getRootProps, getInputProps, acceptedFiles } = useDropzone({
-    noKeyboard: true,
     maxSize: 5242880, // 5MB en bytes
   });
 
@@ -48,11 +47,7 @@ const ModalApply = ({ onClose, jobId }) => {
             <input {...getInputProps()} />
             <ButtonFile>Choose File</ButtonFile>
           </div>
-          {resume && (
-            <aside>
-              <p>{resume.path}</p>
-            </aside>
-          )}
+          {resume && <p>{resume.path}</p>}
         </ContainerText>
         <ButtonSend onClick={applyToJob}>Send resume</ButtonSend>
       </ContainerModal>
