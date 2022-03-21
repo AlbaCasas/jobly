@@ -7,7 +7,6 @@ export function createJob(token, { title, role, location, description }) {
   validateString(title, "title");
   validateString(role, "role");
   validateString(location, "location");
-  validateString(description, "description");
 
   return fetch("http://localhost:8000/api/job", {
     method: "POST",

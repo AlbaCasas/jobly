@@ -14,7 +14,7 @@ import {
   Wrapper,
 } from "./styled";
 
-const ModalJob = ({ onClose, isShowToast, isShowErrorToast }) => {
+const ModalJob = ({ onClose, setToast }) => {
   const {
     register,
     handleSubmit,
@@ -28,11 +28,11 @@ const ModalJob = ({ onClose, isShowToast, isShowErrorToast }) => {
       createJob(sessionStorage.token, { title, role, location, description })
         .then(() => {
           onClose();
-          isShowToast(true);
+          setToast(true);
         })
         .catch((error) => {
           onClose();
-          isShowErrorToast(true);
+          setToast("error");
         });
     } catch (error) {
       alert(error.message);

@@ -22,8 +22,10 @@ import {
   registerCompany,
 } from "../../api";
 import { useForm } from "react-hook-form";
+import Toast from "../../components/Toast";
+import { MdOutlineError } from "react-icons/md";
 
-const Signup = () => {
+const Signup = ({ setToast, toast, closeToast }) => {
   const [isActiveCandidate, setIsActiveCandidate] = useState(true);
   const isActiveCompany = !isActiveCandidate;
   const placeholder = isActiveCandidate ? "Full name" : "Fiscal name";
@@ -54,11 +56,11 @@ const Signup = () => {
                 .then((token) => (sessionStorage.token = token))
                 .then(() => navigate("/"));
             } catch (error) {
-              alert(error.message);
+              setToast(true);
             }
-            alert("user registered");
+            setToast(true);
           })
-          .catch((error) => alert(error.message));
+          .catch(setToast(true));
       } catch (error) {
         alert(error.message);
       }
@@ -69,11 +71,11 @@ const Signup = () => {
             try {
               authenticateUser(email, password).then(() => navigate("/"));
             } catch (error) {
-              alert(error.message);
+              setToast(true);
             }
-            alert("user registered");
+            setToast(true);
           })
-          .catch((error) => alert(error.message));
+          .catch(setToast(true));
       } catch (error) {
         alert(error.message);
       }
@@ -82,6 +84,15 @@ const Signup = () => {
 
   return (
     <View>
+      {toast && (
+        <Toast
+          variant="error"
+          icon={<MdOutlineError />}
+          closeToast={closeToast}
+        >
+          Uh oh, there was a problem with your request.
+        </Toast>
+      )}
       <Box
         justifyContent="space-evently"
         flexDirection="column"

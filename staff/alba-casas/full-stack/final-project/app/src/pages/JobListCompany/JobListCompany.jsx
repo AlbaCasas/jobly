@@ -18,13 +18,11 @@ import JobsTable from "./JobsTable";
 import { MdDone, MdOutlineError } from "react-icons/md";
 import Toast from "../../components/Toast";
 
-const JobListCompany = () => {
+const JobListCompany = ({ toast, setToast, closeToast }) => {
   const [jobList, setJobList] = useState([]);
   const [showModalJob, setShowModalJob] = useState();
   const [showModalCandidates, setShowModalCandidates] = useState();
   const [selectedJob, setSelectedJob] = useState({});
-  const [isShowToast, setIsShowToast] = useState();
-  const [isShowErrorToast, setIsShowErrorToast] = useState();
 
   useEffect(() => {
     try {
@@ -56,13 +54,6 @@ const JobListCompany = () => {
     setShowModalJob(false);
   };
 
-  const closeToast = () => {
-    setIsShowToast(!isShowToast);
-  };
-  const closeErrorToast = () => {
-    setIsShowErrorToast(!isShowErrorToast);
-  };
-
   const onSelectJob = (jobId) => {
     setSelectedJob(jobId);
     toggleCandidatesModal();
@@ -82,11 +73,7 @@ const JobListCompany = () => {
   return (
     <>
       {!!showModalJob && (
-        <ModalJob
-          onClose={closeCreateJobModal}
-          isShowToast={setIsShowToast}
-          isShowErrorToast={setIsShowErrorToast}
-        />
+        <ModalJob onClose={closeCreateJobModal} setToast={setToast} />
       )}
       {!!showModalCandidates && (
         <ModalCandidates
@@ -94,16 +81,16 @@ const JobListCompany = () => {
           selectedJob={selectedJob}
         />
       )}
-      {!!isShowToast && (
+      {!!toast && (
         <Toast variant="success" icon={<MdDone />} closeToast={closeToast}>
           Job created successfully
         </Toast>
       )}
-      {!!isShowErrorToast && (
+      {toast === "error" && (
         <Toast
           variant="error"
           icon={<MdOutlineError />}
-          closeErrorToast={closeErrorToast}
+          closeToast={closeToast}
         >
           Uh oh, there was a problem with your request.
         </Toast>

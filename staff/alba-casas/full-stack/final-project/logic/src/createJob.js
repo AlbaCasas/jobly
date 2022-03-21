@@ -9,7 +9,6 @@ const {
 function createJob(userId, { title, description, role, location }) {
   validateId(userId);
   validateString(title, "title");
-  validateString(description, "description");
   validateString(role);
   validateString(location, "location");
 
