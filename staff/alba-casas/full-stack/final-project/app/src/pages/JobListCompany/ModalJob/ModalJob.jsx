@@ -1,4 +1,5 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 import { createJob } from "../../../api";
 import Input from "../../../components/Input";
 import Modal from "../../../components/Modal";
@@ -14,17 +15,14 @@ import {
 } from "./styled";
 
 const ModalJob = ({ onClose }) => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-    const {
-      target: {
-        title: { value: title },
-        role: { value: role },
-        location: { value: location },
-        description: { value: description },
-      },
-    } = event;
+  const submit = (values) => {
+    const { title, role, location, description } = values;
 
     try {
       createJob(sessionStorage.token, { title, role, location, description })
@@ -37,24 +35,40 @@ const ModalJob = ({ onClose }) => {
     }
   };
   return (
-    <Modal onSubmit={handleSubmit} as="form" onClose={onClose}>
+    <Modal onSubmit={handleSubmit(submit)} as="form" onClose={onClose}>
       <Header>
         <Text variant="subheading">Create a new job posting</Text>
       </Header>
       <Content>
-        <Input name="title" placeholder="Job title" />
+        <Input
+          {...register("title", { required: "This field is required" })}
+          placeholder="Job title"
+          error={errors.title?.message}
+        />
         <Wrapper>
-          <SelectRole name="role" placeholder="Role type">
+          <SelectRole
+            {...register("role", { required: "select one option" })}
+            placeholder="Role type"
+            error={errors.role?.message}
+          >
             <option value="" selected="selected">
               I'm looking for a
             </option>
             <option value="developer">Developer</option>
             <option value="designer">Designer</option>
-            <option value="product">Product</option>/
+            <option value="product">Product</option>
           </SelectRole>
-          <Input name="location" placeholder="Location" />
+          <Input
+            {...register("location", { required: "This field is required" })}
+            placeholder="Location"
+            error={errors.location?.message}
+          />
         </Wrapper>
-        <TextArea name="description" placeholder="Description" />
+        <TextArea
+          {...register("description", { required: "This field is required" })}
+          placeholder="Description"
+          error={errors.location?.message}
+        />
       </Content>
       <SubmitButton>Create job posting</SubmitButton>
       <CancelButton onClick={onClose}>Cancel</CancelButton>

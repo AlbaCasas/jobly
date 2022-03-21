@@ -26,6 +26,7 @@ export const LeftSection = styled(Box)`
     justify-content: center;
     height: 100%;
     align-items: center;
+    text-align: center;
   }
 `;
 
@@ -39,6 +40,7 @@ export const RightSection = styled(Box)`
     width: 50%;
     align-items: center;
     justify-content: center;
+    padding: 180px 24px;
   }
 `;
 
