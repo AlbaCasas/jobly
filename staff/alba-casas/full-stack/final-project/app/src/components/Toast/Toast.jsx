@@ -12,11 +12,11 @@ const Toast = ({
   const [isShown, setIsShown] = useState(true);
 
   useEffect(() => {
-    const time = setTimeout(() => setIsShown(false), 3000);
+    setTimeout(() => closeToast(false), 5000);
+  }, []);
 
-    return () => {
-      clearTimeout(time);
-    };
+  useEffect(() => {
+    setTimeout(() => closeErrorToast(false), 5000);
   }, []);
 
   return (
