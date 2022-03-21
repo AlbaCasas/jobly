@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CloseIcon, ContainerIcon, Content, StyledToast } from "./styled";
 
 const Toast = ({
@@ -11,9 +11,13 @@ const Toast = ({
 }) => {
   const [isShown, setIsShown] = useState(true);
 
-  setTimeout(() => {
-    setIsShown(!isShown);
-  }, 3000);
+  useEffect(() => {
+    const time = setTimeout(() => setIsShown(false), 3000);
+
+    return () => {
+      clearTimeout(time);
+    };
+  }, []);
 
   return (
     <>
