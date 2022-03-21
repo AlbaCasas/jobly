@@ -73,7 +73,7 @@ export const ContainerIcon = styled.div`
 export const Content = styled.div`
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 12px;
   ${({ variant }) => {
     switch (variant) {
       case "success":
