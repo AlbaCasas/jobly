@@ -69,7 +69,9 @@ const Signup = ({ setToast, toast, closeToast }) => {
         registerCompany(name, email, password, location, phone)
           .then(() => {
             try {
-              authenticateUser(email, password).then(() => navigate("/"));
+              authenticateUser(email, password)
+                .then((token) => (sessionStorage.token = token))
+                .then(() => navigate("/"));
             } catch (error) {
               setToast(true);
             }

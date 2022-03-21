@@ -38,6 +38,7 @@ export const StyledToast = styled.div`
   align-items: center;
   color: ${({ theme }) => theme.colors.text};
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  z-index: 10;
 `;
 
 export const CloseIcon = styled(MdClose)`
