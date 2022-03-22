@@ -14,7 +14,7 @@ import {
   View,
 } from "./styled";
 import { StyledButton, RegisterWrapper } from "./styled";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import CardButton from "../../components/CardButton";
 import {
   authenticateUser,
@@ -22,10 +22,10 @@ import {
   registerCompany,
 } from "../../api";
 import { useForm } from "react-hook-form";
-import Toast from "../../components/Toast";
-import { MdOutlineError } from "react-icons/md";
+import Context from "../../Context";
 
-const Signup = ({ setToast, toast, closeToast }) => {
+const Signup = () => {
+  const { setFeedback } = useContext(Context);
   const [isActiveCandidate, setIsActiveCandidate] = useState(true);
   const isActiveCompany = !isActiveCandidate;
   const placeholder = isActiveCandidate ? "Full name" : "Fiscal name";
@@ -54,13 +54,30 @@ const Signup = ({ setToast, toast, closeToast }) => {
             try {
               authenticateUser(email, password)
                 .then((token) => (sessionStorage.token = token))
-                .then(() => navigate("/"));
+                .then(() => {
+                  setFeedback({
+                    message: "User registered successfully.",
+                    level: "success",
+                  });
+                  navigate("/");
+                });
             } catch (error) {
-              setToast(true);
+              setFeedback({
+                message: "Uh oh, there was a problem with your request.",
+                level: "error",
+              });
             }
-            setToast(true);
+            setFeedback({
+              message: "Uh oh, there was a problem with your request.",
+              level: "error",
+            });
           })
-          .catch(setToast(true));
+          .catch(
+            setFeedback({
+              message: "Uh oh, there was a problem with your request.",
+              level: "error",
+            })
+          );
       } catch (error) {
         alert(error.message);
       }
@@ -71,13 +88,30 @@ const Signup = ({ setToast, toast, closeToast }) => {
             try {
               authenticateUser(email, password)
                 .then((token) => (sessionStorage.token = token))
-                .then(() => navigate("/"));
+                .then(() => {
+                  setFeedback({
+                    message: "User registered successfully.",
+                    level: "success",
+                  });
+                  navigate("/");
+                });
             } catch (error) {
-              setToast(true);
+              setFeedback({
+                message: "Uh oh, there was a problem with your request.",
+                level: "error",
+              });
             }
-            setToast(true);
+            setFeedback({
+              message: "Uh oh, there was a problem with your request.",
+              level: "error",
+            });
           })
-          .catch(setToast(true));
+          .catch(
+            setFeedback({
+              message: "Uh oh, there was a problem with your request.",
+              level: "error",
+            })
+          );
       } catch (error) {
         alert(error.message);
       }
@@ -86,15 +120,6 @@ const Signup = ({ setToast, toast, closeToast }) => {
 
   return (
     <View>
-      {toast && (
-        <Toast
-          variant="error"
-          icon={<MdOutlineError />}
-          closeToast={closeToast}
-        >
-          Uh oh, there was a problem with your request.
-        </Toast>
-      )}
       <Box
         justifyContent="space-evently"
         flexDirection="column"

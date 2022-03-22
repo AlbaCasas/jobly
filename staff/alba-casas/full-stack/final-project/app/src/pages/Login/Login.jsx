@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Box from "../../components/Box";
 import Input from "../../components/Input";
@@ -15,8 +15,10 @@ import {
 } from "./styled";
 import { authenticateUser } from "../../api";
 import { useForm } from "react-hook-form";
+import Context from "../../Context";
 
 const Login = () => {
+  const { setFeedback } = useContext(Context);
   const navigate = useNavigate();
   const {
     register,
@@ -32,12 +34,22 @@ const Login = () => {
         .then((token) => {
           sessionStorage.token = token;
           navigate("/");
+          setFeedback({
+            message: "User logged in successfully.",
+            level: "success",
+          });
         })
-        .catch((error) => {
-          alert(error.message);
-        });
+        .catch(
+          setFeedback({
+            message: "Uh oh, there was a problem with your request.",
+            level: "error",
+          })
+        );
     } catch (error) {
-      alert(error.message);
+      setFeedback({
+        message: "Uh oh, there was a problem with your request.",
+        level: "error",
+      });
     }
   };
   return (

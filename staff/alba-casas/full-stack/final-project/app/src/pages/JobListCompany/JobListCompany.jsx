@@ -81,6 +81,11 @@ const JobListCompany = ({ toast, setToast, closeToast }) => {
           selectedJob={selectedJob}
         />
       )}
+      {!!toast === "delete" && (
+        <Toast variant="success" icon={<MdDone />} closeToast={closeToast}>
+          Job deleted successfully
+        </Toast>
+      )}
       {!!toast && (
         <Toast variant="success" icon={<MdDone />} closeToast={closeToast}>
           Job created successfully

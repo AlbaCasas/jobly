@@ -5,8 +5,8 @@ const Toast = ({ closeToast, icon, variant, children, ...props }) => {
   const [isShown, setIsShown] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => closeToast(false), 5000);
-  }, []);
+    setTimeout(() => closeToast(false), 4000);
+  }, [closeToast]);
 
   return (
     <>

@@ -21,8 +21,10 @@ import {
 } from "./styled";
 import moment from "moment";
 import ModalApply from "./ModalApply";
+import Toast from "../../components/Toast";
+import { MdOutlineError } from "react-icons/md";
 
-const Details = () => {
+const Details = ({ toast, setToast, closeToast }) => {
   const [job, setJob] = useState(null);
   const [user, setUser] = useState({});
   const [isModalShow, setIsModalShow] = useState();
@@ -61,12 +63,10 @@ const Details = () => {
     try {
       deleteJob(sessionStorage.token, jobId)
         .then(() => {
-          alert("deleted job");
+          setToast("delete");
           goBack();
         })
-        .catch((error) => {
-          alert(error.message);
-        });
+        .catch(setToast("error"));
     } catch (error) {
       alert(error.message);
     }
@@ -78,6 +78,15 @@ const Details = () => {
 
   return (
     <>
+      {toast === "error" && (
+        <Toast
+          variant="error"
+          icon={<MdOutlineError />}
+          closeToast={closeToast}
+        >
+          Uh oh, there was a problem with your request.
+        </Toast>
+      )}
       {!!isModalShow && <ModalApply onClose={toggleApplyModal} jobId={jobId} />}
       {job && (
         <Layout>

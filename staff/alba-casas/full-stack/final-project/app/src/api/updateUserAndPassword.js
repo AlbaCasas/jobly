@@ -12,11 +12,14 @@ export const updateUserAndPassword = ({
   avatar,
 }) => {
   if (!currPassword && !newPassword && !retypePassword) {
-    updateUser(sessionStorage.token, name, email, phone, location, avatar)
-      .then(() => {
-        alert("user update");
-      })
-      .catch((error) => alert(error.message));
+    updateUser(
+      sessionStorage.token,
+      name,
+      email,
+      phone,
+      location,
+      avatar
+    ).catch((error) => alert(error.message));
   } else {
     updateUser(sessionStorage.token, name, email, phone, location, avatar)
       .then(() => {
@@ -26,7 +29,6 @@ export const updateUserAndPassword = ({
           newPassword,
           retypePassword
         );
-        alert("user update");
       })
       .catch((error) => alert(error.message));
   }
