@@ -142,14 +142,15 @@ const Details = () => {
                   {job.description}
                 </StyledTextBodyDescription>
               </ContainerDescription>
-              {user.role === "candidate" ? (
+              {user.role === "candidate" && (
                 <StyledButton
                   disabled={hasUserApplied}
                   onClick={toggleApplyModal}
                 >
                   Apply now
                 </StyledButton>
-              ) : (
+              )}
+              {job.company?._id === user.id && (
                 <ContainerButton gap="32px">
                   <StyledButton onClick={handleClickDeleteJob}>
                     Delete Job
