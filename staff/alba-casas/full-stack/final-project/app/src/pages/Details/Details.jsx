@@ -18,10 +18,12 @@ import {
   StyledTextDescription,
   Wrapper,
   ContainerLeft,
+  ContainerButton,
 } from "./styled";
 import moment from "moment";
 import ModalApply from "./ModalApply";
 import Context from "../../Context";
+import ModalUpdateJob from "./ModalUpdateJob";
 
 const Details = () => {
   const { setFeedback } = useContext(Context);
@@ -58,6 +60,9 @@ const Details = () => {
   const toggleApplyModal = () => {
     setIsModalShow(!isModalShow);
   };
+  const toggleModalJob = () => {
+    setIsModalShow(!isModalShow);
+  };
 
   const handleClickDeleteJob = () => {
     try {
@@ -86,7 +91,14 @@ const Details = () => {
 
   return (
     <>
-      {!!isModalShow && <ModalApply onClose={toggleApplyModal} jobId={jobId} />}
+      {!!isModalShow && user.role === "candidate" && (
+        <ModalApply onClose={toggleApplyModal} jobId={jobId} />
+      )}
+
+      {!!isModalShow && user.role === "company" && (
+        <ModalUpdateJob onClose={toggleModalJob} jobId={jobId} />
+      )}
+
       {job && (
         <Layout>
           <Wrapper>
@@ -138,9 +150,14 @@ const Details = () => {
                   Apply now
                 </StyledButton>
               ) : (
-                <StyledButton onClick={handleClickDeleteJob}>
-                  Delete Job
-                </StyledButton>
+                <ContainerButton gap="32px">
+                  <StyledButton onClick={handleClickDeleteJob}>
+                    Delete Job
+                  </StyledButton>
+                  <StyledButton onClick={toggleModalJob}>
+                    Update Job
+                  </StyledButton>
+                </ContainerButton>
               )}
             </Box>
           </Wrapper>

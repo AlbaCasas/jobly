@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Text from "../../components/Text";
 import Button from "../../components/Button";
 import { MdArrowBack } from "react-icons/md";
+import Box from "../../components/Box";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -88,4 +89,13 @@ export const ContainerLeft = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
+`;
+
+export const ContainerButton = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    flex-direction: row;
+  }
 `;
