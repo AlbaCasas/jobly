@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Layout from "../../components/Layout/Layout";
 import Box from "../../components/Box";
@@ -21,10 +21,10 @@ import {
 } from "./styled";
 import moment from "moment";
 import ModalApply from "./ModalApply";
-import Toast from "../../components/Toast";
-import { MdOutlineError } from "react-icons/md";
+import Context from "../../Context";
 
-const Details = ({ toast, setToast, closeToast }) => {
+const Details = () => {
+  const { setFeedback } = useContext(Context);
   const [job, setJob] = useState(null);
   const [user, setUser] = useState({});
   const [isModalShow, setIsModalShow] = useState();
@@ -63,10 +63,18 @@ const Details = ({ toast, setToast, closeToast }) => {
     try {
       deleteJob(sessionStorage.token, jobId)
         .then(() => {
-          setToast("delete");
+          setFeedback({
+            message: "Job deleted successfully.",
+            level: "success",
+          });
           goBack();
         })
-        .catch(setToast("error"));
+        .catch(
+          setFeedback({
+            message: "Uh oh, there was a problem with your request.",
+            level: "error",
+          })
+        );
     } catch (error) {
       alert(error.message);
     }
@@ -78,15 +86,6 @@ const Details = ({ toast, setToast, closeToast }) => {
 
   return (
     <>
-      {toast === "error" && (
-        <Toast
-          variant="error"
-          icon={<MdOutlineError />}
-          closeToast={closeToast}
-        >
-          Uh oh, there was a problem with your request.
-        </Toast>
-      )}
       {!!isModalShow && <ModalApply onClose={toggleApplyModal} jobId={jobId} />}
       {job && (
         <Layout>

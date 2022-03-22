@@ -5,11 +5,9 @@ import Card from "../../components/Card";
 import Layout from "../../components/Layout/Layout";
 import Search from "../../components/Search";
 import Text from "../../components/Text";
-import Toast from "../../components/Toast";
 import { Wrapper, StyledContainer } from "./styled";
-import { MdDone } from "react-icons/md";
 
-const Board = ({ toast, closeToast }) => {
+const Board = () => {
   let isTokenValid = !!sessionStorage.token;
   const [jobList, setJobList] = useState([]);
   const [user, setUser] = useState({});
@@ -40,11 +38,6 @@ const Board = ({ toast, closeToast }) => {
     <Navigate to="/login" />
   ) : (
     <Layout>
-      {toast && (
-        <Toast variant="success" icon={<MdDone />} closeToast={closeToast}>
-          user created successfully
-        </Toast>
-      )}
       <Wrapper>
         <Search role={user.role} userId={user.id} setJobList={setJobList} />
         <StyledContainer>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Modal from "../../../components/Modal";
 import Text from "../../../components/Text";
 import {
@@ -10,8 +10,10 @@ import {
 import { useDropzone } from "react-dropzone";
 import { convertToBase64 } from "../../Profile/utils";
 import { applyJob } from "../../../api";
+import Context from "../../../Context";
 
 const ModalApply = ({ onClose, jobId }) => {
+  const { setFeedback } = useContext(Context);
   const { getRootProps, getInputProps, acceptedFiles } = useDropzone({
     maxSize: 5242880, // 5MB en bytes
   });
@@ -24,13 +26,23 @@ const ModalApply = ({ onClose, jobId }) => {
         applyJob(sessionStorage.token, jobId, base64Resume)
           .then(() => {
             onClose();
+            setFeedback({
+              message: "Job successfully applied.",
+              level: "success",
+            });
           })
           .catch((error) => {
-            alert(error.message);
+            setFeedback({
+              message: "Uh oh, there was a problem with your request.",
+              level: "error",
+            });
           });
       });
     } catch (error) {
-      alert(error.message);
+      setFeedback({
+        message: "Uh oh, there was a problem with your request.",
+        level: "error",
+      });
     }
   };
 

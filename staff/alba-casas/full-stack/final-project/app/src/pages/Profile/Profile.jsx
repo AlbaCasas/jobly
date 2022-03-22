@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Layout from "../../components/Layout/Layout";
 import {
   ContainerInput,
@@ -24,10 +24,10 @@ import { useNavigate } from "react-router-dom";
 import { useDropzone } from "react-dropzone";
 import { convertToBase64 } from "./utils";
 import { useForm } from "react-hook-form";
-import Toast from "../../components/Toast";
-import { MdDone, MdOutlineError } from "react-icons/md";
+import Context from "../../Context";
 
-const Profile = ({ toast, setToast, closeToast }) => {
+const Profile = () => {
+  const { setFeedback } = useContext(Context);
   const [user, setUser] = useState({});
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
@@ -87,9 +87,17 @@ const Profile = ({ toast, setToast, closeToast }) => {
               phone,
               avatar,
             });
-            setToast(true);
+            setFeedback({
+              message: "User updated successfully.",
+              level: "success",
+            });
           })
-          .catch(setToast("error"));
+          .catch(
+            setFeedback({
+              message: "Uh oh, there was a problem with your request.",
+              level: "error",
+            })
+          );
       } else {
         updateUserAndPassword({
           currPassword,
@@ -100,185 +108,175 @@ const Profile = ({ toast, setToast, closeToast }) => {
           location,
           phone,
         });
-        setToast(true);
+        setFeedback({
+          message: "User updated successfully.",
+          level: "success",
+        });
       }
     } catch (error) {
-      alert(error.message);
+      setFeedback({
+        message: "Uh oh, there was a problem with your request.",
+        level: "error",
+      });
     }
   };
 
   return (
-    <>
-      {!!toast && (
-        <Toast variant="success" icon={<MdDone />} closeToast={closeToast}>
-          User updated successfully
-        </Toast>
-      )}
-      {toast === "error" && (
-        <Toast
-          variant="error"
-          icon={<MdOutlineError />}
-          closeToast={closeToast}
-        >
-          Uh oh, there was a problem with your request.
-        </Toast>
-      )}
-      <Layout>
-        <StyledForm onSubmit={handleSubmit(submit)}>
-          <AvatarSection>
-            <ContainerPhoto {...getRootProps()}>
-              <input {...getInputProps()} />
-              <StyledImage
-                src={avatarSrc ? avatarSrc : user.avatar}
-                alt="photo"
+    <Layout>
+      <StyledForm onSubmit={handleSubmit(submit)}>
+        <AvatarSection>
+          <ContainerPhoto {...getRootProps()}>
+            <input {...getInputProps()} />
+            <StyledImage
+              src={avatarSrc ? avatarSrc : user.avatar}
+              alt="photo"
+            />
+          </ContainerPhoto>
+        </AvatarSection>
+        <FormSection>
+          <Wrapper>
+            <ContainerText>
+              <StyledDetailsText>Contact Details</StyledDetailsText>
+              <StyledSpan>
+                Introduce your contact details so companies can reach back to
+                you
+              </StyledSpan>
+            </ContainerText>
+            <ContainerInput>
+              <Input
+                type="text"
+                {...register("name", { required: "This field is required" })}
+                placeholder="Name"
+                error={errors.name?.message}
               />
-            </ContainerPhoto>
-          </AvatarSection>
-          <FormSection>
-            <Wrapper>
-              <ContainerText>
-                <StyledDetailsText>Contact Details</StyledDetailsText>
-                <StyledSpan>
-                  Introduce your contact details so companies can reach back to
-                  you
-                </StyledSpan>
-              </ContainerText>
-              <ContainerInput>
-                <Input
-                  type="text"
-                  {...register("name", { required: "This field is required" })}
-                  placeholder="Name"
-                  error={errors.name?.message}
-                />
-                <Input
-                  type="email"
-                  {...register("email", {
-                    required: "This field is required",
-                    pattern: {
-                      value: /^\S+@\S+\.\S+$/,
-                      message: "Enter a valid email",
+              <Input
+                type="email"
+                {...register("email", {
+                  required: "This field is required",
+                  pattern: {
+                    value: /^\S+@\S+\.\S+$/,
+                    message: "Enter a valid email",
+                  },
+                })}
+                placeholder="email"
+                error={errors.email?.message}
+              />
+            </ContainerInput>
+            <ContainerInput>
+              <Input
+                type="tel"
+                {...register("phone", {
+                  required: "This field is required",
+                  pattern: {
+                    value: /^[0-9\s]*$/,
+                    message: "Enter a valid phone",
+                  },
+                })}
+                placeholder="Phone"
+                error={errors.phone?.message}
+              />
+              <Input
+                type="text"
+                {...register("location", {
+                  required: "This field is required",
+                })}
+                placeholder="Location"
+                error={errors.location?.message}
+              />
+            </ContainerInput>
+          </Wrapper>
+          <Wrapper>
+            <StyledSubTitle>Modify your user settings</StyledSubTitle>
+            <ContainerInput>
+              <HalfWidthInput
+                type="password"
+                {...register("currPassword", {
+                  validate: {
+                    requiredPassword: (value) => {
+                      if (
+                        !value &&
+                        (!!getValues("newPassword") ||
+                          !!getValues("retypePassword"))
+                      )
+                        return "This field is required";
+                      return true;
                     },
-                  })}
-                  placeholder="email"
-                  error={errors.email?.message}
-                />
-              </ContainerInput>
-              <ContainerInput>
-                <Input
-                  type="tel"
-                  {...register("phone", {
-                    required: "This field is required",
-                    pattern: {
-                      value: /^[0-9\s]*$/,
-                      message: "Enter a valid phone",
+                  },
+                })}
+                placeholder="Current Password"
+                error={errors.currPassword?.message}
+              />
+            </ContainerInput>
+            <ContainerInput>
+              <Input
+                type="password"
+                {...register("newPassword", {
+                  validate: {
+                    requiredNewPassword: (value) => {
+                      if (
+                        !value &&
+                        (!!getValues("currPassword") ||
+                          !!getValues("retypePassword"))
+                      )
+                        return "This field is required";
+                      return true;
                     },
-                  })}
-                  placeholder="Phone"
-                  error={errors.phone?.message}
-                />
-                <Input
-                  type="text"
-                  {...register("location", {
-                    required: "This field is required",
-                  })}
-                  placeholder="Location"
-                  error={errors.location?.message}
-                />
-              </ContainerInput>
-            </Wrapper>
-            <Wrapper>
-              <StyledSubTitle>Modify your user settings</StyledSubTitle>
-              <ContainerInput>
-                <HalfWidthInput
-                  type="password"
-                  {...register("currPassword", {
-                    validate: {
-                      requiredPassword: (value) => {
-                        if (
-                          !value &&
-                          (!!getValues("newPassword") ||
-                            !!getValues("retypePassword"))
-                        )
-                          return "This field is required";
-                        return true;
-                      },
+                    matchRetypePassword: (value) => {
+                      if (
+                        !!value &&
+                        !!getValues("retypePassword") &&
+                        value !== getValues("retypePassword")
+                      )
+                        return "New password and retype password must match";
+                      return true;
                     },
-                  })}
-                  placeholder="Current Password"
-                  error={errors.currPassword?.message}
-                />
-              </ContainerInput>
-              <ContainerInput>
-                <Input
-                  type="password"
-                  {...register("newPassword", {
-                    validate: {
-                      requiredNewPassword: (value) => {
-                        if (
-                          !value &&
-                          (!!getValues("currPassword") ||
-                            !!getValues("retypePassword"))
-                        )
-                          return "This field is required";
-                        return true;
-                      },
-                      matchRetypePassword: (value) => {
-                        if (
-                          !!value &&
-                          !!getValues("retypePassword") &&
-                          value !== getValues("retypePassword")
-                        )
-                          return "New password and retype password must match";
-                        return true;
-                      },
+                  },
+                })}
+                placeholder="New Password"
+                error={errors.newPassword?.message}
+              />
+              <Input
+                type="password"
+                {...register("retypePassword", {
+                  validate: {
+                    requiredRetypePassword: (value) => {
+                      if (
+                        !value &&
+                        (!!getValues("currPassword") ||
+                          !!getValues("newPassword"))
+                      )
+                        return "This field is required";
+                      return true;
                     },
-                  })}
-                  placeholder="New Password"
-                  error={errors.newPassword?.message}
-                />
-                <Input
-                  type="password"
-                  {...register("retypePassword", {
-                    validate: {
-                      requiredRetypePassword: (value) => {
-                        if (
-                          !value &&
-                          (!!getValues("currPassword") ||
-                            !!getValues("newPassword"))
-                        )
-                          return "This field is required";
-                        return true;
-                      },
-                      matchNewPassword: (value) => {
-                        if (
-                          !!value &&
-                          !!getValues("newPassword") &&
-                          value !== getValues("newPassword")
-                        )
-                          return "New password and retype password must match";
-                        return true;
-                      },
+                    matchNewPassword: (value) => {
+                      if (
+                        !!value &&
+                        !!getValues("newPassword") &&
+                        value !== getValues("newPassword")
+                      )
+                        return "New password and retype password must match";
+                      return true;
                     },
-                  })}
-                  placeholder="Retype Password"
-                  error={errors.retypePassword?.message}
-                />
-              </ContainerInput>
-            </Wrapper>
-            <Footer>
-              <StyledBlueButton>Update profile</StyledBlueButton>
-              <StyledButton
-                onClick={() => {
-                  navigate("/board");
-                }}
-              >
-                Cancel
-              </StyledButton>
-            </Footer>
-          </FormSection>
-        </StyledForm>
-      </Layout>
-    </>
+                  },
+                })}
+                placeholder="Retype Password"
+                error={errors.retypePassword?.message}
+              />
+            </ContainerInput>
+          </Wrapper>
+          <Footer>
+            <StyledBlueButton>Update profile</StyledBlueButton>
+            <StyledButton
+              onClick={() => {
+                navigate("/board");
+              }}
+            >
+              Cancel
+            </StyledButton>
+          </Footer>
+        </FormSection>
+      </StyledForm>
+    </Layout>
   );
 };
 

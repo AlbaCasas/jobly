@@ -9,16 +9,13 @@ import {
 } from "./styled";
 import { MdWorkOutline, MdPerson } from "react-icons/md";
 import Box from "../../components/Box";
-
 import { listJobsFromCompany, retrieveJob } from "../../api";
 import HeadingCard from "./HeadingCard/HeadingCard";
 import ModalJob from "./ModalJob";
 import ModalCandidates from "./ModalCandidates";
 import JobsTable from "./JobsTable";
-import { MdDone, MdOutlineError } from "react-icons/md";
-import Toast from "../../components/Toast";
 
-const JobListCompany = ({ toast, setToast, closeToast }) => {
+const JobListCompany = () => {
   const [jobList, setJobList] = useState([]);
   const [showModalJob, setShowModalJob] = useState();
   const [showModalCandidates, setShowModalCandidates] = useState();
@@ -72,33 +69,12 @@ const JobListCompany = ({ toast, setToast, closeToast }) => {
 
   return (
     <>
-      {!!showModalJob && (
-        <ModalJob onClose={closeCreateJobModal} setToast={setToast} />
-      )}
+      {!!showModalJob && <ModalJob onClose={closeCreateJobModal} />}
       {!!showModalCandidates && (
         <ModalCandidates
           onClose={closeModalCandidates}
           selectedJob={selectedJob}
         />
-      )}
-      {!!toast === "delete" && (
-        <Toast variant="success" icon={<MdDone />} closeToast={closeToast}>
-          Job deleted successfully
-        </Toast>
-      )}
-      {!!toast && (
-        <Toast variant="success" icon={<MdDone />} closeToast={closeToast}>
-          Job created successfully
-        </Toast>
-      )}
-      {toast === "error" && (
-        <Toast
-          variant="error"
-          icon={<MdOutlineError />}
-          closeToast={closeToast}
-        >
-          Uh oh, there was a problem with your request.
-        </Toast>
       )}
 
       <Layout>

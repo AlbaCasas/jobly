@@ -67,19 +67,18 @@ const Signup = () => {
                 level: "error",
               });
             }
+          })
+          .catch(() => {
             setFeedback({
-              message: "Uh oh, there was a problem with your request.",
+              message: "The email already exists",
               level: "error",
             });
-          })
-          .catch(
-            setFeedback({
-              message: "Uh oh, there was a problem with your request.",
-              level: "error",
-            })
-          );
+          });
       } catch (error) {
-        alert(error.message);
+        setFeedback({
+          message: "Uh oh, there was a problem with your request.",
+          level: "error",
+        });
       }
     } else {
       try {
@@ -97,21 +96,17 @@ const Signup = () => {
                 });
             } catch (error) {
               setFeedback({
-                message: "Uh oh, there was a problem with your request.",
+                message: error.message,
                 level: "error",
               });
             }
+          })
+          .catch(({ message }) => {
             setFeedback({
-              message: "Uh oh, there was a problem with your request.",
+              message: message,
               level: "error",
             });
-          })
-          .catch(
-            setFeedback({
-              message: "Uh oh, there was a problem with your request.",
-              level: "error",
-            })
-          );
+          });
       } catch (error) {
         alert(error.message);
       }

@@ -15,52 +15,17 @@ function App() {
   const [feedback, setFeedback] = useState(null);
   const clearFeedback = () => setFeedback(null);
 
-  const [toast, setToast] = useState(null);
-  const closeToast = () => {
-    setToast(!toast);
-  };
-
   return (
     <Context.Provider value={{ setFeedback }}>
       <Routes>
         <Route path="/login" element={<Login />} />;
         <Route path="/signup" element={<Signup />} />
         ;
-        <Route
-          path="/profile"
-          element={
-            <Profile
-              toast={toast}
-              setToast={setToast}
-              closeToast={closeToast}
-            />
-          }
-        />
-        <Route
-          path="/job/:jobId"
-          element={
-            <Details
-              toast={toast}
-              setToast={setToast}
-              closeToast={closeToast}
-            />
-          }
-        />
-        <Route
-          path="/*"
-          element={<Board toast={toast} closeToast={closeToast} />}
-        />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/job/:jobId" element={<Details />} />
+        <Route path="/*" element={<Board />} />
         ;
-        <Route
-          path="/job/company"
-          element={
-            <JobListCompany
-              toast={toast}
-              setToast={setToast}
-              closeToast={closeToast}
-            />
-          }
-        />
+        <Route path="/job/company" element={<JobListCompany />} />
         ;
         <Route path="/job/candidate" element={<JobListCandidate />} />;
       </Routes>

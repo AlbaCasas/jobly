@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { createJob } from "../../../api";
 import Input from "../../../components/Input";
@@ -13,8 +13,11 @@ import {
   SelectRole,
   Wrapper,
 } from "./styled";
+import Context from "../../../Context";
 
-const ModalJob = ({ onClose, setToast }) => {
+const ModalJob = ({ onClose }) => {
+  const { setFeedback } = useContext(Context);
+
   const {
     register,
     handleSubmit,
@@ -28,11 +31,17 @@ const ModalJob = ({ onClose, setToast }) => {
       createJob(sessionStorage.token, { title, role, location, description })
         .then(() => {
           onClose();
-          setToast(true);
+          setFeedback({
+            message: "Job created successfully.",
+            level: "success",
+          });
         })
         .catch((error) => {
           onClose();
-          setToast("error");
+          setFeedback({
+            message: "Uh oh, there was a problem with your request.",
+            level: "error",
+          });
         });
     } catch (error) {
       alert(error.message);
