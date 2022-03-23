@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Modal from "../../../components/Modal";
 import Text from "../../../components/Text";
 import {
@@ -9,7 +9,7 @@ import {
 } from "./styled";
 import { useDropzone } from "react-dropzone";
 import { convertToBase64 } from "../../Profile/utils";
-import { applyJob } from "../../../api";
+import { applyJob, retrieveJob } from "../../../api";
 import Context from "../../../Context";
 
 const ModalApply = ({ onClose, jobId }) => {
@@ -17,8 +17,22 @@ const ModalApply = ({ onClose, jobId }) => {
   const { getRootProps, getInputProps, acceptedFiles } = useDropzone({
     maxSize: 5242880, // 5MB en bytes
   });
+  const [job, setJob] = useState();
 
   const resume = acceptedFiles[0];
+
+  useEffect(() => {
+    try {
+      retrieveJob(sessionStorage.token, jobId).then((job) => {
+        setJob(job);
+      });
+    } catch (error) {
+      setFeedback({
+        message: error.message,
+        level: "error",
+      });
+    }
+  }, [jobId, setFeedback]);
 
   const applyToJob = () => {
     try {
@@ -50,7 +64,9 @@ const ModalApply = ({ onClose, jobId }) => {
     <Modal onClose={onClose}>
       <ContainerModal>
         <ContainerText>
-          <Text variant="subheading">FullStack Developer - Glovo SL</Text>
+          <Text variant="subheading">
+            {job?.title} - {job?.company?.name}
+          </Text>
           <Text>
             Please attach your resume in a PDF format to apply for the FullStack
             Developer position. Maximum file size 5MB.

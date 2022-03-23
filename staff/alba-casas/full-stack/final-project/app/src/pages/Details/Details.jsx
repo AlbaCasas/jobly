@@ -147,7 +147,7 @@ const Details = () => {
                   disabled={hasUserApplied}
                   onClick={toggleApplyModal}
                 >
-                  Apply now
+                  {!!hasUserApplied ? "Registered" : "Apply now"}
                 </StyledButton>
               )}
               {job.company?._id === user.id && (
