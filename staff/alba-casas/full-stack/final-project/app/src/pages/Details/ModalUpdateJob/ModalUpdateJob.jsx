@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { updateJob } from "../../../api";
+import { updateJob, retrieveJob } from "../../../api";
 import Input from "../../../components/Input";
 import Modal from "../../../components/Modal";
 import Text from "../../../components/Text";
@@ -21,8 +21,27 @@ const ModalUpdateJob = ({ onClose, jobId }) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
+
+  useEffect(() => {
+    try {
+      retrieveJob(sessionStorage.token, jobId).then((job) => {
+        reset({
+          title: job.title,
+          role: job.role,
+          location: job.location,
+          description: job.description,
+        });
+      });
+    } catch (error) {
+      setFeedback({
+        message: error.message,
+        level: "error",
+      });
+    }
+  }, [setFeedback, jobId, reset]);
 
   const submit = (values) => {
     const { title, role, location, description } = values;
@@ -52,6 +71,7 @@ const ModalUpdateJob = ({ onClose, jobId }) => {
       alert(error.message);
     }
   };
+
   return (
     <Modal onSubmit={handleSubmit(submit)} as="form" onClose={onClose}>
       <Header>
