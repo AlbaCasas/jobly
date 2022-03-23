@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Box from "../../components/Box";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 
@@ -56,6 +57,7 @@ export const ContainerText = styled.div`
   width: 100%;
   height: auto;
   gap: 8px;
+  align-items: center;
 `;
 
 export const StyledDetailsText = styled.div`
@@ -87,9 +89,11 @@ export const Footer = styled.div`
   flex-direction: column;
   width: 100%;
   gap: 24px;
+  margin-bottom: 48px;
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     flex-direction: row;
     justify-content: flex-end;
+    margin-bottom: 0px;
   }
 `;
 
@@ -122,5 +126,25 @@ export const ContainerInput = styled.div`
 export const HalfWidthInput = styled(Input)`
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     width: calc(50% - 12px);
+  }
+`;
+
+export const ContainerButton = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 24px;
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+`;
+
+export const StyledDeleteButton = styled(Button)`
+  width: 100%;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    align-self: flex-start;
+    width: fit-content;
   }
 `;

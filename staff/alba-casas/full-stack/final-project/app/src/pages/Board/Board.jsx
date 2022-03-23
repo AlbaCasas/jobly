@@ -19,9 +19,7 @@ const Board = () => {
       retrieveUser(sessionStorage.token).then((user) => {
         setUser(user);
       });
-    } catch (error) {
-      alert(error.message);
-    }
+    } catch (error) {}
   }, []);
 
   useEffect(() => {
@@ -29,9 +27,7 @@ const Board = () => {
       listJobs(sessionStorage.token, {}).then((job) => {
         setJobList(job);
       });
-    } catch ({ message }) {
-      alert(message);
-    }
+    } catch (error) {}
   }, []);
 
   return !isTokenValid ? (

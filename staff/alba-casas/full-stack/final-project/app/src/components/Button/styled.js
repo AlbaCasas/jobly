@@ -8,6 +8,13 @@ const disabledCss = css`
   }
 `;
 
+const deleteButton = css`
+  background-color: #e43837;
+  &:hover {
+    background-color: #890f0d;
+  }
+`;
+
 export const StyledButton = styled.button`
   display: flex;
   background-color: ${({ theme }) => theme.colors.primary};
@@ -26,5 +33,14 @@ export const StyledButton = styled.button`
   }
   ${({ disabled }) => {
     if (disabled) return disabledCss;
+  }}
+
+  ${({ type }) => {
+    switch (type) {
+      case "delete":
+        return deleteButton;
+      default:
+        return StyledButton;
+    }
   }}
 `;

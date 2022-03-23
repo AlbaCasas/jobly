@@ -16,6 +16,7 @@ import {
   StyledSubTitle,
   Wrapper,
   AvatarSection,
+  StyledDeleteButton,
 } from "./styled";
 import { useEffect, useState } from "react";
 import { retrieveUser, updateUserAndPassword } from "../../api/";
@@ -25,10 +26,12 @@ import { useDropzone } from "react-dropzone";
 import { convertToBase64 } from "./utils";
 import { useForm } from "react-hook-form";
 import Context from "../../Context";
+import ModalDeleteAccount from "./ModalDeleteAccount";
 
 const Profile = () => {
   const { setFeedback } = useContext(Context);
   const [user, setUser] = useState({});
+  const [isShowModal, setIsShowModal] = useState();
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
   });
@@ -43,6 +46,7 @@ const Profile = () => {
   } = useForm({ reValidateMode: "onBlur" });
 
   const navigate = useNavigate();
+
   useEffect(() => {
     try {
       retrieveUser(sessionStorage.token)
@@ -55,12 +59,17 @@ const Profile = () => {
             location: user.location,
           });
         })
-        .catch((error) => error.message);
-    } catch (error) {
-      alert(error.message);
-    }
+        .catch();
+    } catch (error) {}
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const toogleModal = () => {
+    setIsShowModal(!isShowModal);
+  };
+  const closeModal = () => {
+    setIsShowModal(false);
+  };
 
   const submit = (values) => {
     const {
@@ -123,6 +132,7 @@ const Profile = () => {
 
   return (
     <Layout>
+      {!!isShowModal && <ModalDeleteAccount onClose={closeModal} />}
       <StyledForm onSubmit={handleSubmit(submit)}>
         <AvatarSection>
           <ContainerPhoto {...getRootProps()}>
@@ -276,6 +286,9 @@ const Profile = () => {
           </Footer>
         </FormSection>
       </StyledForm>
+      <StyledDeleteButton type="delete" onClick={toogleModal}>
+        Delete Account
+      </StyledDeleteButton>
     </Layout>
   );
 };

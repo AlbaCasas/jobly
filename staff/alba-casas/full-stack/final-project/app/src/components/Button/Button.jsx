@@ -1,8 +1,8 @@
 import { StyledButton } from "./styled";
 
-const Button = ({ disabled, children, ...props }) => {
+const Button = ({ type, disabled, children, ...props }) => {
   return (
-    <StyledButton disabled={disabled} {...props}>
+    <StyledButton type={type} disabled={disabled} {...props}>
       {children}
     </StyledButton>
   );

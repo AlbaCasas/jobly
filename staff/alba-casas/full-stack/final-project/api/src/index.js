@@ -19,7 +19,7 @@ const {
   updateJob,
   listJobsFromCompany,
   listJobsFromCandidate,
-  deleteCandidate,
+  deleteAccount,
 } = require("./handlers");
 
 const cors = require("cors");
@@ -41,7 +41,7 @@ connect(MONGODB_URL)
 
     api.post("/auth", jsonBodyParser, authenticateUser);
     api.post("/candidate", jsonBodyParser, registerCandidate);
-    api.delete("/candidate", jsonBodyParser, deleteCandidate);
+    api.delete("/users", jsonBodyParser, deleteAccount);
     api.get("/candidate/job", jsonBodyParser, listJobsFromCandidate);
     api.post("/company", jsonBodyParser, registerCompany);
     api.get("/company/job", listJobsFromCompany);

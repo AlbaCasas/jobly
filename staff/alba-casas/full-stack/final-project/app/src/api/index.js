@@ -13,6 +13,7 @@ import { deleteJob } from "./deleteJob";
 import { createJob } from "./createJob";
 import { updateUserAndPassword } from "./updateUserAndPassword";
 import { updateJob } from "./updateJob";
+import { deleteAccount } from "./deleteAccount";
 
 export {
   registerCandidate,
@@ -30,4 +31,5 @@ export {
   createJob,
   updateUserAndPassword,
   updateJob,
+  deleteAccount,
 };

@@ -19,7 +19,7 @@ export const updateUserAndPassword = ({
       phone,
       location,
       avatar
-    ).catch((error) => alert(error.message));
+    ).catch();
   } else {
     updateUser(sessionStorage.token, name, email, phone, location, avatar)
       .then(() => {
@@ -30,6 +30,6 @@ export const updateUserAndPassword = ({
           retypePassword
         );
       })
-      .catch((error) => alert(error.message));
+      .catch();
   }
 };

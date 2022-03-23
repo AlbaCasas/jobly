@@ -6,7 +6,7 @@ const successCss = css`
 `;
 
 const errorCss = css`
-  color: red;
+  color: #e43837;
   font-size: 32px;
 `;
 
@@ -19,7 +19,7 @@ const successBorderCss = css`
   border-left: 3px solid #1ea377;
 `;
 const errorBordercSS = css`
-  border-left: 3px solid red;
+  border-left: 3px solid #e43837;
 `;
 const infoBordercSS = css`
   border-left: 3px solid #027bc2; ;
