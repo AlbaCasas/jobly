@@ -18,7 +18,7 @@ import { useForm } from "react-hook-form";
 import Context from "../../Context";
 
 const Login = () => {
-  const { setFeedback } = useContext(Context);
+  const { setFeedback, loadUser } = useContext(Context);
   const navigate = useNavigate();
   const {
     register,
@@ -33,10 +33,12 @@ const Login = () => {
       authenticateUser(email, password)
         .then((token) => {
           sessionStorage.token = token;
-          navigate("/");
-          setFeedback({
-            message: "User logged in successfully.",
-            level: "success",
+          loadUser().then(() => {
+            navigate("/");
+            setFeedback({
+              message: "User logged in successfully.",
+              level: "success",
+            });
           });
         })
         .catch(

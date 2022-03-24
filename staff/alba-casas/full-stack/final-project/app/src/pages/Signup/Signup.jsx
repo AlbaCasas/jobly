@@ -25,7 +25,7 @@ import { useForm } from "react-hook-form";
 import Context from "../../Context";
 
 const Signup = () => {
-  const { setFeedback } = useContext(Context);
+  const { setFeedback, loadUser } = useContext(Context);
   const [isActiveCandidate, setIsActiveCandidate] = useState(true);
   const isActiveCompany = !isActiveCandidate;
   const placeholder = isActiveCandidate ? "Full name" : "Fiscal name";
@@ -55,11 +55,13 @@ const Signup = () => {
               authenticateUser(email, password)
                 .then((token) => (sessionStorage.token = token))
                 .then(() => {
-                  setFeedback({
-                    message: "User registered successfully.",
-                    level: "success",
+                  loadUser().then(() => {
+                    setFeedback({
+                      message: "User registered successfully.",
+                      level: "success",
+                    });
+                    navigate("/");
                   });
-                  navigate("/");
                 });
             } catch (error) {
               setFeedback({

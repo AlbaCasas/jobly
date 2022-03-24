@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import Modal from "../../../components/Modal";
 import Text from "../../../components/Text";
 import {
@@ -12,40 +12,31 @@ import { convertToBase64 } from "../../Profile/utils";
 import { applyJob, retrieveJob } from "../../../api";
 import Context from "../../../Context";
 
-const ModalApply = ({ onClose, jobId }) => {
+const ModalApply = ({ onClose, job, setJob }) => {
   const { setFeedback } = useContext(Context);
   const { getRootProps, getInputProps, acceptedFiles } = useDropzone({
     maxSize: 5242880, // 5MB en bytes
   });
-  const [job, setJob] = useState();
 
   const resume = acceptedFiles[0];
-
-  useEffect(() => {
-    try {
-      retrieveJob(sessionStorage.token, jobId).then((job) => {
-        setJob(job);
-      });
-    } catch (error) {
-      setFeedback({
-        message: error.message,
-        level: "error",
-      });
-    }
-  }, [jobId, setFeedback]);
-
   const applyToJob = () => {
     try {
       convertToBase64(resume).then((base64Resume) => {
-        applyJob(sessionStorage.token, jobId, base64Resume)
+        applyJob(sessionStorage.token, job.id, base64Resume)
           .then(() => {
-            onClose();
-            setFeedback({
-              message: "Job successfully applied.",
-              level: "success",
-            });
+            retrieveJob(sessionStorage.token, job.id)
+              .then((job) => {
+                console.log({ job });
+                setJob(job);
+                onClose();
+                setFeedback({
+                  message: "Job successfully applied.",
+                  level: "success",
+                });
+              })
+              .catch((error) => alert(error.message));
           })
-          .catch((error) => {
+          .catch(() => {
             setFeedback({
               message: "Uh oh, there was a problem with your request.",
               level: "error",

@@ -35,16 +35,12 @@ const Details = () => {
   const goBack = () => navigate(-1);
 
   useEffect(() => {
-    try {
-      retrieveJob(sessionStorage.token, jobId)
-        .then((job) => {
-          setJob(job);
-        })
-        .catch((error) => alert(error.message));
-    } catch (error) {
-      alert(error.message);
-    }
-  }, [job, jobId]);
+    retrieveJob(sessionStorage.token, jobId)
+      .then((job) => {
+        setJob(job);
+      })
+      .catch((error) => alert(error.message));
+  }, [jobId]);
 
   const toggleApplyModal = () => {
     setIsModalShow(!isModalShow);
@@ -81,11 +77,11 @@ const Details = () => {
   return (
     <>
       {!!isModalShow && user.role === "candidate" && (
-        <ModalApply onClose={toggleApplyModal} jobId={jobId} />
+        <ModalApply onClose={toggleApplyModal} job={job} setJob={setJob} />
       )}
 
       {!!isModalShow && user.role === "company" && (
-        <ModalUpdateJob onClose={toggleModalJob} jobId={jobId} />
+        <ModalUpdateJob onClose={toggleModalJob} job={job} setJob={setJob} />
       )}
 
       {job && (

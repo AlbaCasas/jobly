@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { MdClose } from "react-icons/md";
 
 const successCss = css`
@@ -25,10 +25,14 @@ const infoBordercSS = css`
   border-left: 3px solid #027bc2; ;
 `;
 
+const openToastAnimation = keyframes`
+  100% {right: 24px;}
+`;
+
 export const StyledToast = styled.div`
   position: fixed;
   bottom: 24px;
-  right: 24px;
+  right: -500px;
   padding: 24px;
   border-radius: 5px;
   background-color: ${({ theme }) => theme.colors.white};
@@ -39,6 +43,7 @@ export const StyledToast = styled.div`
   color: ${({ theme }) => theme.colors.text};
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   z-index: 10;
+  animation: ${openToastAnimation} 0.5s forwards;
 `;
 
 export const CloseIcon = styled(MdClose)`

@@ -26,11 +26,16 @@ function App() {
   }, []);
 
   const loadUser = () => {
-    try {
-      retrieveUser(sessionStorage.token).then(setUser);
-    } catch (error) {
-      alert(error.message);
-    }
+    return new Promise((resolve, reject) => {
+      try {
+        retrieveUser(sessionStorage.token).then((user) => {
+          setUser(user);
+          resolve(user);
+        });
+      } catch (error) {
+        reject(error.message);
+      }
+    });
   };
 
   return (

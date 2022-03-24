@@ -9,7 +9,7 @@ import { Wrapper, StyledContainer } from "./styled";
 import Context from "../../Context";
 
 const Board = () => {
-  const { user, loadUser } = useContext(Context);
+  const { user } = useContext(Context);
   let isTokenValid = !!sessionStorage.token;
   const [jobList, setJobList] = useState([]);
 
@@ -20,9 +20,7 @@ const Board = () => {
       listJobs(sessionStorage.token, {}).then((job) => {
         setJobList(job);
       });
-      loadUser();
     } catch (error) {}
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return !isTokenValid ? (
