@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Board from "./pages/Board/Board";
 import Details from "./pages/Details";
@@ -10,13 +10,31 @@ import Signup from "./pages/Signup";
 import Context from "./Context";
 import Toast from "./components/Toast";
 import { MdDone, MdOutlineError, MdInfo } from "react-icons/md";
+import { retrieveUser } from "./api";
 
 function App() {
   const [feedback, setFeedback] = useState(null);
   const clearFeedback = () => setFeedback(null);
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    try {
+      loadUser();
+    } catch (error) {
+      alert(error.message);
+    }
+  }, []);
+
+  const loadUser = () => {
+    try {
+      retrieveUser(sessionStorage.token).then(setUser);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   return (
-    <Context.Provider value={{ setFeedback }}>
+    <Context.Provider value={{ setFeedback, user, loadUser }}>
       <Routes>
         <Route path="/login" element={<Login />} />;
         <Route path="/signup" element={<Signup />} />

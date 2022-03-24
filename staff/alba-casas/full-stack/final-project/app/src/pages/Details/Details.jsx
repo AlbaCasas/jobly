@@ -4,7 +4,7 @@ import Layout from "../../components/Layout/Layout";
 import Box from "../../components/Box";
 import Text from "../../components/Text";
 import { useNavigate, Link } from "react-router-dom";
-import { deleteJob, retrieveJob, retrieveUser } from "../../api";
+import { deleteJob, retrieveJob } from "../../api";
 import {
   ArrowBack,
   ContainerDescription,
@@ -26,24 +26,13 @@ import Context from "../../Context";
 import ModalUpdateJob from "./ModalUpdateJob";
 
 const Details = () => {
-  const { setFeedback } = useContext(Context);
+  const { setFeedback, user } = useContext(Context);
   const [job, setJob] = useState(null);
-  const [user, setUser] = useState({});
   const [isModalShow, setIsModalShow] = useState();
   const { jobId } = useParams();
   const navigate = useNavigate();
 
   const goBack = () => navigate(-1);
-
-  useEffect(() => {
-    try {
-      retrieveUser(sessionStorage.token).then((user) => {
-        setUser(user);
-      });
-    } catch (error) {
-      alert(error.message);
-    }
-  }, []);
 
   useEffect(() => {
     try {

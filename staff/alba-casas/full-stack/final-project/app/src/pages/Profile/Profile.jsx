@@ -19,7 +19,7 @@ import {
   StyledDeleteButton,
 } from "./styled";
 import { useEffect, useState } from "react";
-import { retrieveUser, updateUserAndPassword } from "../../api/";
+import { updateUserAndPassword } from "../../api/";
 import Input from "../../components/Input";
 import { useNavigate } from "react-router-dom";
 import { useDropzone } from "react-dropzone";
@@ -29,8 +29,7 @@ import Context from "../../Context";
 import ModalDeleteAccount from "./ModalDeleteAccount";
 
 const Profile = () => {
-  const { setFeedback } = useContext(Context);
-  const [user, setUser] = useState({});
+  const { setFeedback, user, loadUser } = useContext(Context);
   const [isShowModal, setIsShowModal] = useState();
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
@@ -49,20 +48,15 @@ const Profile = () => {
 
   useEffect(() => {
     try {
-      retrieveUser(sessionStorage.token)
-        .then((user) => {
-          setUser(user);
-          reset({
-            name: user.name,
-            email: user.email,
-            phone: user.phone,
-            location: user.location,
-          });
-        })
-        .catch();
+      reset({
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        location: user.location,
+      });
     } catch (error) {}
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [user]);
 
   const toogleModal = () => {
     setIsShowModal(!isShowModal);
@@ -101,6 +95,9 @@ const Profile = () => {
               level: "success",
             });
           })
+          .then(() => {
+            loadUser();
+          })
           .catch(
             setFeedback({
               message: "Uh oh, there was a problem with your request.",
@@ -117,6 +114,7 @@ const Profile = () => {
           location,
           phone,
         });
+        loadUser();
         setFeedback({
           message: "User updated successfully.",
           level: "success",
@@ -138,7 +136,7 @@ const Profile = () => {
           <ContainerPhoto {...getRootProps()}>
             <input {...getInputProps()} />
             <StyledImage
-              src={avatarSrc ? avatarSrc : user.avatar}
+              src={avatarSrc ? avatarSrc : user?.avatar}
               alt="photo"
             />
           </ContainerPhoto>

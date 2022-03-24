@@ -9,22 +9,13 @@ import moment from "moment";
 import Text from "../../../components/Text";
 import Table from "../../../components/Table";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { retrieveUser } from "../../../api";
+import { useContext } from "react";
+import Context from "../../../Context";
 
 const CandidaturesTable = ({ jobList }) => {
+  const { user } = useContext(Context);
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    try {
-      retrieveUser(sessionStorage.token).then((user) => {
-        setUser(user);
-      });
-    } catch (error) {
-      alert(error.message);
-    }
-  }, []);
   return (
     <Table.Table>
       <Table.Header>

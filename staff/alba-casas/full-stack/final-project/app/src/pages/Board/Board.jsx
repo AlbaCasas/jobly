@@ -1,32 +1,26 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import { retrieveUser, listJobs } from "../../api";
+import { listJobs } from "../../api";
 import Card from "../../components/Card";
 import Layout from "../../components/Layout/Layout";
 import Search from "../../components/Search";
 import Text from "../../components/Text";
 import { Wrapper, StyledContainer } from "./styled";
+import Context from "../../Context";
 
 const Board = () => {
+  const { user, loadUser } = useContext(Context);
   let isTokenValid = !!sessionStorage.token;
   const [jobList, setJobList] = useState([]);
-  const [user, setUser] = useState({});
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    try {
-      retrieveUser(sessionStorage.token).then((user) => {
-        setUser(user);
-      });
-    } catch (error) {}
-  }, []);
 
   useEffect(() => {
     try {
       listJobs(sessionStorage.token, {}).then((job) => {
         setJobList(job);
       });
+      loadUser();
     } catch (error) {}
   }, []);
 
@@ -35,11 +29,11 @@ const Board = () => {
   ) : (
     <Layout>
       <Wrapper>
-        <Search role={user.role} userId={user.id} setJobList={setJobList} />
+        <Search role={user?.role} userId={user?.id} setJobList={setJobList} />
         <StyledContainer>
           {!!jobList.length ? (
             jobList.map((job) => {
-              const isCompany = job.company._id === user.id ? true : null;
+              const isCompany = job.company._id === user?.id ? true : null;
               return (
                 <Card
                   onClick={() => {

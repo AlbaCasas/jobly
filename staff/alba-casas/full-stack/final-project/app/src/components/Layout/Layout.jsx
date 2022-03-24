@@ -1,15 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
-import { retrieveUser } from "../../api";
 import Dropdown from "../Dropdown/Dropdown";
 import Nav from "../Nav";
-
 import { StyledLogo, View, Container } from "./styled";
+import Context from "../../Context";
 
 const Layout = ({ children }) => {
+  const { user } = useContext(Context);
   let tokenValid = !!sessionStorage.token;
   const [isDropdownShown, setIsDropdownShown] = useState(false);
-  const [user, setUser] = useState({});
 
   const navigate = useNavigate();
   const goToBoard = () => {
@@ -26,30 +25,20 @@ const Layout = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    try {
-      retrieveUser(sessionStorage.token).then((user) => {
-        setUser(user);
-      });
-    } catch (error) {
-      alert(error.message);
-    }
-  }, []);
-
   return !tokenValid ? (
     <Navigate to="/login" />
   ) : (
     <View>
       <Nav
-        name={user.name}
-        avatar={user.avatar}
-        role={user.role}
+        name={user?.name}
+        avatar={user?.avatar}
+        role={user?.role}
         showDropdown={showDropdown}
       >
         <StyledLogo onClick={goToBoard}>Jobly</StyledLogo>
       </Nav>
       <Dropdown
-        role={user.role}
+        role={user?.role}
         closeDropdown={closeDropdown}
         isShown={isDropdownShown}
       >

@@ -35,7 +35,7 @@ const Search = ({ role, setJobList, userId }) => {
         <StyledInputSearchBorder name="title" placeholder="Search by title" />
         <StyledInputSearch name="location" placeholder="Location" />
         <StyledSelectSearch name="role" placeholder="Role type">
-          <option value="" selected="selected">
+          <option value="" defaultValue="selected">
             Select role
           </option>
           <option value="developer">Developer</option>
