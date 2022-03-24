@@ -29,7 +29,7 @@ const JobListCompany = () => {
     } catch (error) {
       alert(error.message);
     }
-  }, []);
+  }, [jobList]);
 
   const totalCandidates =
     jobList.length > 0
@@ -69,7 +69,9 @@ const JobListCompany = () => {
 
   return (
     <>
-      {!!showModalJob && <ModalJob onClose={closeCreateJobModal} />}
+      {!!showModalJob && (
+        <ModalJob onClose={closeCreateJobModal} setJobList={selectedJob} />
+      )}
       {!!showModalCandidates && (
         <ModalCandidates
           onClose={closeModalCandidates}
