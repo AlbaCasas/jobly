@@ -44,7 +44,7 @@ const Details = () => {
     } catch (error) {
       alert(error.message);
     }
-  }, [jobId]);
+  }, [job, jobId]);
 
   const toggleApplyModal = () => {
     setIsModalShow(!isModalShow);
