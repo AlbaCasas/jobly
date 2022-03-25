@@ -17,7 +17,7 @@ import { StyledButton, RegisterWrapper } from "./styled";
 import { useState, useContext } from "react";
 import CardButton from "../../components/CardButton";
 import {
-  authenticateUser,
+  authenticateBothUser,
   registerCandidate,
   registerCompany,
 } from "../../api";
@@ -44,38 +44,15 @@ const Signup = () => {
     setIsActiveCandidate(false);
   };
 
-  const submit = (values) => {
+  const submit = async (values) => {
     const { name, email, password, location, phone } = values;
 
     if (isActiveCandidate) {
       try {
-        registerCandidate(name, email, password, location, phone)
-          .then(() => {
-            try {
-              authenticateUser(email, password)
-                .then((token) => (sessionStorage.token = token))
-                .then(() => {
-                  loadUser().then(() => {
-                    setFeedback({
-                      message: "User registered successfully.",
-                      level: "success",
-                    });
-                    navigate("/");
-                  });
-                });
-            } catch (error) {
-              setFeedback({
-                message: "Uh oh, there was a problem with your request.",
-                level: "error",
-              });
-            }
-          })
-          .catch(() => {
-            setFeedback({
-              message: "The email already exists",
-              level: "error",
-            });
-          });
+        await registerCandidate(name, email, password, location, phone);
+        await authenticateBothUser(email, password);
+        loadUser();
+        navigate("/");
       } catch (error) {
         setFeedback({
           message: "Uh oh, there was a problem with your request.",
@@ -84,33 +61,15 @@ const Signup = () => {
       }
     } else {
       try {
-        registerCompany(name, email, password, location, phone)
-          .then(() => {
-            try {
-              authenticateUser(email, password)
-                .then((token) => (sessionStorage.token = token))
-                .then(() => {
-                  setFeedback({
-                    message: "User registered successfully.",
-                    level: "success",
-                  });
-                  navigate("/");
-                });
-            } catch (error) {
-              setFeedback({
-                message: error.message,
-                level: "error",
-              });
-            }
-          })
-          .catch(({ message }) => {
-            setFeedback({
-              message: message,
-              level: "error",
-            });
-          });
+        await registerCompany(name, email, password, location, phone);
+        await authenticateBothUser(email, password);
+        loadUser();
+        navigate("/");
       } catch (error) {
-        alert(error.message);
+        setFeedback({
+          message: "Uh oh, there was a problem with your request.",
+          level: "error",
+        });
       }
     }
   };

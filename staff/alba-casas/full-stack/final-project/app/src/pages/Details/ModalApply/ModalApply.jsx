@@ -26,7 +26,6 @@ const ModalApply = ({ onClose, job, setJob }) => {
           .then(() => {
             retrieveJob(sessionStorage.token, job.id)
               .then((job) => {
-                console.log({ job });
                 setJob(job);
                 onClose();
                 setFeedback({
