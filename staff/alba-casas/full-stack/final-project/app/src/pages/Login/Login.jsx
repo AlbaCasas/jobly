@@ -26,27 +26,18 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const submit = (values) => {
+  const submit = async (values) => {
     const { email, password } = values;
 
     try {
-      authenticateUser(email, password)
-        .then((token) => {
-          sessionStorage.token = token;
-          loadUser().then(() => {
-            navigate("/");
-            setFeedback({
-              message: "User logged in successfully.",
-              level: "success",
-            });
-          });
-        })
-        .catch(
-          setFeedback({
-            message: "Uh oh, there was a problem with your request.",
-            level: "error",
-          })
-        );
+      const token = await authenticateUser(email, password);
+      sessionStorage.token = token;
+      loadUser();
+      navigate("/");
+      setFeedback({
+        message: "User logged in successfully.",
+        level: "success",
+      });
     } catch (error) {
       setFeedback({
         message: "Uh oh, there was a problem with your request.",

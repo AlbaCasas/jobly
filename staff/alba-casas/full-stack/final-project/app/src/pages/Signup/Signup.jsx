@@ -17,7 +17,7 @@ import { StyledButton, RegisterWrapper } from "./styled";
 import { useState, useContext } from "react";
 import CardButton from "../../components/CardButton";
 import {
-  authenticateBothUser,
+  authSession,
   registerCandidate,
   registerCompany,
 } from "../../api";
@@ -50,7 +50,7 @@ const Signup = () => {
     if (isActiveCandidate) {
       try {
         await registerCandidate(name, email, password, location, phone);
-        await authenticateBothUser(email, password);
+        await authSession(email, password);
         loadUser();
         navigate("/");
       } catch (error) {
@@ -62,7 +62,7 @@ const Signup = () => {
     } else {
       try {
         await registerCompany(name, email, password, location, phone);
-        await authenticateBothUser(email, password);
+        await authSession(email, password);
         loadUser();
         navigate("/");
       } catch (error) {

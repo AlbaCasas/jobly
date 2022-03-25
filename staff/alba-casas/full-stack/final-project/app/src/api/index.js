@@ -14,7 +14,7 @@ import { createJob } from "./createJob";
 import { updateUserAndPassword } from "./updateUserAndPassword";
 import { updateJob } from "./updateJob";
 import { deleteAccount } from "./deleteAccount";
-import { authenticateBothUser } from "./authenticateBothUser";
+import { authSession } from "./authSession";
 
 export {
   registerCandidate,
@@ -33,5 +33,5 @@ export {
   updateUserAndPassword,
   updateJob,
   deleteAccount,
-  authenticateBothUser,
+  authSession,
 };
