@@ -23,9 +23,8 @@ import { DEFAULT_ERROR } from "../../constants/feedbacks";
 
 const Signup = () => {
   const { setFeedback, loadUser } = useContext(Context);
-  const [isActiveCandidate, setIsActiveCandidate] = useState(true);
-  const isActiveCompany = !isActiveCandidate;
-  const placeholder = isActiveCandidate ? "Full name" : "Fiscal name";
+  const [isCandidateButtonActive, setIsCandidateButtonActive] = useState(true);
+  const isCompanyButtonActive = !isCandidateButtonActive;
   const navigate = useNavigate();
   const {
     register,
@@ -34,17 +33,17 @@ const Signup = () => {
   } = useForm();
 
   const handleClickCandidate = () => {
-    setIsActiveCandidate(true);
+    setIsCandidateButtonActive(true);
   };
 
   const handleClickCompany = () => {
-    setIsActiveCandidate(false);
+    setIsCandidateButtonActive(false);
   };
 
   const submit = async (values) => {
     const { name, email, password, location, phone } = values;
     try {
-      if (isActiveCandidate) {
+      if (isCandidateButtonActive) {
         await registerCandidate(name, email, password, location, phone);
       } else {
         await registerCompany(name, email, password, location, phone);
@@ -97,14 +96,14 @@ const Signup = () => {
           <SwitchContainer>
             <CardButton
               onClick={handleClickCandidate}
-              isActive={isActiveCandidate}
+              isActive={isCandidateButtonActive}
               icon={<MdPerson />}
             >
               I'm a Candidate
             </CardButton>
             <CardButton
               onClick={handleClickCompany}
-              isActive={isActiveCompany}
+              isActive={isCompanyButtonActive}
               icon={<MdWorkOutline />}
             >
               I'm a Company
@@ -119,7 +118,9 @@ const Signup = () => {
             <Form onSubmit={handleSubmit(submit)}>
               <Input
                 {...register("name", { required: "This field is required" })}
-                placeholder={placeholder}
+                placeholder={
+                  isCandidateButtonActive ? "Full name" : "Fiscal name"
+                }
                 error={errors.name?.message}
               />
               <InputsGrid>

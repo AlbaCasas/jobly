@@ -11,6 +11,7 @@ import Context from "./Context";
 import Toast from "./components/Toast";
 import { MdDone, MdOutlineError, MdInfo } from "react-icons/md";
 import { retrieveUser } from "./api";
+import { DEFAULT_ERROR } from "./constants/feedbacks";
 
 function App() {
   const [feedback, setFeedback] = useState(null);
@@ -20,21 +21,18 @@ function App() {
   useEffect(() => {
     try {
       loadUser();
-    } catch (error) {
-      alert(error.message);
+    } catch {
+      setFeedback(DEFAULT_ERROR);
     }
   }, []);
 
   const loadUser = async () => {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const user = await retrieveUser(sessionStorage.token);
-        setUser(user);
-        resolve(user);
-      } catch (error) {
-        reject(error.message);
-      }
-    });
+    try {
+      const user = await retrieveUser(sessionStorage.token);
+      setUser(user);
+    } catch (error) {
+      throw new Error(error.message);
+    }
   };
 
   return (
