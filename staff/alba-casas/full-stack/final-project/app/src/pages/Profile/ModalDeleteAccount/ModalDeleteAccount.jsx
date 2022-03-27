@@ -7,6 +7,7 @@ import { ContainerModal, DeleteButton, ModalInput } from "./styled";
 import { useForm } from "react-hook-form";
 import Context from "../../../Context";
 import { deleteAccount } from "../../../api";
+import { DEFAULT_ERROR } from "../../../constants/feedbacks";
 
 const ModalDeleteAccount = ({ onClose }) => {
   const { setFeedback } = useContext(Context);
@@ -16,29 +17,18 @@ const ModalDeleteAccount = ({ onClose }) => {
     formState: { errors },
   } = useForm();
 
-  const submit = (values) => {
+  const submit = async (values) => {
     const { password } = values;
 
     try {
-      deleteAccount(sessionStorage.token, password)
-        .then(() => {
-          delete sessionStorage.token;
-          setFeedback({
-            message: "Account deleted",
-            level: "success",
-          });
-        })
-        .catch((error) => {
-          setFeedback({
-            message: error.message,
-            level: "error",
-          });
-        });
-    } catch {
+      await deleteAccount(sessionStorage.token, password);
+      delete sessionStorage.token;
       setFeedback({
-        message: "Uh oh, there was a problem with your request.",
-        level: "error",
+        message: "Account deleted",
+        level: "success",
       });
+    } catch {
+      setFeedback(DEFAULT_ERROR);
     }
   };
   return (

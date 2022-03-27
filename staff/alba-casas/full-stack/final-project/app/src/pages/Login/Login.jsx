@@ -16,6 +16,7 @@ import {
 import { authenticateUser } from "../../api";
 import { useForm } from "react-hook-form";
 import Context from "../../Context";
+import { DEFAULT_ERROR } from "../../constants/feedbacks";
 
 const Login = () => {
   const { setFeedback, loadUser } = useContext(Context);
@@ -32,17 +33,14 @@ const Login = () => {
     try {
       const token = await authenticateUser(email, password);
       sessionStorage.token = token;
-      loadUser();
+      await loadUser();
       navigate("/");
       setFeedback({
         message: "User logged in successfully.",
         level: "success",
       });
     } catch (error) {
-      setFeedback({
-        message: "Uh oh, there was a problem with your request.",
-        level: "error",
-      });
+      setFeedback(DEFAULT_ERROR);
     }
   };
   return (

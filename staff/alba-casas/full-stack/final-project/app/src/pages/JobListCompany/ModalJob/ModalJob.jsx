@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { createJob } from "../../../api";
+import { createJob, listJobsFromCompany } from "../../../api";
 import Input from "../../../components/Input";
 import Modal from "../../../components/Modal";
 import Text from "../../../components/Text";
@@ -14,8 +14,9 @@ import {
   Wrapper,
 } from "./styled";
 import Context from "../../../Context";
+import { DEFAULT_ERROR } from "../../../constants/feedbacks";
 
-const ModalJob = ({ onClose }) => {
+const ModalJob = ({ onClose, setJobList }) => {
   const { setFeedback } = useContext(Context);
 
   const {
@@ -24,27 +25,21 @@ const ModalJob = ({ onClose }) => {
     formState: { errors },
   } = useForm();
 
-  const submit = (values) => {
+  const submit = async (values) => {
     const { title, role, location, description } = values;
 
     try {
-      createJob(sessionStorage.token, { title, role, location, description })
-        .then(() => {
-          onClose();
-          setFeedback({
-            message: "Job created successfully.",
-            level: "success",
-          });
-        })
-        .catch((error) => {
-          onClose();
-          setFeedback({
-            message: "Uh oh, there was a problem with your request.",
-            level: "error",
-          });
-        });
+      await createJob(sessionStorage.token, { title, role, location, description })
+      const jobs = await listJobsFromCompany(sessionStorage.token);
+      setJobList(jobs);
+      onClose();
+      setFeedback({
+        message: "Job created successfully.",
+        level: "success",
+      })
     } catch (error) {
-      alert(error.message);
+      onClose();
+      setFeedback(DEFAULT_ERROR);
     }
   };
   return (

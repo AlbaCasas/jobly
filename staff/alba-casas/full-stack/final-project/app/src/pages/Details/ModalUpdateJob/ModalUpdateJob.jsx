@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { updateJob } from "../../../api";
+import { retrieveJob, updateJob } from "../../../api";
 import Input from "../../../components/Input";
 import Modal from "../../../components/Modal";
 import Text from "../../../components/Text";
@@ -14,6 +14,7 @@ import {
   Wrapper,
 } from "./styled";
 import Context from "../../../Context";
+import { DEFAULT_ERROR } from "../../../constants/feedbacks";
 
 const ModalUpdateJob = ({ onClose, job, setJob }) => {
   const { setFeedback } = useContext(Context);
@@ -34,33 +35,25 @@ const ModalUpdateJob = ({ onClose, job, setJob }) => {
     });
   }, [job, reset]);
 
-  const submit = (values) => {
+  const submit = async (values) => {
     const { title, role, location, description } = values;
 
     try {
-      updateJob(sessionStorage.token, job?.id, {
+      await updateJob(sessionStorage.token, job?.id, {
         title,
         role,
         location,
         description,
-      })
-        .then(() => {
-          setJob({ ...job, title, role, location, description });
-          onClose();
-          setFeedback({
-            message: "Job updated successfully.",
-            level: "success",
-          });
-        })
-        .catch((error) => {
-          onClose();
-          setFeedback({
-            message: "Uh oh, there was a problem with your request.",
-            level: "error",
-          });
-        });
+      });
+      const updatedJob = await retrieveJob(sessionStorage.token, job.id);
+      setJob(updatedJob);
+      onClose();
+      setFeedback({
+        message: "Job updated successfully.",
+        level: "success",
+      });
     } catch (error) {
-      alert(error.message);
+      setFeedback(DEFAULT_ERROR);
     }
   };
 

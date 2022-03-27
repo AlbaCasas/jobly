@@ -16,13 +16,10 @@ import {
 import { StyledButton, RegisterWrapper } from "./styled";
 import { useState, useContext } from "react";
 import CardButton from "../../components/CardButton";
-import {
-  authSession,
-  registerCandidate,
-  registerCompany,
-} from "../../api";
+import { authSession, registerCandidate, registerCompany } from "../../api";
 import { useForm } from "react-hook-form";
 import Context from "../../Context";
+import { DEFAULT_ERROR } from "../../constants/feedbacks";
 
 const Signup = () => {
   const { setFeedback, loadUser } = useContext(Context);
@@ -46,31 +43,21 @@ const Signup = () => {
 
   const submit = async (values) => {
     const { name, email, password, location, phone } = values;
-
-    if (isActiveCandidate) {
-      try {
+    try {
+      if (isActiveCandidate) {
         await registerCandidate(name, email, password, location, phone);
-        await authSession(email, password);
-        loadUser();
-        navigate("/");
-      } catch (error) {
-        setFeedback({
-          message: "Uh oh, there was a problem with your request.",
-          level: "error",
-        });
-      }
-    } else {
-      try {
+      } else {
         await registerCompany(name, email, password, location, phone);
-        await authSession(email, password);
-        loadUser();
-        navigate("/");
-      } catch (error) {
-        setFeedback({
-          message: "Uh oh, there was a problem with your request.",
-          level: "error",
-        });
       }
+      await authSession(email, password);
+      await loadUser();
+      setFeedback({
+        message: "User successfully registered.",
+        level: "success",
+      });
+      navigate("/");
+    } catch (error) {
+      setFeedback(DEFAULT_ERROR);
     }
   };
 

@@ -7,20 +7,26 @@ import Search from "../../components/Search";
 import Text from "../../components/Text";
 import { Wrapper, StyledContainer } from "./styled";
 import Context from "../../Context";
+import { DEFAULT_ERROR } from "../../constants/feedbacks";
 
 const Board = () => {
-  const { user } = useContext(Context);
+  const { user, setFeedback } = useContext(Context);
   let isTokenValid = !!sessionStorage.token;
   const [jobList, setJobList] = useState([]);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    try {
-      listJobs(sessionStorage.token, {}).then((job) => {
+    const retrieveJobList = async () => {
+      try {
+        const job = await listJobs(sessionStorage.token, {});
         setJobList(job);
-      });
-    } catch (error) {}
+      } catch (error) {
+        setFeedback(DEFAULT_ERROR);
+      }
+    };
+    retrieveJobList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return !isTokenValid ? (

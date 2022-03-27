@@ -32,7 +32,7 @@ export const FormSection = styled.div`
 `;
 
 export const ContainerPhoto = styled.div`
-  width: 100%;
+  width: fit-content;
   height: auto;
   border-radius: 10px;
   display: flex;
@@ -57,7 +57,7 @@ export const ContainerText = styled.div`
   width: 100%;
   height: auto;
   gap: 8px;
-  align-items: center;
+  align-items: flex-start;
 `;
 
 export const StyledDetailsText = styled.div`

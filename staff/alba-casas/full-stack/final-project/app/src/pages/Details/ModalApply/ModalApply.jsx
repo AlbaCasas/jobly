@@ -11,6 +11,7 @@ import { useDropzone } from "react-dropzone";
 import { convertToBase64 } from "../../Profile/utils";
 import { applyJob, retrieveJob } from "../../../api";
 import Context from "../../../Context";
+import { DEFAULT_ERROR } from "../../../constants/feedbacks";
 
 const ModalApply = ({ onClose, job, setJob }) => {
   const { setFeedback } = useContext(Context);
@@ -19,34 +20,19 @@ const ModalApply = ({ onClose, job, setJob }) => {
   });
 
   const resume = acceptedFiles[0];
-  const applyToJob = () => {
+  const applyToJob = async () => {
     try {
-      convertToBase64(resume).then((base64Resume) => {
-        applyJob(sessionStorage.token, job.id, base64Resume)
-          .then(() => {
-            retrieveJob(sessionStorage.token, job.id)
-              .then((job) => {
-                setJob(job);
-                onClose();
-                setFeedback({
-                  message: "Job successfully applied.",
-                  level: "success",
-                });
-              })
-              .catch((error) => alert(error.message));
-          })
-          .catch(() => {
-            setFeedback({
-              message: "Uh oh, there was a problem with your request.",
-              level: "error",
-            });
-          });
+      const base64Resume = await convertToBase64(resume);
+      await applyJob(sessionStorage.token, job.id, base64Resume);
+      const appliedJob = retrieveJob(sessionStorage.token, job.id);
+      setJob(appliedJob);
+      onClose();
+      setFeedback({
+        message: "Job successfully applied.",
+        level: "success",
       });
     } catch (error) {
-      setFeedback({
-        message: "Uh oh, there was a problem with your request.",
-        level: "error",
-      });
+      setFeedback(DEFAULT_ERROR);
     }
   };
 

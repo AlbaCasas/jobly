@@ -22,14 +22,16 @@ const JobListCompany = () => {
   const [selectedJob, setSelectedJob] = useState({});
 
   useEffect(() => {
-    try {
-      listJobsFromCompany(sessionStorage.token).then((job) => {
+    const retrieveAndSetCompanyJobs = async () => {
+      try {
+        const job = await listJobsFromCompany(sessionStorage.token);
         setJobList(job);
-      });
-    } catch (error) {
-      alert(error.message);
-    }
-  }, [jobList]);
+      } catch (error) {
+        alert(error.message);
+      }
+    };
+    retrieveAndSetCompanyJobs();
+  }, []);
 
   const totalCandidates =
     jobList.length > 0
@@ -51,17 +53,12 @@ const JobListCompany = () => {
     setShowModalJob(false);
   };
 
-  const onSelectJob = (jobId) => {
+  const onSelectJob = async (jobId) => {
     setSelectedJob(jobId);
     toggleCandidatesModal();
     try {
-      retrieveJob(sessionStorage.token, jobId)
-        .then((job) => {
-          setSelectedJob(job);
-        })
-        .catch((error) => {
-          alert(error.message);
-        });
+      const job = await retrieveJob(sessionStorage.token, jobId);
+      setSelectedJob(job);
     } catch (error) {
       alert(error.message);
     }
@@ -70,7 +67,7 @@ const JobListCompany = () => {
   return (
     <>
       {!!showModalJob && (
-        <ModalJob onClose={closeCreateJobModal} setJobList={selectedJob} />
+        <ModalJob onClose={closeCreateJobModal} setJobList={setJobList} />
       )}
       {!!showModalCandidates && (
         <ModalCandidates

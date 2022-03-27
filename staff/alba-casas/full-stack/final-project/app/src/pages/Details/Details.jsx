@@ -24,6 +24,7 @@ import moment from "moment";
 import ModalApply from "./ModalApply";
 import Context from "../../Context";
 import ModalUpdateJob from "./ModalUpdateJob";
+import { DEFAULT_ERROR } from "../../constants/feedbacks";
 
 const Details = () => {
   const { setFeedback, user } = useContext(Context);
@@ -35,11 +36,11 @@ const Details = () => {
   const goBack = () => navigate(-1);
 
   useEffect(() => {
-    retrieveJob(sessionStorage.token, jobId)
-      .then((job) => {
-        setJob(job);
-      })
-      .catch((error) => alert(error.message));
+    const fetchRetrieveJob = async () => {
+      const job = await retrieveJob(sessionStorage.token, jobId);
+      setJob(job);
+    };
+    fetchRetrieveJob();
   }, [jobId]);
 
   const toggleApplyModal = () => {
@@ -49,24 +50,16 @@ const Details = () => {
     setIsModalShow(!isModalShow);
   };
 
-  const handleClickDeleteJob = () => {
+  const handleClickDeleteJob = async () => {
     try {
-      deleteJob(sessionStorage.token, jobId)
-        .then(() => {
-          setFeedback({
-            message: "Job deleted successfully.",
-            level: "success",
-          });
-          goBack();
-        })
-        .catch(
-          setFeedback({
-            message: "Uh oh, there was a problem with your request.",
-            level: "error",
-          })
-        );
+      await deleteJob(sessionStorage.token, jobId);
+      setFeedback({
+        message: "Job deleted successfully.",
+        level: "success",
+      });
+      goBack();
     } catch (error) {
-      alert(error.message);
+      setFeedback(DEFAULT_ERROR);
     }
   };
 

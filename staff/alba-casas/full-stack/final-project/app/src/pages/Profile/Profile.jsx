@@ -27,6 +27,7 @@ import { convertToBase64 } from "./utils";
 import { useForm } from "react-hook-form";
 import Context from "../../Context";
 import ModalDeleteAccount from "./ModalDeleteAccount";
+import { DEFAULT_ERROR } from "../../constants/feedbacks";
 
 const Profile = () => {
   const { setFeedback, user, loadUser } = useContext(Context);
@@ -65,7 +66,7 @@ const Profile = () => {
     setIsShowModal(false);
   };
 
-  const submit = (values) => {
+  const submit = async (values) => {
     const {
       name,
       email,
@@ -77,54 +78,24 @@ const Profile = () => {
     } = values;
 
     try {
-      if (avatar) {
-        convertToBase64(avatar)
-          .then((avatar) => {
-            updateUserAndPassword({
-              currPassword,
-              newPassword,
-              retypePassword,
-              name,
-              email,
-              location,
-              phone,
-              avatar,
-            });
-            setFeedback({
-              message: "User updated successfully.",
-              level: "success",
-            });
-          })
-          .then(() => {
-            loadUser();
-          })
-          .catch(
-            setFeedback({
-              message: "Uh oh, there was a problem with your request.",
-              level: "error",
-            })
-          );
-      } else {
-        updateUserAndPassword({
-          currPassword,
-          newPassword,
-          retypePassword,
-          name,
-          email,
-          location,
-          phone,
-        });
-        loadUser();
-        setFeedback({
-          message: "User updated successfully.",
-          level: "success",
-        });
-      }
-    } catch (error) {
-      setFeedback({
-        message: "Uh oh, there was a problem with your request.",
-        level: "error",
+      const base64avatar = avatar ? await convertToBase64(avatar) : null;
+      await updateUserAndPassword({
+        currPassword,
+        newPassword,
+        retypePassword,
+        name,
+        email,
+        location,
+        phone,
+        base64avatar,
       });
+      setFeedback({
+        message: "User updated successfully.",
+        level: "success",
+      });
+      loadUser();
+    } catch (error) {
+      setFeedback(DEFAULT_ERROR);
     }
   };
 

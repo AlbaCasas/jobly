@@ -17,13 +17,15 @@ const JobListCandidate = () => {
   const [jobList, setJobList] = useState([]);
 
   useEffect(() => {
-    try {
-      listJobsFromCandidate(sessionStorage.token).then((jobs) => {
+    const listJobCandidate = async () => {
+      try {
+        const jobs = await listJobsFromCandidate(sessionStorage.token);
         setJobList(jobs);
-      });
-    } catch (error) {
-      alert(error.message);
-    }
+      } catch (error) {
+        alert(error.message);
+      }
+    };
+    listJobCandidate();
   }, []);
 
   return (

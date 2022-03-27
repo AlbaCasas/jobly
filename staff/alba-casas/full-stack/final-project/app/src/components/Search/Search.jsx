@@ -14,20 +14,19 @@ import {
 } from "./styled";
 
 const Search = ({ role, setJobList, userId }) => {
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const queryTitle = event.target.title.value;
     const queryLocation = event.target.location.value;
     const queryRole = event.target.role.value;
     const isShowMyJobsChecked = event.target.company?.checked;
-    listJobs(sessionStorage.token, {
+    const jobs = await listJobs(sessionStorage.token, {
       title: queryTitle,
       location: queryLocation,
       role: queryRole,
       company: isShowMyJobsChecked && userId,
-    }).then((jobs) => {
-      setJobList(jobs);
     });
+    setJobList(jobs);
   };
   return (
     <StyledSearch onSubmit={handleSubmit}>

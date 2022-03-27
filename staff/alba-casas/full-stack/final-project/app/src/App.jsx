@@ -25,13 +25,12 @@ function App() {
     }
   }, []);
 
-  const loadUser = () => {
-    return new Promise((resolve, reject) => {
+  const loadUser = async () => {
+    return new Promise(async (resolve, reject) => {
       try {
-        retrieveUser(sessionStorage.token).then((user) => {
-          setUser(user);
-          resolve(user);
-        });
+        const user = await retrieveUser(sessionStorage.token);
+        setUser(user);
+        resolve(user);
       } catch (error) {
         reject(error.message);
       }
