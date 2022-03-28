@@ -1,17 +1,19 @@
 import { listJobs } from "../../api";
+import Select from "../Select";
 import {
   Checkbox,
   CheckboxStyled,
   Label,
   FirstRow,
   StyledButtonSearch,
-  StyledInputSearch,
   StyledInputSearchBorder,
   StyledJobSearch,
   StyledSearch,
   Wrapper,
-  StyledSelectSearch,
 } from "./styled";
+import { data } from "commons";
+
+const { cities, roles } = data;
 
 const Search = ({ role, setJobList, userId }) => {
   const handleSubmit = async (event) => {
@@ -32,15 +34,8 @@ const Search = ({ role, setJobList, userId }) => {
     <StyledSearch onSubmit={handleSubmit}>
       <FirstRow>
         <StyledInputSearchBorder name="title" placeholder="Search by title" />
-        <StyledInputSearch name="location" placeholder="Location" />
-        <StyledSelectSearch name="role" placeholder="Role type">
-          <option value="" defaultValue="selected">
-            Select role
-          </option>
-          <option value="developer">Developer</option>
-          <option value="designer">Designer</option>
-          <option value="product">Product</option>
-        </StyledSelectSearch>
+        <Select name="location" placeholder="Location" options={cities} />
+        <Select name="role" placeholder="Role type" options={roles} />
         <StyledButtonSearch>Find Job</StyledButtonSearch>
       </FirstRow>
       {role === "company" && (
