@@ -34,7 +34,12 @@ const Search = ({ role, setJobList, userId }) => {
     <StyledSearch onSubmit={handleSubmit}>
       <FirstRow>
         <StyledInputSearchBorder name="title" placeholder="Search by title" />
-        <Select name="location" placeholder="Location" options={cities} />
+        <Select
+          name="location"
+          placeholder="Location"
+          options={cities}
+          required={false}
+        />
         <Select name="role" placeholder="Role type" options={roles} />
         <StyledButtonSearch>Find Job</StyledButtonSearch>
       </FirstRow>

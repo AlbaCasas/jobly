@@ -10,11 +10,12 @@ import {
   TextArea,
   SubmitButton,
   CancelButton,
-  SelectRole,
+  StyledSelect,
   Wrapper,
 } from "./styled";
 import Context from "../../../Context";
 import { DEFAULT_ERROR } from "../../../constants/feedbacks";
+import { cities, roles } from "commons/src/data";
 
 const ModalUpdateJob = ({ onClose, job, setJob }) => {
   const { setFeedback } = useContext(Context);
@@ -69,23 +70,20 @@ const ModalUpdateJob = ({ onClose, job, setJob }) => {
           error={errors.title?.message}
         />
         <Wrapper>
-          <SelectRole
+          <StyledSelect
             {...register("role", { required: "select one option" })}
             placeholder="Role type"
             error={errors.role?.message}
-          >
-            <option value="" selected="selected">
-              I'm looking for a
-            </option>
-            <option value="developer">Developer</option>
-            <option value="designer">Designer</option>
-            <option value="product">Product</option>
-          </SelectRole>
-          <Input
+            options={roles}
+            required={true}
+          ></StyledSelect>
+          <StyledSelect
             {...register("location", { required: "This field is required" })}
             placeholder="Location"
             error={errors.location?.message}
-          />
+            options={cities}
+            required={true}
+          ></StyledSelect>
         </Wrapper>
         <TextArea
           {...register("description", { required: "This field is required" })}

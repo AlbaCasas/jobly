@@ -1,14 +1,27 @@
 import React from "react";
 import { StyledSelectSearch } from "./styled";
+import { forwardRef } from "react";
 
-const Select = ({
-  name = "",
-  placeholder = "Location",
-  options = [],
-  defaultValue,
-}) => {
+const Select = (
+  {
+    className,
+    name = "",
+    placeholder = "",
+    options = [],
+    defaultValue,
+    required,
+    ...props
+  },
+  ref
+) => {
   return (
-    <StyledSelectSearch name={name}>
+    <StyledSelectSearch
+      required={required}
+      className={className}
+      {...props}
+      ref={ref}
+      name={name}
+    >
       <option defaultValue={!defaultValue ? true : false} value="">
         {placeholder}
       </option>
@@ -25,4 +38,4 @@ const Select = ({
   );
 };
 
-export default Select;
+export default forwardRef(Select);

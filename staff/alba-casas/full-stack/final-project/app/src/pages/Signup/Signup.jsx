@@ -12,6 +12,7 @@ import {
   TopWrapper,
   SwitchContainer,
   View,
+  StyledSelect,
 } from "./styled";
 import { StyledButton, RegisterWrapper } from "./styled";
 import { useState, useContext } from "react";
@@ -20,6 +21,7 @@ import { authSession, registerCandidate, registerCompany } from "../../api";
 import { useForm } from "react-hook-form";
 import Context from "../../Context";
 import { DEFAULT_ERROR } from "../../constants/feedbacks";
+import { cities } from "commons/src/data";
 
 const Signup = () => {
   const { setFeedback, loadUser } = useContext(Context);
@@ -124,13 +126,15 @@ const Signup = () => {
                 error={errors.name?.message}
               />
               <InputsGrid>
-                <Input
+                <StyledSelect
                   {...register("location", {
                     required: "This field is required",
                   })}
                   placeholder="Location"
+                  options={cities}
                   error={errors.location?.message}
-                />
+                  required={true}
+                ></StyledSelect>
                 <Input
                   {...register("phone", {
                     required: "This field is required",

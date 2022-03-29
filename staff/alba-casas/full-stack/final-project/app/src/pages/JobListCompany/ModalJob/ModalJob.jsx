@@ -10,11 +10,12 @@ import {
   TextArea,
   SubmitButton,
   CancelButton,
-  SelectRole,
   Wrapper,
+  StyledSelect,
 } from "./styled";
 import Context from "../../../Context";
 import { DEFAULT_ERROR } from "../../../constants/feedbacks";
+import { cities, roles } from "commons/src/data";
 
 const ModalJob = ({ onClose, setJobList }) => {
   const { setFeedback } = useContext(Context);
@@ -29,19 +30,25 @@ const ModalJob = ({ onClose, setJobList }) => {
     const { title, role, location, description } = values;
 
     try {
-      await createJob(sessionStorage.token, { title, role, location, description })
+      await createJob(sessionStorage.token, {
+        title,
+        role,
+        location,
+        description,
+      });
       const jobs = await listJobsFromCompany(sessionStorage.token);
       setJobList(jobs);
       onClose();
       setFeedback({
         message: "Job created successfully.",
         level: "success",
-      })
+      });
     } catch (error) {
       onClose();
       setFeedback(DEFAULT_ERROR);
     }
   };
+
   return (
     <Modal onSubmit={handleSubmit(submit)} as="form" onClose={onClose}>
       <Header>
@@ -54,23 +61,20 @@ const ModalJob = ({ onClose, setJobList }) => {
           error={errors.title?.message}
         />
         <Wrapper>
-          <SelectRole
-            {...register("role", { required: "select one option" })}
+          <StyledSelect
+            {...register("role", { required: "This field is required" })}
             placeholder="Role type"
+            options={roles}
             error={errors.role?.message}
-          >
-            <option value="" selected="selected">
-              I'm looking for a
-            </option>
-            <option value="developer">Developer</option>
-            <option value="designer">Designer</option>
-            <option value="product">Product</option>
-          </SelectRole>
-          <Input
+            required={true}
+          ></StyledSelect>
+          <StyledSelect
             {...register("location", { required: "This field is required" })}
             placeholder="Location"
+            options={cities}
             error={errors.location?.message}
-          />
+            required={true}
+          ></StyledSelect>
         </Wrapper>
         <TextArea
           {...register("description", { required: "This field is required" })}

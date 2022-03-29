@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Box from "../../components/Box";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
+import Select from "../../components/Select";
 
 export const StyledForm = styled.form`
   display: flex;
@@ -41,6 +42,18 @@ export const ContainerPhoto = styled.div`
   cursor: pointer;
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     flex-direction: column;
+  }
+`;
+
+export const StyledSelect = styled(Select)`
+  border: 1px solid ${({ theme }) => theme.colors.grayLight};
+  border-radius: 5px;
+  padding: 8px 12px;
+  height: 48px;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    width: 100%;
+    height: 48px;
   }
 `;
 

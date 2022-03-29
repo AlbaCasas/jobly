@@ -17,6 +17,7 @@ import {
   Wrapper,
   AvatarSection,
   StyledDeleteButton,
+  StyledSelect,
 } from "./styled";
 import { useEffect, useState } from "react";
 import { updateUserAndPassword } from "../../api/";
@@ -28,6 +29,7 @@ import { useForm } from "react-hook-form";
 import Context from "../../Context";
 import ModalDeleteAccount from "./ModalDeleteAccount";
 import { DEFAULT_ERROR } from "../../constants/feedbacks";
+import { cities } from "commons/src/data";
 
 const Profile = () => {
   const { setFeedback, user, loadUser } = useContext(Context);
@@ -66,7 +68,7 @@ const Profile = () => {
     setIsShowModal(false);
   };
 
-  const submit = async (values) => {
+  const submit = (values) => {
     const {
       name,
       email,
@@ -78,22 +80,49 @@ const Profile = () => {
     } = values;
 
     try {
-      const base64avatar = avatar ? await convertToBase64(avatar) : null;
-      await updateUserAndPassword({
-        currPassword,
-        newPassword,
-        retypePassword,
-        name,
-        email,
-        location,
-        phone,
-        base64avatar,
-      });
-      setFeedback({
-        message: "User updated successfully.",
-        level: "success",
-      });
-      loadUser();
+      if (avatar) {
+        convertToBase64(avatar)
+          .then((avatar) => {
+            updateUserAndPassword({
+              currPassword,
+              newPassword,
+              retypePassword,
+              name,
+              email,
+              location,
+              phone,
+              avatar,
+            });
+            setFeedback({
+              message: "User updated successfully.",
+              level: "success",
+            });
+          })
+          .then(() => {
+            loadUser();
+          })
+          .catch(
+            setFeedback({
+              message: "Uh oh, there was a problem with your request.",
+              level: "error",
+            })
+          );
+      } else {
+        updateUserAndPassword({
+          currPassword,
+          newPassword,
+          retypePassword,
+          name,
+          email,
+          location,
+          phone,
+        });
+        loadUser();
+        setFeedback({
+          message: "User updated successfully.",
+          level: "success",
+        });
+      }
     } catch (error) {
       setFeedback(DEFAULT_ERROR);
     }
@@ -154,14 +183,15 @@ const Profile = () => {
                 placeholder="Phone"
                 error={errors.phone?.message}
               />
-              <Input
-                type="text"
+              <StyledSelect
                 {...register("location", {
                   required: "This field is required",
                 })}
                 placeholder="Location"
+                options={cities}
                 error={errors.location?.message}
-              />
+                required={true}
+              ></StyledSelect>
             </ContainerInput>
           </Wrapper>
           <Wrapper>

@@ -61,7 +61,7 @@ const cities = [
   "Zaragoza",
 ];
 
-const roles = ["Developer", "Designer", "Product"];
+const roles = ["developer", "designer", "product"];
 
 module.exports = {
   cities,

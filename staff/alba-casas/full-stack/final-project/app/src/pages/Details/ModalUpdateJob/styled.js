@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Button from "../../../components/Button";
+import Select from "../../../components/Select";
 
 export const Header = styled.header`
   display: flex;
@@ -45,7 +46,7 @@ export const SubmitButton = styled(Button)`
   }
 `;
 
-export const SelectRole = styled.select`
+export const StyledSelect = styled(Select)`
   border: 1px solid ${({ theme }) => theme.colors.grayLight};
   border-radius: 5px;
   padding: 8px 12px;

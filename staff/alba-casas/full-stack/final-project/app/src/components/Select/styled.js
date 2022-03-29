@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledSelectSearch = styled.select`
   height: 48px;
-
+  text-transform: capitalize;
   padding-left: 8px;
   border-radius: 0px;
   border-bottom: 1px solid #ddd;
