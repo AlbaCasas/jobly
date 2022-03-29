@@ -51,6 +51,7 @@ export const StyleTextRole = styled(Text)`
   line-height: 16px;
   color: ${({ theme }) => theme.colors.gray};
   user-select: none;
+  text-transform: capitalize;
 `;
 
 export const StyledAvatar = styled.img`
