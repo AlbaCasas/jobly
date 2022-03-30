@@ -30,6 +30,7 @@ Companies on the other hand can register and create job postings for candidates.
 - The candidate will be able to edit his profile and password.
 - The candidate can apply for an job posting.
 - The candidate can send his resume to the job postings in the applying process
+- The candidate will be able to delete his account
 
 #### Bussiness
 
@@ -40,6 +41,8 @@ Companies on the other hand can register and create job postings for candidates.
 - A company can be able to see how many candidates have applied to its job posting.
 - A company can be able to see its job postings
 - A company can be able to see the candidates' profile who have applied to its job posting.
+- A company will be able to delete his account
+- A company will be able to update its job
 
 ---
 
@@ -80,7 +83,7 @@ Companies on the other hand can register and create job postings for candidates.
 
 ### Data Model
 
-![alt Jobly Project](./er-diagram.png)
+![alt Jobly Project](./diagram.png)
 
 ---
 

@@ -11,7 +11,7 @@ function deleteAccount(userId, password) {
 
   return User.findById(userId).then((user) => {
     if (user.password !== password) throw new Error("Wrong credentials");
-    return Job.deleteMany({ userId }).then(() => {
+    return Job.deleteMany({ company: userId }).then(() => {
       return User.deleteOne({ _id: userId, password });
     });
   });
