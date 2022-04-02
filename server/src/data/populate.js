@@ -1,7 +1,7 @@
 const { connect, disconnect } = require('mongoose');
 const { User, Job } = require('./models');
 
-connect('mongodb://localhost:27017/demo-db')
+connect(process.env.MONGODB_URL)
   // eslint-disable-next-line no-console
   .then(() => console.log('connected'))
   .then(() => Promise.all([User.deleteMany(), Job.deleteMany()]))

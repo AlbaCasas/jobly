@@ -16,7 +16,7 @@ export function updateUserPassword(
   if (newPassword !== retypePassword)
     throw new Error("retyped password doesn't match password");
 
-  return fetch('http://localhost:8000/api/users/change-password', {
+  return fetch(`${process.env.REACT_APP_API_HOST}/api/users/change-password`, {
     method: 'PATCH',
     headers: {
       Authorization: `Bearer ${token}`,

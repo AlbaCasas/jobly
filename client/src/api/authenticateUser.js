@@ -5,7 +5,7 @@ export function authenticateUser(email, password) {
   validateEmail(email);
   validatePassword(password);
 
-  return fetch('http://localhost:8000/api/auth', {
+  return fetch(`${process.env.REACT_APP_API_HOST}/api/auth`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

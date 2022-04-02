@@ -10,7 +10,7 @@ export function updateUser(token, name, email, phone, location, avatar) {
   validateString(location);
   validatePhone(phone);
 
-  return fetch('http://localhost:8000/api/users', {
+  return fetch(`${process.env.REACT_APP_API_HOST}/api/users`, {
     method: 'PATCH',
     headers: {
       Authorization: `Bearer ${token}`,

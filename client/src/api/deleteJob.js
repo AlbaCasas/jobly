@@ -6,7 +6,7 @@ export function deleteJob(token, jobId) {
   validateToken(token);
   validatePassword(jobId);
 
-  return fetch(`http://localhost:8000/api/job/${jobId}`, {
+  return fetch(`${process.env.REACT_APP_API_HOST}/api/job/${jobId}`, {
     method: 'DELETE',
     headers: {
       Authorization: `Bearer ${token}`,

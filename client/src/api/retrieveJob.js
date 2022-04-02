@@ -6,7 +6,7 @@ export function retrieveJob(token, jobId) {
   validateToken(token);
   validateId(jobId);
 
-  return fetch(`http://localhost:8000/api/job/${jobId}`, {
+  return fetch(`${process.env.REACT_APP_API_HOST}/api/job/${jobId}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

@@ -11,7 +11,7 @@ export function listJobs(token, { title, location, role, company }) {
     ...(company && { company }),
   });
 
-  return fetch(`http://localhost:8000/api/job?${query}`, {
+  return fetch(`${process.env.REACT_APP_API_HOST}/api/job?${query}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

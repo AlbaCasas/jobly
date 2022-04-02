@@ -5,7 +5,7 @@ const { validateToken } = validators;
 export function retrieveUser(token) {
   validateToken(token);
 
-  return fetch('http://localhost:8000/api/users', {
+  return fetch(`${process.env.REACT_APP_API_HOST}/api/users`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

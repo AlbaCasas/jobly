@@ -8,7 +8,7 @@ export function createJob(token, { title, role, location, description }) {
   validateString(role, 'role');
   validateString(location, 'location');
 
-  return fetch('http://localhost:8000/api/job', {
+  return fetch(`${process.env.REACT_APP_API_HOST}/api/job`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${token}`,

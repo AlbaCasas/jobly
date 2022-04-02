@@ -6,7 +6,7 @@ export function deleteAccount(token, password) {
   validateToken(token);
   validatePassword(password);
 
-  return fetch('http://localhost:8000/api/users', {
+  return fetch(`${process.env.REACT_APP_API_HOST}/api/users`, {
     method: 'DELETE',
     headers: {
       Authorization: `Bearer ${token}`,

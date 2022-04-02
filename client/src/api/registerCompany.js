@@ -10,7 +10,7 @@ export function registerCompany(name, email, password, location, phone) {
   validateString(location);
   validatePhone(phone);
 
-  return fetch('http://localhost:8000/api/company', {
+  return fetch(`${process.env.REACT_APP_API_HOST}/api/company`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

@@ -5,7 +5,7 @@ const { validateToken } = validators;
 export function listJobsFromCandidate(token) {
   validateToken(token);
 
-  return fetch(`http://localhost:8000/api/candidate/job`, {
+  return fetch(`${process.env.REACT_APP_API_HOST}/api/candidate/job`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

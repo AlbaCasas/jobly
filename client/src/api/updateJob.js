@@ -14,7 +14,7 @@ export function updateJob(
   validateString(role, 'role');
   validateString(location, 'location');
 
-  return fetch(`http://localhost:8000/api/job/${jobId}`, {
+  return fetch(`${process.env.REACT_APP_API_HOST}/api/job/${jobId}`, {
     method: 'PATCH',
     headers: {
       Authorization: `Bearer ${token}`,
