@@ -1,8 +1,5 @@
 require('dotenv').config();
 
-const {
-  mongoose: { connect },
-} = require('../data');
 const express = require('express');
 const {
   registerCandidate,
@@ -22,41 +19,22 @@ const {
   deleteAccount,
 } = require('./handlers');
 
-const cors = require('cors');
+const api = express.Router();
 
-const {
-  env: { PORT, MONGODB_URL },
-} = process;
+api.post('/auth', authenticateUser);
+api.post('/candidate', registerCandidate);
+api.delete('/users', deleteAccount);
+api.get('/candidate/job', listJobsFromCandidate);
+api.post('/company', registerCompany);
+api.get('/company/job', listJobsFromCompany);
+api.post('/job', createJob);
+api.patch('/job/apply/:jobId', applyToJob);
+api.patch('/job/:jobId', updateJob);
+api.get('/job', listJobs);
+api.get('/job/:jobId', retrieveJob);
+api.delete('/job/:jobId', deleteJob);
+api.get('/users', retrieveUser);
+api.patch('/users', updateUser);
+api.patch('/users/change-password', updateUserPassword);
 
-connect(MONGODB_URL)
-  // eslint-disable-next-line no-console
-  .then(() => console.log('db connected'))
-  .then(() => {
-    const server = express();
-
-    server.use(cors());
-
-    const jsonBodyParser = express.json();
-
-    const api = express.Router();
-
-    api.post('/auth', jsonBodyParser, authenticateUser);
-    api.post('/candidate', jsonBodyParser, registerCandidate);
-    api.delete('/users', jsonBodyParser, deleteAccount);
-    api.get('/candidate/job', jsonBodyParser, listJobsFromCandidate);
-    api.post('/company', jsonBodyParser, registerCompany);
-    api.get('/company/job', listJobsFromCompany);
-    api.post('/job', jsonBodyParser, createJob);
-    api.patch('/job/apply/:jobId', jsonBodyParser, applyToJob);
-    api.patch('/job/:jobId', jsonBodyParser, updateJob);
-    api.get('/job', listJobs);
-    api.get('/job/:jobId', retrieveJob);
-    api.delete('/job/:jobId', jsonBodyParser, deleteJob);
-    api.get('/users', jsonBodyParser, retrieveUser);
-    api.patch('/users', jsonBodyParser, updateUser);
-    api.patch('/users/change-password', jsonBodyParser, updateUserPassword);
-    server.use('/api', api);
-
-    // eslint-disable-next-line no-console
-    server.listen(PORT, () => console.log('server started'));
-  });
+module.exports = api;
