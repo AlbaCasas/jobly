@@ -44,7 +44,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/" element={isTokenValid ? <Board /> : <Login />} />
+          <Route index element={isTokenValid ? <Board /> : <Login />} />
           <Route element={<ProtectedRoute />}>
             <Route path="/profile" element={<Profile />} />
             <Route path="/job/:jobId" element={<Details />} />
