@@ -4,7 +4,7 @@ const {
 const {
   models: { User },
 } = require("../data");
-const { user } = require("data/src/schemas");
+const { user } = require("../data/schemas");
 
 function deleteUser(userId, password) {
   validateId(userId);

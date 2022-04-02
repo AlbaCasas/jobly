@@ -4,7 +4,7 @@ const {
 const {
   validators: { validateId },
 } = require("commons");
-const { User } = require("data/src/models");
+const { User } = require("../data/models");
 
 function applyToJob(userId, jobId, resume) {
   validateId(userId, "userId");

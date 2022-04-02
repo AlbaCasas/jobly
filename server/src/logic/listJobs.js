@@ -3,7 +3,7 @@ const {
   validateString,
   validateBoolean,
 } = require("commons/src/validators");
-const { Job } = require("data/src/models");
+const { Job } = require("../data/models");
 const ObjectId = require("mongoose").Types.ObjectId;
 
 function listJobs(userId, { title, location, role, company }) {
