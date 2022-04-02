@@ -9,7 +9,7 @@
 
 ## Intro
 
-![alt Jobly Project](./preview.png)
+![alt Jobly Project](./doc/preview.png)
 
 ---
 
@@ -50,13 +50,13 @@ Companies on the other hand can register and create job postings for candidates.
 
 ##### Candidate
 
-![alt Jobly Project](./use-case-candidate.png)
+![alt Jobly Project](./doc/use-case-candidate.png)
 
 ---
 
 #### Company
 
-![alt Jobly Project](./uses-cases-company.png)
+![alt Jobly Project](./doc/uses-cases-company.png)
 
 #### User Interface (UI)
 
@@ -77,13 +77,13 @@ Companies on the other hand can register and create job postings for candidates.
 
 ### Blocks
 
-![alt Jobly Project](./blocks.jpg)
+![alt Jobly Project](./doc/blocks.jpg)
 
 ---
 
 ### Data Model
 
-![alt Jobly Project](./diagram.png)
+![alt Jobly Project](./doc/diagram.png)
 
 ---
 
@@ -109,38 +109,3 @@ Jobs
   - resume: String
   - createAt: (Date, required, dafault(Date now))
 - createAt (Date, required, dafault(Date now))
-
-## Tasks history
-
-### Docs
-
-- ~~TODO introduce the project, describe it (.5h)~~
-
-#### Functional Description
-
-- ~~TODO create use cases diagram (.25h)~~
-- ~~TODO create wireframes in paper (2h)~~
-- ~~TODO create wireframes in figma (alt excalidraw) (3h)~~
-- ~~TODO create wireframes in README (images) (1h)~~
-
-#### Technical Description
-
-- ~~TODO create blocks diagram (.5h)~~
-
-- ~~TODO create data model in paper (1h)~~
-- ~~TODO create data model in diagrams.net (E/R) (1h)~~
-- ~~TODO create data model in README (images) (1h)~~
-
-### Data
-
-- ~~TODO create mongoose schemas and models (2h)~~
-- ~~TODO create populate.js to test my models (1h)~~
-
-### App
-
-- ~~TODO create main views (components) (1h)~~
-- ~~TODO mechanize navigations (.5h)~~
-
-## TODO LIST
-
-- Hacer Test en API
