@@ -12,7 +12,7 @@ const Layout = ({ children }) => {
 
   const navigate = useNavigate();
   const goToBoard = () => {
-    navigate('/');
+    navigate('/board');
   };
 
   const showDropdown = () => {

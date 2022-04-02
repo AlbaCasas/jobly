@@ -34,7 +34,7 @@ const Login = () => {
       const token = await authenticateUser(email, password);
       sessionStorage.token = token;
       await loadUser();
-      navigate('/');
+      navigate('/board');
       setFeedback({
         message: 'User logged in successfully.',
         level: 'success',

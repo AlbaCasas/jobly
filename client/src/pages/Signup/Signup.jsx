@@ -56,7 +56,7 @@ const Signup = () => {
         message: 'User successfully registered.',
         level: 'success',
       });
-      navigate('/');
+      navigate('/board');
     } catch (error) {
       setFeedback(DEFAULT_ERROR);
     }

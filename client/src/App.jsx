@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Board from './pages/Board/Board';
 import Details from './pages/Details';
 import JobListCandidate from './pages/JobListCandidate';
@@ -41,10 +41,11 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/" element={<Navigate to="/board" replace />} />
         <Route element={<ProtectedRoute />}>
           <Route path="/profile" element={<Profile />} />
           <Route path="/job/:jobId" element={<Details />} />
-          <Route path="/" element={<Board />} />
+          <Route path="/board" element={<Board />} />
           <Route path="/job/company" element={<JobListCompany />} />
           <Route path="/job/candidate" element={<JobListCandidate />} />
         </Route>

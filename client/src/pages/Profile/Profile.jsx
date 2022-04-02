@@ -277,7 +277,7 @@ const Profile = () => {
             <StyledBlueButton>Update profile</StyledBlueButton>
             <StyledButton
               onClick={() => {
-                navigate('/');
+                navigate('/board');
               }}
             >
               Cancel
