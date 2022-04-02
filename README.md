@@ -4,7 +4,7 @@
     A React and Mongo marketplace aiming to connect companies and professionals in the tech world.
     <br />
     <br />
-    <a href="https://google.es">View Demo</a></p>
+    <a href="https://jobly-ac.netlify.app/">View Demo</a></p>
 </div>
 
 ## Intro
