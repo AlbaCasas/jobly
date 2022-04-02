@@ -12,6 +12,7 @@ import Toast from './components/Toast';
 import { MdDone, MdOutlineError, MdInfo } from 'react-icons/md';
 import { retrieveUser } from './api';
 import { DEFAULT_ERROR } from './constants/feedbacks';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   const [feedback, setFeedback] = useState(null);
@@ -38,16 +39,15 @@ function App() {
   return (
     <Context.Provider value={{ setFeedback, user, loadUser }}>
       <Routes>
-        <Route path="/login" element={<Login />} />;
+        <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        ;
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/job/:jobId" element={<Details />} />
-        <Route path="/*" element={<Board />} />
-        ;
-        <Route path="/job/company" element={<JobListCompany />} />
-        ;
-        <Route path="/job/candidate" element={<JobListCandidate />} />;
+        <Route element={<ProtectedRoute />}>
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/job/:jobId" element={<Details />} />
+          <Route path="/" element={<Board />} />
+          <Route path="/job/company" element={<JobListCompany />} />
+          <Route path="/job/candidate" element={<JobListCandidate />} />
+        </Route>
       </Routes>
       {feedback && (
         <Toast

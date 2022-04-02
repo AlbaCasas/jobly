@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { listJobs } from '../../api';
 import Card from '../../components/Card';
 import Layout from '../../components/Layout/Layout';
@@ -11,7 +11,6 @@ import { DEFAULT_ERROR } from '../../constants/feedbacks';
 
 const Board = () => {
   const { user, setFeedback } = useContext(Context);
-  let isTokenValid = !!sessionStorage.token;
   const [jobList, setJobList] = useState([]);
 
   const navigate = useNavigate();
@@ -29,9 +28,7 @@ const Board = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return !isTokenValid ? (
-    <Navigate to="/login" />
-  ) : (
+  return (
     <Layout>
       <Wrapper>
         <Search role={user?.role} userId={user?.id} setJobList={setJobList} />
