@@ -13,7 +13,7 @@ export const updateUserAndPassword = ({
 }) => {
   if (!currPassword && !newPassword && !retypePassword) {
     updateUser(
-      sessionStorage.token,
+      localStorage.token,
       name,
       email,
       phone,
@@ -21,10 +21,10 @@ export const updateUserAndPassword = ({
       avatar
     ).catch();
   } else {
-    updateUser(sessionStorage.token, name, email, phone, location, avatar)
+    updateUser(localStorage.token, name, email, phone, location, avatar)
       .then(() => {
         updateUserPassword(
-          sessionStorage.token,
+          localStorage.token,
           currPassword,
           newPassword,
           retypePassword

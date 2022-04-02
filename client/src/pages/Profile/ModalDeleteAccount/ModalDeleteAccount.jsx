@@ -21,8 +21,8 @@ const ModalDeleteAccount = ({ onClose }) => {
     const { password } = values;
 
     try {
-      await deleteAccount(sessionStorage.token, password);
-      delete sessionStorage.token;
+      await deleteAccount(localStorage.token, password);
+      delete localStorage.token;
       setFeedback({
         message: 'Account deleted',
         level: 'success',

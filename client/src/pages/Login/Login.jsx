@@ -32,7 +32,7 @@ const Login = () => {
 
     try {
       const token = await authenticateUser(email, password);
-      sessionStorage.token = token;
+      localStorage.token = token;
       await loadUser();
       navigate('/board');
       setFeedback({

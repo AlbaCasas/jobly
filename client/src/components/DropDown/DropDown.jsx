@@ -29,7 +29,7 @@ const Dropdown = ({ isShown, closeDropdown, role }) => {
         </DropdownItem>
         <DropdownItem
           onClick={() => {
-            delete sessionStorage.token;
+            delete localStorage.token;
             navigate('/login');
           }}
         >

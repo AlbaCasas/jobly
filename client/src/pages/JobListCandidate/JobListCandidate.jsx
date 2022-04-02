@@ -19,7 +19,7 @@ const JobListCandidate = () => {
   useEffect(() => {
     const listJobCandidate = async () => {
       try {
-        const jobs = await listJobsFromCandidate(sessionStorage.token);
+        const jobs = await listJobsFromCandidate(localStorage.token);
         setJobList(jobs);
       } catch (error) {
         alert(error.message);

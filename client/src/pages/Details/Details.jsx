@@ -37,7 +37,7 @@ const Details = () => {
 
   useEffect(() => {
     const fetchRetrieveJob = async () => {
-      const job = await retrieveJob(sessionStorage.token, jobId);
+      const job = await retrieveJob(localStorage.token, jobId);
       setJob(job);
     };
     fetchRetrieveJob();
@@ -52,7 +52,7 @@ const Details = () => {
 
   const handleClickDeleteJob = async () => {
     try {
-      await deleteJob(sessionStorage.token, jobId);
+      await deleteJob(localStorage.token, jobId);
       setFeedback({
         message: 'Job deleted successfully.',
         level: 'success',

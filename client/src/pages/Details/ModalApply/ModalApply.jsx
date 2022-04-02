@@ -24,9 +24,9 @@ const ModalApply = ({ onClose, job, setJob }) => {
   const applyToJob = () => {
     try {
       convertToBase64(resume).then((base64Resume) => {
-        applyJob(sessionStorage.token, job.id, base64Resume)
+        applyJob(localStorage.token, job.id, base64Resume)
           .then(() => {
-            retrieveJob(sessionStorage.token, job.id)
+            retrieveJob(localStorage.token, job.id)
               .then((job) => {
                 setJob(job);
                 onClose();

@@ -18,7 +18,7 @@ const Board = () => {
   useEffect(() => {
     const retrieveJobList = async () => {
       try {
-        const job = await listJobs(sessionStorage.token, {});
+        const job = await listJobs(localStorage.token, {});
         setJobList(job);
       } catch (error) {
         setFeedback(DEFAULT_ERROR);

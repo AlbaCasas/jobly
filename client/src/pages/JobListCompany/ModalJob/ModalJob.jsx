@@ -30,13 +30,13 @@ const ModalJob = ({ onClose, setJobList }) => {
     const { title, role, location, description } = values;
 
     try {
-      await createJob(sessionStorage.token, {
+      await createJob(localStorage.token, {
         title,
         role,
         location,
         description,
       });
-      const jobs = await listJobsFromCompany(sessionStorage.token);
+      const jobs = await listJobsFromCompany(localStorage.token);
       setJobList(jobs);
       onClose();
       setFeedback({

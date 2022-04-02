@@ -24,7 +24,7 @@ const JobListCompany = () => {
   useEffect(() => {
     const retrieveAndSetCompanyJobs = async () => {
       try {
-        const job = await listJobsFromCompany(sessionStorage.token);
+        const job = await listJobsFromCompany(localStorage.token);
         setJobList(job);
       } catch (error) {
         alert(error.message);
@@ -57,7 +57,7 @@ const JobListCompany = () => {
     setSelectedJob(jobId);
     toggleCandidatesModal();
     try {
-      const job = await retrieveJob(sessionStorage.token, jobId);
+      const job = await retrieveJob(localStorage.token, jobId);
       setSelectedJob(job);
     } catch (error) {
       alert(error.message);

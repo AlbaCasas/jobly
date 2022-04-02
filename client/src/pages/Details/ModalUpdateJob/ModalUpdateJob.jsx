@@ -40,13 +40,13 @@ const ModalUpdateJob = ({ onClose, job, setJob }) => {
     const { title, role, location, description } = values;
 
     try {
-      await updateJob(sessionStorage.token, job?.id, {
+      await updateJob(localStorage.token, job?.id, {
         title,
         role,
         location,
         description,
       });
-      const updatedJob = await retrieveJob(sessionStorage.token, job.id);
+      const updatedJob = await retrieveJob(localStorage.token, job.id);
       setJob(updatedJob);
       onClose();
       setFeedback({

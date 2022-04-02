@@ -20,7 +20,7 @@ const Search = ({ role, setJobList, userId }) => {
     const queryLocation = event.target.location.value;
     const queryRole = event.target.role.value;
     const isShowMyJobsChecked = event.target.company?.checked;
-    const jobs = await listJobs(sessionStorage.token, {
+    const jobs = await listJobs(localStorage.token, {
       title: queryTitle,
       location: queryLocation,
       role: queryRole,

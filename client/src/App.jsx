@@ -29,7 +29,7 @@ function App() {
 
   const loadUser = async () => {
     try {
-      const user = await retrieveUser(sessionStorage.token);
+      const user = await retrieveUser(localStorage.token);
       setUser(user);
     } catch (error) {
       throw new Error(error.message);
