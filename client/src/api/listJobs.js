@@ -1,9 +1,4 @@
-import { validators } from 'commons/src/index';
-
-const { validateToken } = validators;
-
 export function listJobs(token, { title, location, role, company }) {
-  validateToken(token);
   const query = new URLSearchParams({
     ...(title && { title }),
     ...(location && { location }),

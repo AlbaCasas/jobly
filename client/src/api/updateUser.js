@@ -1,15 +1,4 @@
-import { validators } from 'commons/src/index';
-
-const { validateToken, validateString, validateEmail, validatePhone } =
-  validators;
-
 export function updateUser(token, name, email, phone, location, avatar) {
-  validateToken(token);
-  validateString(name);
-  validateEmail(email);
-  validateString(location);
-  validatePhone(phone);
-
   return fetch(`${process.env.REACT_APP_API_HOST}/api/users`, {
     method: 'PATCH',
     headers: {

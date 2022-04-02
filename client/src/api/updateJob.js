@@ -1,19 +1,8 @@
-import { validators } from 'commons/src/index';
-import { validateId } from 'commons/src/validators';
-
-const { validateToken, validateString } = validators;
-
 export function updateJob(
   token,
   jobId,
   { title, description, role, location }
 ) {
-  validateToken(token);
-  validateId(jobId);
-  validateString(title, 'title');
-  validateString(role, 'role');
-  validateString(location, 'location');
-
   return fetch(`${process.env.REACT_APP_API_HOST}/api/job/${jobId}`, {
     method: 'PATCH',
     headers: {

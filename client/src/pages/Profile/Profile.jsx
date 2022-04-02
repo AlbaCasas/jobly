@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import Layout from '../../components/Layout/Layout';
 import {
   ContainerInput,
@@ -29,7 +29,7 @@ import { useForm } from 'react-hook-form';
 import Context from '../../Context';
 import ModalDeleteAccount from './ModalDeleteAccount';
 import { DEFAULT_ERROR } from '../../constants/feedbacks';
-import { cities } from 'commons/src/data';
+import { cities } from '../../constants/data';
 
 const Profile = () => {
   const { setFeedback, user, loadUser } = useContext(Context);
@@ -58,7 +58,6 @@ const Profile = () => {
         location: user.location,
       });
     } catch (error) {}
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const toogleModal = () => {

@@ -1,11 +1,4 @@
-import { validators } from 'commons/src/index';
-
-const { validateToken, validateId } = validators;
-
 export function retrieveJob(token, jobId) {
-  validateToken(token);
-  validateId(jobId);
-
   return fetch(`${process.env.REACT_APP_API_HOST}/api/job/${jobId}`, {
     headers: {
       Authorization: `Bearer ${token}`,

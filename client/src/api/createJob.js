@@ -1,13 +1,4 @@
-import { validators } from 'commons';
-
-const { validateString, validateToken } = validators;
-
 export function createJob(token, { title, role, location, description }) {
-  validateToken(token);
-  validateString(title, 'title');
-  validateString(role, 'role');
-  validateString(location, 'location');
-
   return fetch(`${process.env.REACT_APP_API_HOST}/api/job`, {
     method: 'POST',
     headers: {

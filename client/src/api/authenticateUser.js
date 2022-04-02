@@ -1,10 +1,4 @@
-import { validators } from 'commons/src/index';
-const { validateEmail, validatePassword } = validators;
-
 export function authenticateUser(email, password) {
-  validateEmail(email);
-  validatePassword(password);
-
   return fetch(`${process.env.REACT_APP_API_HOST}/api/auth`, {
     method: 'POST',
     headers: {

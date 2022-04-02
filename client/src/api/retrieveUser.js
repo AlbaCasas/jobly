@@ -1,10 +1,4 @@
-import { validators } from 'commons/src/index';
-
-const { validateToken } = validators;
-
 export function retrieveUser(token) {
-  validateToken(token);
-
   return fetch(`${process.env.REACT_APP_API_HOST}/api/users`, {
     headers: {
       Authorization: `Bearer ${token}`,

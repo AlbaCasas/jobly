@@ -1,12 +1,4 @@
-import { validators } from 'commons/src/index';
-import { validateId } from 'commons/src/validators';
-
-const { validateToken } = validators;
-
 export function applyJob(token, jobId, resume) {
-  validateToken(token);
-  validateId(jobId);
-
   return fetch(`${process.env.REACT_APP_API_HOST}/api/job/apply/${jobId}`, {
     method: 'PATCH',
     headers: {

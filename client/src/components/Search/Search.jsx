@@ -11,9 +11,7 @@ import {
   StyledSearch,
   Wrapper,
 } from './styled';
-import { data } from 'commons';
-
-const { cities, roles } = data;
+import { cities, roles } from '../../constants/data';
 
 const Search = ({ role, setJobList, userId }) => {
   const handleSubmit = async (event) => {

@@ -15,7 +15,7 @@ import {
 } from './styled';
 import Context from '../../../Context';
 import { DEFAULT_ERROR } from '../../../constants/feedbacks';
-import { cities, roles } from 'commons/src/data';
+import { cities, roles } from '../../constants/data';
 
 const ModalJob = ({ onClose, setJobList }) => {
   const { setFeedback } = useContext(Context);

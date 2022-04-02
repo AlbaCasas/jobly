@@ -1,11 +1,4 @@
-import { validators } from 'commons/src/index';
-
-const { validateToken, validatePassword } = validators;
-
 export function deleteAccount(token, password) {
-  validateToken(token);
-  validatePassword(password);
-
   return fetch(`${process.env.REACT_APP_API_HOST}/api/users`, {
     method: 'DELETE',
     headers: {

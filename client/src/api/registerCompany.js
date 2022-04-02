@@ -1,15 +1,4 @@
-import { validators } from 'commons';
-
-const { validateString, validateEmail, validatePhone, validatePassword } =
-  validators;
-
 export function registerCompany(name, email, password, location, phone) {
-  validateString(name);
-  validateEmail(email);
-  validatePassword(password);
-  validateString(location);
-  validatePhone(phone);
-
   return fetch(`${process.env.REACT_APP_API_HOST}/api/company`, {
     method: 'POST',
     headers: {

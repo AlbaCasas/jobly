@@ -1,18 +1,9 @@
-import { validators } from 'commons/src/index';
-
-const { validateToken, validatePassword } = validators;
-
 export function updateUserPassword(
   token,
   currPassword,
   newPassword,
   retypePassword
 ) {
-  validateToken(token);
-  validatePassword(currPassword, 'current password');
-  validatePassword(newPassword, 'new password');
-  validatePassword(retypePassword, 'retype password');
-
   if (newPassword !== retypePassword)
     throw new Error("retyped password doesn't match password");
 

@@ -21,7 +21,7 @@ import { authSession, registerCandidate, registerCompany } from '../../api';
 import { useForm } from 'react-hook-form';
 import Context from '../../Context';
 import { DEFAULT_ERROR } from '../../constants/feedbacks';
-import { cities } from 'commons/src/data';
+import { cities } from '../../constants/data';
 
 const Signup = () => {
   const { setFeedback, loadUser } = useContext(Context);

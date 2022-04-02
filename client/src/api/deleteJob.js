@@ -1,11 +1,4 @@
-import { validators } from 'commons/src/index';
-
-const { validateToken, validatePassword } = validators;
-
 export function deleteJob(token, jobId) {
-  validateToken(token);
-  validatePassword(jobId);
-
   return fetch(`${process.env.REACT_APP_API_HOST}/api/job/${jobId}`, {
     method: 'DELETE',
     headers: {
