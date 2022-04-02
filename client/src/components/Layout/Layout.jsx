@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { useNavigate, Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Dropdown from '../DropDown';
 import Nav from '../Nav';
 import { StyledLogo, View, Container } from './styled';
@@ -7,7 +7,6 @@ import Context from '../../Context';
 
 const Layout = ({ children }) => {
   const { user } = useContext(Context);
-  let tokenValid = !!sessionStorage.token;
   const [isDropdownShown, setIsDropdownShown] = useState(false);
 
   const navigate = useNavigate();
@@ -25,9 +24,7 @@ const Layout = ({ children }) => {
     }
   };
 
-  return !tokenValid ? (
-    <Navigate to="/login" />
-  ) : (
+  return (
     <View>
       <Nav
         name={user?.name}

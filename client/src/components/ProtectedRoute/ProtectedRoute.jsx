@@ -4,7 +4,7 @@ const ProtectedRoute = ({ children }) => {
   const isTokenValid = !!sessionStorage.token;
 
   if (!isTokenValid) {
-    return <Navigate to="/login" />;
+    <Navigate to="/login" />;
   }
 
   return children || <Outlet />;

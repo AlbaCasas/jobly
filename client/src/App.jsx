@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Board from './pages/Board/Board';
 import Details from './pages/Details';
 import JobListCandidate from './pages/JobListCandidate';
@@ -36,13 +36,15 @@ function App() {
     }
   };
 
+  const isTokenValid = !!sessionStorage.token;
+
   return (
     <Context.Provider value={{ setFeedback, user, loadUser }}>
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/" element={<Navigate to="/board" replace />} />
+          <Route path="/" element={isTokenValid ? <Board /> : <Login />} />
           <Route element={<ProtectedRoute />}>
             <Route path="/profile" element={<Profile />} />
             <Route path="/job/:jobId" element={<Details />} />
