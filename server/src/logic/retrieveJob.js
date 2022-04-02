@@ -3,7 +3,7 @@ const {
 } = require('../data');
 const {
   validators: { validateId },
-} = require('commons');
+} = require('../utils');
 function retrieveJob(userId, jobId) {
   validateId(userId);
   validateId(jobId);

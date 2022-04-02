@@ -3,7 +3,7 @@ const {
 } = require('../data');
 const {
   validators: { validateId, validatePassword },
-} = require('commons');
+} = require('../utils');
 
 function updateUserPassword({ id, currPassword, newPassword }) {
   validateId(id);

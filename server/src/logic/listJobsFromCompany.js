@@ -1,6 +1,6 @@
 const {
   validators: { validateId },
-} = require('commons');
+} = require('../utils');
 const {
   models: { Job },
 } = require('../data');

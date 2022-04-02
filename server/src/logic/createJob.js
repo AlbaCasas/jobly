@@ -4,7 +4,7 @@ const {
 
 const {
   validators: { validateString, validateId },
-} = require('commons');
+} = require('../utils');
 
 function createJob(userId, { title, description, role, location }) {
   validateId(userId);

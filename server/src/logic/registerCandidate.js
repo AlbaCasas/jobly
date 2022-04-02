@@ -8,7 +8,7 @@ const {
     validateEmail,
     validatePassword,
   },
-} = require('commons');
+} = require('../utils');
 
 function registerCandidate(name, email, password, location, phone) {
   validateString(name);

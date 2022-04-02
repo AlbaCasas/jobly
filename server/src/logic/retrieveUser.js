@@ -3,7 +3,7 @@ const {
 } = require('../data');
 const {
   validators: { validateId },
-} = require('commons');
+} = require('../utils');
 function retrieveUser(id) {
   validateId(id);
   return User.findById(id).then((user) => {

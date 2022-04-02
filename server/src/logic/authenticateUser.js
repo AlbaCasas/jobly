@@ -1,6 +1,6 @@
 const {
   validators: { validateEmail, validatePassword },
-} = require('commons');
+} = require('../utils');
 const {
   models: { User },
 } = require('../data');

@@ -1,4 +1,4 @@
-const { validateId, validateString } = require('commons/src/validators');
+const { validateId, validateString } = require('../utils/validators');
 const { Job } = require('../data/models');
 const ObjectId = require('mongoose').Types.ObjectId;
 

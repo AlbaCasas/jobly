@@ -3,7 +3,7 @@ const {
 } = require('../data');
 const {
   validators: { validateId },
-} = require('commons');
+} = require('../utils');
 const { User } = require('../data/models');
 
 function applyToJob(userId, jobId, resume) {

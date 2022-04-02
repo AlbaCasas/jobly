@@ -3,7 +3,7 @@ const {
 } = require('../data');
 const {
   validators: { validateEmail, validateId, validateString, validatePhone },
-} = require('commons');
+} = require('../utils');
 
 function updateUser(id, { name, email, phone, location, avatar }) {
   validateId(id);
