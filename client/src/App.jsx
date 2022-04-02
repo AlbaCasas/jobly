@@ -36,19 +36,17 @@ function App() {
     }
   };
 
-  const isTokenValid = !!sessionStorage.token;
-
   return (
     <Context.Provider value={{ setFeedback, user, loadUser }}>
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route index element={isTokenValid ? <Board /> : <Login />} />
           <Route element={<ProtectedRoute />}>
             <Route path="/profile" element={<Profile />} />
             <Route path="/job/:jobId" element={<Details />} />
             <Route path="/board" element={<Board />} />
+            <Route path="/" element={<Board />} />
             <Route path="/job/company" element={<JobListCompany />} />
             <Route path="/job/candidate" element={<JobListCandidate />} />
           </Route>

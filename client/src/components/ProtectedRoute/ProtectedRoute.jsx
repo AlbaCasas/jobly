@@ -1,13 +1,14 @@
-import { Navigate, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+import Login from '../../pages/Login';
 
 const ProtectedRoute = ({ children }) => {
   const isTokenValid = !!sessionStorage.token;
-
   if (!isTokenValid) {
-    return <Navigate to="/login" replace />;
+    window.history.replaceState(null, '', '/login');
+    return <Login />;
   }
 
-  return children || <Outlet />;
+  return <Outlet />;
 };
 
 export default ProtectedRoute;
