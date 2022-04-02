@@ -1,12 +1,12 @@
-import React from "react";
-import { StyledSelectSearch } from "./styled";
-import { forwardRef } from "react";
+import React from 'react';
+import { StyledSelectSearch } from './styled';
+import { forwardRef } from 'react';
 
 const Select = (
   {
     className,
-    name = "",
-    placeholder = "",
+    name = '',
+    placeholder = '',
     options = [],
     defaultValue,
     required,

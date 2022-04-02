@@ -1,13 +1,13 @@
-import { useState, useEffect, useContext } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import { listJobs } from "../../api";
-import Card from "../../components/Card";
-import Layout from "../../components/Layout/Layout";
-import Search from "../../components/Search";
-import Text from "../../components/Text";
-import { Wrapper, StyledContainer } from "./styled";
-import Context from "../../Context";
-import { DEFAULT_ERROR } from "../../constants/feedbacks";
+import { useState, useEffect, useContext } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { listJobs } from '../../api';
+import Card from '../../components/Card';
+import Layout from '../../components/Layout/Layout';
+import Search from '../../components/Search';
+import Text from '../../components/Text';
+import { Wrapper, StyledContainer } from './styled';
+import Context from '../../Context';
+import { DEFAULT_ERROR } from '../../constants/feedbacks';
 
 const Board = () => {
   const { user, setFeedback } = useContext(Context);

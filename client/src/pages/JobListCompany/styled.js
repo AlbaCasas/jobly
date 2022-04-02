@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import Box from "../../components/Box";
-import Button from "../../components/Button";
-import Text from "../../components/Text";
-import HeadingCard from "./HeadingCard/HeadingCard";
+import styled from 'styled-components';
+import Box from '../../components/Box';
+import Button from '../../components/Button';
+import Text from '../../components/Text';
+import HeadingCard from './HeadingCard/HeadingCard';
 
 export const Heading = styled(Box)`
   display: flex;

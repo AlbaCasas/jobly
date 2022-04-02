@@ -1,1 +1,1 @@
-export { default } from "./CardButton";
+export { default } from './CardButton';

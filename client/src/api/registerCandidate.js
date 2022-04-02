@@ -1,4 +1,4 @@
-import { validators } from "commons";
+import { validators } from 'commons';
 
 const { validateString, validateEmail, validatePhone, validatePassword } =
   validators;
@@ -10,10 +10,10 @@ export function registerCandidate(name, email, password, location, phone) {
   validateString(location);
   validatePhone(phone);
 
-  return fetch("http://localhost:8000/api/candidate", {
-    method: "POST",
+  return fetch('http://localhost:8000/api/candidate', {
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({ name, email, password, location, phone }),
   }).then((res) => {
@@ -28,9 +28,9 @@ export function registerCandidate(name, email, password, location, phone) {
         throw new Error(error);
       });
     } else if (status >= 500) {
-      throw new Error("server error");
+      throw new Error('server error');
     } else {
-      throw new Error("unknown error");
+      throw new Error('unknown error');
     }
   });
 }

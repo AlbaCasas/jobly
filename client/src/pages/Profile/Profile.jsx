@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import Layout from "../../components/Layout/Layout";
+import React, { useContext } from 'react';
+import Layout from '../../components/Layout/Layout';
 import {
   ContainerInput,
   ContainerPhoto,
@@ -18,24 +18,24 @@ import {
   AvatarSection,
   StyledDeleteButton,
   StyledSelect,
-} from "./styled";
-import { useEffect, useState } from "react";
-import { updateUserAndPassword } from "../../api/";
-import Input from "../../components/Input";
-import { useNavigate } from "react-router-dom";
-import { useDropzone } from "react-dropzone";
-import { convertToBase64 } from "./utils";
-import { useForm } from "react-hook-form";
-import Context from "../../Context";
-import ModalDeleteAccount from "./ModalDeleteAccount";
-import { DEFAULT_ERROR } from "../../constants/feedbacks";
-import { cities } from "commons/src/data";
+} from './styled';
+import { useEffect, useState } from 'react';
+import { updateUserAndPassword } from '../../api/';
+import Input from '../../components/Input';
+import { useNavigate } from 'react-router-dom';
+import { useDropzone } from 'react-dropzone';
+import { convertToBase64 } from './utils';
+import { useForm } from 'react-hook-form';
+import Context from '../../Context';
+import ModalDeleteAccount from './ModalDeleteAccount';
+import { DEFAULT_ERROR } from '../../constants/feedbacks';
+import { cities } from 'commons/src/data';
 
 const Profile = () => {
   const { setFeedback, user, loadUser } = useContext(Context);
   const [isShowModal, setIsShowModal] = useState();
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
-    accept: "image/*",
+    accept: 'image/*',
   });
   const avatar = acceptedFiles[0];
   const avatarSrc = avatar && URL.createObjectURL(avatar);
@@ -45,7 +45,7 @@ const Profile = () => {
     reset,
     getValues,
     formState: { errors },
-  } = useForm({ reValidateMode: "onBlur" });
+  } = useForm({ reValidateMode: 'onBlur' });
 
   const navigate = useNavigate();
 
@@ -94,8 +94,8 @@ const Profile = () => {
               avatar,
             });
             setFeedback({
-              message: "User updated successfully.",
-              level: "success",
+              message: 'User updated successfully.',
+              level: 'success',
             });
           })
           .then(() => {
@@ -103,8 +103,8 @@ const Profile = () => {
           })
           .catch(
             setFeedback({
-              message: "Uh oh, there was a problem with your request.",
-              level: "error",
+              message: 'Uh oh, there was a problem with your request.',
+              level: 'error',
             })
           );
       } else {
@@ -119,8 +119,8 @@ const Profile = () => {
         });
         loadUser();
         setFeedback({
-          message: "User updated successfully.",
-          level: "success",
+          message: 'User updated successfully.',
+          level: 'success',
         });
       }
     } catch (error) {
@@ -153,17 +153,17 @@ const Profile = () => {
             <ContainerInput>
               <Input
                 type="text"
-                {...register("name", { required: "This field is required" })}
+                {...register('name', { required: 'This field is required' })}
                 placeholder="Name"
                 error={errors.name?.message}
               />
               <Input
                 type="email"
-                {...register("email", {
-                  required: "This field is required",
+                {...register('email', {
+                  required: 'This field is required',
                   pattern: {
                     value: /^\S+@\S+\.\S+$/,
-                    message: "Enter a valid email",
+                    message: 'Enter a valid email',
                   },
                 })}
                 placeholder="email"
@@ -173,19 +173,19 @@ const Profile = () => {
             <ContainerInput>
               <Input
                 type="tel"
-                {...register("phone", {
-                  required: "This field is required",
+                {...register('phone', {
+                  required: 'This field is required',
                   pattern: {
                     value: /^[0-9\s]*$/,
-                    message: "Enter a valid phone",
+                    message: 'Enter a valid phone',
                   },
                 })}
                 placeholder="Phone"
                 error={errors.phone?.message}
               />
               <StyledSelect
-                {...register("location", {
-                  required: "This field is required",
+                {...register('location', {
+                  required: 'This field is required',
                 })}
                 placeholder="Location"
                 options={cities}
@@ -199,15 +199,15 @@ const Profile = () => {
             <ContainerInput>
               <HalfWidthInput
                 type="password"
-                {...register("currPassword", {
+                {...register('currPassword', {
                   validate: {
                     requiredPassword: (value) => {
                       if (
                         !value &&
-                        (!!getValues("newPassword") ||
-                          !!getValues("retypePassword"))
+                        (!!getValues('newPassword') ||
+                          !!getValues('retypePassword'))
                       )
-                        return "This field is required";
+                        return 'This field is required';
                       return true;
                     },
                   },
@@ -219,24 +219,24 @@ const Profile = () => {
             <ContainerInput>
               <Input
                 type="password"
-                {...register("newPassword", {
+                {...register('newPassword', {
                   validate: {
                     requiredNewPassword: (value) => {
                       if (
                         !value &&
-                        (!!getValues("currPassword") ||
-                          !!getValues("retypePassword"))
+                        (!!getValues('currPassword') ||
+                          !!getValues('retypePassword'))
                       )
-                        return "This field is required";
+                        return 'This field is required';
                       return true;
                     },
                     matchRetypePassword: (value) => {
                       if (
                         !!value &&
-                        !!getValues("retypePassword") &&
-                        value !== getValues("retypePassword")
+                        !!getValues('retypePassword') &&
+                        value !== getValues('retypePassword')
                       )
-                        return "New password and retype password must match";
+                        return 'New password and retype password must match';
                       return true;
                     },
                   },
@@ -246,24 +246,24 @@ const Profile = () => {
               />
               <Input
                 type="password"
-                {...register("retypePassword", {
+                {...register('retypePassword', {
                   validate: {
                     requiredRetypePassword: (value) => {
                       if (
                         !value &&
-                        (!!getValues("currPassword") ||
-                          !!getValues("newPassword"))
+                        (!!getValues('currPassword') ||
+                          !!getValues('newPassword'))
                       )
-                        return "This field is required";
+                        return 'This field is required';
                       return true;
                     },
                     matchNewPassword: (value) => {
                       if (
                         !!value &&
-                        !!getValues("newPassword") &&
-                        value !== getValues("newPassword")
+                        !!getValues('newPassword') &&
+                        value !== getValues('newPassword')
                       )
-                        return "New password and retype password must match";
+                        return 'New password and retype password must match';
                       return true;
                     },
                   },
@@ -277,7 +277,7 @@ const Profile = () => {
             <StyledBlueButton>Update profile</StyledBlueButton>
             <StyledButton
               onClick={() => {
-                navigate("/board");
+                navigate('/board');
               }}
             >
               Cancel

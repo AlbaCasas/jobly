@@ -1,8 +1,8 @@
-import React from "react";
-import { DropdownItem, StyledDropdown } from "./styled";
-import Text from "../Text";
-import { useNavigate } from "react-router-dom";
-import OutsideClickHandler from "react-outside-click-handler";
+import React from 'react';
+import { DropdownItem, StyledDropdown } from './styled';
+import Text from '../Text';
+import { useNavigate } from 'react-router-dom';
+import OutsideClickHandler from 'react-outside-click-handler';
 
 const Dropdown = ({ isShown, closeDropdown, role }) => {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ const Dropdown = ({ isShown, closeDropdown, role }) => {
         </Text>
         <DropdownItem
           onClick={() => {
-            navigate("/profile");
+            navigate('/profile');
           }}
         >
           <Text variant="caption">View Profile</Text>
@@ -30,7 +30,7 @@ const Dropdown = ({ isShown, closeDropdown, role }) => {
         <DropdownItem
           onClick={() => {
             delete sessionStorage.token;
-            navigate("/login");
+            navigate('/login');
           }}
         >
           <Text cursorPointer="cursor-pointer" as="a" variant="caption">

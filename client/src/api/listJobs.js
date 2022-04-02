@@ -1,4 +1,4 @@
-import { validators } from "commons/src/index";
+import { validators } from 'commons/src/index';
 
 const { validateToken } = validators;
 
@@ -27,9 +27,9 @@ export function listJobs(token, { title, location, role, company }) {
         throw new Error(error);
       });
     } else if (status >= 500) {
-      throw new Error("server error");
+      throw new Error('server error');
     } else {
-      throw new Error("unknown error");
+      throw new Error('unknown error');
     }
   });
 }

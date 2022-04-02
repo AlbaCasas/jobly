@@ -1,9 +1,9 @@
-import React, { useContext, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { retrieveJob, updateJob } from "../../../api";
-import Input from "../../../components/Input";
-import Modal from "../../../components/Modal";
-import Text from "../../../components/Text";
+import React, { useContext, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { retrieveJob, updateJob } from '../../../api';
+import Input from '../../../components/Input';
+import Modal from '../../../components/Modal';
+import Text from '../../../components/Text';
 import {
   Content,
   Header,
@@ -12,10 +12,10 @@ import {
   CancelButton,
   StyledSelect,
   Wrapper,
-} from "./styled";
-import Context from "../../../Context";
-import { DEFAULT_ERROR } from "../../../constants/feedbacks";
-import { cities, roles } from "commons/src/data";
+} from './styled';
+import Context from '../../../Context';
+import { DEFAULT_ERROR } from '../../../constants/feedbacks';
+import { cities, roles } from 'commons/src/data';
 
 const ModalUpdateJob = ({ onClose, job, setJob }) => {
   const { setFeedback } = useContext(Context);
@@ -50,8 +50,8 @@ const ModalUpdateJob = ({ onClose, job, setJob }) => {
       setJob(updatedJob);
       onClose();
       setFeedback({
-        message: "Job updated successfully.",
-        level: "success",
+        message: 'Job updated successfully.',
+        level: 'success',
       });
     } catch (error) {
       setFeedback(DEFAULT_ERROR);
@@ -65,20 +65,20 @@ const ModalUpdateJob = ({ onClose, job, setJob }) => {
       </Header>
       <Content>
         <Input
-          {...register("title", { required: "This field is required" })}
+          {...register('title', { required: 'This field is required' })}
           placeholder="Job title"
           error={errors.title?.message}
         />
         <Wrapper>
           <StyledSelect
-            {...register("role", { required: "select one option" })}
+            {...register('role', { required: 'select one option' })}
             placeholder="Role type"
             error={errors.role?.message}
             options={roles}
             required={true}
           ></StyledSelect>
           <StyledSelect
-            {...register("location", { required: "This field is required" })}
+            {...register('location', { required: 'This field is required' })}
             placeholder="Location"
             error={errors.location?.message}
             options={cities}
@@ -86,7 +86,7 @@ const ModalUpdateJob = ({ onClose, job, setJob }) => {
           ></StyledSelect>
         </Wrapper>
         <TextArea
-          {...register("description", { required: "This field is required" })}
+          {...register('description', { required: 'This field is required' })}
           placeholder="Description"
           error={errors.location?.message}
         />

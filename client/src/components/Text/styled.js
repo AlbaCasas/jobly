@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 const bodyCss = css`
   font-size: 16px;
@@ -69,19 +69,19 @@ export const StyledText = styled.span`
   margin: 0;
   ${({ variant }) => {
     switch (variant) {
-      case "link":
+      case 'link':
         return linkCss;
-      case "heading":
+      case 'heading':
         return headingCss;
-      case "subheading":
+      case 'subheading':
         return subheadingCss;
-      case "body-bold":
+      case 'body-bold':
         return bodyBoldCss;
-      case "caption":
+      case 'caption':
         return captionCss;
-      case "section":
+      case 'section':
         return sectionCss;
-      case "caption-bold":
+      case 'caption-bold':
         return captionBoldCss;
       default:
         return bodyCss;

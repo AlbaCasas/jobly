@@ -1,5 +1,5 @@
-import styled, { css, keyframes } from "styled-components";
-import { MdClose } from "react-icons/md";
+import styled, { css, keyframes } from 'styled-components';
+import { MdClose } from 'react-icons/md';
 
 const successCss = css`
   background-color: #1ea377;
@@ -66,9 +66,9 @@ export const ContainerIcon = styled.div`
   color: ${({ theme }) => theme.colors.white};
   ${({ variant }) => {
     switch (variant) {
-      case "success":
+      case 'success':
         return successCss;
-      case "error":
+      case 'error':
         return errorCss;
       default:
         return infoCss;
@@ -82,9 +82,9 @@ export const Content = styled.div`
   gap: 12px;
   ${({ variant }) => {
     switch (variant) {
-      case "success":
+      case 'success':
         return successBorderCss;
-      case "error":
+      case 'error':
         return errorBordercSS;
       default:
         return infoBordercSS;

@@ -1,4 +1,4 @@
-import { validators } from "commons/src/index";
+import { validators } from 'commons/src/index';
 
 const { validateToken, validatePassword } = validators;
 
@@ -9,18 +9,18 @@ export function updateUserPassword(
   retypePassword
 ) {
   validateToken(token);
-  validatePassword(currPassword, "current password");
-  validatePassword(newPassword, "new password");
-  validatePassword(retypePassword, "retype password");
+  validatePassword(currPassword, 'current password');
+  validatePassword(newPassword, 'new password');
+  validatePassword(retypePassword, 'retype password');
 
   if (newPassword !== retypePassword)
     throw new Error("retyped password doesn't match password");
 
-  return fetch("http://localhost:8000/api/users/change-password", {
-    method: "PATCH",
+  return fetch('http://localhost:8000/api/users/change-password', {
+    method: 'PATCH',
     headers: {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({ currPassword, newPassword }),
   }).then((res) => {
@@ -35,9 +35,9 @@ export function updateUserPassword(
         throw new Error(error);
       });
     } else if (status >= 500) {
-      throw new Error("server error");
+      throw new Error('server error');
     } else {
-      throw new Error("unknown error");
+      throw new Error('unknown error');
     }
   });
 }

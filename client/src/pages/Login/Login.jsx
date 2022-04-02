@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import Box from "../../components/Box";
-import Input from "../../components/Input";
-import Text from "../../components/Text";
-import Logo from "../../assets/logo.png";
-import CardImage from "../../assets/job-card.svg";
+import React, { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import Box from '../../components/Box';
+import Input from '../../components/Input';
+import Text from '../../components/Text';
+import Logo from '../../assets/logo.png';
+import CardImage from '../../assets/job-card.svg';
 import {
   View,
   StyledButton,
@@ -12,11 +12,11 @@ import {
   RightSection,
   Illustration,
   LoginForm,
-} from "./styled";
-import { authenticateUser } from "../../api";
-import { useForm } from "react-hook-form";
-import Context from "../../Context";
-import { DEFAULT_ERROR } from "../../constants/feedbacks";
+} from './styled';
+import { authenticateUser } from '../../api';
+import { useForm } from 'react-hook-form';
+import Context from '../../Context';
+import { DEFAULT_ERROR } from '../../constants/feedbacks';
 
 const Login = () => {
   const { setFeedback, loadUser } = useContext(Context);
@@ -34,10 +34,10 @@ const Login = () => {
       const token = await authenticateUser(email, password);
       sessionStorage.token = token;
       await loadUser();
-      navigate("/");
+      navigate('/');
       setFeedback({
-        message: "User logged in successfully.",
-        level: "success",
+        message: 'User logged in successfully.',
+        level: 'success',
       });
     } catch (error) {
       setFeedback(DEFAULT_ERROR);
@@ -76,11 +76,11 @@ const Login = () => {
             <Box gap="48px" flexDirection="column">
               <Box gap="24px" flexDirection="column">
                 <Input
-                  {...register("email", {
-                    required: "This field is required",
+                  {...register('email', {
+                    required: 'This field is required',
                     pattern: {
                       value: /^\S+@\S+\.\S+$/,
-                      message: "Enter a valid email",
+                      message: 'Enter a valid email',
                     },
                   })}
                   type="email"
@@ -88,8 +88,8 @@ const Login = () => {
                   error={errors.email?.message}
                 />
                 <Input
-                  {...register("password", {
-                    required: "This field is required",
+                  {...register('password', {
+                    required: 'This field is required',
                   })}
                   type="password"
                   placeholder="Password"

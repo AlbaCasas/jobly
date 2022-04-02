@@ -5,8 +5,8 @@ import {
   StyledTextNav,
   StyledTextTitle,
   StyleTextRole,
-} from "./styled";
-import Box from "../Box";
+} from './styled';
+import Box from '../Box';
 
 const Nav = ({ avatar, children, showDropdown, name, role }) => {
   return (

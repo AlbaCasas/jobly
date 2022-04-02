@@ -1,11 +1,11 @@
-import { validators } from "commons/src/index";
+import { validators } from 'commons/src/index';
 
 const { validateToken } = validators;
 
 export function retrieveUser(token) {
   validateToken(token);
 
-  return fetch("http://localhost:8000/api/users", {
+  return fetch('http://localhost:8000/api/users', {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -21,9 +21,9 @@ export function retrieveUser(token) {
         throw new Error(error);
       });
     } else if (status >= 500) {
-      throw new Error("server error");
+      throw new Error('server error');
     } else {
-      throw new Error("unknown error");
+      throw new Error('unknown error');
     }
   });
 }

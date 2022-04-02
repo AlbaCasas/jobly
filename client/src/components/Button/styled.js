@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 const disabledCss = css`
   background-color: ${({ theme }) => theme.colors.gray};
@@ -37,7 +37,7 @@ export const StyledButton = styled.button`
 
   ${({ type }) => {
     switch (type) {
-      case "delete":
+      case 'delete':
         return deleteButton;
       default:
         return StyledButton;

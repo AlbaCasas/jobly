@@ -1,5 +1,5 @@
-import React from "react";
-import { StyledCardButton, StyledText } from "./styled";
+import React from 'react';
+import { StyledCardButton, StyledText } from './styled';
 
 const CardButton = ({ children, icon, isActive, ...props }) => {
   return (

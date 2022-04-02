@@ -4,13 +4,13 @@ import {
   LocationColumn,
   RoleColumn,
   TitleColumn,
-} from "./styled";
-import moment from "moment";
-import Text from "../../../components/Text";
-import Table from "../../../components/Table";
-import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import Context from "../../../Context";
+} from './styled';
+import moment from 'moment';
+import Text from '../../../components/Text';
+import Table from '../../../components/Table';
+import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import Context from '../../../Context';
 
 const CandidaturesTable = ({ jobList }) => {
   const { user } = useContext(Context);
@@ -61,7 +61,7 @@ const CandidaturesTable = ({ jobList }) => {
                 </RoleColumn>
                 <DateColumn>
                   <Text variant="caption">
-                    {moment(userCandidature.createAt).format("MMMM DD, YYYY")}
+                    {moment(userCandidature.createAt).format('MMMM DD, YYYY')}
                   </Text>
                 </DateColumn>
               </Table.Row>

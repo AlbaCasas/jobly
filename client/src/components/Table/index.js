@@ -1,4 +1,4 @@
-import { Table, Body, HeaderRow, Header, Row } from "./styled";
+import { Table, Body, HeaderRow, Header, Row } from './styled';
 export default {
   Table,
   Body,

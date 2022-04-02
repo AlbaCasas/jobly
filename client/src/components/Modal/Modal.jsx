@@ -1,6 +1,6 @@
-import React from "react";
-import OutsideClickHandler from "react-outside-click-handler";
-import { CloseIcon, StyledModal, Backdrop } from "./styled";
+import React from 'react';
+import OutsideClickHandler from 'react-outside-click-handler';
+import { CloseIcon, StyledModal, Backdrop } from './styled';
 
 const Modal = ({ children, onClose, ...props }) => {
   return (

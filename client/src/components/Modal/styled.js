@@ -1,5 +1,5 @@
-import { MdClose } from "react-icons/md";
-import styled from "styled-components";
+import { MdClose } from 'react-icons/md';
+import styled from 'styled-components';
 
 export const StyledModal = styled.div`
   width: 100vw;

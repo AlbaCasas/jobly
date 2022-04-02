@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
-import Layout from "../../components/Layout/Layout";
+import React, { useEffect, useState } from 'react';
+import Layout from '../../components/Layout/Layout';
 import {
   CreateJobButton,
   Heading,
   TextDesktop,
   TextMobile,
   StyledJobHeadingCard,
-} from "./styled";
-import { MdWorkOutline, MdPerson } from "react-icons/md";
-import Box from "../../components/Box";
-import { listJobsFromCompany, retrieveJob } from "../../api";
-import HeadingCard from "./HeadingCard/HeadingCard";
-import ModalJob from "./ModalJob";
-import ModalCandidates from "./ModalCandidates";
-import JobsTable from "./JobsTable";
+} from './styled';
+import { MdWorkOutline, MdPerson } from 'react-icons/md';
+import Box from '../../components/Box';
+import { listJobsFromCompany, retrieveJob } from '../../api';
+import HeadingCard from './HeadingCard/HeadingCard';
+import ModalJob from './ModalJob';
+import ModalCandidates from './ModalCandidates';
+import JobsTable from './JobsTable';
 
 const JobListCompany = () => {
   const [jobList, setJobList] = useState([]);

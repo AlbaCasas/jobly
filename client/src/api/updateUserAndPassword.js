@@ -1,5 +1,5 @@
-import { updateUser } from "./updateUser";
-import { updateUserPassword } from "./updateUserPassword";
+import { updateUser } from './updateUser';
+import { updateUserPassword } from './updateUserPassword';
 
 export const updateUserAndPassword = ({
   currPassword,

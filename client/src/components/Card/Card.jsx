@@ -4,9 +4,9 @@ import {
   ImageStyled,
   StyledCard,
   StyledDescription,
-} from "./styled";
-import Text from "../Text";
-import Tag from "../Tag";
+} from './styled';
+import Text from '../Text';
+import Tag from '../Tag';
 
 const Card = ({
   avatar,

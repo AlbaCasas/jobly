@@ -1,17 +1,17 @@
-import React, { useContext } from "react";
-import Modal from "../../../components/Modal";
-import Text from "../../../components/Text";
+import React, { useContext } from 'react';
+import Modal from '../../../components/Modal';
+import Text from '../../../components/Text';
 import {
   ContainerModal,
   ContainerText,
   ButtonFile,
   ButtonSend,
-} from "./styled";
-import { useDropzone } from "react-dropzone";
-import { convertToBase64 } from "../../Profile/utils";
-import { applyJob, retrieveJob } from "../../../api";
-import Context from "../../../Context";
-import { DEFAULT_ERROR } from "../../../constants/feedbacks";
+} from './styled';
+import { useDropzone } from 'react-dropzone';
+import { convertToBase64 } from '../../Profile/utils';
+import { applyJob, retrieveJob } from '../../../api';
+import Context from '../../../Context';
+import { DEFAULT_ERROR } from '../../../constants/feedbacks';
 
 const ModalApply = ({ onClose, job, setJob }) => {
   const { setFeedback } = useContext(Context);
@@ -31,16 +31,16 @@ const ModalApply = ({ onClose, job, setJob }) => {
                 setJob(job);
                 onClose();
                 setFeedback({
-                  message: "Job successfully applied.",
-                  level: "success",
+                  message: 'Job successfully applied.',
+                  level: 'success',
                 });
               })
               .catch((error) => alert(error.message));
           })
           .catch(() => {
             setFeedback({
-              message: "Uh oh, there was a problem with your request.",
-              level: "error",
+              message: 'Uh oh, there was a problem with your request.',
+              level: 'error',
             });
           });
       });
@@ -60,7 +60,7 @@ const ModalApply = ({ onClose, job, setJob }) => {
             Please attach your resume in a PDF format to apply for the FullStack
             Developer position. Maximum file size 5MB.
           </Text>
-          <div {...getRootProps({ className: "dropzone" })}>
+          <div {...getRootProps({ className: 'dropzone' })}>
             <input {...getInputProps()} />
             <ButtonFile>Choose File</ButtonFile>
           </div>

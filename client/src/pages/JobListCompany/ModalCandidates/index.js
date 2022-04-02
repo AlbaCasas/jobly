@@ -1,1 +1,1 @@
-export { default } from "./ModalCandidates";
+export { default } from './ModalCandidates';

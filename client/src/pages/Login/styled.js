@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import Box from "../../components/Box";
-import Button from "../../components/Button";
+import styled from 'styled-components';
+import Box from '../../components/Box';
+import Button from '../../components/Button';
 
 export const StyledButton = styled(Button)`
   width: 100%;

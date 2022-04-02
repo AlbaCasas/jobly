@@ -5,10 +5,10 @@ import {
   LocationColumn,
   RoleColumn,
   CandidateColumn,
-} from "./styled";
-import Text from "../../../components/Text";
-import Table from "../../../components/Table";
-import { useNavigate } from "react-router-dom";
+} from './styled';
+import Text from '../../../components/Text';
+import Table from '../../../components/Table';
+import { useNavigate } from 'react-router-dom';
 
 const JobsTable = ({ jobList, onSelectJob }) => {
   const navigate = useNavigate();

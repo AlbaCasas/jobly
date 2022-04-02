@@ -1,4 +1,4 @@
-import { validators } from "commons/src/index";
+import { validators } from 'commons/src/index';
 
 const { validateToken, validateString, validateEmail, validatePhone } =
   validators;
@@ -10,11 +10,11 @@ export function updateUser(token, name, email, phone, location, avatar) {
   validateString(location);
   validatePhone(phone);
 
-  return fetch("http://localhost:8000/api/users", {
-    method: "PATCH",
+  return fetch('http://localhost:8000/api/users', {
+    method: 'PATCH',
     headers: {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({ name, email, phone, location, avatar }),
   }).then((res) => {
@@ -29,9 +29,9 @@ export function updateUser(token, name, email, phone, location, avatar) {
         throw new Error(error);
       });
     } else if (status >= 500) {
-      throw new Error("server error");
+      throw new Error('server error');
     } else {
-      throw new Error("unknown error");
+      throw new Error('unknown error');
     }
   });
 }

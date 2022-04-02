@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import Text from "../Text";
+import Text from '../Text';
 
 export const StyledNav = styled.div`
   z-index: 3;

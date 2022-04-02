@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
-import Box from "../../../components/Box";
-import Modal from "../../../components/Modal";
-import Text from "../../../components/Text";
-import { ContainerText } from "../styled";
-import { ContainerModal, DeleteButton, ModalInput } from "./styled";
-import { useForm } from "react-hook-form";
-import Context from "../../../Context";
-import { deleteAccount } from "../../../api";
-import { DEFAULT_ERROR } from "../../../constants/feedbacks";
+import React, { useContext } from 'react';
+import Box from '../../../components/Box';
+import Modal from '../../../components/Modal';
+import Text from '../../../components/Text';
+import { ContainerText } from '../styled';
+import { ContainerModal, DeleteButton, ModalInput } from './styled';
+import { useForm } from 'react-hook-form';
+import Context from '../../../Context';
+import { deleteAccount } from '../../../api';
+import { DEFAULT_ERROR } from '../../../constants/feedbacks';
 
 const ModalDeleteAccount = ({ onClose }) => {
   const { setFeedback } = useContext(Context);
@@ -24,8 +24,8 @@ const ModalDeleteAccount = ({ onClose }) => {
       await deleteAccount(sessionStorage.token, password);
       delete sessionStorage.token;
       setFeedback({
-        message: "Account deleted",
-        level: "success",
+        message: 'Account deleted',
+        level: 'success',
       });
     } catch {
       setFeedback(DEFAULT_ERROR);
@@ -45,7 +45,7 @@ const ModalDeleteAccount = ({ onClose }) => {
         </ContainerText>
         <Box gap="24px" flexDirection="column" alignItems="center">
           <ModalInput
-            {...register("password", { required: "This field is required" })}
+            {...register('password', { required: 'This field is required' })}
             type="password"
             placeholder="password"
             error={errors.password?.message}

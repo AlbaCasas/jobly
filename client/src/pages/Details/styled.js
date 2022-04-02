@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import Text from "../../components/Text";
-import Button from "../../components/Button";
-import { MdArrowBack } from "react-icons/md";
-import Box from "../../components/Box";
+import styled from 'styled-components';
+import Text from '../../components/Text';
+import Button from '../../components/Button';
+import { MdArrowBack } from 'react-icons/md';
+import Box from '../../components/Box';
 
 export const Wrapper = styled.div`
   display: flex;

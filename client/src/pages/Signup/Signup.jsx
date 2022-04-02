@@ -1,8 +1,8 @@
-import { Link, useNavigate } from "react-router-dom";
-import { MdWorkOutline, MdPerson } from "react-icons/md";
-import Box from "../../components/Box";
-import Text from "../../components/Text";
-import Input from "../../components/Input";
+import { Link, useNavigate } from 'react-router-dom';
+import { MdWorkOutline, MdPerson } from 'react-icons/md';
+import Box from '../../components/Box';
+import Text from '../../components/Text';
+import Input from '../../components/Input';
 import {
   ArrowBack,
   GoBackText,
@@ -13,15 +13,15 @@ import {
   SwitchContainer,
   View,
   StyledSelect,
-} from "./styled";
-import { StyledButton, RegisterWrapper } from "./styled";
-import { useState, useContext } from "react";
-import CardButton from "../../components/CardButton";
-import { authSession, registerCandidate, registerCompany } from "../../api";
-import { useForm } from "react-hook-form";
-import Context from "../../Context";
-import { DEFAULT_ERROR } from "../../constants/feedbacks";
-import { cities } from "commons/src/data";
+} from './styled';
+import { StyledButton, RegisterWrapper } from './styled';
+import { useState, useContext } from 'react';
+import CardButton from '../../components/CardButton';
+import { authSession, registerCandidate, registerCompany } from '../../api';
+import { useForm } from 'react-hook-form';
+import Context from '../../Context';
+import { DEFAULT_ERROR } from '../../constants/feedbacks';
+import { cities } from 'commons/src/data';
 
 const Signup = () => {
   const { setFeedback, loadUser } = useContext(Context);
@@ -53,10 +53,10 @@ const Signup = () => {
       await authSession(email, password);
       await loadUser();
       setFeedback({
-        message: "User successfully registered.",
-        level: "success",
+        message: 'User successfully registered.',
+        level: 'success',
       });
-      navigate("/");
+      navigate('/');
     } catch (error) {
       setFeedback(DEFAULT_ERROR);
     }
@@ -119,16 +119,16 @@ const Signup = () => {
           >
             <Form onSubmit={handleSubmit(submit)}>
               <Input
-                {...register("name", { required: "This field is required" })}
+                {...register('name', { required: 'This field is required' })}
                 placeholder={
-                  isCandidateButtonActive ? "Full name" : "Fiscal name"
+                  isCandidateButtonActive ? 'Full name' : 'Fiscal name'
                 }
                 error={errors.name?.message}
               />
               <InputsGrid>
                 <StyledSelect
-                  {...register("location", {
-                    required: "This field is required",
+                  {...register('location', {
+                    required: 'This field is required',
                   })}
                   placeholder="Location"
                   options={cities}
@@ -136,11 +136,11 @@ const Signup = () => {
                   required={true}
                 ></StyledSelect>
                 <Input
-                  {...register("phone", {
-                    required: "This field is required",
+                  {...register('phone', {
+                    required: 'This field is required',
                     pattern: {
                       value: /^[0-9\s]*$/,
-                      message: "Enter a valid phone",
+                      message: 'Enter a valid phone',
                     },
                   })}
                   type="tel"
@@ -149,11 +149,11 @@ const Signup = () => {
                 />
               </InputsGrid>
               <Input
-                {...register("email", {
-                  required: "This field is required",
+                {...register('email', {
+                  required: 'This field is required',
                   pattern: {
                     value: /^\S+@\S+\.\S+$/,
-                    message: "Enter a valid email",
+                    message: 'Enter a valid email',
                   },
                 })}
                 type="email"
@@ -161,11 +161,11 @@ const Signup = () => {
                 error={errors.email?.message}
               />
               <Input
-                {...register("password", {
-                  required: "This field is required",
+                {...register('password', {
+                  required: 'This field is required',
                   minLength: {
                     value: 8,
-                    message: "Password must be at least 8 characters long",
+                    message: 'Password must be at least 8 characters long',
                   },
                 })}
                 type="password"

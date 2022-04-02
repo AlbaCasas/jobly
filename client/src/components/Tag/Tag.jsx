@@ -1,5 +1,5 @@
-import { StyledTag } from "./styled";
-import Text from "../Text";
+import { StyledTag } from './styled';
+import Text from '../Text';
 
 const Tag = ({ children }) => {
   return (

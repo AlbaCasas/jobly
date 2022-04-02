@@ -1,1 +1,1 @@
-export { default } from "./ModalDeleteAccount";
+export { default } from './ModalDeleteAccount';

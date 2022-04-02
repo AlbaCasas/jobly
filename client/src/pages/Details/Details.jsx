@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import Layout from "../../components/Layout/Layout";
-import Box from "../../components/Box";
-import Text from "../../components/Text";
-import { useNavigate, Link } from "react-router-dom";
-import { deleteJob, retrieveJob } from "../../api";
+import React, { useContext, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import Layout from '../../components/Layout/Layout';
+import Box from '../../components/Box';
+import Text from '../../components/Text';
+import { useNavigate, Link } from 'react-router-dom';
+import { deleteJob, retrieveJob } from '../../api';
 import {
   ArrowBack,
   ContainerDescription,
@@ -19,12 +19,12 @@ import {
   Wrapper,
   ContainerLeft,
   ContainerButton,
-} from "./styled";
-import moment from "moment";
-import ModalApply from "./ModalApply";
-import Context from "../../Context";
-import ModalUpdateJob from "./ModalUpdateJob";
-import { DEFAULT_ERROR } from "../../constants/feedbacks";
+} from './styled';
+import moment from 'moment';
+import ModalApply from './ModalApply';
+import Context from '../../Context';
+import ModalUpdateJob from './ModalUpdateJob';
+import { DEFAULT_ERROR } from '../../constants/feedbacks';
 
 const Details = () => {
   const { setFeedback, user } = useContext(Context);
@@ -54,8 +54,8 @@ const Details = () => {
     try {
       await deleteJob(sessionStorage.token, jobId);
       setFeedback({
-        message: "Job deleted successfully.",
-        level: "success",
+        message: 'Job deleted successfully.',
+        level: 'success',
       });
       goBack();
     } catch (error) {
@@ -69,11 +69,11 @@ const Details = () => {
 
   return (
     <>
-      {!!isModalShow && user.role === "candidate" && (
+      {!!isModalShow && user.role === 'candidate' && (
         <ModalApply onClose={toggleApplyModal} job={job} setJob={setJob} />
       )}
 
-      {!!isModalShow && user.role === "company" && (
+      {!!isModalShow && user.role === 'company' && (
         <ModalUpdateJob onClose={toggleModalJob} job={job} setJob={setJob} />
       )}
 
@@ -107,7 +107,7 @@ const Details = () => {
                   <Text>{job.location}</Text>
                 </ContainerLeft>
                 <Text>
-                  Posted {moment(Date.now()).diff(moment(job.createAt), "days")}{" "}
+                  Posted {moment(Date.now()).diff(moment(job.createAt), 'days')}{' '}
                   days ago
                 </Text>
               </StyledTextContainer>
@@ -120,12 +120,12 @@ const Details = () => {
                   {job.description}
                 </StyledTextBodyDescription>
               </ContainerDescription>
-              {user.role === "candidate" && (
+              {user.role === 'candidate' && (
                 <StyledButton
                   disabled={hasUserApplied}
                   onClick={toggleApplyModal}
                 >
-                  {!!hasUserApplied ? "Registered" : "Apply now"}
+                  {!!hasUserApplied ? 'Registered' : 'Apply now'}
                 </StyledButton>
               )}
               {job.company?._id === user.id && (

@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import Input from "../Input";
-import Button from "../Button";
+import styled from 'styled-components';
+import Input from '../Input';
+import Button from '../Button';
 
 export const StyledSearch = styled.form`
   overflow: hidden;

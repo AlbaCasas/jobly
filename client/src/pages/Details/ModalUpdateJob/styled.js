@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import Button from "../../../components/Button";
-import Select from "../../../components/Select";
+import styled from 'styled-components';
+import Button from '../../../components/Button';
+import Select from '../../../components/Select';
 
 export const Header = styled.header`
   display: flex;

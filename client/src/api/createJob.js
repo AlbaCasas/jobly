@@ -1,18 +1,18 @@
-import { validators } from "commons";
+import { validators } from 'commons';
 
 const { validateString, validateToken } = validators;
 
 export function createJob(token, { title, role, location, description }) {
   validateToken(token);
-  validateString(title, "title");
-  validateString(role, "role");
-  validateString(location, "location");
+  validateString(title, 'title');
+  validateString(role, 'role');
+  validateString(location, 'location');
 
-  return fetch("http://localhost:8000/api/job", {
-    method: "POST",
+  return fetch('http://localhost:8000/api/job', {
+    method: 'POST',
     headers: {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({ title, role, location, description }),
   }).then((res) => {
@@ -27,9 +27,9 @@ export function createJob(token, { title, role, location, description }) {
         throw new Error(error);
       });
     } else if (status >= 500) {
-      throw new Error("server error");
+      throw new Error('server error');
     } else {
-      throw new Error("unknown error");
+      throw new Error('unknown error');
     }
   });
 }

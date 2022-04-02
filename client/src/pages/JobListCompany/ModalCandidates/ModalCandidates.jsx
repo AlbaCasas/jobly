@@ -1,6 +1,6 @@
-import React from "react";
-import Box from "../../../components/Box";
-import Text from "../../../components/Text";
+import React from 'react';
+import Box from '../../../components/Box';
+import Text from '../../../components/Text';
 import {
   Header,
   Avatar,
@@ -12,8 +12,8 @@ import {
   EmailColumn,
   PhoneColumn,
   ResumeColumn,
-} from "./styled";
-import { downloadBase64 } from "./utils";
+} from './styled';
+import { downloadBase64 } from './utils';
 
 function ModalCandidates({ onClose, selectedJob }) {
   return (

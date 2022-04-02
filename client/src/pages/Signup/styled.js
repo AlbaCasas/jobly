@@ -1,9 +1,9 @@
-import styled from "styled-components";
-import Box from "../../components/Box";
-import Button from "../../components/Button";
-import Text from "../../components/Text";
-import { MdArrowBack } from "react-icons/md";
-import Select from "../../components/Select";
+import styled from 'styled-components';
+import Box from '../../components/Box';
+import Button from '../../components/Button';
+import Text from '../../components/Text';
+import { MdArrowBack } from 'react-icons/md';
+import Select from '../../components/Select';
 
 export const View = styled(Box)`
   display: flex;

@@ -1,4 +1,4 @@
-import { validators } from "commons/src/index";
+import { validators } from 'commons/src/index';
 
 const { validateToken, validatePassword } = validators;
 
@@ -6,11 +6,11 @@ export function deleteAccount(token, password) {
   validateToken(token);
   validatePassword(password);
 
-  return fetch("http://localhost:8000/api/users", {
-    method: "DELETE",
+  return fetch('http://localhost:8000/api/users', {
+    method: 'DELETE',
     headers: {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({ password }),
   }).then((res) => {
@@ -25,9 +25,9 @@ export function deleteAccount(token, password) {
         throw new Error(error);
       });
     } else if (status >= 500) {
-      throw new Error("server error");
+      throw new Error('server error');
     } else {
-      throw new Error("unknown error");
+      throw new Error('unknown error');
     }
   });
 }

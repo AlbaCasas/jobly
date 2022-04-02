@@ -1,14 +1,14 @@
-import { validators } from "commons/src/index";
+import { validators } from 'commons/src/index';
 const { validateEmail, validatePassword } = validators;
 
 export function authenticateUser(email, password) {
   validateEmail(email);
   validatePassword(password);
 
-  return fetch("http://localhost:8000/api/auth", {
-    method: "POST",
+  return fetch('http://localhost:8000/api/auth', {
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({ email, password }),
   }).then((res) => {
@@ -27,9 +27,9 @@ export function authenticateUser(email, password) {
         throw new Error(error);
       });
     } else if (status >= 500) {
-      throw new Error("server error");
+      throw new Error('server error');
     } else {
-      throw new Error("unknown error");
+      throw new Error('unknown error');
     }
   });
 }

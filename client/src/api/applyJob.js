@@ -1,5 +1,5 @@
-import { validators } from "commons/src/index";
-import { validateId } from "commons/src/validators";
+import { validators } from 'commons/src/index';
+import { validateId } from 'commons/src/validators';
 
 const { validateToken } = validators;
 
@@ -8,10 +8,10 @@ export function applyJob(token, jobId, resume) {
   validateId(jobId);
 
   return fetch(`http://localhost:8000/api/job/apply/${jobId}`, {
-    method: "PATCH",
+    method: 'PATCH',
     headers: {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({ resume }),
   }).then((res) => {
@@ -24,9 +24,9 @@ export function applyJob(token, jobId, resume) {
         throw new Error(error);
       });
     } else if (status >= 500) {
-      throw new Error("server error");
+      throw new Error('server error');
     } else {
-      throw new Error("unknown error");
+      throw new Error('unknown error');
     }
   });
 }

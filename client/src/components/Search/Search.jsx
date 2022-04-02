@@ -1,5 +1,5 @@
-import { listJobs } from "../../api";
-import Select from "../Select";
+import { listJobs } from '../../api';
+import Select from '../Select';
 import {
   Checkbox,
   CheckboxStyled,
@@ -10,8 +10,8 @@ import {
   StyledJobSearch,
   StyledSearch,
   Wrapper,
-} from "./styled";
-import { data } from "commons";
+} from './styled';
+import { data } from 'commons';
 
 const { cities, roles } = data;
 
@@ -43,7 +43,7 @@ const Search = ({ role, setJobList, userId }) => {
         <Select name="role" placeholder="Role type" options={roles} />
         <StyledButtonSearch>Find Job</StyledButtonSearch>
       </FirstRow>
-      {role === "company" && (
+      {role === 'company' && (
         <StyledJobSearch>
           <Checkbox>
             <Wrapper>

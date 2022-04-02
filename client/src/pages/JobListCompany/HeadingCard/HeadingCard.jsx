@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 import {
   ContainerCandidates,
   ContainerIcon,
   ContainerText,
   Subtitle,
   Title,
-} from "./styled";
+} from './styled';
 
 function HeadingCard({ title, subtitle, Icon, className }) {
   return (

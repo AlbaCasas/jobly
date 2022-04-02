@@ -1,4 +1,4 @@
-import { StyledText } from "./styled";
+import { StyledText } from './styled';
 
 const Text = ({
   color,

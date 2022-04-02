@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import Box from "../../components/Box";
-import Layout from "../../components/Layout/Layout";
+import React, { useEffect, useState } from 'react';
+import Box from '../../components/Box';
+import Layout from '../../components/Layout/Layout';
 import {
   ContainerIcon,
   ContainerJobs,
@@ -8,10 +8,10 @@ import {
   Heading,
   Subtitle,
   Title,
-} from "./styled";
-import { MdWorkOutline } from "react-icons/md";
-import { listJobsFromCandidate } from "../../api";
-import CandidaturesTable from "./CandidaturesTable";
+} from './styled';
+import { MdWorkOutline } from 'react-icons/md';
+import { listJobsFromCandidate } from '../../api';
+import CandidaturesTable from './CandidaturesTable';
 
 const JobListCandidate = () => {
   const [jobList, setJobList] = useState([]);

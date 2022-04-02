@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components";
-import Text from "../Text";
+import styled, { css } from 'styled-components';
+import Text from '../Text';
 
 const cardBlue = css`
   background-color: ${({ theme }) => theme.colors.primary};
