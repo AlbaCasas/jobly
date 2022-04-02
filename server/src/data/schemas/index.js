@@ -1,5 +1,5 @@
-const user = require("./user");
-const job = require("./job");
+const user = require('./user');
+const job = require('./job');
 
 module.exports = {
   user,

@@ -1,4 +1,4 @@
-const { Schema } = require("mongoose");
+const { Schema } = require('mongoose');
 
 const user = new Schema({
   email: {
@@ -37,7 +37,7 @@ const user = new Schema({
 
   role: {
     type: String,
-    enum: ["company", "candidate"],
+    enum: ['company', 'candidate'],
     required: true,
   },
 });

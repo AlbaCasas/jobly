@@ -1,9 +1,9 @@
 const {
   models: { User },
-} = require("../data");
+} = require('../data');
 const {
   validators: { validateId },
-} = require("commons");
+} = require('commons');
 function retrieveUser(id) {
   validateId(id);
   return User.findById(id).then((user) => {

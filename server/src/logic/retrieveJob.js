@@ -1,17 +1,17 @@
 const {
   models: { Job },
-} = require("../data");
+} = require('../data');
 const {
   validators: { validateId },
-} = require("commons");
+} = require('commons');
 function retrieveJob(userId, jobId) {
   validateId(userId);
   validateId(jobId);
 
   return Job.findById(jobId)
     .lean()
-    .populate("company")
-    .populate("candidatures.candidate")
+    .populate('company')
+    .populate('candidatures.candidate')
     .then((job) => {
       job.id = job._id.toString();
 

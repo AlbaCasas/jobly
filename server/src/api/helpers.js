@@ -1,4 +1,4 @@
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
 
 const {
   env: { JWT_SECRET },
@@ -18,7 +18,7 @@ function verifyTokenAndGetUserId(req) {
     headers: { authorization },
   } = req;
 
-  const [, token] = authorization.split(" ");
+  const [, token] = authorization.split(' ');
 
   const payload = jwt.verify(token, JWT_SECRET);
 

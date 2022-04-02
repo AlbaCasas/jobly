@@ -1,6 +1,6 @@
 const {
   models: { User },
-} = require("../data");
+} = require('../data');
 const {
   validators: {
     validateString,
@@ -8,7 +8,7 @@ const {
     validateEmail,
     validatePassword,
   },
-} = require("commons");
+} = require('commons');
 
 function registerCompany(name, email, password, location, phone) {
   validateString(name);
@@ -18,9 +18,9 @@ function registerCompany(name, email, password, location, phone) {
   validateString(location);
   validatePhone(phone);
 
-  const role = "company";
+  const role = 'company';
   const avatar =
-    "https://humanoz.com/wp-content/uploads/2019/10/deafult-profile-icon-png-image-free-download-searchpngcom-profile-icon-png-673_673.png";
+    'https://humanoz.com/wp-content/uploads/2019/10/deafult-profile-icon-png-image-free-download-searchpngcom-profile-icon-png-673_673.png';
   return User.create({
     name,
     email,
@@ -29,7 +29,7 @@ function registerCompany(name, email, password, location, phone) {
     phone,
     role,
     avatar,
-  }).then((user) => {});
+  }).then(() => {});
 }
 
 module.exports = registerCompany;

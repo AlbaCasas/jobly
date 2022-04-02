@@ -1,5 +1,5 @@
-const { listJobsFromCandidate } = require("../../logic");
-const { verifyTokenAndGetUserId } = require("../helpers");
+const { listJobsFromCandidate } = require('../../logic');
+const { verifyTokenAndGetUserId } = require('../helpers');
 
 module.exports = (req, res) => {
   try {

@@ -1,16 +1,16 @@
 const {
-  models: { Job, User },
-} = require("../data");
+  models: { Job },
+} = require('../data');
 const {
   validators: { validateId },
-} = require("commons");
+} = require('commons');
 
 function listJobsFromCandidate(userId) {
   validateId(userId);
 
-  return Job.find({ "candidatures.candidate": userId })
-    .populate("company")
-    .populate("candidatures.candidate")
+  return Job.find({ 'candidatures.candidate': userId })
+    .populate('company')
+    .populate('candidatures.candidate')
     .then((jobs) => {
       const docs = jobs.map((job) => {
         const doc = job._doc;

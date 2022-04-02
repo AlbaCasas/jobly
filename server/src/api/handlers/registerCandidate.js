@@ -1,4 +1,4 @@
-const { registerCandidate } = require("../../logic");
+const { registerCandidate } = require('../../logic');
 
 module.exports = (req, res) => {
   try {

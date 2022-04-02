@@ -1,4 +1,4 @@
-const { Schema } = require("mongoose");
+const { Schema } = require('mongoose');
 const {
   Types: { ObjectId },
 } = Schema;
@@ -6,7 +6,7 @@ const {
 const job = new Schema({
   company: {
     type: ObjectId,
-    ref: "User",
+    ref: 'User',
     required: true,
   },
 
@@ -23,7 +23,7 @@ const job = new Schema({
   role: {
     type: String,
     required: true,
-    enum: ["designer", "developer", "product"],
+    enum: ['designer', 'developer', 'product'],
   },
 
   location: {
@@ -33,7 +33,7 @@ const job = new Schema({
 
   candidatures: [
     {
-      candidate: { type: ObjectId, ref: "User" },
+      candidate: { type: ObjectId, ref: 'User' },
       resume: { type: String },
       createAt: { type: Date, default: Date.now() },
     },

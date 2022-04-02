@@ -1,17 +1,17 @@
 const {
   validators: { validateId },
-} = require("commons");
+} = require('commons');
 const {
-  models: { Job, User },
-} = require("../data");
+  models: { Job },
+} = require('../data');
 
 function listJobsFromCompany(userId) {
   validateId(userId);
 
   return Job.find({ company: userId })
     .lean()
-    .populate("company")
-    .populate("candidatures.candidate")
+    .populate('company')
+    .populate('candidatures.candidate')
 
     .then((jobs) => {
       jobs.forEach((job) => {

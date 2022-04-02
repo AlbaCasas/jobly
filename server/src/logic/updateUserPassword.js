@@ -1,5 +1,9 @@
-const { models: { User }} = require("../data");
-const { validators: { validateId, validatePassword }} = require("commons");
+const {
+  models: { User },
+} = require('../data');
+const {
+  validators: { validateId, validatePassword },
+} = require('commons');
 
 function updateUserPassword({ id, currPassword, newPassword }) {
   validateId(id);
@@ -11,7 +15,7 @@ function updateUserPassword({ id, currPassword, newPassword }) {
       return User.updateOne({ _id: id }, { password: newPassword }).then(
         () => {}
       );
-    } else throw new Error("Wrong credentials");
+    } else throw new Error('Wrong credentials');
   });
 }
 

@@ -1,9 +1,9 @@
 const {
   validators: { validateId },
-} = require("commons");
+} = require('commons');
 const {
   models: { Job, User },
-} = require("../data");
+} = require('../data');
 
 function deleteJob(userId, jobId) {
   validateId(userId);
@@ -12,7 +12,7 @@ function deleteJob(userId, jobId) {
   return User.findById(userId).then((user) => {
     if (!user) throw new Error(`User with id ${userId} does not exist`);
 
-    if (user.role !== "company")
+    if (user.role !== 'company')
       throw new Error(`User with id ${userId} is not a company`);
 
     return Job.deleteOne({ _id: jobId, company: userId }).then((result) => {

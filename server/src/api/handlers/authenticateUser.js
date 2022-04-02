@@ -1,5 +1,5 @@
-const { authenticateUser } = require("../../logic");
-const { createTokenWithUserId } = require("../helpers");
+const { authenticateUser } = require('../../logic');
+const { createTokenWithUserId } = require('../helpers');
 
 module.exports = (req, res) => {
   try {
