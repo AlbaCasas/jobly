@@ -140,3 +140,7 @@ Jobs
 
 - ~~TODO create main views (components) (1h)~~
 - ~~TODO mechanize navigations (.5h)~~
+
+## TODO LIST
+
+- Hacer Test en API
