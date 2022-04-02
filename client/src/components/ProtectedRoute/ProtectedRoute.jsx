@@ -1,10 +1,10 @@
-import { Navigate, Outlet } from 'react-router-dom';
+import { Outlet, Navigate } from 'react-router-dom';
 
 const ProtectedRoute = ({ children }) => {
   const isTokenValid = !!sessionStorage.token;
 
   if (!isTokenValid) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/login" />;
   }
 
   return children || <Outlet />;
