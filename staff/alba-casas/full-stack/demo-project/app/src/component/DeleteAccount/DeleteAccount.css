@@ -1,9 +1,0 @@
-.form__delete-account {
-  gap: 10px;
-  display: flex;
-  flex-direction: column;
-}
-
-.container__delete-account {
-  gap: 12px;
-}

@@ -1,1 +1,0 @@
-My [Github](https://github.com/manuelbarzi).

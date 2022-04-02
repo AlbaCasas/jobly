@@ -1,9 +1,0 @@
-.container__register {
-  gap: 12;
-}
-
-.register__form {
-  gap: 10px;
-  display: flex;
-  flex-direction: column;
-}

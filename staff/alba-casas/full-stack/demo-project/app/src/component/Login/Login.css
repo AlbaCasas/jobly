@@ -1,9 +1,0 @@
-.container__login {
-  gap: 12;
-}
-
-.login__form {
-  gap: 10px;
-  display: flex;
-  flex-direction: column;
-}
