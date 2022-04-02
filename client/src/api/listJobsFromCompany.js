@@ -1,4 +1,7 @@
+import { validateToken } from "./validators/validateToken";
+
 export function listJobsFromCompany(token) {
+  validateToken(localStorage.token);
   return fetch(`${process.env.REACT_APP_API_HOST}/api/company/job`, {
     headers: {
       Authorization: `Bearer ${token}`,

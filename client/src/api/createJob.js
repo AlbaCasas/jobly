@@ -1,4 +1,7 @@
+import { validateToken } from "./validators/validateToken";
+
 export function createJob(token, { title, role, location, description }) {
+  validateToken(localStorage.token);
   return fetch(`${process.env.REACT_APP_API_HOST}/api/job`, {
     method: 'POST',
     headers: {

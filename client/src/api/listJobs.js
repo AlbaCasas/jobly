@@ -1,4 +1,7 @@
+import { validateToken } from "./validators/validateToken";
+
 export function listJobs(token, { title, location, role, company }) {
+  validateToken(localStorage.token);
   const query = new URLSearchParams({
     ...(title && { title }),
     ...(location && { location }),

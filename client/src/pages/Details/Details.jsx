@@ -77,71 +77,74 @@ const Details = () => {
         <ModalUpdateJob onClose={toggleModalJob} job={job} setJob={setJob} />
       )}
 
-      {job && (
-        <Layout>
-          <Wrapper>
-            <Header>
-              <GoBackText
-                forwardedAs={Link}
-                to={-1}
-                color="white"
-                variant="link"
-              >
-                <ArrowBack />
-                Go back
-              </GoBackText>
-              <ImageStyled src={job.company.avatar} alt="logo" />
-            </Header>
-            <Box
-              marginTop="32px"
-              padding="24px"
-              flexDirection="column"
-              gap="16px"
-            >
-              <Text variant="subheading">{job.title}</Text>
-              <StyledTextContainer>
-                <ContainerLeft>
-                  <StyledLocation variant="bodyBold">
-                    {job.company.name}
-                  </StyledLocation>
-                  <Text>{job.location}</Text>
-                </ContainerLeft>
-                <Text>
-                  Posted {moment(Date.now()).diff(moment(job.createAt), 'days')}{' '}
-                  days ago
-                </Text>
-              </StyledTextContainer>
-              <Text>{job.date}</Text>
-              <ContainerDescription>
-                <StyledTextDescription variant="section">
-                  Description
-                </StyledTextDescription>
-                <StyledTextBodyDescription>
-                  {job.description}
-                </StyledTextBodyDescription>
-              </ContainerDescription>
-              {user.role === 'candidate' && (
-                <StyledButton
-                  disabled={hasUserApplied}
-                  onClick={toggleApplyModal}
+      <Layout>
+        <Wrapper>
+          {job && (
+            <>
+              <Header>
+                <GoBackText
+                  forwardedAs={Link}
+                  to={-1}
+                  color="white"
+                  variant="link"
                 >
-                  {!!hasUserApplied ? 'Registered' : 'Apply now'}
-                </StyledButton>
-              )}
-              {job.company?._id === user.id && (
-                <ContainerButton gap="32px">
-                  <StyledButton onClick={handleClickDeleteJob}>
-                    Delete Job
+                  <ArrowBack />
+                  Go back
+                </GoBackText>
+                <ImageStyled src={job.company.avatar} alt="logo" />
+              </Header>
+              <Box
+                marginTop="32px"
+                padding="24px"
+                flexDirection="column"
+                gap="16px"
+              >
+                <Text variant="subheading">{job.title}</Text>
+                <StyledTextContainer>
+                  <ContainerLeft>
+                    <StyledLocation variant="bodyBold">
+                      {job.company.name}
+                    </StyledLocation>
+                    <Text>{job.location}</Text>
+                  </ContainerLeft>
+                  <Text>
+                    Posted{' '}
+                    {moment(Date.now()).diff(moment(job.createAt), 'days')} days
+                    ago
+                  </Text>
+                </StyledTextContainer>
+                <Text>{job.date}</Text>
+                <ContainerDescription>
+                  <StyledTextDescription variant="section">
+                    Description
+                  </StyledTextDescription>
+                  <StyledTextBodyDescription>
+                    {job.description}
+                  </StyledTextBodyDescription>
+                </ContainerDescription>
+                {user.role === 'candidate' && (
+                  <StyledButton
+                    disabled={hasUserApplied}
+                    onClick={toggleApplyModal}
+                  >
+                    {!!hasUserApplied ? 'Registered' : 'Apply now'}
                   </StyledButton>
-                  <StyledButton onClick={toggleModalJob}>
-                    Update Job
-                  </StyledButton>
-                </ContainerButton>
-              )}
-            </Box>
-          </Wrapper>
-        </Layout>
-      )}
+                )}
+                {job.company?._id === user.id && (
+                  <ContainerButton gap="32px">
+                    <StyledButton onClick={handleClickDeleteJob}>
+                      Delete Job
+                    </StyledButton>
+                    <StyledButton onClick={toggleModalJob}>
+                      Update Job
+                    </StyledButton>
+                  </ContainerButton>
+                )}
+              </Box>
+            </>
+          )}
+        </Wrapper>
+      </Layout>
     </>
   );
 };

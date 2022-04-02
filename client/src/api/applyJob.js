@@ -1,4 +1,7 @@
+import { validateToken } from './validators/validateToken';
+
 export function applyJob(token, jobId, resume) {
+  validateToken(localStorage.token);
   return fetch(`${process.env.REACT_APP_API_HOST}/api/job/apply/${jobId}`, {
     method: 'PATCH',
     headers: {

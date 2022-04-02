@@ -1,4 +1,7 @@
+import { validateToken } from "./validators/validateToken";
+
 export function deleteAccount(token, password) {
+  validateToken(localStorage.token);
   return fetch(`${process.env.REACT_APP_API_HOST}/api/users`, {
     method: 'DELETE',
     headers: {
