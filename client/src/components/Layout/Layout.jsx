@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
-import Dropdown from '../Dropdown/Dropdown';
+import Dropdown from '../Dropdown';
 import Nav from '../Nav';
 import { StyledLogo, View, Container } from './styled';
 import Context from '../../Context';
