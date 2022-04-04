@@ -58,21 +58,6 @@ Companies on the other hand can register and create job postings for candidates.
 
 ![alt Jobly Project](./doc/uses-cases-company.png)
 
-#### User Interface (UI)
-
-##### Main Views
-
-![alt Jobly Project](figma/mobile-login-signup.png)
-![alt Jobly Project](figma/login-signup.png)
-![alt Jobly Project](figma/board-candidate.png)
-![alt Jobly Project](figma/board-company.png)
-![alt Jobly Project](figma/board-mobile.png)
-![alt Jobly Project](figma/profile.png)
-![alt Jobly Project](figma/profile-mobile.png)
-![alt Jobly Project](figma/details-job.png)
-![alt Jobly Project](figma/list-candidates.png)
-![alt Jobly Project](figma/list-jobs-mobile-company.png)
-
 ## Technical Description
 
 ### Blocks
